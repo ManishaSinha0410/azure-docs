@@ -84,7 +84,7 @@ In the following samples, replace example parameter names such as *myResourceGro
 >
 > Shrinking an existing disk isn’t supported and may result in data loss.
 > 
-> After expanding the disks, you need to [Expand the volume in the operating system](#expand-the-volume-in-the-operating-system) to take advantage of the larger disk.
+> After expanding the disks, you need to [Expand the volume in the operating system](#expand-a-disk-partition-and-filesystem) to take advantage of the larger disk.
 
 1. Operations on virtual hard disks can't be performed with the VM running. Deallocate your VM with [az vm deallocate](/cli/azure/vm#az-vm-deallocate). The following example deallocates the VM named *myVM* in the resource group named *myResourceGroup*:
 
