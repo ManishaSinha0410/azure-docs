@@ -1,11 +1,9 @@
 ---
 title: Get policy compliance data
 description: Azure Policy evaluations and effects determine compliance. Learn how to get the compliance details of your Azure resources.
-author: davidsmatlak
 ms.date: 11/03/2022
 ms.topic: how-to
-ms.custom: devx-track-azurepowershell
-ms.author: davidsmatlak
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
 ---
 # Get compliance data of Azure resources
 
@@ -629,7 +627,7 @@ az policy state list --filter "ResourceType eq 'Microsoft.Network/virtualNetwork
 The Azure PowerShell module for Azure Policy is available on the PowerShell Gallery as
 [Az.PolicyInsights](https://www.powershellgallery.com/packages/Az.PolicyInsights). Using
 PowerShellGet, you can install the module using `Install-Module -Name Az.PolicyInsights` (make sure
-you have the latest [Azure PowerShell](/powershell/azure/install-az-ps) installed):
+you have the latest [Azure PowerShell](/powershell/azure/install-azure-powershell) installed):
 
 ```azurepowershell-interactive
 # Install from PowerShell Gallery via PowerShellGet

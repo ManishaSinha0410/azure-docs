@@ -4,13 +4,12 @@ titleSuffix: Azure Data Science Virtual Machine
 description: Perform data exploration and modeling tasks on the Windows Data Science Virtual Machine.
 services: machine-learning
 ms.service: data-science-vm
-ms.custom: devx-track-python, devx-track-azurepowershell
+ms.custom: devx-track-azurepowershell
 
 author: jesscioffi
 ms.author: jcioffi
 ms.topic: conceptual
 ms.date: 06/23/2022
-
 ---
 
 # Data science with a Windows Data Science Virtual Machine
@@ -97,7 +96,7 @@ To administer your Azure subscription and cloud resources, you have two options:
 [Microsoft Azure PowerShell documentation](../../azure-resource-manager/management/manage-resources-powershell.md) for full details. 
 
 ## Extend storage by using shared file systems
-Data scientists can share large datasets, code, or other resources within the team. The DSVM has about 45 GB of space available. To extend your storage, you can use Azure Files and either mount it on one or more DSVM instances or access it via a REST API. You can also use the [Azure portal](../../virtual-machines/windows/attach-managed-disk-portal.md) or use [Azure PowerShell](../../virtual-machines/windows/attach-disk-ps.md) to add extra dedicated data disks. 
+Data scientists can share large datasets, code, or other resources within the team. The DSVM has about 45 GB of space available. To extend your storage, you can use Azure Files and either mount it on one or more DSVM instances or access it via a REST API. You can also use the [Azure portal](../../virtual-machines/windows/attach-managed-disk-portal.yml) or use [Azure PowerShell](../../virtual-machines/windows/attach-disk-ps.md) to add extra dedicated data disks. 
 
 > [!NOTE]
 > The maximum space on the Azure Files share is 5 TB. The size limit for each file is 1 TB. 

@@ -1,12 +1,12 @@
 ---
-title: Collect and transport metrics - Azure IoT Edge
+title: Collect and transport Azure IoT Edge metrics
 description: Use Azure Monitor to remotely monitor IoT Edge's built-in metrics
-author: veyalla
+author: PatAltimore
 
 ms.author: veyalla
-ms.date: 2/14/2023
+ms.date: 06/07/2023
 ms.topic: conceptual
-ms.reviewer: kgremban
+ms.reviewer: veyalla
 ms.service: iot-edge 
 services: iot-edge
 ---
@@ -56,7 +56,7 @@ To configure monitoring on your IoT Edge device, follow the [Tutorial: Monitor I
 
 ## Metrics collector module
 
-A Microsoft-supplied metrics-collector module can be added to an IoT Edge deployment to collect module metrics and send them to Azure Monitor. The module code is open-source and available in the [IoT Edge GitHub repo](https://github.com/Azure/iotedge/tree/release/1.1/edge-modules/metrics-collector).
+A Microsoft-supplied metrics-collector module can be added to an IoT Edge deployment to collect module metrics and send them to Azure Monitor. The module code is open-source and available in the [IoT Edge GitHub repo](https://github.com/Azure/iotedge/tree/main/edge-modules/metrics-collector).
 
 The metrics-collector module is provided as a multi-arch Docker container image that supports Linux X64, ARM32, ARM64, and Windows X64 (version 1809). It's publicly available at **[`mcr.microsoft.com/azureiotedge-metrics-collector`](https://aka.ms/edgemon-metrics-collector)**.
 
@@ -150,7 +150,7 @@ az resource show -g <resource group> -n <application name> --resource-type "Micr
 
 The **UploadTarget** configuration option controls whether metrics are sent directly to Azure Monitor or to IoT Hub.
 
-If you set **UploadTarget** to **IoTMessage**, then your module metrics are published as IoT messages. These messages are emitted as UTF8-encoded json from the endpoint `/messages/modules/<module name>/outputs/metricOutput`. The format is as follows:
+If you set **UploadTarget** to **IoTMessage**, then your module metrics are published as IoT messages. These messages are emitted as UTF8-encoded json from the endpoint `/messages/modules/<metrics collector module name>/outputs/metricOutput`. For example, if your IoT Edge Metrics Collector module is named **IoTEdgeMetricsCollector**, the endpoint is `/messages/modules/IoTEdgeMetricsCollector/outputs/metricOutput`. The format is as follows:
 
 ```json
 [{
@@ -174,7 +174,7 @@ If you set **UploadTarget** to **IoTMessage**, then your module metrics are publ
 
 The **UploadTarget** configuration option controls whether metrics are sent directly to Azure Monitor or to IoT Central.
 
-If you set **UploadTarget** to **IoTMessage**, then your module metrics are published as IoT messages. These messages are emitted as UTF8-encoded json from the endpoint `/messages/modules/<module name>/outputs/metricOutput`. The format is as follows:
+If you set **UploadTarget** to **IoTMessage**, then your module metrics are published as IoT messages. These messages are emitted as UTF8-encoded json from the endpoint `/messages/modules/<metrics collector module name>/outputs/metricOutput`. For example, if your IoT Edge Metrics Collector module is named **IoTEdgeMetricsCollector**, the endpoint is `/messages/modules/IoTEdgeMetricsCollector/outputs/metricOutput`. The format is as follows:
 
 ```json
 [{

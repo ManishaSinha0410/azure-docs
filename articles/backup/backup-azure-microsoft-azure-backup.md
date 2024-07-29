@@ -2,10 +2,11 @@
 title: Use Azure Backup Server to back up workloads
 description: In this article, learn how to prepare your environment to protect and back up workloads using Microsoft Azure Backup Server (MABS).
 ms.topic: how-to
-ms.date: 04/27/2023
+ms.date: 04/30/2024
 ms.service: backup
-author: jyothisuri
-ms.author: jsuri
+author: AbhishekMallick-MS
+ms.author: v-abhmallick
+ms.custom: engagement-fy24
 ---
 
 # Install and upgrade Azure Backup Server
@@ -184,9 +185,9 @@ Once the extraction process completes, check the box to launch the freshly extra
 
    When you use your own instance of SQL, make sure you add builtin\Administrators to sysadmin role to master DB.
 
-    **SSRS Configuration with SQL 2017**
+    **SSRS Configuration with SQL**
 
-    When you're using your own instance of SQL 2017, you need to manually configure SSRS. After SSRS configuration, ensure that *IsInitialized* property of SSRS is set to *True*. When this is set to True, MABS assumes that SSRS is already configured and will skip the SSRS configuration.
+    When you're using your own instance of SQL 2019 or 2022 with MABS V4, you need to manually configure SSRS. After SSRS configuration, ensure that *IsInitialized* property of SSRS is set to *True*. When this is set to True, MABS assumes that SSRS is already configured and will skip the SSRS configuration.
 
     Use the following values for SSRS configuration:
     * Service Account: ‘Use built-in account’ should be Network Service
@@ -332,7 +333,7 @@ If your machine has limited internet access, ensure that firewall settings on th
 
 If you're using ExpressRoute Microsoft peering, select the following services/regions:
 
-* Azure Active Directory (12076:5060)
+* Microsoft Entra ID (12076:5060)
 * Microsoft Azure Region (according to the location of your Recovery Services vault)
 * Azure Storage (according to the location of your Recovery Services vault)
 

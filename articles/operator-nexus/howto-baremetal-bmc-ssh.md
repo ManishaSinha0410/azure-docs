@@ -5,34 +5,44 @@ author: eak13
 ms.author: ekarandjeff
 ms.service: azure-operator-nexus
 ms.topic: how-to
-ms.date: 04/18/2023
-ms.custom: template-how-to
+ms.date: 05/05/2023
+ms.custom: template-how-to, devx-track-azurecli
 ---
 
 # Manage emergency access to a bare metal machine using the `az networkcloud cluster bmckeyset`
 
 > [!CAUTION]
-> Please note this process is used in emergency situations when all other troubleshooting options via Azure have been exhausted. SSH access to these bare metal machines (BMM) is restricted to users managed via this method from the specified jump host list.
+> Please note this process is used in emergency situations when all other troubleshooting options via Azure have been exhausted. SSH access to these bare metal machines is restricted to users managed via this method from the specified jump host list.
 
-There are rare situations where a user needs to investigate & resolve issues with a BMM and all other ways using Azure have been exhausted. Operator Nexus provides the `az networkcloud cluster bmckeyset` command so users can manage SSH access to the baseboard management controller (BMC) on these BMMs.
+There are rare situations where a user needs to investigate & resolve issues with a bare metal machine and all other ways using Azure have been exhausted. Operator Nexus provides the `az networkcloud cluster bmckeyset` command so users can manage SSH access to the baseboard management controller (BMC) on these bare metal machines. On keyset creation, users are validated against Microsoft Entra ID for proper authorization by cross referencing the User Principal Name provided for a user against the supplied Azure Group ID `--azure-group-id <Entra Group ID>`.
 
-When the command runs, it executes on each BMM in the Cluster. If a BMM is unavailable or powered off at the time of command execution, the status of the command reflects which BMMs couldn't have the command executed. There's a reconciliation process that runs periodically that retries the command on any BMM that wasn't available at the time of the original command. Multiple commands execute in the order received.
+If the User Principal Name for a user isn't a member of the supplied group, the user's status is set to 'Invalid', and their status message will say "Invalid because userPrincipal isn't a member of AAD group." If the Azure Group ID is invalid, each user in the keyset has their status set to 'Invalid' and their status message will say "AAD group doesn't exist." Invalid users remain in the keyset but their key won't be enabled for SSH access.
 
-There's a maximum number of 12 users defined per Cluster. Attempts to add more than 12 users results in an error. Delete a user before adding another one when 12 already exists.
+> [!NOTE]
+> There is currently a transitional period where specifying User Principal Names is optional. In a future release, it will become mandatory and Microsoft Entra ID validation will be enforced for all users. Users are encouraged to add User Principal Names to their keysets before the transitional period ends (planned for July 2024) to avoid keysets being invalidated. Note that if any User Principal Names are added to a keyset, even if they are not added for all users, Microsoft Entra ID validation will be enabled, and this will result in the entire keyset being invalidated if the Group ID specified is not valid.
+
+When the command runs, it executes on each bare metal machine in the Cluster with an active Kubernetes node. There's a reconciliation process that runs periodically that retries the command on any bare metal machine that wasn't available at the time of the original command. Also, any bare metal machine that returns to the cluster via an `az networkcloud baremetalmachine actionreimage` or `az networkcloud baremetalmachine actionreplace` command (see [BareMetal functions](./howto-baremetal-functions.md)) sends a signal causing any active keysets to be sent to the machine as soon as it returns to the cluster. Multiple commands execute in the order received.
+
+The BMCs support a maximum number of 12 users. Users are defined on a per Cluster basis and applied to each bare metal machine. Attempts to add more than 12 users results in an error. Delete a user before adding another one when 12 already exists.
 
 ## Prerequisites
 
-- Install the latest version of the
-  [appropriate CLI extensions](./howto-install-cli-extensions.md)
+- Install the latest version of the [appropriate CLI extensions](./howto-install-cli-extensions.md).
 - The on-premises Cluster must have connectivity to Azure.
-- Get the Resource group name that you created for `Cluster` resource
-- The process applies keysets to all running BMMs.
-- The users added must be part of an Azure Active Directory (Azure AD) group. For more information, see [How to Manage Groups](../active-directory/fundamentals/how-to-manage-groups.md).
-- To restrict access for managing keysets, create a custom role. For more information, see [Azure Custom Roles](../role-based-access-control/custom-roles.md). In this instance, add or exclude permissions for `Microsoft.NetworkCloud/clusters/bmcKeySets`. The options are `/read`, `/write` and `/delete`.
+- Get the Resource Group name for the `Cluster` resource.
+- The process applies keysets to all running bare metal machines.
+- The users added must be part of a Microsoft Entra group. For more information, see [How to Manage Groups](../active-directory/fundamentals/how-to-manage-groups.md).
+- To restrict access for managing keysets, create a custom role. For more information, see [Azure Custom Roles](../role-based-access-control/custom-roles.md). In this instance, add or exclude permissions for `Microsoft.NetworkCloud/clusters/bmcKeySets`. The options are `/read`, `/write`, and `/delete`.
+
+> [!NOTE]
+> When BMC access is created, modified or deleted via the commands described in this
+> article, a background process delivers those changes to the machines. This process is paused during
+> Operator Nexus software upgrades. If an upgrade is known to be in progress, you can use the `--no-wait`
+> option with the command to prevent the command prompt from waiting for the process to complete.
 
 ## Creating a BMC keyset
 
-The `bmckeyset create` command creates SSH access to the BMM in a Cluster for a group of users.
+The `bmckeyset create` command creates SSH access to the bare metal machine in a Cluster for a group of users.
 
 The command syntax is:
 
@@ -46,8 +56,9 @@ az networkcloud cluster bmckeyset create \
   --expiration <Expiration Timestamp> \
   --jump-hosts-allowed <List of jump server IP addresses> \
   --privilege-level <"Administrator" or "ReadOnly"> \
-  --user-list '[{"description":"<User description>","azureUserName":"<User Name>", \
-   "sshPublicKey":{"keyData":"<SSH Public Key>"}}]' \
+  --user-list '[{"description":"<User List Description>","azureUserName":"<User Name>",\
+    "sshPublicKey":{"keyData":"<SSH Public Key>"}, \
+    "userPrincipalName":""}]', \
   --tags key1=<Key Value> key2=<Key Value> \
   --cluster-name <Cluster Name> \
   --resource-group <Resource Group Name>
@@ -74,15 +85,16 @@ az networkcloud cluster bmckeyset create \
       type: Required. The extended location type: "CustomLocation".
   --privilege-level                           [Required] : The access level allowed for the users
                                                            in this key set.  Allowed values:
-                                                           "Standard" or "Superuser".
+                                                           "Administrator" or "ReadOnly".
   --resource-group -g                         [Required] : Name of resource group. Optional if
                                                            configuring the default group using `az
                                                            configure --defaults group=<name>`.
   --user-list                                 [Required] : The unique list of permitted users.
     Usage: --user-list azure-user-name=XX description=XX key-data=XX
-      azure-user-name: Required. The Azure Active Directory user name (email name).
+      azure-user-name: Required. User name used to login to the server.
       description: The free-form description for this user.
       key-data: Required. The public ssh key of the user.
+      userPrincipalName: Optional. The User Principal Name of the User.
 
       Multiple users can be specified by using more than one --user-list argument.
   --tags                                                 : Space-separated tags: key[=value]
@@ -140,13 +152,13 @@ For assistance in creating the `--user-list` structure, see [Azure CLI Shorthand
 
 ## Deleting a BMC keyset
 
-The `bmckeyset delete` command removes SSH access to the BMC for a group of users. All members of the group will no longer have SSH access to any of the BMCs in the Cluster.
+The `bmckeyset delete` command removes SSH access to the BMC for a group of users. All members of the group lose SSH access to any of the BMCs in the Cluster.
 
 The command syntax is:
 
 ```azurecli
 az networkcloud cluster bmckeyset delete \
-  --name <BMM Keyset Name> \
+  --name <BMC Keyset Name> \
   --cluster-name <Cluster Name> \
   --resource-group <Resource Group Name> \
 ```
@@ -180,12 +192,12 @@ The command syntax is:
 
 ```azurecli
 az networkcloud cluster bmckeyset update \
-  --name <BMM Keyset Name> \
+  --name <BMC Keyset Name> \
   --jump-hosts-allowed <List of jump server IP addresses> \
   --privilege-level <"Standard" or "Superuser"> \
-  --user-list '[{"description":"<User description>",\
-    "azureUserName":"<UserName>", \
-    "sshPublicKey":{"keyData":"<SSH Public Key>"}}]' \
+  --user-list '[{"description":"<User List Description>","azureUserName":"<User Name>",\
+    "sshPublicKey":{"keyData":"<SSH Public Key>"}, \
+    "userPrincipalName":""}]', \
   --tags key1=<Key Value> key2=<Key Value> \
   --cluster-name <Cluster Name> \
   --resource-group <Resource Group Name>
@@ -206,12 +218,13 @@ az networkcloud cluster bmckeyset update \
                                                            users. Supports IPv4 or IPv6 addresses.
   --privilege-level                                      : The access level allowed for the users
                                                            in this key set.  Allowed values:
-                                                           "Standard" or "Superuser".
+                                                           "Administrator" or "ReadOnly".
   --user-list                                            : The unique list of permitted users.
     Usage: --user-list azure-user-name=XX description=XX key-data=XX
-      azure-user-name: Required. The Azure Active Directory user name (email name).
+      azure-user-name: Required. User name used to login to the server.
       description: The free-form description for this user.
       key-data: Required. The public SSH key of the user.
+      userPrincipalName: Optional. The User Principal Name of the User.
 
       Multiple users can be specified by using more than one --user-list argument.
   --resource-group -g                         [Required] : Name of resource group. Optional if
@@ -231,7 +244,9 @@ az networkcloud cluster bmckeyset update \
   --name "bmcKeySetName" \
   --expiration "2023-12-31T23:59:59.008Z" \
   --user-list '[{"description":"Needs access for troubleshooting as a part of the support team",\
-  "azureUserName":"userDEF","sshPublicKey":{"keyData":"ssh-rsa  AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1XoyYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"}}]\
+    "azureUserName":"userDEF", \
+    "sshPublicKey":{"keyData":"ssh-rsa  AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1XoyYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"}, \
+    "userPrincipalName":"example@contoso.com"}] \
   --cluster-name "clusterName" \
   --resource-group "resourceGroupName"
 ```

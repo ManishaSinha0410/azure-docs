@@ -6,7 +6,7 @@ author: rajeevmv
 ms.author: ravokkar
 ms.service: iot
 ms.topic: conceptual
-ms.date: 04/24/2023
+ms.date: 06/27/2023
 ms.custom:  [amqp, mqtt]
 ---
 
@@ -54,7 +54,7 @@ If a device can't use the device SDKs, it can still connect to the public device
 
 The following list contains DPS implementation-specific behaviors:
 
- * DPS doesn't support persistent sessions. It treats every session as nonpersistent, regardless of the value of the **CleanSession** flag. We recommend setting **CleanSession** to true.
+ * DPS doesn't support persistent sessions. It treats every session as non-persistent, regardless of the value of the **CleanSession** flag. We recommend setting **CleanSession** to true.
 
  * When a device app subscribes to a topic with **QoS 2**, DPS grants maximum QoS level 1 in the **SUBACK** packet. After that, DPS delivers messages to the device using QoS 1.
 
@@ -67,8 +67,8 @@ To use the MQTT protocol directly, your client *must* connect over TLS 1.2. Atte
 
 To register a device through DPS, a device should subscribe using `$dps/registrations/res/#` as a **Topic Filter**. The multi-level wildcard `#` in the Topic Filter is used only to allow the device to receive more properties in the topic name. DPS doesn't allow the usage of the `#` or `?` wildcards for filtering of subtopics. Since DPS isn't a general-purpose pub-sub messaging broker, it only supports the documented topic names and topic filters.
 
-The device should publish a register message to DPS using `$dps/registrations/PUT/iotdps-register/?$rid={request_id}` as a **Topic Name**. The payload should contain the [Device Registration](/rest/api/iot-dps/device/runtime-registration/register-device) object in JSON format.
-In a successful scenario, the device receives a response on the `$dps/registrations/res/202/?$rid={request_id}&retry-after=x` topic name where x is the retry-after value in seconds. The payload of the response contains the [RegistrationOperationStatus](/rest/api/iot-dps/device/runtime-registration/register-device#registrationoperationstatus) object in JSON format.
+The device should publish a register message to DPS using `$dps/registrations/PUT/iotdps-register/?$rid={request_id}` as a **Topic Name**. The payload should contain the [Device Registration](/azure/notification-hubs/notification-hubs-push-notification-registration-management) object in JSON format.
+In a successful scenario, the device receives a response on the `$dps/registrations/res/202/?$rid={request_id}&retry-after=x` topic name where x is the retry-after value in seconds.
 
 ## Polling for registration operation status
 
@@ -80,6 +80,8 @@ When connecting over Websocket, specify the subprotocol as `mqtt`. Follow [RFC 6
 ## Next steps
 
 To learn more about the MQTT protocol, see the [MQTT documentation](https://mqtt.org/).
+
+To browse sample MQTT code, see [MQTT application samples](https://github.com/Azure-Samples/MqttApplicationSamples).
 
 To further explore the capabilities of DPS, see:
 

@@ -5,9 +5,9 @@ services: load-balancer
 author: mbender-ms
 ms.service: load-balancer
 ms.topic: conceptual
-ms.date: 1/6/2022
+ms.date: 04/11/2024
 ms.author: mbender
-ms.custom: template-how-to, contperf-fy21q1
+ms.custom: template-how-to, engagement-fy23
 ---
 
 # <a name="outboundrules"></a>Outbound rules Azure Load Balancer
@@ -97,18 +97,15 @@ Ensure that the VM can receive health probe requests from Azure Load Balancer.
 
 If an NSG blocks health probe requests from the AZURE_LOADBALANCER default tag, your VM health probe fails and the VM is marked unavailable. The load balancer stops sending new flows to that VM.
 
-## Scenarios with outbound rules
-		
-
-### Outbound rules scenarios
+## Outbound rules scenarios
 
 
-* Configure outbound connections to a specific set of public IPs or prefix.
-* Modify [SNAT](load-balancer-outbound-connections.md) port allocation.
-* Enable outbound only.
-* Outbound NAT for VMs only (no inbound).
-* Outbound NAT for internal standard load balancer.
-* Enable both TCP & UDP protocols for outbound NAT with a public standard load balancer.
+* [Configure outbound connections to a specific set of public IPs or prefix](#scenario1out).
+* [Modify SNAT port allocation](#scenario2out).
+* [Enable outbound only](#scenario3out).
+* [Outbound NAT for VMs only (no inbound)](#scenario4out).
+* [Outbound NAT for internal standard load balancer](#scenario5out).
+* [Enable both TCP & UDP protocols for outbound NAT with a public standard load balancer](#scenario6out).
 
 
 ### <a name="scenario1out"></a>Scenario 1: Configure outbound connections to a specific set of public IPs or prefix
@@ -167,13 +164,13 @@ Revert to the [default port allocation](load-balancer-outbound-connections.md#pr
 Use a public standard load balancer to provide outbound NAT for a group of VMs. In this scenario, use an outbound rule by itself, without configuring extra rules.
 
 > [!NOTE]
-> **Azure Virtual Network NAT** can provide outbound connectivity for virtual machines without the need for a load balancer. See [What is Azure Virtual Network NAT?](../virtual-network/nat-gateway/nat-overview.md) for more information.
+> **Azure NAT Gateway** can provide outbound connectivity for virtual machines without the need for a load balancer. See [What is Azure NAT Gateway?](../virtual-network/nat-gateway/nat-overview.md) for more information.
 
 ### <a name="scenario4out"></a>Scenario 4: Outbound NAT for VMs only (no inbound)
 
 
 > [!NOTE]
-> **Azure Virtual Network NAT** can provide outbound connectivity for virtual machines without the need for a load balancer. See [What is Azure Virtual Network NAT?](../virtual-network/nat-gateway/nat-overview.md) for more information.
+> **Azure NAT Gateway** can provide outbound connectivity for virtual machines without the need for a load balancer. See [What is Azure NAT Gateway?](../virtual-network/nat-gateway/nat-overview.md) for more information.
 
 #### Details
 
@@ -199,7 +196,7 @@ Use a prefix or public IP to scale [SNAT](load-balancer-outbound-connections.md)
 
 
 > [!NOTE]
-> **Azure Virtual Network NAT** can provide outbound connectivity for virtual machines utilizing an internal standard load balancer. See [What is Azure Virtual Network NAT?](../virtual-network/nat-gateway/nat-overview.md) for more information.
+> **Azure NAT Gateway** can provide outbound connectivity for virtual machines utilizing an internal standard load balancer. See [What is Azure NAT Gateway?](../virtual-network/nat-gateway/nat-overview.md) for more information.
 
 #### Details
 
@@ -240,8 +237,9 @@ When only inbound NAT rules are used, no outbound NAT is provided.
 
 - The maximum number of usable ephemeral ports per frontend IP address is 64,000.
 - The range of the configurable outbound idle timeout is 4 to 120 minutes (240 to 7200 seconds).
-- Load balancer doesn't support ICMP for outbound NAT.
-- Outbound rules can only be applied to primary IP configuration of a NIC.  You can't create an outbound rule for the secondary IP of a VM or NVA. Multiple NICs are supported.
+- Load balancer doesn't support ICMP for outbound NAT, the only supported protocols are TCP and UDP.
+- Outbound rules can only be applied to primary IPv4 configuration of a NIC.  You can't create an outbound rule for the secondary IPv4 configurations of a VM or NVA . Multiple NICs are supported.
+- Outbound rules for the secondary IP configuration are only supported for IPv6.
 - All virtual machines within an **availability set** must be added to the backend pool for outbound connectivity. 
 - All virtual machines within a **virtual machine scale set** must be added to the backend pool for outbound connectivity.
 

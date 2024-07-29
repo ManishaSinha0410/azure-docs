@@ -2,11 +2,11 @@
 title: Azure Backup - Archive tier overview 
 description: Learn about Archive tier support for Azure Backup.
 ms.topic: overview
-ms.date: 04/25/2023
+ms.date: 04/25/2024
 ms.custom: references_regions
 ms.service: backup
-author: jyothisuri
-ms.author: jsuri
+author: AbhishekMallick-MS
+ms.author: v-abhmallick
 ---
 
 # Overview of Archive tier in Azure Backup
@@ -23,14 +23,13 @@ Archive tier supports the following workloads:
 
 | Workloads | Operations |
 | --- | --- |
-| Azure Virtual Machines | Only monthly and yearly recovery points. Daily and weekly recovery points aren't supported.  <br><br> Age >= 3 months in Vault-standard tier <br><br> Retention left >= 6 months. <br><br> No active daily and weekly dependencies. |
+| Azure Virtual Machines | Only monthly and yearly recovery points. Daily and weekly recovery points aren't supported.  <br><br> Age >= 3 months in Vault-standard tier <br><br> Retention left >= 6 months. <br><br> No active daily and weekly dependencies. There are no un-expired daily or weekly recovery points between the recovery point considered for archival and the next monthly or yearly recovery point. |
 | SQL Server in Azure Virtual Machines <br><br> SAP HANA in Azure Virtual Machines | Only full recovery points. Logs and differentials aren't supported. <br><br> Age >= 45 days in Vault-standard tier. <br><br> Retention left >= 6 months. <br><br>  No dependencies. |
 
 A recovery point becomes archivable only if all the above conditions are met.
 
 >[!Note]
->- Archive tier support for Azure Virtual Machines, SQL Servers in Azure VMs and SAP HANA in Azure VM is now generally available in multiple regions. For the detailed list of supported regions, see the [support matrix](#support-matrix).
->- Archive tier support for Azure Virtual Machines for the remaining regions is in limited public preview. To sign up for limited public preview, fill [this form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR463S33c54tEiJLEM6Enqb9UNU5CVTlLVFlGUkNXWVlMNlRPM1lJWUxLRy4u).
+>Archive tier support for Azure Virtual Machines, SQL Servers in Azure VMs and SAP HANA in Azure VM is now generally available in multiple regions. For the detailed list of supported regions, see the [support matrix](#support-matrix).
 
 ### Supported clients
 
@@ -42,10 +41,9 @@ Archive tier supports the following clients:
 
 ### Supported regions
 
-| Workloads | Generally available |
-| --- | --- | --- |
-| SQL Server in Azure Virtual Machines/ SAP HANA in Azure Virtual Machines |  All regions, except West US 3, West India, Switzerland North, Switzerland West, Sweden Central, Sweden South, Australia Central, Australia Central 2, Brazil Southeast, Norway West, Germany Central, Germany North, Germany Northeast, South Africa North, South Africa West. |
-| Azure Virtual Machines |      All regions, except West US 3, West India, Switzerland North, Switzerland West, Sweden Central, Sweden South, Australia Central, Australia Central 2, Brazil Southeast, Norway West, Germany Central, Germany North, Germany Northeast, South Africa North, South Africa West, UAE North. |
+| Supported workload | Supported region |
+| --- | --- |
+| - **Azure VMs** <br><br> - **SQL Server in Azure VMs** <br><br> - **SAP HANA in Azure VMs** | Australia East, Australia Southeast, Brazil South, Canada Central, Canada East, Central US, East Asia, East US 2, East US, France Central, Germany West Central, Central India, South India, Japan East, Japan West, Korea Central, Korea South, North Central US, North Europe, Norway East, South Central US, South East Asia, UAE North, UK South, UK West, West Central US, West Europe, West US 2, West US, US Gov Arizona, US Gov Virginia, US Gov Texas, China North 2, China East 2, South Africa North, South Africa West, Sweden Central, Sweden South, Switzerland North. |
 
 ## How Azure Backup moves recovery points to the Vault-archive tier?
 
@@ -119,6 +117,23 @@ If the list of recovery points is blank, then all the eligible/recommended recov
 ### Can I use 'File Recovery' option to restore specific files in Azure VM backup for archived recovery points?
 
 No. Currently, the **File Recovery** option doesn't support restoring specific files from an archived recovery point of an Azure VM backup.
+
+### What are the possible reasons if my VM recovery point was not moved to archive?
+
+Before you move VM recovery points to archive tier, ensure that the following criteria are met:
+
+- The recovery point should be a monthly or yearly recovery point.
+- The age of the recovery point in standard tier needs to be *>= 3 months*.
+- The remaining retention duration should be *>= 6 months*.
+- There should be *no unexpired daily or weekly recovery point* between the recovery point in consideration and the next monthly or yearly recovery point.
+
+To check the type of recovery point, go to the *backup instance*, and then select the *link* to view all recovery points.
+
+:::image type="content" source="./media/archive-tier-support/view-all-vm-recovery-points.png" alt-text="Screenshot shows how to view all recovery points for an Azure VM." lightbox="./media/archive-tier-support/view-all-vm-recovery-points.png":::
+
+You can also filter from the list of all recovery points as per *daily*, *weekly*, *monthly*, and *yearly*.
+ 
+:::image type="content" source="./media/archive-tier-support/filter-vm-recovery-points-by-age.png" alt-text="Screenshot shows how to filter recovery points for an Azure VM by daily, weekly, monthly, and yearly." lightbox="./media/archive-tier-support/filter-vm-recovery-points-by-age.png":::
 
 ## Next steps
 

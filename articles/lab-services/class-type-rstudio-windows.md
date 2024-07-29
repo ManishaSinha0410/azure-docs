@@ -18,8 +18,7 @@ This article shows you how to set up a class in Azure Lab Services for teaching 
 
 [R](https://www.r-project.org/about.html) is an open-source language used for statistical computing and graphics.  The R language is used in the statistical analysis of genetics to natural language processing to analyzing financial data.  R provides an [interactive command line](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Invoking-R-from-the-command-line) experience.  [RStudio](https://www.rstudio.com/products/rstudio/) is an interactive development environment (IDE) available for the R language.  The free version provides code-editing tools, an integrated debugging experience, and package development tools.
 
-This article focuses on using R and RStudio for statistical computing. The [deep learning] (class-type-deep-learning-natural-language-processing.md) and [Python and Jupyter Notebooks](class-type-jupyter-notebook.md)
-class types set up RStudio differently.  Each article describes how to use the [Data Science Virtual Machine for Linux (Ubuntu)](https://azuremarketplace.microsoft.com/marketplace/apps?search=Data%20science%20Virtual%20machine&page=1&filters=microsoft%3Blinux) marketplace image, which has many [data science related tools](../machine-learning/data-science-virtual-machine/tools-included.md), including RStudio, pre-installed.
+This article focuses on using R and RStudio for statistical computing. The [deep learning] (class-type-deep-learning-natural-language-processing.md) and [Python and Jupyter Notebooks](class-type-jupyter-notebook.md) class types set up RStudio differently.  Each article describes how to use the [Data Science Virtual Machine for Linux (Ubuntu)](https://azuremarketplace.microsoft.com/marketplace/apps?search=Data%20science%20Virtual%20machine&page=1&filters=microsoft%3Blinux) marketplace image, which has many [data science related tools](../machine-learning/data-science-virtual-machine/tools-included.md), including RStudio, pre-installed.
 
 
 ## Prerequisites
@@ -37,7 +36,7 @@ If you choose to have a shared R Server for the students, the server should be s
 If you choose to use any external resources, you’ll need to [Connect to your virtual network in Azure Lab Services](how-to-connect-vnet-injection.md) with your lab plan.
 
 > [!IMPORTANT]
-> [Advanced networking](how-to-connect-vnet-injection.md#connect-the-virtual-network-during-lab-plan-creation) must be enabled during the creation of your lab plan.  It can't be added later.
+> [Advanced networking](how-to-connect-vnet-injection.md) must be enabled during the creation of your lab plan.  It can't be added later.
 
 ### Lab plan settings
 

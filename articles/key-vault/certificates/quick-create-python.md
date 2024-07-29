@@ -23,7 +23,7 @@ Get started with the Azure Key Vault certificate client library for Python. Foll
 - [Python 3.7+](/azure/developer/python/configure-local-development-environment)
 - [Azure CLI](/cli/azure/install-azure-cli)
 
-This quickstart assumes you're running [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-az-ps) in a Linux terminal window.
+This quickstart assumes you're running [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell) in a Linux terminal window.
 
 ## Set up your local environment
 
@@ -67,7 +67,7 @@ This quickstart uses the Azure Identity library with Azure CLI or Azure PowerShe
 
 1. In a terminal or command prompt, create a suitable project folder, and then create and activate a Python virtual environment as described on [Use Python virtual environments](/azure/developer/python/configure-local-development-environment?tabs=cmd#use-python-virtual-environments)
 
-1. Install the Azure Active Directory identity library:
+1. Install the Microsoft Entra identity library:
 
     ```terminal
     pip install azure.identity
@@ -90,21 +90,7 @@ This quickstart uses the Azure Identity library with Azure CLI or Azure PowerShe
 
 ### Grant access to your key vault
 
-Create an access policy for your key vault that grants certificate permission to your user account
-
-### [Azure CLI](#tab/azure-cli)
-
-```azurecli
-az keyvault set-policy --name <your-unique-keyvault-name> --upn user@domain.com --certificate-permissions delete get list create
-```
-
-### [Azure PowerShell](#tab/azure-powershell)
-
-```azurepowershell
-Set-AzKeyVaultAccessPolicy -VaultName "<your-unique-keyvault-name>" -UserPrincipalName "user@domain.com" -PermissionsToCertificates delete,get,list,create
-```
-
----
+[!INCLUDE [Using RBAC to provide access to a key vault](../../../includes/key-vault-quickstart-rbac.md)]
 
 ## Create the sample code
 
