@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: disk
 ms.topic: include
 ms.date: 12/16/2021
-ms.author: shaas
+ms.author: alkohli
 ---
 
 The following sample verbose log has sample file entries for block blob, page blob, and Azure File imports.
@@ -24,4 +24,3 @@ The following sample verbose log has sample file entries for block blob, page bl
 </File><File CloudFormat="PageBlob" Path="tesdirf631630d-8098-4c84-be7b-40f6bbdb73fb\Dir1/file_size0.txt" Size="0" crc64="0">
 </File>
 ```
-

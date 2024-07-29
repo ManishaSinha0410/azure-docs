@@ -1,23 +1,20 @@
 ---
-title: Create backup policies via REST API in Azure Backup
+title: Create backup policies using REST API
 description: In this article, you'll learn how to create and manage backup policies (schedule and retention) using REST API.
 ms.topic: how-to
-ms.date: 02/21/2024
+ms.date: 02/14/2023
 ms.assetid: 5ffc4115-0ae5-4b85-a18c-8a942f6d4870
 ms.service: backup
-ms.custom: engagement-fy24
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
+author: jyothisuri
+ms.author: jsuri
 ---
-# Create Azure Recovery Services backup policies by using REST API
+# Create Azure Recovery Services backup policies using REST API
 
-This article describes how to create policies for the backup of Azure VM, SQL database in Azure VM, SAP HANA database in Azure VM, and Azure File share.
-
-Learn more about [creating or modifying a backup policy for an Azure Recovery Services vault by using REST API](/rest/api/backup/protection-policies/create-or-update). 
+The steps to create a backup policy for an Azure Recovery Services vault are outlined in the [policy REST API document](/rest/api/backup/protection-policies/create-or-update). Let's use this document as a reference to create a policy for Azure VM backup.
 
 ## Create or update a policy
 
-To create or update an Azure Backup policy, use the following *PUT* operation.
+To create or update an Azure Backup policy, use the following *PUT* operation
 
 ```http
 PUT https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}?api-version=2019-05-13
@@ -27,22 +24,18 @@ The `{policyName}` and `{vaultName}` are provided in the URI. Additional informa
 
 ## Create the request body
 
-If you want to create a policy for Azure VM backup, the request body needs to have the following components:
+For example, to create a policy for Azure VM backup, following are the components of the request body.
 
 |Name  |Required  |Type  |Description  |
 |---------|---------|---------|---------|
 |properties     |   True      |  ProtectionPolicy:[AzureIaaSVMProtectionPolicy](/rest/api/backup/protection-policies/create-or-update#azureiaasvmprotectionpolicy)      | ProtectionPolicyResource properties        |
 |tags     |         | Object        |  Resource tags       |
 
-For the complete list of definitions in the request body, see the [backup policy REST API article](/rest/api/backup/protection-policies/create-or-update).
+For the complete list of definitions in the request body, refer to the [backup policy REST API document](/rest/api/backup/protection-policies/create-or-update).
 
 ### Example request body
 
-This section provides the example request body to create policies for the backup of Azure VM, SQL database in Azure VM, SAP HANA database in Azure VM, and Azure File share.
-
-**Choose a datasource**:
-
-# [Azure VM](#tab/azure-vm)
+#### For Azure VM backup
 
 The following request body defines a standard backup policy for Azure VM backups.
 
@@ -221,9 +214,9 @@ This policy:
 
 
 
-# [SQL in Azure VM](#tab/sql-in-azure-vm)
+#### For SQL in Azure VM backup
 
-The following request body defines the backup policy for SQL in Azure VM backup.
+The following is an example request body for SQL in Azure VM backup.
 
 This policy:
 
@@ -407,9 +400,9 @@ The following is an example of a policy that takes a differential backup everyda
   }
 ```
 
-# [SAP HANA in Azure VM](#tab/sap-hana-in-azure-vm)
+#### For SAP HANA in Azure VM backup
 
-The following request body defines the policy for SAP HANA database in Azure VM backup.
+The following is an example request body for SQL in Azure VM backup.
 
 This policy:
 
@@ -629,9 +622,9 @@ The following is an example of a policy that takes a full backup once a week and
 ```
 
 
-# [Azure File share](#tab/azure-file-share)
+#### For Azure File share backup
 
-The following request body defines the policy for Azure File share backup.
+The following is an example request body for Azure File share backup.
 
 This policy:
 
@@ -681,8 +674,6 @@ This policy:
 ```
 
 
-
----
 
 ## Responses
 

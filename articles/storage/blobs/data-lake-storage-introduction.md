@@ -4,11 +4,12 @@ titleSuffix: Azure Storage
 description: Read an introduction to Azure Data Lake Storage Gen2. Learn key features. Review supported Blob storage features, Azure service integrations, and platforms.
 author: normesta
 
-ms.service: azure-data-lake-storage
+ms.service: storage
 ms.topic: overview
 ms.date: 03/29/2023
 ms.author: normesta
 ms.reviewer: jamesbak
+ms.subservice: data-lake-storage-gen2
 ---
 
 # Introduction to Azure Data Lake Storage Gen2

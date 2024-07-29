@@ -1,15 +1,19 @@
 ---
 title: Create or update Azure custom roles using Azure PowerShell - Azure RBAC
 description: Learn how to list, create, update, or delete custom roles using Azure PowerShell and Azure role-based access control (Azure RBAC).
+services: active-directory
+documentationcenter: ''
 author: rolyon
 manager: amycolannino
 
 ms.assetid: 9e225dba-9044-4b13-b573-2f30d77925a9
 ms.service: role-based-access-control
 ms.topic: how-to
-ms.date: 12/01/2023
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 04/05/2023
 ms.author: rolyon
-ms.reviewer: bagovind
+ms.reviewer: bagovind 
 ms.custom: devx-track-azurepowershell
 ---
 # Create or update Azure custom roles using Azure PowerShell
@@ -24,8 +28,8 @@ For a step-by-step tutorial on how to create a custom role, see [Tutorial: Creat
 
 To create custom roles, you need:
 
-- Permissions to create custom roles, such as [User Access Administrator](built-in-roles.md#user-access-administrator)
-- [Azure Cloud Shell](../cloud-shell/overview.md) or [Azure PowerShell](/powershell/azure/install-azure-powershell)
+- Permissions to create custom roles, such as [Owner](built-in-roles.md#owner) or [User Access Administrator](built-in-roles.md#user-access-administrator)
+- [Azure Cloud Shell](../cloud-shell/overview.md) or [Azure PowerShell](/powershell/azure/install-az-ps)
 
 ## List custom roles
 

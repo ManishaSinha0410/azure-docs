@@ -7,7 +7,7 @@ ms.date: 8/6/2019
 ms.topic: how-to
 ms.service: azure-maps
 services: azure-maps
-ms.custom:
+ms.custom: devx-track-js
 ---
 
 # How to use image templates
@@ -26,11 +26,11 @@ Image templates can be added to the map image sprite resources by using the `map
 createFromTemplate(id: string, templateName: string, color?: string, secondaryColor?: string, scale?: number): Promise<void>
 ```
 
-The `id` is a unique identifier you create. The `id` is assigned to the image when it's added to the maps image sprite. Use this identifier in the layers to specify which image resource to render. The `templateName` specifies which image template to use. The `color` option sets the primary color of the image and the `secondaryColor` options sets the secondary color of the image. The `scale` option scales the image template before applying it to the image sprite. When the image is applied to the image sprite, it converts into a PNG. To ensure crisp rendering, it's better to scale up the image template before adding it to the sprite, than to scale it up in a layer.
+The `id` is a unique identifier you create. The `id` is assigned to the image when it's added to the maps image sprite. Use this identifier in the layers to specifying which image resource to render. The `templateName` specifies which image template to use. The `color` option sets the primary color of the image and the `secondaryColor` options sets the secondary color of the image. The `scale` option scales the image template before applying it to the image sprite. When the image is applied to the image sprite, it's converted into a PNG. To ensure crisp rendering, it's better to scale up the image template before adding it to the sprite, than to scale it up in a layer.
 
 This function asynchronously loads the image into the image sprite. Thus, it returns a Promise that you can wait for this function to complete.
 
-The following code shows how to create an image from one of the built-in templates, then use it with a symbol layer.
+The following code shows how to create an image from one of the built-in templates, and use it with a symbol layer.
 
 ```javascript
 map.imageSprite.createFromTemplate('myTemplatedIcon', 'marker-flat', 'teal', '#fff').then(function () {
@@ -48,30 +48,27 @@ map.imageSprite.createFromTemplate('myTemplatedIcon', 'marker-flat', 'teal', '#f
 
 Once an image template is loaded into the map image sprite, it can be rendered as a symbol in a symbol layer by referencing the image resource ID in the `image` option of the `iconOptions`.
 
-The [Symbol layer with built-in icon template] sample demonstrates how to do this by rendering a symbol layer using the `marker-flat` image template with a teal primary color and a white secondary color, as shown in the following screenshot.
+The following sample renders a symbol layer using the `marker-flat` image template with a teal primary color and a white secondary color.
 
-:::image type="content" source="./media/how-to-use-image-templates-web-sdk/symbol-layer-with-built-in-icon-template.png" alt-text="Screenshot showing a map displaying a symbol layer using the marker-flat image template with a teal primary color and a white secondary color.":::
-
-For the source code for this sample, see [Symbol layer with built-in icon template sample code].
-
-<!-----------------------------------------------------
 <br/>
-> [!VIDEO //codepen.io/azuremaps/embed/VoQMPp/?height=500&theme-id=0&default-tab=js,result&editable=true]
------------------------------------------------------>
+
+<iframe height="500" scrolling="no" title="Symbol layer with built-in icon template" src="//codepen.io/azuremaps/embed/VoQMPp/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/VoQMPp/'>Symbol layer with built-in icon template</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Use an image template along a lines path
 
 Once an image template is loaded into the map image sprite, it can be rendered along the path of a line by adding a LineString to a data source and using a symbol layer with a `lineSpacing`option and by referencing the ID of the image resource in the `image` option of th `iconOptions`.
 
-The [Line layer with built-in icon template] demonstrates how to do this. As show in the following screenshot, it renders a red line on the map and uses a symbol layer using the `car` image template with a dodger blue primary color and a white secondary color. For the source code for this sample, see [Line layer with built-in icon template sample code].
+The following sample renders a pink line on the map and uses a symbol layer using the `car` image template with a dodger blue primary color and a white secondary color.
 
-:::image type="content" source="./media/how-to-use-image-templates-web-sdk/line-layer-with-built-in-icon-template.png" alt-text="Screenshot showing a map displaying a line layer marking the route with car icons along the route.":::
-
-<!-----------------------------------------------------
 <br/>
 
-> [!VIDEO //codepen.io/azuremaps/embed/KOQvJe/?height=500&theme-id=0&default-tab=js,result&editable=true]
------------------------------------------------------>
+<iframe height="500" scrolling="no" title="Line layer with built-in icon template" src="//codepen.io/azuremaps/embed/KOQvJe/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/KOQvJe/'>Line layer with built-in icon template</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 > [!TIP]
 > If the image template points up, set the `rotation` icon option of the symbol layer to 90 if you want it to point in the same direction as the line.
@@ -80,15 +77,14 @@ The [Line layer with built-in icon template] demonstrates how to do this. As sho
 
 Once an image template is loaded into the map image sprite, it can be rendered as a fill pattern in a polygon layer by referencing the image resource ID in the `fillPattern` option of the layer.
 
-The [Fill polygon with built-in icon template] sample demonstrates how to render a polygon layer using the `dot` image template with a red primary color and a transparent secondary color, as shown in the following screenshot. For the source code for this sample, see [Fill polygon with built-in icon template sample code].
+The following sample renders a polygon layer using the `dot` image template with a red primary color and a transparent secondary color.  
 
-:::image type="content" source="./media/how-to-use-image-templates-web-sdk/fill-polygon-with-built-in-icon-template.png" alt-text="Screenshot showing a map displaying a polygon layer using the dot image template with a red primary color and a transparent secondary color.":::
-
-<!-----------------------------------------------------
 <br/>
 
-> [!VIDEO //codepen.io/azuremaps/embed/WVMEmz/?height=500&theme-id=0&default-tab=js,result&editable=true]
------------------------------------------------------>
+<iframe height="500" scrolling="no" title="Fill polygon with built-in icon template" src="//codepen.io/azuremaps/embed/WVMEmz/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/WVMEmz/'>Fill polygon with built-in icon template</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 > [!TIP]
 > Setting the secondary color of fill patterns makes it easier to see the underlying map will still providing the primary pattern.
@@ -97,15 +93,14 @@ The [Fill polygon with built-in icon template] sample demonstrates how to render
 
 An image template can be retrieved using the `altas.getImageTemplate` function and used as the content of an HTML marker. The template can be passed into the `htmlContent` option of the marker, and then customized using the `color`, `secondaryColor`, and `text` options.
 
-The [HTML Marker with built-in icon template] sample demonstrates this using the `marker-arrow` template with a red primary color, a pink secondary color, and a text value of "00", as shown in the following screenshot. For the source code for this sample, see [HTML Marker with built-in icon template sample code].
+The following sample uses the `marker-arrow` template with a red primary color, a pink secondary color, and a text value of "00".
 
-:::image type="content" source="./media/how-to-use-image-templates-web-sdk/html-marker-with-built-in-icon-template.png" alt-text="Screenshot showing a map displaying the marker-arrow template with a red primary color, a pink secondary color, and a text value of 00 inside the red arrow.":::
-
-<!-----------------------------------------------------
 <br/>
 
-> [!VIDEO //codepen.io/azuremaps/embed/EqQvzq/?height=500&theme-id=0&default-tab=js,result&editable=true]
------------------------------------------------------>
+<iframe height="500" scrolling="no" title="HTML Marker with built-in icon template" src="//codepen.io/azuremaps/embed/EqQvzq/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/EqQvzq/'>HTML Marker with built-in icon template</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 > [!TIP]
 > Image templates can be used outside of the map too. The getImageTemplate funciton returns an SVG string that has placeholders; `{color}`, `{secondaryColor}`, `{scale}`, `{text}`. Replace these placeholder values to create a valid SVG string. You can then either add the SVG string directly to the HTML DOM or convert it into a data URI and insert it into an image tag. For example:
@@ -137,15 +132,14 @@ SVG image templates support the following placeholder values:
 | `{scale}` | The SVG image is converted to an png image when added to the map image sprite. This placeholder can be used to scale a template before it's converted to ensure it renders clearly. |
 | `{text}` | The location to render text when used with an HTML Marker. |
 
-The [Add custom icon template to atlas namespace] sample demonstrates how to take an SVG template, and add it to the Azure Maps web SDK as a reusable icon template, as shown in the following screenshot. For the source code for this sample, see [Add custom icon template to atlas namespace sample code].
+The following example shows how to take an SVG template, and add it to the Azure Maps web SDK as a reusable icon template.
 
-:::image type="content" source="./media/how-to-use-image-templates-web-sdk/add-custom-icon-template-to-atlas-namespace.png" alt-text="Screenshot showing a map displaying a polygon layer in the shape of a big green triangle with multiple images of blue anchors inside.":::
-
-<!-----------------------------------------------------
 <br/>
 
-> [!VIDEO //codepen.io/azuremaps/embed/NQyvEX/?height=500&theme-id=0&default-tab=js,result&editable=true]
----------------------------------------------->
+<iframe height="500" scrolling="no" title="Add custom icon template to atlas namespace" src="//codepen.io/azuremaps/embed/NQyvEX/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/NQyvEX/'>Add custom icon template to atlas namespace</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## List of image templates
 
@@ -508,9 +502,10 @@ With the following tool, you can render the different built-in image templates i
 
 <br/>
 
-<!-----
-> [!VIDEO //codepen.io/azuremaps/embed/NQyaaO/?height=500&theme-id=0&default-tab=result]
----->
+<iframe height="500" scrolling="no" title="Icon template options" src="//codepen.io/azuremaps/embed/NQyaaO/?height=500&theme-id=0&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/azuremaps/pen/NQyaaO/'>Icon template options</a> by Azure Maps
+  (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Next steps
 
@@ -535,16 +530,3 @@ See the following articles for more code samples where image templates can be us
 
 > [!div class="nextstepaction"]
 > [Add HTML Makers](map-add-bubble-layer.md)
-
-[Azure Maps Samples]: https://samples.azuremaps.com
-[Symbol layer with built-in icon template]: https://samples.azuremaps.com/symbol-layer/symbol-layer-with-built-in-icon-template
-[Line layer with built-in icon template]: https://samples.azuremaps.com/line-layer/line-layer-with-built-in-icon-template
-[Fill polygon with built-in icon template]: https://samples.azuremaps.com/polygons/fill-polygon-with-built-in-icon-template
-[HTML Marker with built-in icon template]: https://samples.azuremaps.com/html-markers/html-marker-with-built-in-icon-template
-[Add custom icon template to atlas namespace]: https://samples.azuremaps.com/map/add-custom-icon-template-to-atlas-namespace
-
-[Symbol layer with built-in icon template sample code]: https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/main/Samples/Symbol%20Layer/Symbol%20layer%20with%20built-in%20icon%20template/Symbol%20layer%20with%20built-in%20icon%20template.html
-[Line layer with built-in icon template sample code]: https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/main/Samples/Line%20Layer/Line%20layer%20with%20built-in%20icon%20template/Line%20layer%20with%20built-in%20icon%20template.html
-[Fill polygon with built-in icon template sample code]: https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/main/Samples/Polygons/Fill%20polygon%20with%20built-in%20icon%20template/Fill%20polygon%20with%20built-in%20icon%20template.html
-[HTML Marker with built-in icon template sample code]: https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/main/Samples/HTML%20Markers/HTML%20Marker%20with%20built-in%20icon%20template/HTML%20Marker%20with%20built-in%20icon%20template.html
-[Add custom icon template to atlas namespace sample code]: https://github.com/Azure-Samples/AzureMapsCodeSamples/blob/main/Samples/Map/Add%20custom%20icon%20template%20to%20atlas%20namespace/Add%20custom%20icon%20template%20to%20atlas%20namespace.html

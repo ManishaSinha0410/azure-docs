@@ -6,7 +6,7 @@ ms.author: makromer
 ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
-ms.date: 10/20/2023
+ms.date: 10/27/2022
 ---
 
 # Power Query activity in Azure Data Factory
@@ -69,6 +69,6 @@ You have the option to sink your output to multiple destinations. Click on the p
 
 In the Mapping tab, you can configure column mapping from the output of your Power Query activity to the target schema of your chosen sink. Read more about column mapping from the [data flow sink mapping documentation](data-flow-sink.md#field-mapping).
 
-## Related content
+## Next steps
 
 Learn more about data wrangling concepts using [Power Query in Azure Data Factory](wrangling-tutorial.md)

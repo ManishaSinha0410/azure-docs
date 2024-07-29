@@ -6,15 +6,13 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/02/2022
 ms.author: danlep
 ---
 
 # Validate GraphQL request
 
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
-
-The `validate-graphql-request` policy validates the GraphQL request and authorizes access to specific query paths in a GraphQL API. An invalid query is a "request error". Authorization is only done for valid requests. 
+The `validate-graphql-request` policy validates the GraphQL request and authorizes access to specific query paths. An invalid query is a "request error". Authorization is only done for valid requests. 
 
 [!INCLUDE [api-management-policy-generic-alert](../../includes/api-management-policy-generic-alert.md)]
 
@@ -70,28 +68,24 @@ Available actions are described in the following table.
 ## Usage
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
-- [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+- [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, product, API, operation
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ### Usage notes
   
-* Configure the policy for a [pass-through](graphql-api.md) or [synthetic](graphql-schema-resolve-api.md) GraphQL API that has been imported to API Management.
+Because GraphQL queries use a flattened schema, permissions may be applied at any leaf node of an output type: 
 
-* This policy can only be used once in a policy section.
+* Mutation, query, or subscription
+* Individual field in a type declaration 
 
-* Because GraphQL queries use a flattened schema, permissions may be applied at any leaf node of an output type: 
-
-    * Mutation, query, or subscription
-    * Individual field in a type declaration 
-    
-    Permissions may not be applied to:
-     
-    * Input types
-    * Fragments
-    * Unions
-    * Interfaces
-    * The schema element  
-     
+Permissions may not be applied to:
+ 
+* Input types
+* Fragments
+* Unions
+* Interfaces
+* The schema element  
+ 
 ## Error handling
 
 Failure to validate against the GraphQL schema, or a failure for the request's size or depth, is a request error and results in the request being failed with an errors block (but no data block). 
@@ -132,6 +126,6 @@ This example applies the following validation and authorization rules to a Graph
 
 ## Related policies
 
-* [Content validation](api-management-policies.md#content-validation)
+* [Validation policies](api-management-policies.md#validation-policies)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

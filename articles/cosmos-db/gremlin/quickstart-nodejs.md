@@ -1,229 +1,208 @@
 ---
-title: 'Quickstart: Gremlin library for Node.js'
-titleSuffix: Azure Cosmos DB for Apache Gremlin
-description: In this quickstart, connect to Azure Cosmos DB for Apache Gremlin using Node.js. Then, create and traverse vertices and edges.
-author: manishmsfte
-ms.author: mansha
-ms.reviewer: sidandrews
+title: Build an Azure Cosmos DB Node.js application by using Gremlin API
+description: Presents a Node.js code sample you can use to connect to and query Azure Cosmos DB
 ms.service: cosmos-db
 ms.subservice: apache-gremlin
-ms.custom: devx-track-azurecli, devx-track-js
-ms.topic: quickstart-sdk
-ms.date: 09/27/2023
-# CustomerIntent: As a Node.js developer, I want to use a library for my programming language so that I can create and traverse vertices and edges in code.
+ms.devlang: javascript
+ms.topic: quickstart
+ms.date: 06/05/2019
+author: manishmsfte
+ms.author: mansha
+ms.custom: devx-track-js, mode-api, ignite-2022
 ---
-
-# Quickstart: Azure Cosmos DB for Apache Gremlin library for Node.js
-
+# Quickstart: Build a Node.js application by using Azure Cosmos DB for Gremlin account
 [!INCLUDE[Gremlin](../includes/appliesto-gremlin.md)]
 
-[!INCLUDE[Gremlin devlang](includes/quickstart-devlang.md)]
+> [!div class="op_single_selector"]
+> * [Gremlin console](quickstart-console.md)
+> * [.NET](quickstart-dotnet.md)
+> * [Java](quickstart-java.md)
+> * [Node.js](quickstart-nodejs.md)
+> * [Python](quickstart-python.md)
+> * [PHP](quickstart-php.md)
+>  
 
-Azure Cosmos DB for Apache Gremlin is a fully managed graph database service implementing the popular [`Apache Tinkerpop`](https://tinkerpop.apache.org/), a graph computing framework using the Gremlin query language. The API for Gremlin gives you a low-friction way to get started using Gremlin with a service that can grow and scale out as much as you need with minimal management.
-
-In this quickstart, you use the `gremlin` library to connect to a newly created Azure Cosmos DB for Gremlin account.
-
-[Library source code](https://github.com/apache/tinkerpop/tree/master/gremlin-javascript/src/main/javascript/gremlin-javascript) | [Package (npm)](https://www.npmjs.com/package/gremlin)
+In this quickstart, you create and manage an Azure Cosmos DB for Gremlin (graph) API account from the Azure portal, and add data by using a Node.js app cloned from GitHub. Azure Cosmos DB is a multi-model database service that lets you quickly create and query document, table, key-value, and graph databases with global distribution and horizontal scale capabilities.
 
 ## Prerequisites
+- An Azure account with an active subscription. [Create one for free](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio). 
+- [Node.js 0.10.29+](https://nodejs.org/).
+- [Git](https://git-scm.com/downloads).
 
-- An Azure account with an active subscription.
-  - No Azure subscription? [Sign up for a free Azure account](https://azure.microsoft.com/free/).
-  - Don't want an Azure subscription? You can [try Azure Cosmos DB free](../try-free.md) with no subscription required.
-- [Node.js (LTS)](https://nodejs.org/)
-  - Don't have Node.js installed? Try this quickstart in [GitHub Codespaces](https://codespaces.new/github/codespaces-blank?quickstart=1).codespaces.new/github/codespaces-blank?quickstart=1)
-- [Azure Command-Line Interface (CLI)](/cli/azure/)
+## Create a database account
 
-[!INCLUDE[Cloud Shell](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [cosmos-db-create-dbaccount-graph](../includes/cosmos-db-create-dbaccount-graph.md)]
 
-## Setting up
+## Add a graph
 
-This section walks you through creating an API for Gremlin account and setting up a Node.js project to use the library to connect to the account.
+[!INCLUDE [cosmos-db-create-graph](../includes/cosmos-db-create-graph.md)]
 
-### Create an API for Gremlin account
+## Clone the sample application
 
-The API for Gremlin account should be created prior to using the Node.js library. Additionally, it helps to also have the database and graph in place.
+Now let's clone a Gremlin API app from GitHub, set the connection string, and run it. You'll see how easy it is to work with data programmatically. 
 
-[!INCLUDE[Create account, database, and graph](includes/create-account-database-graph-cli.md)]
-
-### Create a new Node.js console application
-
-Create a Node.js console application in an empty folder using your preferred terminal.
-
-1. Open your terminal in an empty folder.
-
-1. Initialize a new module
+1. Open a command prompt, create a new folder named git-samples, then close the command prompt.
 
     ```bash
-    npm init es6 --yes
+    md "C:\git-samples"
     ```
 
-1. Create the **app.js** file
+2. Open a git terminal window, such as git bash, and use the `cd` command to change to the new folder to install the sample app.
 
     ```bash
-    touch app.js
+    cd "C:\git-samples"
     ```
 
-### Install the npm package
+3. Run the following command to clone the sample repository. This command creates a copy of the sample app on your computer.
 
-Add the `gremlin` npm package to the Node.js project.
+    ```bash
+    git clone https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started.git
+    ```
 
-1. Open the **package.json** file and replace the contents with this JSON configuration.
+3. Open the solution file in Visual Studio. 
 
-    ```json
+## Review the code
+
+This step is optional. If you're interested in learning how the database resources are created in the code, you can review the following snippets. Otherwise, you can skip ahead to [Update your connection string](#update-your-connection-string). 
+
+The following snippets are all taken from the *app.js* file.
+
+This console app uses the open-source [Gremlin Node.js](https://www.npmjs.com/package/gremlin) driver.
+
+* The Gremlin client is created.
+
+    ```javascript
+    const authenticator = new Gremlin.driver.auth.PlainTextSaslAuthenticator(
+        `/dbs/${config.database}/colls/${config.collection}`, 
+        config.primaryKey
+    )
+
+
+    const client = new Gremlin.driver.Client(
+        config.endpoint, 
+        { 
+            authenticator,
+            traversalsource : "g",
+            rejectUnauthorized : true,
+            mimeType : "application/vnd.gremlin-v2.0+json"
+        }
+    );
+
+    ```
+
+  The configurations are all in *config.js*, which we edit in the [following section](#update-your-connection-string).
+
+* A series of functions are defined to execute different Gremlin operations. This is one of them:
+
+    ```javascript
+    function addVertex1()
     {
-      "main": "app.js",
-      "type": "module",
-      "scripts": {
-        "start": "node app.js"
-      },
-      "dependencies": {
-        "gremlin": "^3.*"
-      }
+        console.log('Running Add Vertex1'); 
+        return client.submit("g.addV(label).property('id', id).property('firstName', firstName).property('age', age).property('userid', userid).property('pk', 'pk')", {
+                label:"person",
+                id:"thomas",
+                firstName:"Thomas",
+                age:44, userid: 1
+            }).then(function (result) {
+                    console.log("Result: %s\n", JSON.stringify(result));
+            });
     }
     ```
 
-1. Use the `npm install` command to install all packages specified in the **package.json** file.
+* Each function executes a `client.execute` method with a Gremlin query string parameter. Here is an example of how `g.V().count()` is executed:
 
-    ```bash
-    npm install
+    ```javascript
+    function countVertices()
+    {
+        console.log('Running Count');
+        return client.submit("g.V().count()", { }).then(function (result) {
+            console.log("Result: %s\n", JSON.stringify(result));
+        });
+    }
     ```
 
-### Configure environment variables
+* At the end of the file, all methods are then invoked. This will execute them one after the other:
 
-To use the *NAME* and *URI* values obtained earlier in this quickstart, persist them to new environment variables on the local machine running the application.
-
-1. To set the environment variable, use your terminal to persist the values as `COSMOS_ENDPOINT` and `COSMOS_KEY` respectively.
-
-    ```bash
-    export COSMOS_GREMLIN_ENDPOINT="<account-name>"
-    export COSMOS_GREMLIN_KEY="<account-key>"
+    ```javascript
+    client.open()
+    .then(dropGraph)
+    .then(addVertex1)
+    .then(addVertex2)
+    .then(addEdge)
+    .then(countVertices)
+    .catch((err) => {
+        console.error("Error running query...");
+        console.error(err)
+    }).then((res) => {
+        client.close();
+        finish();
+    }).catch((err) => 
+        console.error("Fatal error:", err)
+    );
     ```
 
-1. Validate that the environment variables were set correctly.
 
-    ```bash
-    printenv COSMOS_GREMLIN_ENDPOINT
-    printenv COSMOS_GREMLIN_KEY
-    ```
+## Update your connection string
 
-## Code examples
+1. Open the *config.js* file. 
 
-- [Authenticate the client](#authenticate-the-client)
-- [Create vertices](#create-vertices)
-- [Create edges](#create-edges)
-- [Query vertices &amp; edges](#query-vertices--edges)
+2. In *config.js*, fill in the `config.endpoint` key with the **Gremlin Endpoint** value from the **Overview** page of your Cosmos DB account in the Azure portal. 
 
-The code in this article connects to a database named `cosmicworks` and a graph named `products`. The code then adds vertices and edges to the graph before traversing the added items.
+    `config.endpoint = "https://<your_Gremlin_account_name>.gremlin.cosmosdb.azure.com:443/";`
 
-### Authenticate the client
+    :::image type="content" source="./media/quickstart-nodejs/gremlin-uri.png" alt-text="View and copy an access key in the Azure portal, Overview page":::
 
-Application requests to most Azure services must be authorized. For the API for Gremlin, use the *NAME* and *URI* values obtained earlier in this quickstart.
+3. In *config.js*, fill in the config.primaryKey value with the **Primary Key** value from the **Keys** page of your Cosmos DB account in the Azure portal. 
 
-1. Open the **app.js** file.
+    `config.primaryKey = "PRIMARYKEY";`
 
-1. Import the `gremlin` module.
+   :::image type="content" source="./media/quickstart-nodejs/keys.png" alt-text="Azure portal keys blade":::
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="imports":::
+4. Enter the database name, and graph (container) name for the value of config.database and config.collection. 
 
-1. Create `accountName` and `accountKey` variables. Store the `COSMOS_GREMLIN_ENDPOINT` and `COSMOS_GREMLIN_KEY` environment variables as the values for each respective variable.
+Here's an example of what your completed *config.js* file should look like:
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="environment_variables":::
+```javascript
+var config = {}
 
-1. Use `PlainTextSaslAuthenticator` to create a new object for the account's credentials.
+// Note that this must include the protocol (HTTPS:// for .NET SDK URI or wss:// for Gremlin Endpoint) and the port number
+config.endpoint = "https://testgraphacct.gremlin.cosmosdb.azure.com:443/"; 
+config.primaryKey = "Pams6e7LEUS7LJ2Qk0fjZf3eGo65JdMWHmyn65i52w8ozPX2oxY3iP0yu05t9v1WymAHNcMwPIqNAEv3XDFsEg==";
+config.database = "graphdb"
+config.collection = "Persons"
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="authenticate_client":::
+module.exports = config;
+```
 
-1. Use `Client` to connect using the remote server credentials and the **GraphSON 2.0** serializer. Then, use `Open` to create a new connection to the server.
+## Run the console app
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="connect_client":::
+1. Open a terminal window and change (via `cd` command) to the installation directory for the *package.json* file that's included in the project.
 
-### Create vertices
+2. Run `npm install` to install the required npm modules, including `gremlin`.
 
-Now that the application is connected to the account, use the standard Gremlin syntax to create vertices.
+3. Run `node app.js` in a terminal to start your node application.
 
-1. Use `submit` to run a command server-side on the API for Gremlin account. Create a **product** vertex with the following properties:
+## Browse with Data Explorer
 
-    | | Value |
-    | --- | --- |
-    | **label** | `product` |
-    | **id** | `68719518371` |
-    | **`name`** | `Kiama classic surfboard` |
-    | **`price`** | `285.55` |
-    | **`category`** | `surfboards` |
+You can now go back to Data Explorer in the Azure portal to view, query, modify, and work with your new graph data.
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="create_vertices_1":::
+In Data Explorer, the new database appears in the **Graphs** pane. Expand the database, followed by the container, and then select **Graph**.
 
-1. Create a second **product** vertex with these properties:
+The data generated by the sample app is displayed in the next pane within the **Graph** tab when you select **Apply Filter**.
 
-    | | Value |
-    | --- | --- |
-    | **label** | `product` |
-    | **id** | `68719518403` |
-    | **`name`** | `Montau Turtle Surfboard` |
-    | **`price`** | `600.00` |
-    | **`category`** | `surfboards` |
+Try completing `g.V()` with `.has('firstName', 'Thomas')` to test the filter. Note that the value is case sensitive.
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="create_vertices_2":::
+## Review SLAs in the Azure portal
 
-1. Create a third **product** vertex with these properties:
+[!INCLUDE [cosmosdb-tutorial-review-slas](../includes/cosmos-db-tutorial-review-slas.md)]
 
-    | | Value |
-    | --- | --- |
-    | **label** | `product` |
-    | **id** | `68719518409` |
-    | **`name`** | `Bondi Twin Surfboard` |
-    | **`price`** | `585.50` |
-    | **`category`** | `surfboards` |
+## Clean up your resources
 
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="create_vertices_3":::
+[!INCLUDE [cosmosdb-delete-resource-group](../includes/cosmos-db-delete-resource-group.md)]
 
-### Create edges
+## Next steps
 
-Create edges using the Gremlin syntax to define relationships between vertices.
-
-1. Create an edge from the `Montau Turtle Surfboard` product named **replaces** to the `Kiama classic surfboard` product.
-
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="create_edges_1":::
-
-    > [!TIP]
-    > This edge defintion uses the `g.V(['<partition-key>', '<id>'])` syntax. Alternatively, you can use `g.V('<id>').has('category', '<partition-key>')`.
-
-1. Create another **replaces** edge from the same product to the `Bondi Twin Surfboard`.
-
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="create_edges_2":::
-
-### Query vertices &amp; edges
-
-Use the Gremlin syntax to traverse the graph and discover relationships between vertices.
-
-1. Traverse the graph and find all vertices that `Montau Turtle Surfboard` replaces.
-
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="query_vertices_edges":::
-
-1. Write to the console the result of this traversal.
-
-    :::code language="javascript" source="~/cosmos-db-apache-gremlin-javascript-samples/001-quickstart/app.js" id="output_vertices_edges":::
-
-## Run the code
-
-Validate that your application works as expected by running the application. The application should execute with no errors or warnings. The output of the application includes data about the created and queried items.
-
-1. Open the terminal in the Node.js project folder.
-
-1. Use `npm <script>` to run the application. Observe the output from the application.
-
-    ```bash
-    npm start
-    ```
-
-## Clean up resources
-
-When you no longer need the API for Gremlin account, delete the corresponding resource group.
-
-[!INCLUDE[Delete account](includes/delete-account-cli.md)]
-
-## Next step
+In this article, you learned how to create an Azure Cosmos DB account, create a graph by using Data Explorer, and run a Node.js app to add data to the graph. You can now build more complex queries and implement powerful graph traversal logic by using Gremlin. 
 
 > [!div class="nextstepaction"]
-> [Create and query data using Azure Cosmos DB for Apache Gremlin](tutorial-query.md)
+> [Query by using Gremlin](tutorial-query.md)

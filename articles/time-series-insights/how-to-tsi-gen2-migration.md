@@ -4,6 +4,7 @@ description: How to migrate Azure Time Series Insights Gen 2 environments to Azu
 ms.service: time-series-insights
 author: tedvilutis
 ms.author: tvilutis
+ms.workload: big-data
 ms.topic: conceptual
 ms.date: 3/15/2022
 ms.custom: tvilutis
@@ -188,7 +189,7 @@ You can use the ‘Ingestion (preview)’ section with the below settings to mon
 
 :::image type="content" source="media/gen2-migration/adx-ingest-monitoring-results.png" alt-text="Screenshot of the Azure Data Explorer ingestion for Monitoring results" lightbox="media/gen2-migration/adx-ingest-lightingest-command.png":::
 
-You’ll know that the ingestion is complete once you see the metrics go to 0 for your table. If you want to see more details, you can use Log Analytics. On the Azure Data Explorer cluster section select on the ‘Log’ tab:
+You’ll know that the ingestion is complete once you see the metrics go to 0 for your table. If you want to see more details,, you can use Log Analytics. On the Azure Data Explorer cluster section select on the ‘Log’ tab:
 
 :::image type="content" source="media/gen2-migration/adx-ingest-monitoring-logs.png" alt-text="Screenshot of the Azure Data Explorer ingestion for Monitoring logs" lightbox="media/gen2-migration/adx-ingest-monitoring-logs.png":::
 
@@ -257,7 +258,7 @@ events
 
 #### GetEvents with filter
 
-```TSQ
+ ```TSQ
 {
   "getEvents": {
     "timeSeriesId": [

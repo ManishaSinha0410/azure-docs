@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.subservice: pod
 ms.topic: include
 ms.date: 06/08/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 When Microsoft receives and scans the device, order status is updated to **Received**. The device then undergoes physical verification for damage or signs of tampering.

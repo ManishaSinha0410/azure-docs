@@ -9,7 +9,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 05/15/2024
+ms.date: 08/04/2022
 ---
 
 # Rank transformation in mapping data flow 
@@ -68,6 +68,6 @@ PruneColumns
     ) ~> RankByPoints
 ```
 
-## Related content
+## Next steps
 
 Filter rows based upon the rank values using the [filter transformation](data-flow-filter.md).

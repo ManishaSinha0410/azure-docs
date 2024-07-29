@@ -5,6 +5,7 @@ author: yelevin
 ms.topic: conceptual
 ms.date: 01/10/2022
 ms.author: yelevin
+ms.custom: ignite-fall-2021
 ---
 
 # Useful resources for working with Kusto Query Language in Microsoft Sentinel

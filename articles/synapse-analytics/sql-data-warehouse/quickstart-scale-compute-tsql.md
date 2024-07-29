@@ -1,8 +1,9 @@
 ---
 title: "Quickstart: Scale compute in dedicated SQL pool (formerly SQL DW) - T-SQL"
 description: Scale compute in dedicated SQL pool (formerly SQL DW) using T-SQL and SQL Server Management Studio (SSMS). Scale out compute for better performance, or scale back compute to save costs.
-author: WilliamDAssafMSFT
-ms.author: wiassaf
+author: kedodd
+ms.author: kedodd
+manager: craigg
 ms.reviewer: wiassaf
 ms.date: 02/22/2023
 ms.service: synapse-analytics

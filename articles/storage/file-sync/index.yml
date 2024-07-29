@@ -6,8 +6,11 @@ summary: Azure File Sync enables centralizing your organization's file shares in
 metadata:
   title: Azure File Sync documentation
   description: Mount file shares in the cloud or on-premises on Windows, Linux, and macOS. Cache Azure file shares on Windows Servers with Azure File Sync for local access.
-  ms.service: azure-file-storage
+  services: storage
+  ms.service: storage
+  ms.subservice: files
   ms.topic: landing-page
+  ms.collection: collection
   author: khdownie
   ms.author: kendownie
   ms.date: 09/08/2022
@@ -36,7 +39,7 @@ landingContent:
       - linkListType: get-started
         links:
           - text: Create/use file shares - Windows
-            url: ../files/storage-files-quick-create-use-windows.md?toc=/azure/storage/file-sync/toc.json
+            url: ../files/storage-files-quick-create-use-windows.md?toc=/azure/storage/filesync/toc.json
           - text: Manage your server with Azure File Sync
             url: file-sync-server-registration.md
       - linkListType: tutorial
@@ -50,11 +53,11 @@ landingContent:
       - linkListType: reference
         links:
           - text: Azure Files troubleshooting
-            url: /troubleshoot/azure/azure-storage/files-troubleshoot?toc=/azure/storage/file-sync/toc.json
+            url: ../files/files-troubleshoot.md?toc=/azure/storage/filesync/toc.json
           - text: Azure Files performance troubleshooting
-            url: /troubleshoot/azure/azure-storage/files-troubleshoot-performance?toc=/azure/storage/file-sync/toc.json
+            url: ../files/files-troubleshoot-performance.md?toc=/azure/storage/filesync/toc.json
           - text: Azure File Sync troubleshooting
-            url: /troubleshoot/azure/azure-storage/file-sync-troubleshoot?toc=/azure/storage/file-sync/toc.json
+            url: file-sync-troubleshoot.md
 
   # Card
   - title: Migrate

@@ -1,7 +1,7 @@
 ---
 title: CLI command reference from OT network sensors- Microsoft Defender for IoT
 description: Learn about the CLI commands available from Microsoft Defender for IoT OT network sensors.
-ms.date: 12/19/2023
+ms.date: 12/29/2022
 ms.topic: reference
 ---
 
@@ -15,28 +15,28 @@ This article lists the CLI commands available from Defender for IoT OT network s
 
 Before you can run any of the following CLI commands, you'll need access to the CLI on your OT network sensor as a privileged user.
 
-While this article lists the command syntax for each user, we recommend using the *admin* user for all CLI commands where the *admin* user is supported.
+Each activity listed in this article is accessible by a different set of privileged users, including the *cyberx*, *support*, or *cyber_x_host* users. Command syntax is listed only for the users supported for a specific activity.
 
-If you're using an older version of the sensor software, you may have access to the legacy *support* user. In such cases, any commands that are listed as supported for the *admin* user are supported for the legacy *support* user.
+>[!IMPORTANT]
+> We recommend that customers using the Defender for IoT CLI use the *support* user whenever possible.
 
-For more information, see [Access the CLI](../references-work-with-defender-for-iot-cli-commands.md#access-the-cli) and [Privileged user access for OT monitoring](references-work-with-defender-for-iot-cli-commands.md#privileged-user-access-for-ot-monitoring).
-
+For more information, see [Access the CLI](../references-work-with-defender-for-iot-cli-commands.md#access-the-cli) and [Privileged user access for OT monitoring](../references-work-with-defender-for-iot-cli-commands.md#privileged-user-access-for-ot-monitoring).
 
 ## Appliance maintenance
 
 ### Check OT monitoring services health
 
-Use the following commands to verify that the Defender for IoT application on the OT sensor is working correctly, including the web console and traffic analysis processes.
+Use the following commands to verify that the Defender for IoT application on the OT sensor are working correctly, including the web console and traffic analysis processes.
 
 Health checks are also available from the OT sensor console. For more information, see [Troubleshoot the sensor](how-to-troubleshoot-sensor.md).
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system sanity`      |  No attributes      |
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)   |   `cyberx-xsense-sanity`      |   No attributes     |
+|**support**     |   `system sanity`      |  No attributes      |
+|**cyberx**     |   `cyberx-xsense-sanity`      |   No attributes     |
 
 
-The following example shows the command syntax and response for the *admin* user:
+The following example shows the command syntax and response for the *support* user:
 
 ```bash
 root@xsense: system sanity
@@ -59,19 +59,18 @@ System is UP! (medium)
 
 
 ### Restart and shutdown
-
 #### Restart an appliance
 
 Use the following commands to restart the OT sensor appliance.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system reboot`      |   No attributes     |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `sudo reboot`      |   No attributes      |
-|**cyberx_host**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `sudo reboot`      |   No attributes      |
+|**support**     |   `system reboot`      |   No attributes     |
+|**cyberx**     |   `sudo reboot`      |   No attributes      |
+|**cyberx_host**     |   `sudo reboot`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system reboot
@@ -83,30 +82,29 @@ Use the following commands to shut down the OT sensor appliance.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system shutdown`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `sudo shutdown -r now`      |   No attributes      |
-|**cyberx_host**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   `sudo shutdown -r now`      |   No attributes      |
+|**support**     |   `system shutdown`      |   No attributes      |
+|**cyberx**     |   `sudo shutdown -r now`      |   No attributes      |
+|**cyberx_host**     |   `sudo shutdown -r now`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system shutdown
 ```
 
 ### Software versions
-
 #### Show installed software version
 
 Use the following commands to list the Defender for IoT software version installed on your OT sensor.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system version`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `cyberx-xsense-version`      |   No attributes      |
+|**support**     |   `system version`      |   No attributes      |
+|**cyberx**     |   `cyberx-xsense-version`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system version
@@ -118,19 +116,18 @@ Version: 22.2.5.9-r-2121448
 For more information, see [Update your sensors](update-ot-software.md#update-ot-sensors).
 
 ### Date, time, and NTP
-
 #### Show current system date/time
 
 Use the following commands to show the current system date and time on your OT network sensor, in GMT format.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `date`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `date`      |   No attributes      |
-|**cyberx_host**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `date`      |  No attributes    |
+|**support**     |   `date`      |   No attributes      |
+|**cyberx**     |   `date`      |   No attributes      |
+|**cyberx_host**     |   `date`      |  No attributes    |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: date
@@ -149,12 +146,12 @@ To use these commands, make sure that:
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `ntp enable <IP address>`      |  No attributes |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `cyberx-xsense-ntp-enable <IP address>`      |  No attributes      |
+|**support**     |   `ntp enable <IP address>`      |  No attributes |
+|**cyberx**     |   `cyberx-xsense-ntp-enable <IP address>`      |  No attributes      |
 
 In these commands, `<IP address>` is the IP address of a valid IPv4 NTP server using port 123.
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: ntp enable 129.6.15.28
@@ -167,12 +164,12 @@ Use the following commands to turn off the synchronization for the appliance tim
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `ntp disable <IP address>`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `cyberx-xsense-ntp-disable <IP address>`      |  No attributes |
+|**support**     |   `ntp disable <IP address>`      |   No attributes      |
+|**cyberx**     |   `cyberx-xsense-ntp-disable <IP address>`      |  No attributes |
 
 In these commands, `<IP address>` is the IP address of a valid IPv4 NTP server using port 123.
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: ntp disable 129.6.15.28
@@ -194,11 +191,11 @@ Use the following commands to list the backup files currently stored on your OT 
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system backup-list`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   ` cyberx-xsense-system-backup-list`      |   No attributes      |
+|**support**     |   `system backup-list`      |   No attributes      |
+|**cyberx**     |   ` cyberx-xsense-system-backup-list`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system backup-list
@@ -218,11 +215,11 @@ Use the following commands to start an immediate, unscheduled backup of the data
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system backup`      |   No attributes      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   ` cyberx-xsense-system-backup`      |   No attributes      |
+|**support**     |   `system backup`      |   No attributes      |
+|**cyberx**     |   ` cyberx-xsense-system-backup`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system backup
@@ -243,11 +240,11 @@ Use the following commands to restore data on your OT network sensor using the m
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `system restore`      |   No attributes      |
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)   |   ` cyberx-xsense-system-restore`      |   `-f` `<filename>`      |
+|**support**     |   `system restore`      |   No attributes      |
+|**cyberx**     |   ` cyberx-xsense-system-restore`      |   No attributes      |
 
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: system restore
@@ -275,7 +272,7 @@ The following command lists the current backup disk space allocation, including 
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   ` cyberx-backup-memory-check`      |   No attributes      |
+|**cyberx**     |   ` cyberx-backup-memory-check`      |   No attributes      |
 
 For example, for the *cyberx* user:
 
@@ -303,7 +300,7 @@ For more information, see [Prepare CA-signed certificates](best-practices/plan-p
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user) | `cyberx-xsense-certificate-import` | cyberx-xsense-certificate-import [-h] [--crt &lt;PATH&gt;] [--key &lt;FILE NAME&gt;] [--chain &lt;PATH&gt;] [--pass &lt;PASSPHRASE&gt;] [--passphrase-set &lt;VALUE&gt;]`
+| **cyberx** | `cyberx-xsense-certificate-import` | cyberx-xsense-certificate-import [-h] [--crt &lt;PATH&gt;] [--key &lt;FILE NAME&gt;] [--chain &lt;PATH&gt;] [--pass &lt;PASSPHRASE&gt;] [--passphrase-set &lt;VALUE&gt;]`
 
 In this command:
 
@@ -311,11 +308,7 @@ In this command:
 - `--crt`: The path to the certificate file you want to upload, with a `.crt` extension
 - `--key`: The `\*.key` file you want to use for the certificate. Key length must be a minimum of 2,048 bits
 - `--chain`: The path to a certificate chain file. Optional.
-- `--pass`: A passphrase used to encrypt the certificate. Optional. 
-
-    The following characters are supported for creating a key or certificate with a passphrase:
-    - ASCII characters, including **a-z**, **A-Z**, **0-9**
-    - The following special characters: **! #  % ( ) + , - . /  :  =  ?  @  [  \  ]  ^  _  {  }  ~**
+- `--pass`: A passphrase used to encrypt the certificate. Optional.
 - `--passphrase-set`: Unused and set to *False* by default. Set to *True* to use passphrase supplied with the previous certificate. Optional.
 
 For example, for the *cyberx* user:
@@ -330,7 +323,7 @@ Use the following command to restore the default, self-signed certificates on yo
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   `cyberx-xsense-create-self-signed-certificate`      |   No attributes     |
+|**cyberx**     |   `cyberx-xsense-create-self-signed-certificate`      |   No attributes     |
 
 For example, for the *cyberx* user:
 
@@ -355,24 +348,24 @@ root@xsense:/#
 
 Use the following commands to change passwords for local users on your OT sensor.
 
-When you change the password for the *admin*, *cyberx*, or *cyberx_host* user, the password is changed for both SSH and web access.
+When you change the password for the *cyberx*, *support*, or *cyberx_host* user, the password is changed for both SSH and web access.
 
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |   `cyberx-users-password-reset`      | `cyberx-users-password-reset -u <user> -p <password>`      |
-|**cyberx_host**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)  |   `passwd` | No attributes   |
+|**cyberx**     |   `cyberx-users-password-reset`      | `cyberx-users-password-reset -u <user> -p <password>`      |
+|**cyberx_host**  |   `passwd` | No attributes   |
 
 
-The following example shows the *cyberx* user resetting the *admin* user's password to `jI8iD9kE6hB8qN0h`:
+The following example shows the *cyberx* user resetting the *support* user's password to `jI8iD9kE6hB8qN0h`:
 
 ```bash
-root@xsense:/# cyberx-users-password-reset -u admin -p jI8iD9kE6hB8qN0h
-resetting the password of OS user "admin"
+root@xsense:/# cyberx-users-password-reset -u support -p jI8iD9kE6hB8qN0h
+resetting the password of OS user "support"
 Sending USER_PASSWORD request to OS manager
 Open UDS connection with /var/cyberx/system/os_manager.sock
 Received data: b'ack'
-resetting the password of UI user "admin"
+resetting the password of UI user "support"
 root@xsense:/#
 ```
 
@@ -404,18 +397,18 @@ For more information, see [Define maximum number of failed sign-ins](manage-user
 ## Network configuration
 
 ### Network settings
-
 #### Change networking configuration or reassign network interface roles
 
 Use the following command to rerun the OT monitoring software configuration wizard, which helps you define or reconfigure the following OT sensor settings:
 
 - Enable/disable SPAN monitoring interfaces
 - Configure network settings for the management interface (IP, subnet, default gateway, DNS)
+- Setting up for [ERSPAN monitoring](traffic-mirroring/configure-mirror-erspan.md)
 - Assigning a backup directory
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx_host**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)      |   `sudo dpkg-reconfigure iot-sensor`      |   No attributes     |
+|**cyberx_host**     |   `sudo dpkg-reconfigure iot-sensor`      |   No attributes     |
 
 For example, with the **cyberx_host** user:
 
@@ -433,9 +426,9 @@ Use the following commands to validate and show the current network interface co
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `network validate`      |   No attributes |
+|**support**     |   `network validate`      |   No attributes |
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: network validate
@@ -457,8 +450,8 @@ Use the following commands to send a ping message from the OT sensor.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `ping <IP address>`      |  No attributes|
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   `ping <IP address>`      |   No attributes |
+|**support**     |   `ping <IP address>`      |  No attributes|
+|**cyberx**      |   `ping <IP address>`      |   No attributes |
 
 In these commands, `<IP address>` is the IP address of a valid IPv4 network host accessible from the management port on your OT sensor.
 
@@ -468,7 +461,7 @@ Use the following command to display network traffic and bandwidth using a six-s
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)   |   `cyberx-nload`      |   No attributes     |
+|**cyberx**     |   `cyberx-nload`      |   No attributes     |
 
 ```bash
 root@xsense:/# cyberx-nload
@@ -495,7 +488,7 @@ Use the following command to check the internet connectivity on your appliance.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   `cyberx-xsense-internet-connectivity`      |   No attributes |
+|**cyberx**     |   `cyberx-xsense-internet-connectivity`      |   No attributes |
 
 ```bash
 root@xsense:/# cyberx-xsense-internet-connectivity
@@ -513,7 +506,7 @@ Setting outbound bandwidth limits can be helpful in maintaining networking quali
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |  `cyberx-xsense-limit-interface` |  `cyberx-xsense-limit-interface [-h] --interface <INTERFACE VALUE> [--limit <LIMIT VALUE] [--clear]`    |
+|**cyberx**     |  `cyberx-xsense-limit-interface` |  `cyberx-xsense-limit-interface [-h] --interface <INTERFACE VALUE> [--limit <LIMIT VALUE] [--clear]`    |
 
 In this command:
 
@@ -554,18 +547,17 @@ setting the bandwidth limit of interface "eth0" to 1000mbps
 
 
 ### Physical interfaces
-
 #### Locate a physical port by blinking interface lights
 
 Use the following command to locate a specific physical interface by causing the interface lights to blink.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `network blink <INT>`      | No attributes |
+|**support**     |   `network blink <INT>`      | No attributes |
 
 In this command, `<INT>` is a physical ethernet port on the appliance.
 
-The following example shows the *admin* user blinking the *eth0* interface:
+The following example shows the *support* user blinking the *eth0* interface:
 
 ```bash
 root@xsense: network blink eth0
@@ -578,10 +570,10 @@ Use the following commands to list the connected physical interfaces on your OT 
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `network list`      |   No attributes |
-|**cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)     |   `ifconfig`      |   No attributes |
+|**support**     |   `network list`      |   No attributes |
+|**cyberx**     |   `ifconfig`      |   No attributes |
 
-For example, for the *admin* user:
+For example, for the *support* user:
 
 ```bash
 root@xsense: network list
@@ -625,31 +617,30 @@ The basic use case for capture filters uses the same filter for all Defender for
 - `traffic-monitor`: Captures communication statistics
 
 > [!NOTE]
-> - Capture filters don't apply to [Defender for IoT malware alerts](../alert-engine-messages.md#malware-engine-alerts), which are triggered on all detected network traffic.
+> Capture filters don't apply to [Defender for IoT malware alerts](../alert-engine-messages.md#malware-engine-alerts), which are triggered on all detected network traffic.
 >
-> - The capture filter command has a character length limit that's based on the complexity of the capture filter definition and the available network interface card capabilities. If your requested filter commmand fails, try grouping subnets into larger scopes and using a shorter capture filter command.
 
 ### Create a basic filter for all components
 
 The method used to configure a basic capture filter differs, depending on the user performing the command:
 
 - **cyberx** user: Run the specified command with specific attributes to configure your capture filter.
-- **admin** user: Run the specified command, and then enter values as [prompted by the CLI](#create-a-basic-capture-filter-using-the-admin-user), editing your include and exclude lists in a nano editor.
+- **support** user: Run the specified command, and then enter values as [prompted by the CLI](#create-a-basic-capture-filter-using-the-support-user), editing your include and exclude lists in a nano editor.
 
 Use the following commands to create a new capture filter:
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | `network capture-filter` | No attributes.|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user) | `cyberx-xsense-capture-filter` | `cyberx-xsense-capture-filter [-h] [-i INCLUDE] [-x EXCLUDE] [-etp EXCLUDE_TCP_PORT] [-eup EXCLUDE_UDP_PORT] [-itp INCLUDE_TCP_PORT] [-iup INCLUDE_UDP_PORT] [-vlan INCLUDE_VLAN_IDS] -m MODE [-S]`   |
+| **support** | `network capture-filter` | No attributes.|
+| **cyberx** | `cyberx-xsense-capture-filter` | `cyberx-xsense-capture-filter [-h] [-i INCLUDE] [-x EXCLUDE] [-etp EXCLUDE_TCP_PORT] [-eup EXCLUDE_UDP_PORT] [-itp INCLUDE_TCP_PORT] [-iup INCLUDE_UDP_PORT] [-vlan INCLUDE_VLAN_IDS] -m MODE [-S]`   |
 
 Supported attributes for the *cyberx* user are defined as follows:
 
 |Attribute  |Description  |
 |---------|---------|
 |`-h`, `--help`     |  Shows the help message and exits.      |
-|`-i <INCLUDE>`, `--include <INCLUDE>`     |  The path to a file that contains the devices and subnet masks you want to include, where `<INCLUDE>` is the path to the file. For example, see [Sample include or exclude file](#txt).   |
-|`-x EXCLUDE`, `--exclude EXCLUDE`     |  The path to a file that contains the devices and subnet masks you want to exclude, where `<EXCLUDE>` is the path to the file. For example, see [Sample include or exclude file](#txt).      |
+|`-i <INCLUDE>`, `--include <INCLUDE>`     |  The path to a file that contains the devices and subnet masks you want to include, where `<INCLUDE>` is the path to the file.       |
+|`-x EXCLUDE`, `--exclude EXCLUDE`     |  The path to a file that contains the devices and subnet masks you want to exclude, where `<EXCLUDE>` is the path to the file.       |
 |- `-etp <EXCLUDE_TCP_PORT>`, `--exclude-tcp-port <EXCLUDE_TCP_PORT>`     | Excludes TCP traffic on any specified ports, where the `<EXCLUDE_TCP_PORT>` defines the port or ports you want to exclude. Delimitate multiple ports by commas, with no spaces.        |
 |`-eup <EXCLUDE_UDP_PORT>`, `--exclude-udp-port <EXCLUDE_UDP_PORT>`     |   Excludes UDP traffic on any specified ports, where the `<EXCLUDE_UDP_PORT>` defines the port or ports you want to exclude. Delimitate multiple ports by commas, with no spaces.              |
 |`-itp <INCLUDE_TCP_PORT>`, `--include-tcp-port <INCLUDE_TCP_PORT>`     |   Includes TCP traffic on any specified ports, where the `<INCLUDE_TCP_PORT>` defines the port or ports you want to include. Delimitate multiple ports by commas, with no spaces.                   |
@@ -658,18 +649,9 @@ Supported attributes for the *cyberx* user are defined as follows:
 |`-p <PROGRAM>`, `--program <PROGRAM>`     | Defines the component for which you want to configure a capture filter. Use `all` for basic use cases, to create a single capture filter for all components. <br><br>For advanced use cases, create separate capture filters for each component. For more information, see [Create an advanced filter for specific components](#create-an-advanced-filter-for-specific-components).|
 |`-m <MODE>`, `--mode <MODE>`     | Defines an include list mode, and is relevant only when an include list is used. Use one of the following values: <br><br>- `internal`: Includes all communication between the specified source and destination <br>- `all-connected`: Includes all communication between either of the specified endpoints and external endpoints. <br><br>For example, for endpoints A and B, if you use the `internal` mode, included traffic will only include communications between endpoints **A** and **B**. <br>However, if you use the `all-connected` mode, included traffic will include all communications between A *or* B and other, external endpoints. |
 
-<a name="txt"></a>**Sample include or exclude file**
+#### Create a basic capture filter using the support user
 
-For example, an include or exclude **.txt** file might include the following entries:
-
-```txt
-192.168.50.10
-172.20.248.1
-```
-
-#### Create a basic capture filter using the admin user
-
-If you're creating a basic capture filter as the *admin* user, no attributes are passed in the [original command](#create-a-basic-filter-for-all-components). Instead, a series of prompts is displayed to help you create the capture filter interactively.
+If you're creating a basic capture filter as the *support* user, no attributes are passed in the [original command](#create-a-basic-filter-for-all-components). Instead, a series of prompts is displayed to help you create the capture filter interactively.
 
 Reply to the prompts displayed as follows:
 
@@ -684,6 +666,7 @@ Reply to the prompts displayed as follows:
     |**Device**     |   Define a device by its IP address.      |    `1.1.1.1` includes all traffic for this device.     |
     |**Channel**    |    Define a channel by the IP addresses of its source and destination devices, separated by a comma.     |   `1.1.1.1,2.2.2.2` includes all of the traffic for this channel.      |
     |**Subnet**     |    Define a subnet by its network address.     |   `1.1.1` includes all traffic for this subnet.      |
+    |**Subnet channel**     |    Define subnet channel network addresses for the source and destination subnets.     |   `1.1.1,2.2.2` includes all of the traffic between these subnets.      |
 
     List multiple arguments in separate rows.
 
@@ -715,7 +698,7 @@ Reply to the prompts displayed as follows:
 
 1. `In which component do you wish to apply this capture filter?`
 
-    Enter `all` for a basic capture filter. For [advanced use cases](#create-an-advanced-capture-filter-using-the-admin-user), create capture filters for each Defender for IoT component separately.
+    Enter `all` for a basic capture filter. For [advanced use cases](#create-an-advanced-capture-filter-using-the-support-user), create capture filters for each Defender for IoT component separately.
 
 1. `Type Y for "internal" otherwise N for "all-connected" (custom operation mode enabled) [Y/N]:`
 
@@ -770,8 +753,8 @@ To create a capture filter for *each* component, make sure to repeat the entire 
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | `network capture-filter` | No attributes.|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)  | `cyberx-xsense-capture-filter` | `cyberx-xsense-capture-filter [-h] [-i INCLUDE] [-x EXCLUDE] [-etp EXCLUDE_TCP_PORT] [-eup EXCLUDE_UDP_PORT] [-itp INCLUDE_TCP_PORT] [-iup INCLUDE_UDP_PORT] [-vlan INCLUDE_VLAN_IDS] -p PROGRAM [-o BASE_HORIZON] [-s BASE_TRAFFIC_MONITOR] [-c BASE_COLLECTOR] -m MODE [-S]`   |
+| **support** | `network capture-filter` | No attributes.|
+| **cyberx** | `cyberx-xsense-capture-filter` | `cyberx-xsense-capture-filter [-h] [-i INCLUDE] [-x EXCLUDE] [-etp EXCLUDE_TCP_PORT] [-eup EXCLUDE_UDP_PORT] [-itp INCLUDE_TCP_PORT] [-iup INCLUDE_UDP_PORT] [-vlan INCLUDE_VLAN_IDS] -p PROGRAM [-o BASE_HORIZON] [-s BASE_TRAFFIC_MONITOR] [-c BASE_COLLECTOR] -m MODE [-S]`   |
 
 The following extra attributes are used for the *cyberx* user to create capture filters for each component separately:
 
@@ -784,11 +767,11 @@ The following extra attributes are used for the *cyberx* user to create capture 
 
 Other attribute values have the same descriptions as in the basic use case, described [earlier](#create-a-basic-filter-for-all-components).
 
-#### Create an advanced capture filter using the admin user
+#### Create an advanced capture filter using the support user
 
-If you're creating a capture filter for each component separately as the *admin* user, no attributes are passed in the [original command](#create-an-advanced-filter-for-specific-components). Instead, a series of prompts is displayed to help you create the capture filter interactively.
+If you're creating a capture filter for each component separately as the *support* user, no attributes are passed in the [original command](#create-an-advanced-filter-for-specific-components). Instead, a series of prompts is displayed to help you create the capture filter interactively.
 
-Most of the prompts are identical to [basic use case](#create-a-basic-capture-filter-using-the-admin-user). Reply to the following extra prompts as follows:
+Most of the prompts are identical to [basic use case](#create-a-basic-capture-filter-using-the-support-user). Reply to the following extra prompts as follows:
 
 1. `In which component do you wish to apply this capture filter?`
 
@@ -804,7 +787,7 @@ Most of the prompts are identical to [basic use case](#create-a-basic-capture-fi
 
     Enter `Y` to customize the template for the specified component, or `N` to use the capture filter you'd configured earlier as it is.
 
-Continue with the remaining prompts as in the [basic use case](#create-a-basic-capture-filter-using-the-admin-user).
+Continue with the remaining prompts as in the [basic use case](#create-a-basic-capture-filter-using-the-support-user).
 
 ### List current capture filters for specific components
 
@@ -812,8 +795,8 @@ Use the following commands to show details about the current capture filters con
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | Use the following commands to view the capture filters for each component: <br><br>- **horizon**: `edit-config horizon_parser/horizon.properties` <br>- **traffic-monitor**: `edit-config traffic_monitor/traffic-monitor` <br>- **collector**: `edit-config dumpark.properties` | No attributes |
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user) | Use the following commands to view the capture filters for each component: <br><br>-**horizon**: `nano /var/cyberx/properties/horizon_parser/horizon.properties` <br>- **traffic-monitor**: `nano /var/cyberx/properties/traffic_monitor/traffic-monitor.properties` <br>- **collector**: `nano /var/cyberx/properties/dumpark.properties` | No attributes |
+| **support** | Use the following commands to view the capture filters for each component: <br><br>- **horizon**: `edit-config horizon_parser/horizon.properties` <br>- **traffic-monitor**: `edit-config traffic_monitor/traffic-monitor` <br>- **collector**: `edit-config dumpark.properties` | No attributes |
+| **cyberx** | Use the following commands to view the capture filters for each component: <br><br>-**horizon**: `nano /var/cyberx/properties/horizon_parser/horizon.properties` <br>- **traffic-monitor**: `nano /var/cyberx/properties/traffic_monitor/traffic-monitor.properties` <br>- **collector**: `nano /var/cyberx/properties/dumpark.properties` | No attributes |
 
 These commands open the following files, which list the capture filters configured for each component:
 
@@ -823,7 +806,7 @@ These commands open the following files, which list the capture filters configur
 |**traffic-monitor**     |   `/var/cyberx/properties/traffic-monitor.properties`      |    `horizon.processor.filter`     |
 |**collector**     |   `/var/cyberx/properties/dumpark.properties`      |   `dumpark.network.filter`      |
 
-For example with the **admin** user, with a capture filter defined for the *collector* component that excludes subnet 192.168.x.x and port 9000:
+For example with the **support** user, with a capture filter defined for the *collector* component that excludes subnet 192.168.x.x and port 9000:
 
 ```bash
 
@@ -849,11 +832,11 @@ Use the following command to reset your sensor to the default capture configurat
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)  | `cyberx-xsense-capture-filter -p all -m all-connected` | No attributes |
+| **cyberx**  | `cyberx-xsense-capture-filter -p all -m all-connected` | No attributes |
 
 If you want to modify the existing capture filters, run the [earlier](#create-a-basic-filter-for-all-components) command again, with new attribute values.
 
-To reset all capture filters using the *admin* user, run the [earlier](#create-a-basic-filter-for-all-components) command again, and respond `N` to all [prompts](#create-a-basic-capture-filter-using-the-admin-user) to reset all capture filters.
+To reset all capture filters using the *support* user, run the [earlier](#create-a-basic-filter-for-all-components) command again, and respond `N` to all [prompts](#create-a-basic-capture-filter-using-the-support-user) to reset all capture filters.
 
 The following example shows the command syntax and response for the *cyberx* user:
 
@@ -879,14 +862,13 @@ root@xsense:/#
 ```
 
 ## Alerts
-
 ### Trigger a test alert
 
 Use the following command to test connectivity and alert forwarding from the sensor to management consoles, including the Azure portal, a Defender for IoT on-premises management console, or a third-party SIEM.
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user) | `cyberx-xsense-trigger-test-alert` | No attributes |
+| **cyberx** | `cyberx-xsense-trigger-test-alert` | No attributes |
 
 The following example shows the command syntax and response for the *cyberx* user:
 
@@ -909,10 +891,10 @@ Use the following command to display a list of currently configured exclusion ru
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-|**admin**     |   `alerts exclusion-rule-list`      |   `alerts exclusion-rule-list [-h] -n NAME [-ts TIMES] [-dir DIRECTION]  [-dev DEVICES] [-a ALERTS]`      |
-|**cyberx**  , or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)    |  `alerts cyberx-xsense-exclusion-rule-list`       |   `alerts cyberx-xsense-exclusion-rule-list [-h] -n NAME [-ts TIMES] [-dir DIRECTION]  [-dev DEVICES] [-a ALERTS]`      |
+|**support**     |   `alerts exclusion-rule-list`      |   `alerts exclusion-rule-list [-h] -n NAME [-ts TIMES] [-dir DIRECTION]  [-dev DEVICES] [-a ALERTS]`      |
+|**cyberx**     |  `alerts cyberx-xsense-exclusion-rule-list`       |   `alerts cyberx-xsense-exclusion-rule-list [-h] -n NAME [-ts TIMES] [-dir DIRECTION]  [-dev DEVICES] [-a ALERTS]`      |
 
-The following example shows the command syntax and response for the *admin* user:
+The following example shows the command syntax and response for the *support* user:
 
 ```bash
 root@xsense: alerts exclusion-rule-list
@@ -926,8 +908,8 @@ Use the following commands to create a local alert exclusion rule on your sensor
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | `cyberx-xsense-exclusion-rule-create` |  `cyberx-xsense-exclusion-rule-create [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user) |`cyberx-xsense-exclusion-rule-create`  |`cyberx-xsense-exclusion-rule-create [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
+| **support** | `cyberx-xsense-exclusion-rule-create` |  `cyberx-xsense-exclusion-rule-create [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
+| **cyberx** |`cyberx-xsense-exclusion-rule-create`  |`cyberx-xsense-exclusion-rule-create [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
 
 Supported attributes are defined as follows:
 
@@ -935,12 +917,12 @@ Supported attributes are defined as follows:
 |---------|---------|
 |`-h`, `--help`     |  Shows the help message and exits.      |
 |`[-n <NAME>]`, `[--name <NAME>]` | Define the rule's name.|
-|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax: `hh:mm-hh:mm, hh:mm-hh:mm` |
+|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax: `xx:yy-xx:yy, xx:yy-xx:yy` |
 |`[-dir <DIRECTION>]`, `--direction <DIRECTION>` | Address direction to exclude. Use one of the following values: `both`, `src`, `dst`|
 |`[-dev <DEVICES>]`, `[--devices <DEVICES>]` | Device addresses or address types to exclude, using the following syntax: `ip-x.x.x.x`, `mac-xx:xx:xx:xx:xx:xx`, `subnet:x.x.x.x/x`|
 | `[-a <ALERTS>]`, `--alerts <ALERTS>`|Alert names to exclude, by hex value. For example: `0x00000, 0x000001` |
 
-The following example shows the command syntax and response for the *admin* user:
+The following example shows the command syntax and response for the *support* user:
 
 ```bash
 alerts exclusion-rule-create [-h] -n NAME [-ts TIMES] [-dir DIRECTION]
@@ -953,8 +935,8 @@ Use the following commands to modify an existing local alert exclusion rule on y
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | `exclusion-rule-append` |  `exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)  |`exclusion-rule-append`  |`exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
+| **support** | `exclusion-rule-append` |  `exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
+| **cyberx** |`exclusion-rule-append`  |`exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
 
 Supported attributes are defined as follows:
 
@@ -962,12 +944,12 @@ Supported attributes are defined as follows:
 |---------|---------|
 |`-h`, `--help`     |  Shows the help message and exits.      |
 |`[-n <NAME>]`, `[--name <NAME>]` | The name of the rule you want to modify.|
-|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax:  `hh:mm-hh:mm, hh:mm-hh:mm` |
+|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax: `xx:yy-xx:yy, xx:yy-xx:yy` |
 |`[-dir <DIRECTION>]`, `--direction <DIRECTION>` | Address direction to exclude. Use one of the following values: `both`, `src`, `dst`|
 |`[-dev <DEVICES>]`, `[--devices <DEVICES>]` | Device addresses or address types to exclude, using the following syntax: `ip-x.x.x.x`, `mac-xx:xx:xx:xx:xx:xx`, `subnet:x.x.x.x/x`|
 | `[-a <ALERTS>]`, `--alerts <ALERTS>`|Alert names to exclude, by hex value. For example: `0x00000, 0x000001` |
 
-Use the following command syntax with the *admin* user:
+Use the following command syntax with the **support* user:
 
 ```bash
 alerts exclusion-rule-append [-h] -n NAME [-ts TIMES] [-dir DIRECTION]
@@ -980,8 +962,8 @@ Use the following commands to delete an existing local alert exclusion rule on y
 
 |User  |Command  |Full command syntax   |
 |---------|---------|---------|
-| **admin** | `exclusion-rule-remove` |  `exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
-| **cyberx**, or **admin** with [root access](references-work-with-defender-for-iot-cli-commands.md#access-the-system-root-as-an-admin-user)  |`exclusion-rule-remove`  |`exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
+| **support** | `exclusion-rule-remove` |  `exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`|
+| **cyberx** |`exclusion-rule-remove`  |`exclusion-rule-append [-h] [-n NAME] [-ts TIMES] [-dir DIRECTION] [-dev DEVICES] [-a ALERTS]`   |
 
 Supported attributes are defined as follows:
 
@@ -989,12 +971,12 @@ Supported attributes are defined as follows:
 |---------|---------|
 |`-h`, `--help`     |  Shows the help message and exits.      |
 |`[-n <NAME>]`, `[--name <NAME>]` | The name of the rule you want to delete.|
-|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax:  `hh:mm-hh:mm, hh:mm-hh:mm` |
+|`[-ts <TIMES>]` `[--time_span <TIMES>]` | Defines the time span for which the rule is active, using the following syntax: `xx:yy-xx:yy, xx:yy-xx:yy` |
 |`[-dir <DIRECTION>]`, `--direction <DIRECTION>` | Address direction to exclude. Use one of the following values: `both`, `src`, `dst`|
 |`[-dev <DEVICES>]`, `[--devices <DEVICES>]` | Device addresses or address types to exclude, using the following syntax: `ip-x.x.x.x`, `mac-xx:xx:xx:xx:xx:xx`, `subnet:x.x.x.x/x`|
 | `[-a <ALERTS>]`, `--alerts <ALERTS>`|Alert names to exclude, by hex value. For example: `0x00000, 0x000001` |
 
-The following example shows the command syntax and response for the *admin* user:
+The following example shows the command syntax and response for the *support* user:
 
 ```bash
 alerts exclusion-rule-remove [-h] -n NAME [-ts TIMES] [-dir DIRECTION]

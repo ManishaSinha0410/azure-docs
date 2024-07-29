@@ -2,9 +2,10 @@
 title: Azure Workbooks graph visualizations
 description: Learn about all the Azure Workbooks graph visualizations.
 services: azure-monitor
+ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
-ms.date: 06/21/2023
+ms.date: 07/05/2022
 ---
 
 # Graph visualizations
@@ -12,8 +13,11 @@ ms.date: 06/21/2023
 Azure Workbooks graph visualizations support visualizing arbitrary graphs based on data from logs to show the relationships between monitoring entities.
 
 The following graph shows data flowing in and out of a computer via various ports to and from external computers. It's colored by type, for example, computer vs. port vs. external IP. The edge sizes correspond to the amount of data flowing in between. The underlying data comes from KQL query targeting VM connections.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-graph-visualizations/graph.png" lightbox="./media/workbooks-graph-visualizations/graph.png" alt-text="Screenshot that shows a tile summary view." border="false":::
+
+[![Screenshot that shows a tile summary view.](./media/workbooks-graph-visualizations/graph.png)](./media/workbooks-graph-visualizations/graph.png#lightbox)
+
+Watch this video to learn how to create graphs and use links in Azure Workbooks.
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE5ah5O]
 
 ## Add a graph
 
@@ -68,8 +72,8 @@ The following graph shows data flowing in and out of a computer via various port
     * **Node Color Field**: `Kind`
     * **Color palette**: `Pastel`
 1. Select **Save and Close** at the bottom of the pane.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-graph-visualizations/graph-settings.png" lightbox="./media/workbooks-graph-visualizations/graph-settings.png" alt-text="Screenshot that shows a tile summary view with the preceding query and settings." border="false":::
+
+[![Screenshot that shows a tile summary view with the preceding query and settings.](./media/workbooks-graph-visualizations/graph-settings.png)](./media/workbooks-graph-visualizations/graph-settings.png#lightbox)
 
 ## Graph settings
 
@@ -147,8 +151,8 @@ You can specify what content goes to the different parts of a node: top, left, c
     * **Coloring Type**: `Field Based`
     * **Node Color Field**: `Color`
 1. Select **Save and Close** at the bottom of the pane.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-graph-visualizations/graph-field-based.png" lightbox="./media/workbooks-graph-visualizations/graph-field-based.png" alt-text="Screenshot that shows the creation of a graph visualization with field-based node coloring." border="false":::
+
+[![Screenshot that shows the creation of a graph visualization with field-based node coloring.](./media/workbooks-graph-visualizations/graph-field-based.png)](./media/workbooks-graph-visualizations/graph-field-based.png#lightbox)
 
 ## Next steps
 

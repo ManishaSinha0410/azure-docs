@@ -3,15 +3,16 @@ title: Specify a customer-provided key on a request to Blob storage with .NET
 titleSuffix: Azure Storage
 description: Learn how to specify a customer-provided key on a request to Blob storage using .NET.
 services: storage
-author: akashdubey-ms
+author: tamram
 
-ms.service: azure-blob-storage
+ms.service: storage
 ms.topic: how-to
 ms.date: 05/09/2022
-ms.author: akashdubey
+ms.author: tamram
 ms.reviewer: ozgun
+ms.subservice: common
 ms.devlang: csharp
-ms.custom: devx-track-csharp, devx-track-dotnet
+ms.custom: devx-track-csharp
 ---
 
 # Specify a customer-provided key on a request to Blob storage with .NET
@@ -26,7 +27,7 @@ To learn more about how to authenticate with the Azure Identity client library, 
 
 ## Use a customer-provided key to write to a blob
 
-The following example provides an AES-256 key when uploading a blob with the v12 client library for Blob storage. The example uses the [DefaultAzureCredential](/dotnet/api/azure.identity.defaultazurecredential) object to authorize the write request with Microsoft Entra ID, but you can also authorize the request with Shared Key credentials. For more information about using the DefaultAzureCredential class to authorize a managed identity to access Azure Storage, see [Azure Identity client library for .NET](/dotnet/api/overview/azure/identity-readme).
+The following example provides an AES-256 key when uploading a blob with the v12 client library for Blob storage. The example uses the [DefaultAzureCredential](/dotnet/api/azure.identity.defaultazurecredential) object to authorize the write request with Azure AD, but you can also authorize the request with Shared Key credentials. For more information about using the DefaultAzureCredential class to authorize a managed identity to access Azure Storage, see [Azure Identity client library for .NET](/dotnet/api/overview/azure/identity-readme).
 
 ```csharp
 async static Task UploadBlobWithClientKey(Uri blobUri,

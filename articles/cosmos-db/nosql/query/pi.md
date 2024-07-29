@@ -1,43 +1,45 @@
 ---
-title: PI
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns constant value Pi.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: PI in Azure Cosmos DB query language
+description: Learn about SQL system function PI in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# PI (NoSQL query)
-
+# PI (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the constant value of Pi. For more information, see [Pi](https://wikipedia.org/wiki/pi).
+ Returns the constant value of PI.  
   
 ## Syntax
   
-```nosql
-PI()  
+```sql
+PI ()  
 ```  
-
+   
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
   
-The following example returns the constant value of Pi.
+  The following example returns the value of `PI`.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/pi/query.sql" highlight="2":::
+```sql
+SELECT PI() AS pi 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"pi": 3.1415926535897931}]  
+```  
 
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/pi/result.json":::
+## Next steps
 
-## Related content
-
-- [System functions](system-functions.yml)
-- [`SQRT`](sqrt.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

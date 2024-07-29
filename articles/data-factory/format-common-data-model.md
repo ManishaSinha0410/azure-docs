@@ -7,7 +7,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.custom: synapse
 ms.topic: conceptual
-ms.date: 01/05/2024
+ms.date: 08/05/2022
 ms.author: makromer
 ---
 
@@ -155,6 +155,6 @@ CDMSource sink(allowSchemaDrift: true,
 
 ```
 
-## Related content
+## Next steps
 
 Create a [source transformation](data-flow-source.md) in mapping data flow.

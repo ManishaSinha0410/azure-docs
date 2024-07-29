@@ -4,11 +4,12 @@ titleSuffix: Microsoft Cost Management
 description: This article helps get the most value out of your cloud investments, reduce your costs, and evaluate where your money is being spent.
 author: bandersmsft
 ms.author: banders
-ms.date: 03/21/2024
+ms.date: 12/06/2022
 ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.reviewer: adwise
+ms.custom: seodec18
 ---
 
 # How to optimize your cloud investment with Cost Management
@@ -62,7 +63,7 @@ Act to reduce your spending. Make the most of it based on the findings gathered 
 
 Everyone in your organization must engage in the cost management lifecycle. They need to stay involved on an ongoing basis to optimize costs. Be rigorous about this iterative process and make it a key tenet of responsible cloud governance in your organization.
 
-:::image type="content" border="false" source="./media/cost-mgt-best-practices/principles.png" alt-text="The Key principles diagram showing visibility, accountability, and optimization.":::
+![Key principles diagram showing visibility, accountability, and optimization](./media/cost-mgt-best-practices/principles.png)
 
 ## Plan with cost in mind
 
@@ -180,9 +181,9 @@ For more information about exporting billing data, see [Create and manage export
 
 ### Create budgets
 
-After you've identified and analyzed your spending patterns, it's important to begin setting limits for yourself and your teams. Budgets give you the ability to set either a cost or usage-based budget with many thresholds and alerts. Make sure to review the budgets that you create regularly to see your budget burn-down progress and make changes as needed. Budgets also allow you to configure an automation trigger when a given budget threshold is reached. For example, you can configure your service to shut down VMs. Or you can move your infrastructure to a different pricing tier in response to a budget trigger.
+After you've identified and analyzed your spending patterns, it's important to begin setting limits for yourself and your teams. Azure budgets give you the ability to set either a cost or usage-based budget with many thresholds and alerts. Make sure to review the budgets that you create regularly to see your budget burn-down progress and make changes as needed. Azure budgets also allow you to configure an automation trigger when a given budget threshold is reached. For example, you can configure your service to shut down VMs. Or you can move your infrastructure to a different pricing tier in response to a budget trigger.
 
-For more information, see [Create budgets](tutorial-acm-create-budgets.md).
+For more information, see [Azure Budgets](tutorial-acm-create-budgets.md).
 
 For more information about budget-based automation, see [Budget Based Automation](../manage/cost-management-budget-scenario.md).
 
@@ -230,6 +231,5 @@ For more information, see [Azure Hybrid Benefit savings calculator](https://azur
 
 Azure also has a service that allows you to build services that take advantage of surplus capacity in Azure for reduced rates. For more information, see [Use low priority VMs with Batch](../../batch/batch-low-pri-vms.md).
 
-## Related content
-
+## Next steps
 - If you're new to Cost Management, read [What is Cost Management?](../cost-management-billing-overview.md) to learn how it helps monitor and control Azure spending and to optimize resource use.

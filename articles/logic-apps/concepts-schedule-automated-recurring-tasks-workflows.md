@@ -5,7 +5,7 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, azla
 ms.topic: conceptual
-ms.date: 01/04/2024
+ms.date: 10/26/2022
 ---
 
 # Schedules for recurring triggers in Azure Logic Apps workflows

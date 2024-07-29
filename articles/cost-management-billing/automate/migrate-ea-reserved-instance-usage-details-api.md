@@ -4,23 +4,20 @@ titleSuffix: Microsoft Cost Management
 description: This article has information to help you migrate from the EA Reserved Instance Usage Details API.
 author: bandersmsft
 ms.author: banders
-ms.date: 04/23/2024
+ms.date: 07/15/2022
 ms.topic: conceptual
 ms.service: cost-management-billing
 ms.subservice: cost-management
-ms.reviewer: jojoh
+ms.reviewer: adwise
 ---
 
 # Migrate from EA Reserved Instance Usage Details API
 
-EA customers who were previously using the Enterprise Reporting consumption.azure.com API to obtain reserved instance usage details need to migrate to a parity Azure Resource Manager API. The following instructions help you migrate and discuss any contract differences between the old API and the new API.
+EA customers who were previously using the Enterprise Reporting consumption.azure.com API to obtain reserved instance usage details need to migrate to a parity Azure Resource Manager API. Instructions to do this are outlined below along with any contract differences between the old API and the new API.
 
-> [!NOTE]
-> All Azure Enterprise Reporting APIs are retired. You should [Migrate to Microsoft Cost Management APIs](migrate-ea-reporting-arm-apis-overview.md) as soon as possible.
+## Assign permissions to an SPN to call the API
 
-## Assign permissions to a service principal to call the API
-
-Before calling the API, you need to configure a Service Principal with the correct permission. You use the service principal to call the API. For more information, see [Assign permissions to Cost Management APIs](cost-management-api-permissions.md).
+Before calling the API, you need to configure a Service Principal with the correct permission. You use the service principal to call the API. For more information, see [Assign permissions to ACM APIs](cost-management-api-permissions.md).
 
 ### Call the Reserved instance usage details API
 
@@ -28,45 +25,20 @@ Microsoft isn't updating the older synchronous-based Reservation Details APIs. W
 
 #### Supported requests
 
-Use the following request URIs when calling the new Asynchronous Reservation Details API. Your enrollment number should be used as the billingAccountId. You can call the API with the following scope:
+Use the following request URIs when calling the new Asynchronous Reservation Details API. Your enrollment number should be used as the billingAccountId. You can call the API with the following scopes:
 
-Enrollment: `providers/Microsoft.Billing/billingAccounts/{billingAccountId}`
-
-[Generate report by billing account ID](/rest/api/cost-management/generate-reservation-details-report/by-billing-account-id)
+- Enrollment: `providers/Microsoft.Billing/billingAccounts/{billingAccountId}`
 
 #### Sample request to generate a reservation details report
 
 ```http
-POST https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport?startDate={startDate}&endDate={endDate}&api-version=2023-11-01 
-```
-
-The POST request returns a location to poll the report generation status as outlined in the following response:
-
-#### Sample response
-
-Status code 202
-
-```http
-Location: https://management.azure.com/providers/Microsoft.Billing/billingAccounts/9845612/providers/Microsoft.CostManagement/reservationDetailsOperationResults/cf9f95c9-af6b-41dd-a622-e6f4fc60c3ee?api-version=2023-11-01
-Retry-After: 60
-```
-
-Status code 200
-
-```json
-{
-  "status": "Completed",
-  "properties": {
-    "reportUrl": "https://storage.blob.core.windows.net/details/20200911/00000000-0000-0000-0000-000000000000?sv=2016-05-31&sr=b&sig=jep8HT2aphfUkyERRZa5LRfd9RPzjXbzB%2F9TNiQ",
-    "validUntil": "2020-09-12T02:56:55.5021869Z"
-  }
-}
+POST https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport?startDate={startDate}&endDate={endDate}&api-version=2019-11-01 
 ```
 
 #### Sample request to poll report generation status
 
 ```http
-GET https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/reservationDetailsOperationResults/{operationId}?api-version=2023-11-01 
+GET https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/reservationDetailsOperationResults/{operationId}?api-version=2019-11-01 
 ```
 
 #### Sample poll response
@@ -83,7 +55,7 @@ GET https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{bi
 
 #### Response body changes
 
-The following information is an example of the response of the older synchronous based Reservation Details API.
+The response of the older synchronous based Reservation Details API is below.
 
 Old response:
 
@@ -106,8 +78,8 @@ The new API creates a CSV file for you. See the following file fields.
 
 | Old property | New property | Notes |
 | --- | --- | --- |
-| | InstanceFlexibilityGroup | The new instance size flexibility property. |
-| | InstanceFlexibilityRatio | The new instance size flexibility property. |
+| | InstanceFlexibilityGroup | New property for instance flexibility. |
+| | InstanceFlexibilityRatio | New property for instance flexibility. |
 | instanceId | InstanceName |  |
 | | Kind | It's a new property. Value is `None`, `Reservation`, or `IncludedQuantity`. |
 | reservationId | ReservationId |  |
@@ -118,6 +90,6 @@ The new API creates a CSV file for you. See the following file fields.
 | usageDate | UsageDate |  |
 | usedHours | UsedHours |  |
 
-## Related content
+## Next steps
 
 - Read the [Migrate from EA Reporting to ARM APIs overview](migrate-ea-reporting-arm-apis-overview.md) article.

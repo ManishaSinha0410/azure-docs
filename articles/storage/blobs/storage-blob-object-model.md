@@ -6,9 +6,10 @@ services: storage
 author: pauljewellmsft
 ms.author: pauljewell
 
-ms.service: azure-blob-storage
+ms.service: storage
 ms.topic: how-to
 ms.date: 03/07/2023
+ms.subservice: blobs
 ms.custom: devguide-csharp, devguide-java, devguide-javascript, devguide-python
 ---
 

@@ -5,9 +5,7 @@ author: cgillum
 ms.topic: conceptual
 ms.date: 06/16/2022
 ms.author: azfuncdf
-ms.devlang: csharp
-# ms.devlang: csharp, javascript, python
-ms.custom: devx-track-js
+ms.devlang: csharp, javascript, python
 ---
 
 # Function chaining in Durable Functions - Hello sequence sample

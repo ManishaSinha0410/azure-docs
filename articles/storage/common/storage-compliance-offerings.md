@@ -1,13 +1,13 @@
 ---
 title: Azure Storage compliance offerings
-description: Read a summary of compliance offerings on Azure Storage for national/regional and industry-specific requirements governing the collection and usage of data.
+description: Read a summary of compliance offerings on Azure Storage for national, regional, and industry-specific requirements governing the collection and usage of data.
 services: storage
 author: fhryo-msft
-ms.service: azure-storage
+ms.service: storage
 ms.topic: conceptual
 ms.date: 04/28/2023
 ms.author: fryu
-ms.subservice: storage-common-concepts
+ms.subservice: common
 ---
 
 # Azure Storage compliance offerings

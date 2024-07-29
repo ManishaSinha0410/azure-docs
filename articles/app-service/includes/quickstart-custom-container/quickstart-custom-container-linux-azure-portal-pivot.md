@@ -2,7 +2,6 @@
 author: cephalin
 ms.service: app-service
 ms.devlang: java
-ms.custom: linux-related-content
 ms.topic: quickstart
 ms.date: 06/30/2022
 ms.author: cephalin
@@ -64,7 +63,7 @@ Make sure you are in the cloned repository's root folder. This repository contai
 
 ### Sign in to Azure portal
 
-Sign in to the [Azure portal](https://portal.azure.com).
+Sign in to the Azure portal at https://portal.azure.com.
 
 ### Create Azure resources
 
@@ -146,4 +145,4 @@ The App Service app pulls from the container registry every time it starts. If y
 > [Configure custom container](../../configure-custom-container.md)
 
 > [!div class="nextstepaction"]
-> [Sidecar container tutorial](../../tutorial-custom-container-sidecar.md)
+> [Multi-container app tutorial](../../tutorial-multi-container-app.md)

@@ -4,7 +4,7 @@ description: This article provides an overview of Azure availability zones and r
 keywords: automation availability zones.
 services: automation
 ms.subservice: process-automation
-ms.date: 10/16/2023
+ms.date: 04/10/2023
 ms.topic: conceptual
 ms.custom: references_regions 
 ---
@@ -36,7 +36,6 @@ Automation accounts currently support the following regions:
 - Australia East
 - Brazil South
 - Canada Central
-- Central India
 - Central US
 - China North 3
 - East Asia
@@ -44,19 +43,15 @@ Automation accounts currently support the following regions:
 - East US 2
 - France Central
 - Germany West Central
-- Israel Central
-- Italy North
 - Japan East
 - Korea Central
 - North Europe
 - Norway East
-- Poland Central
 - Qatar Central
 - South Africa North
 - South Central US
 - South East Asia
 - Sweden Central
-- USGov Virginia (Fairfax Private Cloud)
 - UK South
 - West Europe
 - West US 2

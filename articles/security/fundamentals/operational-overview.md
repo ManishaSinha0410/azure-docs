@@ -3,13 +3,19 @@
 title: Azure operational security overview| Microsoft Docs
 description: Learn about Azure operational security in this overview. Operational security refers to asset protection services, controls, and features.
 services: security
-author: terrylanfear
+documentationcenter: na
+author: unifycloud
 manager: rkarlin
-ms.service: security
-ms.subservice: security-fundamentals
+editor: tomsh
+
+ms.assetid:
+ms.service: information-protection
+ms.subservice: aiplabels
 ms.topic: article
-ms.date: 08/29/2023
-ms.author: terrylan
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/31/2019
+ms.author: tomsh
 
 ---
 
@@ -45,17 +51,15 @@ For more information, see the [Azure Backup components table](../../backup/backu
 
 [Azure Site Recovery](../../site-recovery/index.yml) provides business continuity by orchestrating the replication of on-premises virtual and physical machines to Azure, or to a secondary site. If your primary site is unavailable, you fail over to the secondary location so that users can keep working. You fail back when systems return to working order. Use Microsoft Defender for Cloud to perform more intelligent and effective threat detection.
 
-<a name='azure-active-directory'></a>
+## Azure Active Directory
 
-## Microsoft Entra ID
-
-[Microsoft Entra ID](../../active-directory/manage-apps/what-is-application-management.md) is a comprehensive identity service that:
+[Azure Active Directory (Azure AD)](../../active-directory/manage-apps/what-is-application-management.md) is a comprehensive identity service that:
 
 -	Enables identity and access management (IAM) as a cloud service.
 -	Provides central access management, single sign-on (SSO), and reporting.
 -	Supports integrated access management for [thousands of applications](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AzureActiveDirectory) in the Azure Marketplace, including Salesforce, Google Apps, Box, and Concur.
 
-Microsoft Entra ID also includes a full suite of [identity management capabilities](./identity-management-overview.md#security-monitoring-alerts-and-machine-learning-based-reports), including these:
+Azure AD also includes a full suite of [identity management capabilities](./identity-management-overview.md#security-monitoring-alerts-and-machine-learning-based-reports), including these:
 
 - [Multi-factor authentication](../../active-directory/authentication/concept-mfa-howitworks.md)
 - [Self-service password management](https://azure.microsoft.com/resources/videos/self-service-password-reset-azure-ad/)
@@ -66,7 +70,7 @@ Microsoft Entra ID also includes a full suite of [identity management capabiliti
 - [Rich auditing](../../active-directory/reports-monitoring/concept-audit-logs.md)
 - [Security monitoring and alerting](../../security-center/security-center-managing-and-responding-alerts.md)
 
-With Microsoft Entra ID, all applications that you publish for your partners and customers (business or consumer) have the same identity and access management capabilities. This enables you to significantly reduce your operational costs.
+With Azure Active Directory, all applications that you publish for your partners and customers (business or consumer) have the same identity and access management capabilities. This enables you to significantly reduce your operational costs.
 
 ## Microsoft Defender for Cloud
 
@@ -80,7 +84,7 @@ With Microsoft Entra ID, all applications that you publish for your partners and
 - Disk encryption validation.
 - Network-based attacks.
 
-Defender for Cloud uses [Azure role-based access control (Azure RBAC)](../../role-based-access-control/role-assignments-portal.yml). Azure RBAC provides [built-in roles](../../role-based-access-control/built-in-roles.md) that can be assigned to users, groups, and services in Azure.
+Defender for Cloud uses [Azure role-based access control (Azure RBAC)](../../role-based-access-control/role-assignments-portal.md). Azure RBAC provides [built-in roles](../../role-based-access-control/built-in-roles.md) that can be assigned to users, groups, and services in Azure.
 
 Defender for Cloud assesses the configuration of your resources to identify security issues and vulnerabilities. In Defender for Cloud, you see information related to a resource only when you're assigned the role of owner, contributor, or reader for the subscription or resource group that a resource belongs to.
 
@@ -149,7 +153,7 @@ For more information, see [Configure Network Watcher](../../network-watcher/netw
 
 [Customer Lockbox for Microsoft Azure](customer-lockbox-overview.md) is a service integrated into Azure portal that gives you explicit control in the rare instance when a Microsoft Support Engineer may need access to your data to resolve an issue.
 There are very few instances, such as a debugging remote access issue, where a Microsoft Support Engineer requires elevated permissions to resolve this issue. In such cases, Microsoft engineers use just-in-time access service that provides limited, time-bound authorization with access limited to the service.  
-While Microsoft has always obtained customer consent for access, Customer Lockbox now gives you the ability to review and approve or deny such requests from the Azure portal. Microsoft support engineers will not be granted access until you approve the request.
+While Microsoft has always obtained customer consent for access, Customer Lockbox now gives you the ability to review and approve or deny such requests from the Azure Portal. Microsoft support engineers will not be granted access until you approve the request.
 
 ## Standardized and Compliant Deployments
 

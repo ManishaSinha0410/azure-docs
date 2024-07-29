@@ -1,11 +1,11 @@
 ---
 title: Understand Azure App Configuration key-value store
 description: Understand key-value storage in Azure App Configuration, which stores configuration data as key-values. Key-values are a representation of application settings.
-author: maud-lv
-ms.author: malev
+author: mcleanbyron
+ms.author: mcleans
 ms.service: azure-app-configuration
 ms.topic: conceptual
-ms.date: 05/13/2024
+ms.date: 09/14/2022
 ms.custom: devdivchpfy22
 ---
 
@@ -96,7 +96,7 @@ Each key-value in App Configuration has a content type attribute. You can option
 > [!div class="nextstepaction"]
 > [Point-in-time snapshot](./concept-point-time-snapshot.md)
 
-> [!div class="neSxtstepaction"]
+> [!div class="nextstepaction"]
 > [Feature management](./concept-feature-management.md)
 
 > [!div class="nextstepaction"]

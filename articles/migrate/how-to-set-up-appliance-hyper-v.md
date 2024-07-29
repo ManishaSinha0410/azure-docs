@@ -5,7 +5,6 @@ author: Vikram1988
 ms.author: vibansa
 ms.manager: abhemraj
 ms.topic: how-to
-ms.service: azure-migrate
 ms.date: 12/12/2022
 ms.custom: engagement-fy23
 ---

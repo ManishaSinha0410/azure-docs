@@ -6,7 +6,8 @@ author: jianleishen
 ms.service: data-factory
 ms.subservice: data-movement
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.custom: seo-lt-2019
+ms.date: 08/12/2022
 ---
 
 # Load data into Azure Data Lake Storage Gen2 with Azure Data Factory
@@ -101,7 +102,7 @@ This article shows you how to use the Data Factory Copy Data tool to load data f
 
 11. Verify that the data is copied into your Data Lake Storage Gen2 account.
 
-## Related content
+## Next steps
 
 * [Copy activity overview](copy-activity-overview.md)
 * [Azure Data Lake Storage Gen2 connector](connector-azure-data-lake-storage.md)

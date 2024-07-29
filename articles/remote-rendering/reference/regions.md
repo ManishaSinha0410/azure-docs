@@ -1,8 +1,8 @@
 ---
 title: Regions
 description: Lists the available regions for Azure Remote Rendering
-author: FlorianBorn71
-ms.author: flborn
+author: jakrams
+ms.author: jakras
 ms.date: 02/11/2020
 ms.topic: reference
 ms.custom: references_regions

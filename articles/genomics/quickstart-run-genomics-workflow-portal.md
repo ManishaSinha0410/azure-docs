@@ -1,7 +1,9 @@
 ---
 title: 'Quickstart: Run a workflow - Microsoft Genomics'
 description: The quickstart shows how to load input data into Azure Blob Storage and run a workflow through the Microsoft Genomics service.
+services: genomics
 author: vigunase
+manager: cgronlun
 ms.author: vigunase
 ms.service: genomics
 ms.topic: quickstart
@@ -102,7 +104,10 @@ Then select **Review + create** to create your storage account. As you did with 
 
 ## Upload input data to your storage account
 
-The Microsoft Genomics service expects paired end reads (fastq or bam files) as input files. You can choose to either upload your own data, or explore using publicly available sample data provided for you.
+The Microsoft Genomics service expects paired end reads (fastq or bam files) as input files. You can choose to either upload your own data, or explore using publicly available sample data provided for you. If you would like to use the publicly available sample data, it is hosted here:
+
+[https://msgensampledata.blob.core.windows.net/small/chr21_1.fq.gz](https://msgensampledata.blob.core.windows.net/small/chr21_1.fq.gz)
+[https://msgensampledata.blob.core.windows.net/small/chr21_2.fq.gz](https://msgensampledata.blob.core.windows.net/small/chr21_2.fq.gz)
 
 Within your storage account, you need to make one blob container for your input data and a second blob container for your output data.  Upload the input data into your input blob container. Various tools can be used to do this, including [Microsoft Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/), [BlobPorter](https://github.com/Azure/blobporter), or [AzCopy](../storage/common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json). 
 

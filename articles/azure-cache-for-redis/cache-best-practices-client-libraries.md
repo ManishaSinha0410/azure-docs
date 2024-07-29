@@ -7,7 +7,7 @@ ms.service: cache
 ms.topic: conceptual
 ms.date: 01/04/2022
 ms.author: franlanglois
-ms.custom: devx-track-java, devx-track-javaee, devx-track-javaee-liberty, devx-track-javaee-liberty-aks, devx-track-extended-java
+ms.custom: devx-track-java, devx-track-javaee, devx-track-javaee-liberty, devx-track-javaee-liberty-aks
 ---
 
 # Client libraries
@@ -63,7 +63,6 @@ clusterServersConfig:
   timeout: 5000
   retryAttempts: 3
   retryInterval: 3000
-  checkLockSyncedSlaves: false
   failedSlaveReconnectionInterval: 15000
   failedSlaveCheckInterval: 60000
   subscriptionsPerConnection: 5

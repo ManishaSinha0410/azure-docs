@@ -1,38 +1,34 @@
 ---
-title: UPPER
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a string expression with lowercase characters converted to uppercase.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: UPPER in Azure Cosmos DB query language
+description: Learn about SQL system function UPPER in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 04/08/2021
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# UPPER (NoSQL query)
-
+# UPPER (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
 Returns a string expression after converting lowercase character data to uppercase.
 
 > [!NOTE]
-> This function automatically uses culture-independent (invariant) casing rules when returning the converted string expression.
+> This function uses culture-independent (invariant) casing rules when returning the converted string expression. 
+
+The UPPER system function doesn't utilize the index. If you plan to do frequent case insensitive comparisons, the UPPER system function may consume a significant number of RUs. If so, instead of using the UPPER system function to normalize data each time for comparisons, you can normalize the casing upon insertion. Then a query such as SELECT * FROM c WHERE UPPER(c.name) = 'USERNAME' simply becomes SELECT * FROM c WHERE c.name = 'USERNAME'.
 
 ## Syntax
   
-```nosql
-UPPER(<string_expr>)
-```
+```sql
+UPPER(<str_expr>)  
+```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
+  
+*str_expr*  
+   Is a string expression.  
   
 ## Return types
   
@@ -40,18 +36,24 @@ Returns a string expression.
   
 ## Examples
   
-The following example shows how to use the function to modify various strings.
+The following example shows how to use `UPPER` in a query  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/upper/query.sql" highlight="2-6":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/upper/result.json":::
+```sql
+SELECT UPPER("Abc") AS upper  
+```  
+  
+Here's the result set.  
+  
+```json
+[{"upper": "ABC"}]
+```
 
 ## Remarks
 
-- This function doesn't use the index.
-- If you plan to do frequent case insensitive comparisons, this function may consume a significant number of RUs. Consider normalizing the casing of strings when ingesting your data. Then a query like `SELECT * FROM c WHERE UPPER(c.name) = 'USERNAME'` is simplified to `SELECT * FROM c WHERE c.name = 'USERNAME'`.
+This system function won't [use indexes](../../index-overview.md#index-usage).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`LOWER`](lower.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

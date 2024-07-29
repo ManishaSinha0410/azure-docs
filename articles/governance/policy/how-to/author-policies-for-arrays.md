@@ -59,9 +59,7 @@ can be rewritten as follows:
             "displayName": "Allowed locations",
             "strongType": "location"
         },
-        "defaultValue": [
-            "eastus2"
-        ],
+        "defaultValue": "eastus2",
         "allowedValues": [
             "eastus2",
             "eastus",

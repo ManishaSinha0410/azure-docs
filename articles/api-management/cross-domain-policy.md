@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/07/2022
 ms.author: danlep
 ---
 
 # Allow cross-domain calls
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 Use the `cross-domain` policy to make the API accessible from Adobe Flash and Microsoft Silverlight browser-based clients.
 
@@ -39,7 +37,7 @@ Child elements must conform to the [Adobe cross-domain policy file specification
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Example
 
@@ -53,6 +51,6 @@ Child elements must conform to the [Adobe cross-domain policy file specification
 
 ## Related policies
 
-* [Cross-domain](api-management-policies.md#cross-domain)
+* [API Management cross-domain policies](api-management-cross-domain-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

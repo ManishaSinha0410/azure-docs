@@ -1,36 +1,59 @@
 ---
-title: Monitoring data reference for Azure Blob Storage
-description: This article contains important reference material you need when you monitor Azure Blob Storage.
-ms.date: 02/12/2024
-ms.custom: horz-monitor
-ms.topic: reference
+title: Azure Blob Storage monitoring data reference
+titleSuffix: Azure Storage
+description: Log and metrics reference for monitoring data from Azure Blob Storage.
+recommendations: false
 author: normesta
+
+ms.service: storage
+ms.topic: reference
+ms.date: 05/02/2023
 ms.author: normesta
-ms.service: azure-blob-storage
+ms.subservice: blobs
+ms.custom: subject-monitoring
 ---
 
 # Azure Blob Storage monitoring data reference
 
-[!INCLUDE [horz-monitor-ref-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-intro.md)]
+See [Monitoring Azure Storage](monitor-blob-storage.md) for details on collecting and analyzing monitoring data for Azure Storage.
 
-See [Monitor Azure Blob Storage](monitor-blob-storage.md) for details on the data you can collect for Azure Blob Storage and how to use it.
+## Metrics
 
-<a name="metrics-dimensions"></a>
-[!INCLUDE [horz-monitor-ref-metrics-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-intro.md)]
+The following tables list the platform metrics collected for Azure Storage.
 
-### Supported metrics for Microsoft.Storage/storageAccounts
-The following table lists the metrics available for the Microsoft.Storage/storageAccounts resource type.
-[!INCLUDE [horz-monitor-ref-metrics-tableheader](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-tableheader.md)]
-[!INCLUDE [Microsoft.Storage/storageAccounts](~/azure-reference-other-repo/azure-monitor-ref/supported-metrics/includes/microsoft-storage-storageaccounts-metrics-include.md)]
+### Capacity metrics
 
-### Supported metrics for Microsoft.Storage/storageAccounts/blobServices
-The following table lists the metrics available for the Microsoft.Storage/storageAccounts/blobServices resource type.
-[!INCLUDE [horz-monitor-ref-metrics-tableheader](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-tableheader.md)]
-[!INCLUDE [Microsoft.Storage/storageAccounts/blobServices](~/azure-reference-other-repo/azure-monitor-ref/supported-metrics/includes/microsoft-storage-storageaccounts-blobservices-metrics-include.md)]
+Capacity metrics values are refreshed daily (up to 24 Hours). The time grain defines the time interval for which metrics values are presented. The supported time grain for all capacity metrics is one hour (PT1H).
 
-[!INCLUDE [horz-monitor-ref-metrics-dimensions-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-dimensions-intro.md)]
+Azure Storage provides the following capacity metrics in Azure Monitor.
 
-[!INCLUDE [horz-monitor-ref-metrics-dimensions](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-dimensions.md)]
+#### Account Level
+
+[!INCLUDE [Account level capacity metrics](../../../includes/azure-storage-account-capacity-metrics.md)]
+
+#### Blob storage
+
+This table shows [Blob storage metrics](../../azure-monitor/essentials/metrics-supported.md#microsoftstoragestorageaccountsblobservices).
+
+| Metric | Description |
+| ------------------- | ----------------- |
+| BlobCapacity | The total of Blob storage used in the storage account. <br/><br/> Unit: Bytes <br/> Aggregation Type: Average <br/> Value example: 1024 <br/> Dimensions: **BlobType**, and **Tier** ([Definition](#metrics-dimensions)) |
+| BlobCount    | The number of blob objects stored in the storage account. <br/><br/> Unit: Count <br/> Aggregation Type: Average <br/> Value example: 1024 <br/> Dimensions: **BlobType**, and **Tier** ([Definition](#metrics-dimensions)) |
+| BlobProvisionedSize | The amount of storage provisioned in the storage account. This metric is applicable to premium storage accounts only. <br/><br/> Unit: bytes <br/> Aggregation Type: Average |
+| ContainerCount    | The number of containers in the storage account. <br/><br/> Unit: Count <br/> Aggregation Type: Average <br/> Value example: 1024 |
+| IndexCapacity     | The amount of storage used by ADLS Gen2 Hierarchical Index <br/><br/> Unit: Bytes <br/> Aggregation Type: Average <br/> Value example: 1024 |
+
+### Transaction metrics
+
+Transaction metrics are emitted on every request to a storage account from Azure Storage to Azure Monitor. In the case of no activity on your storage account, there will be no data on transaction metrics in the period. All transaction metrics are available at both account and Blob storage service level. The time grain defines the time interval that metric values are presented. The supported time grains for all transaction metrics are PT1H and PT1M.
+
+[!INCLUDE [Transaction metrics](../../../includes/azure-storage-account-transaction-metrics.md)]
+
+<a id="metrics-dimensions"></a>
+
+## Metrics dimensions
+
+Azure Storage supports following dimensions for metrics in Azure Monitor.
 
 ### Dimensions available to all storage services
 
@@ -45,19 +68,11 @@ The following table lists the metrics available for the Microsoft.Storage/storag
 
 For the metrics supporting dimensions, you need to specify the dimension value to see the corresponding metrics values. For example, if you look at  **Transactions** value for successful responses, you need to filter the **ResponseType** dimension with **Success**. If you look at **BlobCount** value for Block Blob, you need to filter the **BlobType** dimension with **BlockBlob**.
 
-<a name="resource-logs-preview"></a>
-[!INCLUDE [horz-monitor-ref-resource-logs](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-resource-logs.md)]
+<a id="resource-logs-preview"></a>
 
-### Supported resource logs for Microsoft.Storage/storageAccounts/blobServices
-[!INCLUDE [Microsoft.Storage/storageAccounts/blobServices](~/azure-reference-other-repo/azure-monitor-ref/supported-logs/includes/microsoft-storage-storageaccounts-blobservices-logs-include.md)]
+## Resource logs
 
-[!INCLUDE [horz-monitor-ref-logs-tables](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-logs-tables.md)]
-
-- [AzureActivity](/azure/azure-monitor/reference/tables/azureactivity)
-- [AzureMetrics](/azure/azure-monitor/reference/tables/azuremetrics)
-- [StorageBlobLogs](/azure/azure-monitor/reference/tables/storagebloblogs)
-
-The following sections describe the properties for Azure Storage resource logs when they're collected in Azure Monitor Logs or Azure Storage. The properties describe the operation, the service, and the type of authorization that was used to perform the operation.
+The following table lists the properties for Azure Storage resource logs when they're collected in Azure Monitor Logs or Azure Storage. The properties describe the operation, the service, and the type of authorization that was used to perform the operation.
 
 ### Fields that describe the operation
 
@@ -89,24 +104,16 @@ The following sections describe the properties for Azure Storage resource logs w
         "authorization": [
             {
                 "action": "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
-                "denyAssignmentId": "821ddce4-021d-4d04-8a41-gggggggggggg",
                 "principals": [
                     {
                         "id": "fde5ba15-4355-4223-b811-cccccccccccc",
                         "type": "User"
                     }
                 ],
-                "reason": "Policy",
-                "result": "Granted",
                 "roleAssignmentId": "ecf75cb8-491c-4a25-ad6e-aaaaaaaaaaaa",
-                "roleDefinitionId": "b7e6dc6d-f1e8-4753-8033-ffffffffffff",
-                "type": "RBAC"
+                "roleDefinitionId": "b7e6dc6d-f1e8-4753-8033-ffffffffffff"
             }
         ],
-        "properties": {
-            "metricResponseType": "Success",
-            "objectKey": "/samplestorageaccount/samplecontainer/sampleblob.png"
-           },
         "requester": {
             "appId": "691458b9-1327-4635-9f55-bbbbbbbbbbbb",
             "audience": "https://storage.azure.com/",
@@ -156,15 +163,13 @@ The following sections describe the properties for Azure Storage resource logs w
         "smbCommandMajor" : "0x6",
         "smbCommandMinor" : "DirectoryCloseAndDelete"
     }
+
 }
 ```
 
 [!INCLUDE [Account level capacity metrics](../../../includes/azure-storage-logs-properties-service.md)]
 
-[!INCLUDE [horz-monitor-ref-activity-log](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-activity-log.md)]
-- [Microsoft.Storage resource provider operations](/azure/role-based-access-control/resource-provider-operations#microsoftstorage)
+## See also
 
-## Related content
-
-- See [Monitor Azure Blob Storage](monitor-blob-storage.md) for a description of monitoring Azure Blob Storage.
-- See [Monitor Azure resources with Azure Monitor](/azure/azure-monitor/essentials/monitor-azure-resource) for details on monitoring Azure resources.
+- See [Monitoring Azure Storage](monitor-blob-storage.md) for a description of monitoring Azure Storage.
+- See [Monitoring Azure resources with Azure Monitor](../../azure-monitor/essentials/monitor-azure-resource.md) for details on monitoring Azure resources.

@@ -3,7 +3,6 @@ author: cherylmc
 ms.author: cherylmc
 ms.date: 04/26/2023
 ms.service: virtual-wan
-ms.custom: linux-related-content
 ms.topic: include
 ---
 

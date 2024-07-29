@@ -3,7 +3,7 @@ title: Use Curl to export data with Apache Sqoop in Azure HDInsight
 description: Learn how to remotely submit Apache Sqoop jobs to Azure HDInsight using Curl.
 ms.service: hdinsight
 ms.topic: how-to
-ms.date: 05/10/2024
+ms.date: 04/25/2023
 ---
 
 # Run Apache Sqoop jobs in HDInsight with Curl

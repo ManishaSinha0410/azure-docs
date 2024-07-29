@@ -4,6 +4,7 @@ author: rwike77
 manager: CelesteDG
 ms.service: app-service
 ms.topic: include
+ms.workload: identity
 ms.date: 03/14/2023
 ms.author: ryanwi
 ms.reviewer: stsoneff

@@ -1,18 +1,17 @@
 ---
-title: GPU acceleration for Azure IoT Edge for Linux on Windows
+title: GPU acceleration for Azure IoT Edge for Linux on Windows | Microsoft Docs
 description: Learn about how to configure your Azure IoT Edge for Linux on Windows virtual machines to use host device GPUs.
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/29/2024
+ms.date: 6/7/2022
 ms.topic: conceptual
 ms.service: iot-edge
-ms.custom: linux-related-content
 services: iot-edge
 ---
 
 # GPU acceleration for Azure IoT Edge for Linux on Windows
 
-[!INCLUDE [iot-edge-version-all-supported](includes/iot-edge-version-all-supported.md)]
+[!INCLUDE [iot-edge-version-1.4](includes/iot-edge-version-1.4.md)]
 
 GPUs are a popular choice for artificial intelligence computations, because they offer parallel processing capabilities and can often execute vision-based inferencing faster than CPUs. To better support artificial intelligence and machine learning applications, Azure IoT Edge for Linux on Windows (EFLOW) can expose a GPU to the virtual machine's Linux module.
 
@@ -118,7 +117,7 @@ Visit our [EFLOW Samples Page](https://github.com/Azure/iotedge-eflow/tree/main/
 
 ### Learn More from our Partners
 Several GPU vendors have provided user guides on getting the most of their hardware and software with EFLOW.
-* Learn how to run Intel OpenVINO&trade; applications on EFLOW by following [Intel's guide on iGPU with Azure IoT Edge for Linux on Windows (EFLOW) & OpenVINO&trade; Toolkit](https://community.intel.com/t5/Blogs/Tech-Innovation/Artificial-Intelligence-AI/Witness-the-power-of-Intel-iGPU-with-Azure-IoT-Edge-for-Linux-on/post/1382405) and [reference implementations](https://www.intel.com/content/www/us/en/developer/articles/technical/deploy-reference-implementation-to-azure-iot-eflow.html).
+* Learn how to run Intel OpenVINO™ applications on EFLOW by following [Intel's guide on iGPU with Azure IoT Edge for Linux on Windows (EFLOW) & OpenVINO™ Toolkit](https://community.intel.com/t5/Blogs/Tech-Innovation/Artificial-Intelligence-AI/Witness-the-power-of-Intel-iGPU-with-Azure-IoT-Edge-for-Linux-on/post/1382405) and [reference implementations](https://www.intel.com/content/www/us/en/developer/articles/technical/deploy-reference-implementation-to-azure-iot-eflow.html).
 * Get started with deploying CUDA-accelerated applications on EFLOW by following [NVIDIA's EFLOW User Guide for GeForce/Quadro/RTX GPUs](https://docs.nvidia.com/cuda/eflow-users-guide/index.html). 
 
 > [!NOTE]

@@ -2,14 +2,12 @@
 title: Manage firewall rules - Azure portal - Azure Database for MariaDB
 description: Create and manage Azure Database for MariaDB firewall rules using the Azure portal
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: how-to
 ms.date: 06/24/2022
 ---
 # Create and manage Azure Database for MariaDB firewall rules by using the Azure portal
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 Server-level firewall rules can be used to manage access to an Azure Database for MariaDB Server from a specified IP address or a range of IP addresses.
 

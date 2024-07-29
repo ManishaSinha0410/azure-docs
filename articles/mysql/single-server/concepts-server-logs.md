@@ -4,8 +4,8 @@ description: Describes the slow query logs available in Azure Database for MySQL
 ms.service: mysql
 ms.subservice: single-server
 ms.topic: conceptual
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.date: 06/20/2022
 ---
 

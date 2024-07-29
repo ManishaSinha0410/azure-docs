@@ -5,7 +5,8 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: estfan, azla
 ms.topic: how-to
-ms.date: 01/04/2024
+ms.date: 08/15/2022
+tags: connectors
 ---
 
 # Connect to an FTP server from workflows in Azure Logic Apps

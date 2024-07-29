@@ -2,12 +2,11 @@
 title: Run scripts in a Windows or Linux VM in Azure with Run Command
 description: This topic provides an overview of running scripts within an Azure virtual machine by using the Run Command feature
 ms.service: virtual-machines
-ms.custom: linux-related-content
 author: nikhilpatel909
-ms.author: jushiman
+ms.author: erd
 ms.date: 03/10/2023
-ms.topic: how-to
-ms.reviewer: jushiman
+ms.topic: how-to  
+ms.reviewer: erd
 ---
 
 # Run scripts in your VM by using Run Command
@@ -40,8 +39,6 @@ The updated set of commands are management orientated. Consider using managed ru
 
 See [Managed Run Command for Linux](./linux/run-command-managed.md) and [Managed Run Command for Windows](./windows/run-command-managed.md) to learn how to use them.
 
-> [!NOTE]
-> The maximum number of allowed Managed Run Commands is currently limited to 25.
 
 ## Compare feature support
 

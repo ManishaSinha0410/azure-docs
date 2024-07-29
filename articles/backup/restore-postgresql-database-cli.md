@@ -5,8 +5,8 @@ ms.topic: conceptual
 ms.date: 01/24/2022
 ms.service: backup
 ms.custom: devx-track-azurecli
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
+author: jyothisuri
+ms.author: jsuri
 ---
 
 # Restore Azure PostgreSQL databases using Azure CLI

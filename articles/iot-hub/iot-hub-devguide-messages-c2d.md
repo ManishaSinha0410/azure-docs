@@ -7,7 +7,7 @@ ms.author: kgremban
 ms.service: iot-hub
 ms.topic: concept-article
 ms.date: 12/20/2022
-ms.custom: mqtt, devx-track-azurecli
+ms.custom: mqtt
 ---
 
 # Send cloud-to-device messages from an IoT hub

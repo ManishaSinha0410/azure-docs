@@ -1,9 +1,9 @@
 ---
 title: Linter rule - use stable VM image
 description: Linter rule - use stable VM image
-ms.topic: reference
+ms.topic: conceptual
 ms.custom: devx-track-bicep
-ms.date: 03/20/2024
+ms.date: 12/15/2021
 ---
 
 # Linter rule - use stable VM image
@@ -25,11 +25,9 @@ Use the following value in the [Bicep configuration file](bicep-config-linter.md
 The following example fails this test.
 
 ```bicep
-param location string = resourceGroup().location
-
-resource vm 'Microsoft.Compute/virtualMachines@2023-03-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
   name: 'virtualMachineName'
-  location: location
+  location: resourceGroup().location
   properties: {
     storageProfile: {
       imageReference: {
@@ -45,11 +43,9 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-03-01' = {
 You can fix it by using an image that does not contain the string `preview` in the imageReference.
 
 ```bicep
-param location string = resourceGroup().location
-
-resource vm 'Microsoft.Compute/virtualMachines@2023-03-01' = {
+resource vm 'Microsoft.Compute/virtualMachines@2020-06-01' = {
   name: 'virtualMachineName'
-  location: location
+  location: resourceGroup().location
   properties: {
     storageProfile: {
       imageReference: {

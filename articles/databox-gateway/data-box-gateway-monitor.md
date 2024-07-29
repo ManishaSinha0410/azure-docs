@@ -2,13 +2,13 @@
 title: Monitor your Azure Data Box Gateway device | Microsoft Docs 
 description: Describes how to use the Azure portal and local web UI to monitor your Azure Data Box Gateway.
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: gateway
 ms.topic: how-to
 ms.date: 10/20/2020
-ms.author: shaas
+ms.author: alkohli
 ---
 # Monitor your Azure Data Box Gateway
 

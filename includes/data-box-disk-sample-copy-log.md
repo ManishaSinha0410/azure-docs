@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: disk
 ms.topic: include
 ms.date: 12/16/2021
-ms.author: shaas
+ms.author: alkohli
 ---
 
 The following sample is a copy log for an import to both Azure Files and Azure Blob storage.
@@ -46,4 +46,3 @@ This copy failed, with no validation errors but with three copy errors. One file
   </Summary>
 </CopyLog>
 ```
-

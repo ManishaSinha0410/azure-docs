@@ -4,7 +4,8 @@ titleSuffix: Azure Storage
 description: This tutorial shows how to run SQL queries on an Azure Synapse serverless SQL endpoint to access data in an Azure Data Lake Storage Gen2 enabled storage account.
 author: jovanpop-msft
 
-ms.service: azure-data-lake-storage
+ms.subservice: data-lake-storage-gen2
+ms.service: storage
 ms.topic: tutorial
 ms.date: 03/07/2022
 ms.author: normesta

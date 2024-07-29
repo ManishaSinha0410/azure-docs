@@ -3,12 +3,11 @@ title: Prerequisites for Azure Database Migration Service
 description: Learn about an overview of the prerequisites for using the Azure Database Migration Service to perform database migrations.
 author: abhims14
 ms.author: abhishekum
-ms.reviewer: randolphwest
+ms.reviewer: craigg
 ms.date: 02/25/2020
 ms.service: dms
 ms.topic: conceptual
-ms.custom:
-  - sql-migration-content
+ms.custom: seo-lt-2019
 ---
 
 # Overview of prerequisites for using the Azure Database Migration Service
@@ -86,7 +85,7 @@ Azure Database Migration Service prerequisites that are common across all suppor
     > Set-AzRoleDefinition -Role $aRole
     > }
     >
-    > function Update-DmsContributorRole() {
+    > function Update-DmsConributorRole() {
     > $aRole = Get-AzRoleDefinition "Azure Database Migration Contributor"
     > $aRole.Actions = $writerActions
     > $aRole.NotActions = @()
@@ -97,7 +96,7 @@ Azure Database Migration Service prerequisites that are common across all suppor
     > New-DmsReaderRole
     > New-DmsContributorRole
     > Update-DmsReaderRole
-    > Update-DmsContributorRole
+    > Update-DmsConributorRole
     > ```
 
 ## Prerequisites for migrating SQL Server to Azure SQL Database

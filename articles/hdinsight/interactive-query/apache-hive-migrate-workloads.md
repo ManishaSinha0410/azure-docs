@@ -116,7 +116,7 @@ The following table compares Hive table types and ACID operations before an upgr
 
 ### HDInsight 3.x and HDInsight 4.x Table type comparison
 
-|**HDInsight 3.x**| - | - | - |**HDInsight 4.x**| - |
+|**HDInsight 3.x**| | | |**HDInsight 4.x**| |
 |-|-|-|-|-|-|
 |**Table Type**	|**ACID v1**	|**Format**	|**Owner (user) of Hive Table File**	|**Table Type**|**ACID v2**|
 |External	|No	|Native or non-native|	Hive or non-Hive	|External	|No|
@@ -244,10 +244,7 @@ Hive has changed table creation in the following ways
     Find a table having the problematic table reference.
     `math.students` that appears in a CREATE TABLE statement.
     Enclose the database name and the table name in backticks.
-    
-    ```sql
-    TABLE `math`.`students` (name VARCHAR(64), age INT, gpa DECIMAL(3,2));
-    ```
+     `CREATE TABLE `math`.`students` (name VARCHAR(64), age INT, gpa DECIMAL(3,2));`
 
 * CASTING TIMESTAMPS
     Results of applications that cast numerics to timestamps differ from Hive 2 to Hive 3. Apache Hive changed the behavior of CAST to comply with the SQL Standard, which doesn't associate a time zone with the TIMESTAMP type.
@@ -454,7 +451,7 @@ Create a directory called "schemacompare" under "/tmp" directory.
 
 Put the "schemacompare_final.py" and "test.csv" into the folder "/tmp/schemacompare". Do "ls -ltrh /tmp/schemacompare/" and verify whether the files are present.
 
-To execute the Python script, use the command "python schemacompare_final.py". This script starts executing the script and it takes less than five minutes to complete. The above script automatically connects to your backend DB and fetches the details from each and every table, which Hive uses and update the details in the new csv file called "return.csv". After creating the file return.csv, it compares the data with the file "test.csv" and prints the column name or datatype if there's anything missing under the tablename.
+To execute the Python script, use the command "python schemacompare_final.py". This script starts executing the script and it takes less than five minutes to complete. The above script automatically connects to your backend DB and fetches the details from each and every table, which Hive uses and update the details in the new csv file called "return.csv". After after creating the file return.csv, it compares the data with the file "test.csv" and prints the column name or datatype if there's anything missing under the tablename.
 
 Once after executing the script you can see the following lines, which indicate that the details are fetched for the tables and the script is in progressing
 
@@ -504,7 +501,7 @@ This step avoids the query failures, which fail with "Invalid column name" once 
 
 ## Secure Hive across HDInsight versions
 
-HDInsight optionally integrates with Microsoft Entra ID using HDInsight Enterprise Security Package (ESP). ESP uses Kerberos and Apache Ranger to manage the permissions of specific resources within the cluster. Ranger policies deployed against Hive in HDInsight 3.6 can be migrated to HDInsight 4.0 with the following steps:
+HDInsight optionally integrates with Azure Active Directory using HDInsight Enterprise Security Package (ESP). ESP uses Kerberos and Apache Ranger to manage the permissions of specific resources within the cluster. Ranger policies deployed against Hive in HDInsight 3.6 can be migrated to HDInsight 4.0 with the following steps:
 
 1. Navigate to the Ranger Service Manager panel in your HDInsight 3.6 cluster.
 1. Navigate to the policy named **HIVE** and export the policy to a json file.
@@ -564,7 +561,7 @@ Tune Metastore to reduce their CPU usage.
    1. Default Value: `60`
    1. Proposed value: `3600` 
 1. Advanced Optimizations
-The following options need to be tested in a lower(non-prod) environment before applying to production.
+The following options need to be tested in a lower(non-prod) environment before applying tin production.
    1.	Remove the Materialized view related listener if Materialized view isn't used.
    1. From Ambari UI, **add a custom property (in custom hive-site.xml) and remove the unwanted background metastore threads**. 
    1. Property name: **metastore.task.threads.remote**

@@ -7,7 +7,8 @@ ms.author: ulrichchrist
 ms.service: data-factory
 ms.subservice: data-movement
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.custom: seo-lt-2019
+ms.date: 08/12/2022
 ---
 
 # Copy data from SAP Business Warehouse with Azure Data Factory or Synapse Analytics
@@ -260,7 +261,7 @@ To set the status of the delta DTP to **Fetched**, you can use the following opt
 
 *No Data Transfer; Delta Status in Source: Fetched*
 
-## Related content
+## Next steps
 
 Learn about SAP BW Open Hub connector support:
 

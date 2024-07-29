@@ -1,7 +1,7 @@
 ---
 title: Azure Communication Services in Azure Government 
 description: Learn about using Azure Communication Services in US Government regions
-author: hrazi
+author: harazi
 manager: mharbut
 services: azure-communication-services
 

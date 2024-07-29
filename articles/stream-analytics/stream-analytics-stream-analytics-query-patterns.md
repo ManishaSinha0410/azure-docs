@@ -1,15 +1,16 @@
 ---
 title: Common query patterns in Azure Stream Analytics
 description: This article describes several common query patterns and designs that are useful in Azure Stream Analytics jobs.
+services: stream-analytics
 ms.service: stream-analytics
 ms.topic: how-to
-ms.date: 01/23/2024
+ms.date: 08/29/2022
 ms.custom: devx-track-js
 ---
 
 # Common query patterns in Azure Stream Analytics
 
-Queries in Azure Stream Analytics are expressed in an SQL-like query language. The language constructs are documented in the [Stream Analytics query language reference](/stream-analytics-query/stream-analytics-query-language-reference) guide. 
+Queries in Azure Stream Analytics are expressed in a SQL-like query language. The language constructs are documented in the [Stream Analytics query language reference](/stream-analytics-query/stream-analytics-query-language-reference) guide. 
 
 The query design can express simple pass-through logic to move event data from one input stream into an output data store, or it can do rich pattern matching and temporal analysis to calculate aggregates over various time windows as in the [Build an IoT solution by using Stream Analytics](stream-analytics-build-an-iot-solution-using-stream-analytics.md) guide. You can join data from multiple inputs to combine streaming events, and you can do lookups against static reference data to enrich the event values. You can also write data to multiple outputs.
 
@@ -17,47 +18,41 @@ This article outlines solutions to several common query patterns based on real-w
 
 ## Supported Data Formats
 
-Azure Stream Analytics supports processing events in CSV, JSON, and Avro data formats. The JSON and Avro formats can contain complex types such as nested objects (records) or arrays. For more information on working with these complex data types, see [Parsing JSON and AVRO data](stream-analytics-parsing-json.md).
+Azure Stream Analytics supports processing events in CSV, JSON, and Avro data formats.
+
+Both JSON and Avro may contain complex types such as nested objects (records) or arrays. For more information on working with these complex data types, see the [Parsing JSON and AVRO data](stream-analytics-parsing-json.md) article.
 
 ## Send data to multiple outputs
 
-Multiple **SELECT** statements can be used to output data to different output sinks. For example, one **SELECT** statement can output a threshold-based alert while another one can output events to a blob storage.
+Multiple **SELECT** statements can be used to output data to different output sinks. For example, one **SELECT** can output a threshold-based alert while another one can output events to blob storage.
 
-Consider the following **input**:
+**Input**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make1 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:01.0000000Z |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:03.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make1 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:01.0000000Z |
+| Make2 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:03.0000000Z |
 
-And, you want the following two outputs from the query: 
+**Output ArchiveOutput**:
 
-**ArchiveOutput**:
-
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make1 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:01.0000000Z |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:03.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make1 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:01.0000000Z |
+| Make2 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:03.0000000Z |
 
-**AlertOutput**:
+**Output AlertOutput**:
 
-```
 | Make | Time | Count |
 | --- | --- | --- |
-| Make2 |2023-01-01T00:00:10.0000000Z |3 |
-```
+| Make2 |2015-01-01T00:00:10.0000000Z |3 |
 
-**Query with two SELECT statements with Archive output and Alert output as outputs**:
+**Query**:
 
 ```SQL
 SELECT
@@ -82,10 +77,9 @@ HAVING
 	[Count] >= 3
 ```
 
+The **INTO** clause tells Stream Analytics which of the outputs to write the data to. The first **SELECT** defines a pass-through query that receives data from the input and sends it to the output named **ArchiveOutput**. The second query does some simple aggregation and filtering before sending the results to a downstream alerting system output called **AlertOutput**.
 
-The **INTO** clause tells the Stream Analytics service which of the outputs to write the data to. The first **SELECT** defines a pass-through query that receives data from the input and sends it to the output named **ArchiveOutput**. The second query aggregates and filters data before sending the results to a downstream alerting system output called **AlertOutput**.
-
-The **WITH** clause can be used to define multiple subquery blocks. This option has the benefit of opening fewer readers to the input source.
+Note that the **WITH** clause can be used to define multiple subquery blocks. This option has the benefit of opening fewer readers to the input source.
 
 **Query**:
 
@@ -115,27 +109,23 @@ For more information, see [**WITH** clause](/stream-analytics-query/with-azure-s
 
 ## Simple pass-through query
 
-A simple pass-through query can be used to copy the input stream data into the output. For example, if a stream of data containing real-time vehicle information needs to be saved in an SQL database for later analysis, a simple pass-through query does the job.
+A simple pass-through query can be used to copy the input stream data into the output. For example, if a stream of data containing real-time vehicle information needs to be saved in a SQL database for later analysis, a simple pass-through query will do the job.
 
-Consider the following **input**:
+**Input**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |"1000" |
-| Make1 |2023-01-01T00:00:02.0000000Z |"2000" |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |"1000" |
+| Make1 |2015-01-01T00:00:02.0000000Z |"2000" |
 
-You want the **output** to be the same as the input:
+**Output**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |"1000" |
-| Make1 |2023-01-01T00:00:02.0000000Z |"2000" |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |"1000" |
+| Make1 |2015-01-01T00:00:02.0000000Z |"2000" |
 
-Here's the **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -144,29 +134,25 @@ INTO Output
 FROM Input
 ```
 
-This **SELECT** * query projects **all** the fields of an incoming event and sends them to the output. Instead, you can project only the required fields in a **SELECT** statement. In the following example, the **SELECT** statement projects only the *Make* and *Time* fields from the input data.
+A **SELECT** * query projects all the fields of an incoming event and sends them to the output. The same way, **SELECT** can also be used to only project required fields from the input. In this example, if vehicle *Make* and *Time* are the only required fields to be saved, those fields can be specified in the **SELECT** statement.
 
-Consider the following **input**:
+**Input**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |1000 |
-| Make1 |2023-01-01T00:00:02.0000000Z |2000 |
-| Make2 |2023-01-01T00:00:04.0000000Z |1500 |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |1000 |
+| Make1 |2015-01-01T00:00:02.0000000Z |2000 |
+| Make2 |2015-01-01T00:00:04.0000000Z |1500 |
 
-You want the **output** to have only the Make and Time fields:
+**Output**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make1 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:04.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make1 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:04.0000000Z |
 
-Here's the **query** that projects only the required fields:
+**Query**:
 
 ```SQL
 SELECT
@@ -177,28 +163,24 @@ FROM Input
 
 ## String matching with LIKE and NOT LIKE
 
-**LIKE** and **NOT LIKE** can be used to verify if a field matches a certain pattern. For example, you can use a filter to return only the license plates that start with the letter `A` and end with the number `9`.
+**LIKE** and **NOT LIKE** can be used to verify if a field matches a certain pattern. For example, a filter can be created to return only the license plates that start with the letter 'A' and end with the number 9.
 
-Consider the following **input**:
+**Input**:
 
-```
 | Make | License_plate | Time |
 | --- | --- | --- |
-| Make1 |ABC-123 |2023-01-01T00:00:01.0000000Z |
-| Make2 |AAA-999 |2023-01-01T00:00:02.0000000Z |
-| Make3 |ABC-369 |2023-01-01T00:00:03.0000000Z |
-```
+| Make1 |ABC-123 |2015-01-01T00:00:01.0000000Z |
+| Make2 |AAA-999 |2015-01-01T00:00:02.0000000Z |
+| Make3 |ABC-369 |2015-01-01T00:00:03.0000000Z |
 
-You want the **output** to have the license plates that start with the letter `A` and end with the number `9`:
+**Output**:
 
-```
 | Make | License_plate | Time |
 | --- | --- | --- |
-| Make2 |AAA-999 |2023-01-01T00:00:02.0000000Z |
-| Make3 |ABC-369 |2023-01-01T00:00:03.0000000Z |
-```
+| Make2 |AAA-999 |2015-01-01T00:00:02.0000000Z |
+| Make3 |ABC-369 |2015-01-01T00:00:03.0000000Z |
 
-Here's **query** that uses the LIKE operator:
+**Query**:
 
 ```SQL
 SELECT
@@ -209,30 +191,26 @@ WHERE
 	License_plate LIKE 'A%9'
 ```
 
-Use the **LIKE** statement to check the **License_plate** field value. It should start with the letter `A`, then have any string of zero or more characters, ending with the number 9.
+Use the **LIKE** statement to check the **License_plate** field value. It should start with the letter 'A', then have any string of zero or more characters, ending with the number 9.
 
 ## Calculation over past events
 
-The **LAG** function can be used to look at past events within a time window and compare them against the current event. For example, make of the current car can be outputted if it’s different from make of the last car that passed through the toll booth.
+The **LAG** function can be used to look at past events within a time window and compare them against the current event. For example, the current car make can be outputted if it’s different from the last car that went through the toll.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make2 |2015-01-01T00:00:02.0000000Z |
 
-Sample **output**:
+**Output**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-```
+| Make2 |2015-01-01T00:00:02.0000000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -250,32 +228,28 @@ For more information, see [**LAG**](/stream-analytics-query/lag-azure-stream-ana
 
 ## Return the last event in a window
 
-As events are consumed by the system in real time, there’s no function that can determine if an event is the last one to arrive for that time window. To achieve this, the input stream needs to be joined with another one where the time of an event is the maximum time for all events at that window.
+As events are consumed by the system in real time, there’s no function that can determine if an event will be the last one to arrive for that window of time. To achieve this, the input stream needs to be joined with another where the time of an event is the maximum time for all events at that window.
 
-Sample **input**:
+**Input**:
 
-```
 | License_plate | Make | Time |
 | --- | --- | --- |
-| DXE 5291 |Make1 |2023-07-27T00:00:05.0000000Z |
-| YZK 5704 |Make3 |2023-07-27T00:02:17.0000000Z |
-| RMV 8282 |Make1 |2023-07-27T00:05:01.0000000Z |
-| YHN 6970 |Make2 |2023-07-27T00:06:00.0000000Z |
-| VFE 1616 |Make2 |2023-07-27T00:09:31.0000000Z |
-| QYF 9358 |Make1 |2023-07-27T00:12:02.0000000Z |
-| MDR 6128 |Make4 |2023-07-27T00:13:45.0000000Z |
-```
+| DXE 5291 |Make1 |2015-07-27T00:00:05.0000000Z |
+| YZK 5704 |Make3 |2015-07-27T00:02:17.0000000Z |
+| RMV 8282 |Make1 |2015-07-27T00:05:01.0000000Z |
+| YHN 6970 |Make2 |2015-07-27T00:06:00.0000000Z |
+| VFE 1616 |Make2 |2015-07-27T00:09:31.0000000Z |
+| QYF 9358 |Make1 |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |Make4 |2015-07-27T00:13:45.0000000Z |
 
-Sample **output** with information about last cars in two ten-minute time windows: 
+**Output**:
 
-```
 | License_plate | Make | Time |
 | --- | --- | --- |
-| VFE 1616 |Make2 |2023-07-27T00:09:31.0000000Z |
-| MDR 6128 |Make4 |2023-07-27T00:13:45.0000000Z |
-```
+| VFE 1616 |Make2 |2015-07-27T00:09:31.0000000Z |
+| MDR 6128 |Make4 |2015-07-27T00:13:45.0000000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 WITH LastInWindow AS
@@ -299,7 +273,7 @@ FROM
 	AND Input.Time = LastInWindow.LastEventTime
 ```
 
-The first step on the query finds the maximum time stamp in 10-minute windows, that is, the time stamp of the last event for that window. The second step joins the results of the first query with the original stream to find the event that matches the last time stamps in each window. 
+The first step on the query finds the maximum time stamp in 10-minute windows, that is the time stamp of the last event for that window. The second step joins the results of the first query with the original stream to find the event that matches the last time stamps in each window. 
 
 **DATEDIFF** is a date-specific function that compares and returns the time difference between two DateTime fields, for more information, see [date functions](/stream-analytics-query/date-and-time-functions-azure-stream-analytics).
 
@@ -307,26 +281,22 @@ For more information on joining streams, see [**JOIN**](/stream-analytics-query/
 
 ## Data aggregation over time
 
-To compute information over a time window, you can aggregate the data. In this example, the statement computes a count over the last 10 seconds of time for every specific make of a car.
+To compute information over a time window, data can be aggregated together. In this example, a count is computed over the last 10 seconds of time for every specific car make.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |1000 |
-| Make1 |2023-01-01T00:00:02.0000000Z |2000 |
-| Make2 |2023-01-01T00:00:04.0000000Z |1500 |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |1000 |
+| Make1 |2015-01-01T00:00:02.0000000Z |2000 |
+| Make2 |2015-01-01T00:00:04.0000000Z |1500 |
 
-Sample **output**:
+**Output**:
 
-```
 | Make | Count |
 | --- | --- |
 | Make1 | 2 |
 | Make2 | 1 |
-```
 
 **Query**:
 
@@ -341,7 +311,7 @@ GROUP BY
 	TumblingWindow(second, 10)
 ```
 
-This aggregation groups the cars by *Make* and counts them every 10 seconds. The output has the *Make* and *Count* of cars that went through the toll booth.
+This aggregation groups the cars by *Make* and counts them every 10 seconds. The output has the *Make* and *Count* of cars that went through the toll.
 
 TumblingWindow is a windowing function used to group events together. An aggregation can be applied over all grouped events. For more information, see [windowing functions](stream-analytics-window-functions.md).
 
@@ -349,11 +319,10 @@ For more information on aggregation, see [aggregate functions](/stream-analytics
 
 ## Periodically output values
 
-When events are missing or irregular, a regular interval output can be generated from a more sparse data input. For example, generate an event every 5 seconds that reports the most recently seen data point.
+In case of irregular or missing events, a regular interval output can be generated from a more sparse data input. For example, generate an event every 5 seconds that reports the most recently seen data point.
 
-Sample **input**:
+**Input**:
 
-```
 | Time | Value |
 | --- | --- |
 | "2014-01-01T06:01:00" |1 |
@@ -362,10 +331,9 @@ Sample **input**:
 | "2014-01-01T06:01:15" |4 |
 | "2014-01-01T06:01:30" |5 |
 | "2014-01-01T06:01:35" |6 |
-```
-Sample **output (first 10 rows)**:
 
-```
+**Output (first 10 rows)**:
+
 | Window_end | Last_event.Time | Last_event.Value |
 | --- | --- | --- |
 | 2014-01-01T14:01:00.000Z |2014-01-01T14:01:00.000Z |1 |
@@ -378,9 +346,8 @@ Sample **output (first 10 rows)**:
 | 2014-01-01T14:01:35.000Z |2014-01-01T14:01:35.000Z |6 |
 | 2014-01-01T14:01:40.000Z |2014-01-01T14:01:35.000Z |6 |
 | 2014-01-01T14:01:45.000Z |2014-01-01T14:01:35.000Z |6 |
-```
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -398,28 +365,24 @@ For more information, see [Hopping window](/stream-analytics-query/hopping-windo
 
 ## Correlate events in a stream
 
-Correlating events in the same stream can be done by looking at past events using the **LAG** function. For example, an output can be generated every time two consecutive cars from the same *Make* go through the toll booth in the last 90 seconds.
+Correlating events in the same stream can be done by looking at past events using the **LAG** function. For example, an output can be generated every time two consecutive cars from the same *Make* go through the toll for the last 90 seconds.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | License_plate | Time |
 | --- | --- | --- |
-| Make1 |ABC-123 |2023-01-01T00:00:01.0000000Z |
-| Make1 |AAA-999 |2023-01-01T00:00:02.0000000Z |
-| Make2 |DEF-987 |2023-01-01T00:00:03.0000000Z |
-| Make1 |GHI-345 |2023-01-01T00:00:04.0000000Z |
-```
+| Make1 |ABC-123 |2015-01-01T00:00:01.0000000Z |
+| Make1 |AAA-999 |2015-01-01T00:00:02.0000000Z |
+| Make2 |DEF-987 |2015-01-01T00:00:03.0000000Z |
+| Make1 |GHI-345 |2015-01-01T00:00:04.0000000Z |
 
-Sample **output**:
+**Output**:
 
-```
 | Make | Time | Current_car_license_plate | First_car_license_plate | First_car_time |
 | --- | --- | --- | --- | --- |
-| Make1 |2023-01-01T00:00:02.0000000Z |AAA-999 |ABC-123 |2023-01-01T00:00:01.0000000Z |
-```
+| Make1 |2015-01-01T00:00:02.0000000Z |AAA-999 |ABC-123 |2015-01-01T00:00:01.0000000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -442,24 +405,20 @@ For more information, see [LAG](/stream-analytics-query/lag-azure-stream-analyti
 
 The duration of an event can be computed by looking at the last Start event once an End event is received. This query can be useful to determine the time a user spends on a page or a feature.
 
-Sample **input**:  
+**Input**:  
 
-```
 | User | Feature | Event | Time |
 | --- | --- | --- | --- |
-| user@location.com |RightMenu |Start |2023-01-01T00:00:01.0000000Z |
-| user@location.com |RightMenu |End |2023-01-01T00:00:08.0000000Z |
-```
+| user@location.com |RightMenu |Start |2015-01-01T00:00:01.0000000Z |
+| user@location.com |RightMenu |End |2015-01-01T00:00:08.0000000Z |
 
-Sample **output**:  
+**Output**:  
 
-```
 | User | Feature | Duration |
 | --- | --- | --- |
 | user@location.com |RightMenu |7 |
-```
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -474,34 +433,30 @@ WHERE
 	Event = 'end'
 ```
 
-The **LAST** function can be used to retrieve the last event within a specific condition. In this example, the condition is an event of type Start, partitioning the search by **PARTITION BY** user and feature. This way, every user, and feature are treated independently when searching for the Start event. **LIMIT DURATION** limits the search back in time to 1 hour between the End and Start events.
+The **LAST** function can be used to retrieve the last event within a specific condition. In this example, the condition is an event of type Start, partitioning the search by **PARTITION BY** user and feature. This way, every user and feature are treated independently when searching for the Start event. **LIMIT DURATION** limits the search back in time to 1 hour between the End and Start events.
 
 ## Count unique values
 
-**COUNT** and **DISTINCT** can be used to count the number of unique field values that appear in the stream within a time window. You can create a query to calculate how many unique *Makes* of cars have passed through the toll booth in a 2-second window.
+**COUNT** and **DISTINCT** can be used to count the number of unique field values that appear in the stream within a time window. A query can be created to calculate how many unique *Makes* of cars passed through the toll booth in a 2-second window.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make1 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:01.0000000Z |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:03.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make1 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:01.0000000Z |
+| Make2 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:03.0000000Z |
 
-Sample **output:**
+**Output:**
 
-```
 | Count_make | Time |
 | --- | --- |
-| 2 |2023-01-01T00:00:02.000Z |
-| 1 |2023-01-01T00:00:04.000Z |
-```
+| 2 |2015-01-01T00:00:02.000Z |
+| 1 |2015-01-01T00:00:04.000Z |
 
-Sample **query:**
+**Query:**
 
 ```SQL
 SELECT
@@ -512,36 +467,33 @@ GROUP BY
      TumblingWindow(second, 2)
 ```
 
-**COUNT(DISTINCT Make)** returns the count of distinct values in the **Make** column within a time window. For more information, see [**COUNT** aggregate function](/stream-analytics-query/count-azure-stream-analytics).
+**COUNT(DISTINCT Make)** returns the count of distinct values in the **Make** column within a time window.
+For more information, see [**COUNT** aggregate function](/stream-analytics-query/count-azure-stream-analytics).
 
 ## Retrieve the first event in a window
 
-You can use `IsFirst` to retrieve the first event in a time window. For example, outputting the first car information at every 10-minute interval.
+**IsFirst** can be used to retrieve the first event in a time window. For example, outputting the first car information at every 10-minute interval.
 
-Sample **input**:
+**Input**:
 
-```
 | License_plate | Make | Time |
 | --- | --- | --- |
-| DXE 5291 |Make1 |2023-07-27T00:00:05.0000000Z |
-| YZK 5704 |Make3 |2023-07-27T00:02:17.0000000Z |
-| RMV 8282 |Make1 |2023-07-27T00:05:01.0000000Z |
-| YHN 6970 |Make2 |2023-07-27T00:06:00.0000000Z |
-| VFE 1616 |Make2 |2023-07-27T00:09:31.0000000Z |
-| QYF 9358 |Make1 |2023-07-27T00:12:02.0000000Z |
-| MDR 6128 |Make4 |2023-07-27T00:13:45.0000000Z |
-```
+| DXE 5291 |Make1 |2015-07-27T00:00:05.0000000Z |
+| YZK 5704 |Make3 |2015-07-27T00:02:17.0000000Z |
+| RMV 8282 |Make1 |2015-07-27T00:05:01.0000000Z |
+| YHN 6970 |Make2 |2015-07-27T00:06:00.0000000Z |
+| VFE 1616 |Make2 |2015-07-27T00:09:31.0000000Z |
+| QYF 9358 |Make1 |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |Make4 |2015-07-27T00:13:45.0000000Z |
 
-Sample **output**:
+**Output**:
 
-```
 | License_plate | Make | Time |
 | --- | --- | --- |
-| DXE 5291 |Make1 |2023-07-27T00:00:05.0000000Z |
-| QYF 9358 |Make1 |2023-07-27T00:12:02.0000000Z |
-```
+| DXE 5291 |Make1 |2015-07-27T00:00:05.0000000Z |
+| QYF 9358 |Make1 |2015-07-27T00:12:02.0000000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT 
@@ -556,19 +508,17 @@ WHERE
 
 **IsFirst** can also partition the data and calculate the first event to each specific car *Make* found at every 10-minute interval.
 
-Sample **output**:
+**Output**:
 
-```
 | License_plate | Make | Time |
 | --- | --- | --- |
-| DXE 5291 |Make1 |2023-07-27T00:00:05.0000000Z |
-| YZK 5704 |Make3 |2023-07-27T00:02:17.0000000Z |
-| YHN 6970 |Make2 |2023-07-27T00:06:00.0000000Z |
-| QYF 9358 |Make1 |2023-07-27T00:12:02.0000000Z |
-| MDR 6128 |Make4 |2023-07-27T00:13:45.0000000Z |
-```
+| DXE 5291 |Make1 |2015-07-27T00:00:05.0000000Z |
+| YZK 5704 |Make3 |2015-07-27T00:02:17.0000000Z |
+| YHN 6970 |Make2 |2015-07-27T00:06:00.0000000Z |
+| QYF 9358 |Make1 |2015-07-27T00:12:02.0000000Z |
+| MDR 6128 |Make4 |2015-07-27T00:13:45.0000000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT 
@@ -585,11 +535,10 @@ For more information, see [**IsFirst**](/stream-analytics-query/isfirst-azure-st
 
 ## Remove duplicate events in a window
 
-When you perform an operation such as calculating averages over events in a given time window, duplicate events should be filtered. In the following example, the second event is a duplicate of the first.
+When performing an operation such as calculating averages over events in a given time window, duplicate events should be filtered. In the following example, the second event is a duplicate of the first.
 
-Sample **input**:  
+**Input**:  
 
-```
 | DeviceId | Time | Attribute | Value |
 | --- | --- | --- | --- |
 | 1 |2018-07-27T00:00:01.0000000Z |Temperature |50 |
@@ -598,60 +547,61 @@ Sample **input**:
 | 1 |2018-07-27T00:00:05.0000000Z |Temperature |60 |
 | 2 |2018-07-27T00:00:05.0000000Z |Temperature |50 |
 | 1 |2018-07-27T00:00:10.0000000Z |Temperature |100 |
-```
 
-Sample **output**:  
+**Output**:  
 
-```
 | AverageValue | DeviceId |
 | --- | --- |
 | 70 | 1 |
 |45 | 2 |
-```
 
-Sample **query**:
+**Query**:
 
 ```SQL
-WITH Temp AS (
-	SELECT Value, DeviceId
-	FROM Input TIMESTAMP BY Time
-	GROUP BY Value, DeviceId, System.Timestamp()
+With Temp AS (
+SELECT
+	COUNT(DISTINCT Time) AS CountTime,
+	Value,
+	DeviceId
+FROM
+	Input TIMESTAMP BY Time
+GROUP BY
+	Value,
+	DeviceId,
+	SYSTEM.TIMESTAMP()
 )
- 
 
 SELECT
-	AVG(Value) AS AverageValue, DeviceId
+    AVG(Value) AS AverageValue, DeviceId
 INTO Output
 FROM Temp
 GROUP BY DeviceId,TumblingWindow(minute, 5)
 ```
 
-When the first statement executes, the duplicate records are combined into one as the fields in the group by clause are all the same. Therefore, it removes the duplicates. 
+**COUNT(DISTINCT Time)** returns the number of distinct values in the Time column within a time window. The output of the first step can then be used to compute the average per device, by discarding duplicates.
+
+For more information, see [COUNT(DISTINCT Time)](/stream-analytics-query/count-azure-stream-analytics).
 
 ## Specify logic for different cases/values (CASE statements)
 
-**CASE** statements can provide different computations for different fields, based on particular criterion. For example, assign lane `A` to cars of `Make1` and lane `B` to any other make.
+**CASE** statements can provide different computations for different fields, based on particular criterion. For example, assign lane 'A' to cars of *Make1* and lane 'B' to any other make.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time |
 | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |
-| Make2 |2023-01-01T00:00:02.0000000Z |
-| Make2 |2023-01-01T00:00:03.0000000Z |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |
+| Make2 |2015-01-01T00:00:02.0000000Z |
+| Make2 |2015-01-01T00:00:03.0000000Z |
 
-Sample **output**:
+**Output**:
 
-```
 | Make |Dispatch_to_lane | Time |
 | --- | --- | --- |
-| Make1 |"A" |2023-01-01T00:00:01.0000000Z |
-| Make2 |"B" |2023-01-01T00:00:02.0000000Z |
-```
+| Make1 |"A" |2015-01-01T00:00:01.0000000Z |
+| Make2 |"B" |2015-01-01T00:00:02.0000000Z |
 
-Sample **query**:
+**Solution**:
 
 ```SQL
 SELECT
@@ -665,32 +615,28 @@ FROM
 	Input TIMESTAMP BY Time
 ```
 
-The **CASE** expression compares an expression to a set of simple expressions to determine its result. In this example, vehicles of `Make1` are dispatched to lane `A` while vehicles of any other make will be assigned lane `B`.
+The **CASE** expression compares an expression to a set of simple expressions to determine its result. In this example, vehicles of *Make1* are dispatched to lane 'A' while vehicles of any other make will be assigned lane 'B'.
 
 For more information, see [case expression](/stream-analytics-query/case-azure-stream-analytics).
 
 ## Data conversion
 
-Data can be cast in real time using the **CAST** method. For example, car weight can be converted from type **nvarchar(max)** to type **bigint** and be used in a numeric calculation.
+Data can be cast in real time using the **CAST** method. For example, car weight can be converted from type **nvarchar(max)** to type **bigint** and be used on a numeric calculation.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |"1000" |
-| Make1 |2023-01-01T00:00:02.0000000Z |"2000" |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |"1000" |
+| Make1 |2015-01-01T00:00:02.0000000Z |"2000" |
 
-Sample **output**:
+**Output**:
 
-```
 | Make | Weight |
 | --- | --- |
 | Make1 |3000 |
-```
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -711,30 +657,26 @@ For more information on [data conversion functions](/stream-analytics-query/conv
 
 For conditions that span through multiple events the **LAG** function can be used to identify the duration of that condition. For example, suppose that a bug resulted in all cars having an incorrect weight (above 20,000 pounds), and the duration of that bug must be computed.
 
-Sample **input**:
+**Input**:
 
-```
 | Make | Time | Weight |
 | --- | --- | --- |
-| Make1 |2023-01-01T00:00:01.0000000Z |2000 |
-| Make2 |2023-01-01T00:00:02.0000000Z |25000 |
-| Make1 |2023-01-01T00:00:03.0000000Z |26000 |
-| Make2 |2023-01-01T00:00:04.0000000Z |25000 |
-| Make1 |2023-01-01T00:00:05.0000000Z |26000 |
-| Make2 |2023-01-01T00:00:06.0000000Z |25000 |
-| Make1 |2023-01-01T00:00:07.0000000Z |26000 |
-| Make2 |2023-01-01T00:00:08.0000000Z |2000 |
-```
+| Make1 |2015-01-01T00:00:01.0000000Z |2000 |
+| Make2 |2015-01-01T00:00:02.0000000Z |25000 |
+| Make1 |2015-01-01T00:00:03.0000000Z |26000 |
+| Make2 |2015-01-01T00:00:04.0000000Z |25000 |
+| Make1 |2015-01-01T00:00:05.0000000Z |26000 |
+| Make2 |2015-01-01T00:00:06.0000000Z |25000 |
+| Make1 |2015-01-01T00:00:07.0000000Z |26000 |
+| Make2 |2015-01-01T00:00:08.0000000Z |2000 |
 
-Sample **output**:
+**Output**:
 
-```
 | Start_fault | End_fault |
 | --- | --- |
-| 2023-01-01T00:00:02.000Z |2023-01-01T00:00:07.000Z |
-```
+| 2015-01-01T00:00:02.000Z |2015-01-01T00:00:07.000Z |
 
-Sample **query**:
+**Query**:
 
 ```SQL
 WITH SelectPreviousEvent AS
@@ -756,31 +698,28 @@ WHERE
 ```
 The first **SELECT** statement correlates the current weight measurement with the previous measurement, projecting it together with the current measurement. The second **SELECT** looks back to the last event where the *previous_weight* is less than 20000, where the current weight is smaller than 20000 and the *previous_weight* of the current event was bigger than 20000.
 
-The End_fault is the current nonfaulty event where the previous event was faulty, and the Start_fault is the last nonfaulty event before that.
+The End_fault is the current non-faulty event where the previous event was faulty, and the Start_fault is the last non-faulty event before that.
 
 ## Process events with independent time (Substreams)
 
 Events can arrive late or out of order due to clock skews between event producers, clock skews between partitions, or network latency.
-For example, the device clock for *TollID* 2 is five seconds behind *TollID* 1, and the device clock for *TollID* 3 is 10 seconds behind *TollID* 1. A computation can happen independently for each toll, considering only its own clock data as a timestamp.
+For example, the device clock for *TollID* 2 is five seconds behind *TollID* 1, and the device clock for *TollID* 3 is ten seconds behind *TollID* 1. A computation can happen independently for each toll, considering only its own clock data as a timestamp.
 
-Sample **input**:
+**Input**:
 
-```
 | LicensePlate | Make | Time | TollID |
 | --- | --- | --- | --- |
-| DXE 5291 |Make1 |2023-07-27T00:00:01.0000000Z | 1 |
-| YHN 6970 |Make2 |2023-07-27T00:00:05.0000000Z | 1 |
-| QYF 9358 |Make1 |2023-07-27T00:00:01.0000000Z | 2 |
-| GXF 9462 |Make3 |2023-07-27T00:00:04.0000000Z | 2 |
-| VFE 1616 |Make2 |2023-07-27T00:00:10.0000000Z | 1 |
-| RMV 8282 |Make1 |2023-07-27T00:00:03.0000000Z | 3 |
-| MDR 6128 |Make3 |2023-07-27T00:00:11.0000000Z | 2 |
-| YZK 5704 |Make4 |2023-07-27T00:00:07.0000000Z | 3 |
-```
+| DXE 5291 |Make1 |2015-07-27T00:00:01.0000000Z | 1 |
+| YHN 6970 |Make2 |2015-07-27T00:00:05.0000000Z | 1 |
+| QYF 9358 |Make1 |2015-07-27T00:00:01.0000000Z | 2 |
+| GXF 9462 |Make3 |2015-07-27T00:00:04.0000000Z | 2 |
+| VFE 1616 |Make2 |2015-07-27T00:00:10.0000000Z | 1 |
+| RMV 8282 |Make1 |2015-07-27T00:00:03.0000000Z | 3 |
+| MDR 6128 |Make3 |2015-07-27T00:00:11.0000000Z | 2 |
+| YZK 5704 |Make4 |2015-07-27T00:00:07.0000000Z | 3 |
 
-Sample **output**:
+**Output**:
 
-```
 | TollID | Count |
 | --- | --- |
 | 1 | 2 |
@@ -789,9 +728,8 @@ Sample **output**:
 | 3 | 1 |
 | 2 | 1 |
 | 3 | 1 |
-```
 
-Sample **query**:
+**Query**:
 
 ```SQL
 SELECT
@@ -808,11 +746,12 @@ For more information, see [TIMESTAMP BY OVER](/stream-analytics-query/timestamp-
 
 ## Session Windows
 
-A session window is a window that keeps expanding as events occur and closes for computation if no event is received after a specific amount of time or if the window reaches its maximum duration. This window is particularly useful when computing user interaction data. A window starts when a user starts interacting with the system and closes when no more events are observed, meaning, the user has stopped interacting. For example, a user is interacting with a web page where the number of clicks is logged, a Session Window can be used to find out how long the user interacted with the site.
+A Session Window is a window that keeps expanding as events occur and closes for computation if no event is received after a specific amount of time or if the window reaches its maximum duration.
+This window is particularly useful when computing user interaction data. A window starts when a user starts interacting with the system and closes when no more events are observed, meaning, the user has stopped interacting.
+For example, a user is interacting with a web page where the number of clicks is logged, a Session Window can be used to find out how long the user interacted with the site.
 
-Sample **input**:
+**Input**:
 
-```
 | User_id | Time | URL |
 | --- | --- | --- |
 | 0 | 2017-01-26T00:00:00.0000000Z | "www.example.com/a.html" |
@@ -820,18 +759,15 @@ Sample **input**:
 | 1 | 2017-01-26T00:00:55.0000000Z | "www.example.com/c.html" |
 | 0 | 2017-01-26T00:01:10.0000000Z | "www.example.com/d.html" |
 | 1 | 2017-01-26T00:01:15.0000000Z | "www.example.com/e.html" |
-```
 
-Sample **output**:
+**Output**:
 
-```
 | User_id | StartTime | EndTime | Duration_in_seconds |
 | --- | --- | --- | --- |
 | 0 | 2017-01-26T00:00:00.0000000Z | 2017-01-26T00:01:10.0000000Z | 70 |
 | 1 | 2017-01-26T00:00:55.0000000Z | 2017-01-26T00:01:15.0000000Z | 20 |
-```
 
-Sample **query**:
+**Query**:
 
 ``` SQL
 SELECT
@@ -849,29 +785,25 @@ The **SELECT** projects the data relevant to the user interaction, together with
 
 For more information on SessionWindow, see [Session Window](/stream-analytics-query/session-window-azure-stream-analytics) .
 
-## User defined functions in JavaScript and C#
+## Language extensibility with User Defined Function in JavaScript and C#
 
 Azure Stream Analytics query language can be extended with custom functions written either in JavaScript or C# language. User Defined Functions (UDF) are custom/complex computations that can’t be easily expressed using the **SQL** language. These UDFs can be defined once and used multiple times within a query. For example, an UDF can be used to convert a hexadecimal *nvarchar(max)* value to a *bigint* value.
 
-Sample **input**:
+**Input**:
 
-```
 | Device_id | HexValue |
 | --- | --- |
 | 1 | "B4" |
 | 2 | "11B" |
 | 3 | "121" |
-```
 
-Sample **output**:
+**Output**:
 
-```
 | Device_id | Decimal |
 | --- | --- |
 | 1 | 180 |
 | 2 | 283 |
 | 3 | 289 |
-```
 
 ```JavaScript
 function hex2Int(hexValue){
@@ -895,7 +827,7 @@ From
 	Input
 ```
 
-The User-Defined Function computes the *bigint* value from the HexValue on every event consumed.
+The User-Defined Function will compute the *bigint* value from the HexValue on every event consumed.
 
 For more information, see [JavaScript](./stream-analytics-javascript-user-defined-functions.md) and [C#](./stream-analytics-edge-csharp-udf.md).
 
@@ -906,7 +838,6 @@ For example, an ATM is being monitored at real time for failures, during the ope
 
 **Input**:
 
-```
 | ATM_id | Operation_id | Return_Code | Time |
 | --- | --- | --- | --- |
 | 1 | "Entering Pin" | "Success" | 2017-01-26T00:10:00.0000000Z |
@@ -915,15 +846,12 @@ For example, an ATM is being monitored at real time for failures, during the ope
 | 1 | "Entering Withdraw Quantity" | "Success" | 2017-01-26T00:10:08.0000000Z |
 | 1 | "Opening Money Slot" | "Warning" | 2017-01-26T00:10:14.0000000Z |
 | 1 | "Printing Bank Balance" | "Warning" | 2017-01-26T00:10:19.0000000Z |
-```
 
 **Output**:
 
-```
 | ATM_id | First_Warning_Operation_id | Warning_Time |
 | --- | --- | --- |
 | 1 | "Opening Money Slot" | 2017-01-26T00:10:14.0000000Z |
-```
 
 ```SQL
 SELECT *
@@ -958,30 +886,24 @@ The manufacture would like to keep track of the location of those machines and b
 
 **Input**:
 
-```
 | Equipment_id | Equipment_current_location | Time |
 | --- | --- | --- |
 | 1 | "POINT(-122.13288797982818 47.64082002051315)" | 2017-01-26T00:10:00.0000000Z |
 | 1 | "POINT(-122.13307252987875 47.64081350934929)" | 2017-01-26T00:11:00.0000000Z |
 | 1 | "POINT(-122.13308862313283 47.6406508603241)" | 2017-01-26T00:12:00.0000000Z |
 | 1 | "POINT(-122.13341048821462 47.64043760861279)" | 2017-01-26T00:13:00.0000000Z |
-```
 
 **Reference Data Input**:
 
-```
 | Equipment_id | Equipment_lease_location |
 | --- | --- |
 | 1 | "POLYGON((-122.13326028450979 47.6409833866794,-122.13261655434621 47.6409833866794,-122.13261655434621 47.64061471602751,-122.13326028450979 47.64061471602751,-122.13326028450979 47.6409833866794))" |
-```
 
 **Output**:
 
-```
 | Equipment_id | Equipment_alert_location | Time |
 | --- | --- | --- |
 | 1 | "POINT(-122.13341048821462 47.64043760861279)" | 2017-01-26T00:13:00.0000000Z |
-```
 
 ```SQL
 SELECT
@@ -1002,7 +924,7 @@ For more information, see the [Geofencing and geospatial aggregation scenarios w
 
 ## Get help
 
-For further assistance, try our [Microsoft Q&A question page for Azure Stream Analytics](/answers/tags/179/azure-stream-analytics).
+For further assistance, try our [Microsoft Q&A question page for Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## Next steps
 * [Introduction to Azure Stream Analytics](stream-analytics-introduction.md)

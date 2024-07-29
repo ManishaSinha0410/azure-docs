@@ -2,14 +2,15 @@
 title: include file
 description: include file
 services: azure-communication-services
-author: tophpalmer
+author: dademath2
 manager: shahen
-ms.author: chpalm
+
 ms.service: azure-communication-services
 ms.subservice: azure-communication-services
 ms.date: 02/09/2023
 ms.topic: include
 ms.custom: include file
+ms.author: dademath
 ---
 
 
@@ -113,8 +114,10 @@ To run the function locally, press `F5` in Visual Studio Code. We use [ngrok](ht
 
 1. Once the function is running, we configure ngrok. (You need to [download ngrok](https://ngrok.com/download) for your environment.)
 
-    ```bash
+   ```bash
+
     ngrok http 7071
+
     ```
 
     Copy the ngrok link provided where your function is running.

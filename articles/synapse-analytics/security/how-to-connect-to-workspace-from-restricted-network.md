@@ -6,8 +6,8 @@ ms.author: danzhang
 ms.service: synapse-analytics 
 ms.topic: how-to
 ms.subservice: security 
-ms.date: 06/05/2023
-ms.reviewer: sngun, wiassaf
+ms.date: 02/09/2023
+ms.reviewer: sngun
 ---
 
 # Connect to workspace resources from a restricted network
@@ -128,11 +128,6 @@ Required for workspace/pool management:
  - `{workspaceName}.[dev|sql].azuresynapse.net`
  - `{workspaceName}-ondemand.sql.azuresynapse.net`
 
-Required for Synapse notebook authoring:
-- `aznb.azuresandbox.ms`
- 
-Required for access control and identity searching:
-- `graph.windows.net`
 
 ## Appendix: DNS registration for private endpoint
 

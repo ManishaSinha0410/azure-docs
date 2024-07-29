@@ -1,21 +1,17 @@
 ---
 title: Expose an AKS service over HTTP or HTTPS using Application Gateway
-description: This article provides information on how to expose an AKS service over HTTP or HTTPS using Application Gateway.
+description: This article provides information on how to expose an AKS service over HTTP or HTTPS using Application Gateway. 
 services: application-gateway
 author: greg-lindsay
 ms.service: application-gateway
-ms.custom:
 ms.topic: how-to
-ms.date: 07/23/2023
+ms.date: 04/27/2023
 ms.author: greglin
 ---
 
-# Expose an AKS service over HTTP or HTTPS using Application Gateway
+# Expose an AKS service over HTTP or HTTPS using Application Gateway 
 
 These tutorials help illustrate the usage of [Kubernetes Ingress Resources](https://kubernetes.io/docs/concepts/services-networking/ingress/) to expose an example Kubernetes service through the [Azure Application Gateway](https://azure.microsoft.com/services/application-gateway/) over HTTP or HTTPS.
-
-> [!TIP]
-> Also see [What is Application Gateway for Containers](for-containers/overview.md).
 
 ## Prerequisites
 
@@ -44,7 +40,7 @@ Now, the `guestbook` application has been deployed.
 To expose the guestbook application, use the following ingress resource:
 
 ```yaml
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: guestbook
@@ -89,7 +85,7 @@ Without specifying hostname, the guestbook service is available on all the host-
 1. Define the following ingress. In the ingress, specify the name of the secret in the `secretName` section.
 
     ```yaml
-    apiVersion: networking.k8s.io/v1
+    apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
       name: guestbook
@@ -106,7 +102,7 @@ Without specifying hostname, the guestbook service is available on all the host-
               servicePort: 80
     ```
 
-    > [!NOTE]
+    > [!NOTE] 
     > Replace `<guestbook-secret-name>` in the above Ingress Resource with the name of your secret. Store the above Ingress Resource in a file name `ing-guestbook-tls.yaml`.
 
 1. Deploy ing-guestbook-tls.yaml by running
@@ -128,7 +124,7 @@ By specifying hostname, the guestbook service is only available on the specified
     In the ingress, specify the name of the secret in the `secretName` section and replace the hostname in the `hosts` section accordingly.
 
     ```yaml
-    apiVersion: networking.k8s.io/v1
+    apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
       name: guestbook
@@ -163,7 +159,7 @@ Now the `guestbook` application is available on both HTTP and HTTPS only on the 
 The following ingress allows you to add other paths into this ingress and redirect those paths to other services:
 
 ```yaml
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: guestbook

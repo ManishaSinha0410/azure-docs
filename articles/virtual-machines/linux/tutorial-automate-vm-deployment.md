@@ -1,20 +1,21 @@
 ---
-title: Tutorial - Customize a Linux VM with cloud-init in Azure
-description: In this tutorial, you learn how to use cloud-init and Key Vault to customize Linux VMs the first time they boot in Azure
-author: ju-shim
+title: Tutorial - Customize a Linux VM with cloud-init in Azure 
+description: In this tutorial, you learn how to use cloud-init and Key Vault to customize Linux VMs the first time they boot in Azure 
+author: cynthn
 ms.service: virtual-machines
 ms.collection: linux
 ms.topic: tutorial
 ms.date: 04/06/2023
-ms.author: jushiman
+ms.author: cynthn
 ms.reviewer: mattmcinnes
-ms.custom: mvc, devx-track-azurecli, linux-related-content
+ms.custom: mvc, devx-track-js, devx-track-azurecli
+
 #Customer intent: As an IT administrator or developer, I want learn about cloud-init so that I customize and configure Linux VMs in Azure on first boot to minimize the number of post-deployment configuration tasks required.
 ---
 
 # Tutorial - How to use cloud-init to customize a Linux virtual machine in Azure on first boot
 
-**Applies to:** :heavy_check_mark: Linux VMs :heavy_check_mark: Flexible scale sets
+**Applies to:** :heavy_check_mark: Linux VMs :heavy_check_mark: Flexible scale sets 
 
 In a previous tutorial, you learned how to SSH to a virtual machine (VM) and manually install NGINX. To create VMs in a quick and consistent manner, some form of automation is typically desired. A common approach to customize a VM on first boot is to use [cloud-init](https://cloudinit.readthedocs.io). In this tutorial you learn how to:
 
@@ -50,7 +51,6 @@ packages:
 write_files:
   - owner: www-data:www-data
     path: /etc/nginx/sites-available/default
-    defer: true
     content: |
       server {
         listen 80;
@@ -65,7 +65,6 @@ write_files:
       }
   - owner: azureuser:azureuser
     path: /home/azureuser/myapp/index.js
-    defer: true
     content: |
       var express = require('express')
       var app = express()
@@ -99,7 +98,7 @@ Now create a VM with [az vm create](/cli/azure/vm#az-vm-create). Use the `--cust
 az vm create \
     --resource-group myResourceGroupAutomate \
     --name myAutomatedVM \
-    --image Ubuntu2204 \
+    --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
     --custom-data cloud-init.txt
@@ -180,7 +179,6 @@ packages:
 write_files:
   - owner: www-data:www-data
     path: /etc/nginx/sites-available/default
-    defer: true
     content: |
       server {
         listen 80;
@@ -198,7 +196,6 @@ write_files:
       }
   - owner: azureuser:azureuser
     path: /home/azureuser/myapp/index.js
-    defer: true
     content: |
       var express = require('express')
       var app = express()
@@ -228,7 +225,7 @@ Now create a VM with [az vm create](/cli/azure/vm#az-vm-create). The certificate
 az vm create \
     --resource-group myResourceGroupAutomate \
     --name myVMWithCerts \
-    --image Ubuntu2204 \
+    --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
     --custom-data cloud-init-secured.txt \

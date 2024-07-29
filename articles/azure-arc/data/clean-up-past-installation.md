@@ -82,8 +82,8 @@ kubectl delete apiservice v1.sql.arcdata.microsoft.com
 kubectl delete mutatingwebhookconfiguration arcdata.microsoft.com-webhook-{namespace}
 ```
 
-## Related content
+## Next steps
 
 [Start by creating a Data Controller](create-data-controller-indirect-cli.md)
 
-Already created a Data Controller? [Create a SQL Managed Instance enabled by Azure Arc](create-sql-managed-instance.md)
+Already created a Data Controller? [Create an Azure Arc-enabled SQL Managed Instance](create-sql-managed-instance.md)

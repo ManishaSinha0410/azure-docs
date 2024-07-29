@@ -1,8 +1,8 @@
 ---
 title: Azure Remote Rendering Toolkit
 description: Learn about the Azure Remote Rendering Toolkit (ARRT) which is an open-source desktop application developed in C++/Qt.
-author: flborn
-ms.author: flborn
+author: jakras
+ms.author: jakras
 ms.date: 05/27/2022
 ms.topic: sample
 ---

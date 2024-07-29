@@ -6,17 +6,15 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/06/2022
 ms.author: danlep
 ---
 
 # Authenticate with managed identity
 
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
+ Use the `authentication-managed-identity` policy to authenticate with a backend service using the managed identity. This policy essentially uses the managed identity to obtain an access token from Azure Active Directory for accessing the specified resource. After successfully obtaining the token, the policy will set the value of the token in the `Authorization` header using the `Bearer` scheme. API Management caches the token until it expires.
 
- Use the `authentication-managed-identity` policy to authenticate with a backend service using the managed identity. This policy essentially uses the managed identity to obtain an access token from Microsoft Entra ID for accessing the specified resource. After successfully obtaining the token, the policy will set the value of the token in the `Authorization` header using the `Bearer` scheme. API Management caches the token until it expires.
-
-Both system-assigned identity and any of the multiple user-assigned identities can be used to request a token. If `client-id` is not provided, system-assigned identity is assumed. If the `client-id` variable is provided, token is requested for that user-assigned identity from Microsoft Entra ID.
+Both system-assigned identity and any of the multiple user-assigned identities can be used to request a token. If `client-id` is not provided, system-assigned identity is assumed. If the `client-id` variable is provided, token is requested for that user-assigned identity from Azure Active Directory.
 
 [!INCLUDE [api-management-policy-generic-alert](../../includes/api-management-policy-generic-alert.md)]
 
@@ -30,8 +28,8 @@ Both system-assigned identity and any of the multiple user-assigned identities c
 
 | Attribute         | Description                                            | Required | Default |
 | ----------------- | ------------------------------------------------------ | -------- | ------- |
-|resource|String. The application ID of the target web API (secured resource) in Microsoft Entra ID. Policy expressions are allowed. |Yes|N/A|
-|client-id|String. The client ID of the user-assigned identity in Microsoft Entra ID. Policy expressions aren't allowed. |No|system-assigned identity|
+|resource|String. The application ID of the target web API (secured resource) in Azure Active Directory. Policy expressions are allowed. |Yes|N/A|
+|client-id|String. The client ID of the user-assigned identity in Azure Active Directory. Policy expressions aren't allowed. |No|system-assigned identity|
 |output-token-variable-name|String. Name of the context variable that will receive token value as an object of type `string`. Policy expressions aren't allowed. |No|N/A|  
 |ignore-error|Boolean. If set to `true`, the policy pipeline continues to execute even if an access token isn't obtained.|No|`false`|  
 
@@ -40,7 +38,7 @@ Both system-assigned identity and any of the multiple user-assigned identities c
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
-- [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+- [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Examples
 
@@ -56,9 +54,6 @@ Both system-assigned identity and any of the multiple user-assigned identities c
 ```
 ```xml  
 <authentication-managed-identity resource="https://servicebus.azure.net/"/> <!--Azure Service Bus-->
-```
-```xml  
-<authentication-managed-identity resource="https://eventhubs.azure.net/"/> <!--Azure Event Hub-->
 ```
 ```xml  
 <authentication-managed-identity resource="https://storage.azure.com/"/> <!--Azure Blob Storage-->
@@ -92,6 +87,6 @@ Both system-assigned identity and any of the multiple user-assigned identities c
 
 ## Related policies
 
-* [Authentication and authorization](api-management-policies.md#authentication-and-authorization)
+* [API Management authentication policies](api-management-authentication-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

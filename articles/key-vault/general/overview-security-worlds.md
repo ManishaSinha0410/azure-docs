@@ -6,7 +6,7 @@ ms.subservice: general
 ms.topic: conceptual
 author: msmbaldwin
 ms.author: mbaldwin
-ms.date: 02/20/2024
+ms.date: 07/03/2017
 ---
 # Azure Key Vault security worlds and geographic boundaries
 

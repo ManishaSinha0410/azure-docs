@@ -8,7 +8,7 @@ ms.service: azure-communication-services
 ms.subservice: identity
 ms.date: 07/20/2022
 ms.topic: include
-ms.custom: mode-other, devx-track-azurecli
+ms.custom: mode-other
 ms.author: dademath
 ---
 
@@ -157,9 +157,7 @@ Make this replacement in the code:
 
 Access tokens are short-lived credentials that need to be reissued. Not doing so might cause a disruption of your application users' experience. The `expires_on` response property indicates the lifetime of the access token.
 
-<a name='exchange-an-azure-ad-access-token-of-the-teams-user-for-a-communication-identity-access-token'></a>
-
-### Exchange a Microsoft Entra access token of the Teams User for a Communication Identity access token
+### Exchange an Azure AD access token of the Teams User for a Communication Identity access token
 
 Use the `token get-for-teams-user` command to issue an access token for the Teams user that can be used with the Azure Communication Services SDKs.
 
@@ -170,9 +168,9 @@ az communication identity token get-for-teams-user --aad-token "<yourAadToken>" 
 Make this replacement in the code:
 
 - Replace `<yourConnectionString>` with your connection string.
-- Replace `<yourAadUser>` with your Microsoft Entra userId.
-- Replace `<yourAadApplication>` with your Microsoft Entra application Id.
-- Replace `<yourAadToken>` with your Microsoft Entra access token.
+- Replace `<yourAadUser>` with your Azure Active Directory userId.
+- Replace `<yourAadApplication>` with your Azure Active Directory application Id.
+- Replace `<yourAadToken>` with your Azure Active Directory access token.
 
 ### Revoke access tokens
 
@@ -199,3 +197,4 @@ Make this replacement in the code:
 
 - Replace `<yourConnectionString>` with your connection string.
 - Replace `<userId>` with your userId.
+

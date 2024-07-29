@@ -4,7 +4,6 @@ titleSuffix: Azure Web PubSub Service
 description: How to access key vault in private network through Shared Private Endpoints
 author: ArchangelSDY
 ms.service: azure-web-pubsub
-ms.custom: devx-track-azurecli
 ms.topic: how-to
 ms.date: 03/27/2023
 ms.author: dayshen

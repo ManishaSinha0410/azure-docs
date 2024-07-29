@@ -7,6 +7,7 @@ ms.topic: sample
 ms.date: 07/08/2020
 ms.author: ericg
 ms.service: app-service
+ms.workload: web 
 ms.custom: devx-track-arm-template
 ---
 

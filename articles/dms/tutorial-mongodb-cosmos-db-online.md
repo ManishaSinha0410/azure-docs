@@ -1,24 +1,24 @@
 ---
-title: "Tutorial: Migrate MongoDB online to Azure Cosmos DB for MongoDB RU"
+title: "Tutorial: Migrate MongoDB online to Azure Cosmos DB for MongoDB"
 titleSuffix: Azure Database Migration Service
-description: Learn to migrate from MongoDB on-premises to Azure Cosmos DB for MongoDB RU online by using Azure Database Migration Service.
-author: abhims14
-ms.author: abhishekum
-ms.reviewer: randolphwest
+description: Learn to migrate from MongoDB on-premises to Azure Cosmos DB for MongoDB online by using Azure Database Migration Service.
+author: croblesm
+ms.author: roblescarlos
+ms.reviewer: craigg
 ms.date: 09/21/2021
 ms.service: dms
 ms.topic: tutorial
 ms.custom:
-  - sql-migration-content
-  - ignite-2023
+  - seo-nov-2020
+  - ignite-2022
 ---
 
-# Tutorial: Migrate MongoDB to Azure Cosmos DB for MongoDB RU online using Azure Database Migration Service
-
+# Tutorial: Migrate MongoDB to Azure Cosmos DB for MongoDB online using DMS
 [!INCLUDE[appliesto-mongodb-api](../cosmos-db/includes/appliesto-mongodb.md)]
 
 > [!IMPORTANT]
-> Please read this entire guide before carrying out your migration steps. Azure Database Migration Service does not currently support migrations to an Azure Cosmos DB for MongoDB vCore account.
+> Please read this entire guide before carrying out your migration steps.
+>
 
 This MongoDB migration guide is part of series on MongoDB migration. The critical MongoDB migration steps are [pre-migration](../cosmos-db/mongodb-pre-migration.md), migration, and [post-migration](../cosmos-db/mongodb-post-migration.md), as shown below.
 

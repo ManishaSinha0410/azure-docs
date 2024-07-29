@@ -5,9 +5,9 @@ description: Learn how to create and set up a self-hosted integration runtime fo
 author: ukchrist
 ms.service: data-factory
 ms.subservice: data-movement
-ms.custom: devx-track-dotnet
+ms.custom: ignite-2022
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.date: 08/18/2022
 ms.author: ulrichchrist
 ---
 
@@ -69,6 +69,6 @@ yyy.yyy.yyy.yyy sapbw01
 zzz.zzz.zzz.zzz sapnw01 
 ```
 
-## Related content
+## Next steps
 
 [Set up an SAP CDC linked service and source dataset](sap-change-data-capture-prepare-linked-service-source-dataset.md)

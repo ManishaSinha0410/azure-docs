@@ -1,54 +1,57 @@
 ---
-title: LEFT
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a substring from the left side of a string.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: LEFT in Azure Cosmos DB query language
+description: Learn about SQL system function LEFT in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# LEFT (NoSQL query)
-
+# LEFT (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the left part of a string up to the specified number of characters.  
+ Returns the left part of a string with the specified number of characters.  
   
 ## Syntax
   
-```nosql
-LEFT(<string_expr>, <numeric_expr>)  
+```sql
+LEFT(<str_expr>, <num_expr>)  
 ```  
   
 ## Arguments
   
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
-| **`numeric_expr`** | A numeric expression specifying the number of characters to extract from `string_expr`. |
+*str_expr*  
+   Is the string expression to extract characters from.  
+  
+*num_expr*  
+   Is a numeric expression which specifies the number of characters.  
   
 ## Return types
   
-Returns a string expression.  
+  Returns a string expression.  
   
 ## Examples
   
-The following example returns the left part of the string `Microsoft` for various length values.  
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/left/query.sql" highlight="2-6":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/left/result.json":::
+  The following example returns the left part of "abc" for various length values.  
+  
+```sql
+SELECT LEFT("abc", 1) AS l1, LEFT("abc", 2) AS l2 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"l1": "a", "l2": "ab"}]  
+```  
 
 ## Remarks
 
-- This function benefits from a [range index](../../index-policy.md#includeexclude-strategy).
+This system function will benefit from a [range index](../../index-policy.md#includeexclude-strategy).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`RIGHT`](right.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

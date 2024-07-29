@@ -5,8 +5,9 @@ author: roygara
 ms.author: rogarana
 ms.date: 05/02/2023
 ms.topic: conceptual
-ms.service: azure-disk-storage
-ms.custom: references_regions
+ms.service: storage
+ms.subservice: disks
+ms.custom: references_regions, ignite-2022
 ---
 # Managed disk bursting
 

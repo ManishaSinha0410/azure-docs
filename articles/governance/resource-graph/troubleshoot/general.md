@@ -4,7 +4,6 @@ description: Learn how to troubleshoot issues with the various SDKs while queryi
 ms.date: 08/17/2021
 ms.topic: troubleshooting
 ---
-
 # Troubleshoot errors using Azure Resource Graph
 
 You may run into errors when querying Azure resources with Azure Resource Graph. This article
@@ -18,7 +17,7 @@ it can be fixed and a later query succeeds.
 
 ## General errors
 
-### Scenario: Throttled requests
+### <a name="throttled"></a>Scenario: Throttled requests
 
 #### Issue
 
@@ -40,7 +39,7 @@ There are several methods of dealing with throttled requests:
 - [Query in Parallel](../concepts/guidance-for-throttled-requests.md#query-in-parallel)
 - [Pagination](../concepts/guidance-for-throttled-requests.md#pagination)
 
-### Scenario: Too many subscriptions
+### <a name="toomanysubscription"></a>Scenario: Too many subscriptions
 
 #### Issue
 
@@ -81,7 +80,7 @@ foreach ($batch in $subscriptionsBatch){ $response += Search-AzGraph -Query $que
 $response
 ```
 
-### Scenario: Unsupported Content-Type REST header
+### <a name="rest-contenttype"></a>Scenario: Unsupported Content-Type REST header
 
 #### Issue
 
@@ -98,7 +97,7 @@ tools or agents default to **text/plain**, which is unsupported by the REST API.
 Validate that the tool or agent you're using to query Azure Resource Graph has the REST API header
 `Content-Type` configured for **application/json**.
 
-### Scenario: No read permission to all subscriptions in list
+### <a name="rest-403"></a>Scenario: No read permission to all subscriptions in list
 
 #### Issue
 

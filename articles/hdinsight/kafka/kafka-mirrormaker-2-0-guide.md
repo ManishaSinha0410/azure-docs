@@ -4,7 +4,7 @@ description: How to use Kafka MirrorMaker 2.0 in data migration/replication and 
 ms.service: hdinsight
 ms.topic: how-to
 ms.custom: hdinsightactive
-ms.date: 05/09/2024
+ms.date: 05/20/2022
 ---
 
 # How to use Kafka MirrorMaker 2.0 in data migration, replication and the use-cases
@@ -160,7 +160,7 @@ destination.sasl.mechanism=GSSAPI
 
 **Why does MirrorMaker create only two replicas of the topic in the destination cluster while the source has more?**
 
-  MirrorMaker 2 doesn’t replicate the replication factor of topics to target clusters. This can be controlled from MM2 config, by specifying the required number of “replication.factor”. The default value for the same is two.
+  MirrormMker 2 doesn’t replicate the replication factor of topics to target clusters. This can be controlled from MM2 config, by specifying the required number of “replication.factor”. The default value for the same is two.
 
 **How to use custom replication policy in MirrorMaker 2.0?**
 

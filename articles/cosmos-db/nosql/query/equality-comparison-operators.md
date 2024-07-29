@@ -1,30 +1,26 @@
 ---
-title: Equality and comparison operators
-titleSuffix: Azure Cosmos DB for NoSQL
-description: Equality and comparison operators in Azure Cosmos DB for NoSQL check two different expressions for equivalency or compares both expressions relationally.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: Equality and comparison operators in Azure Cosmos DB
+description: Learn about SQL equality and comparison operators supported by Azure Cosmos DB.
+author: seesharprun
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.custom: ignite-2022
+ms.topic: conceptual
+ms.date: 01/07/2022
+ms.author: sidandrews
+ms.reviewer: jucocchi
 ---
-
-# Equality and comparison operators in Azure Cosmos DB for NoSQL
-
+# Equality and comparison operators in Azure Cosmos DB
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Equality and comparison operators in Azure Cosmos DB for NoSQL check two different expressions for equivalency or compares both expressions relationally.
+This article details the equality and comparison operators supported by Azure Cosmos DB.
 
 ## Understanding equality comparisons
 
 The following table shows the result of equality comparisons in the API for NoSQL between any two JSON types.
 
-| | **Undefined** | Null | Boolean | Number | String | Object | Array |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Op** | **Undefined** | **Null** | **Boolean** | **Number** | **String** | **Object** | **Array** |
+|---|---|---|---|---|---|---|---|
 | **Undefined** | Undefined | Undefined | Undefined | Undefined | Undefined | Undefined | Undefined |
 | **Null** | Undefined | **Ok** | Undefined | Undefined | Undefined | Undefined | Undefined |
 | **Boolean** | Undefined | Undefined | **Ok** | Undefined | Undefined | Undefined | Undefined |
@@ -33,23 +29,20 @@ The following table shows the result of equality comparisons in the API for NoSQ
 | **Object** | Undefined | Undefined | Undefined | Undefined | Undefined | **Ok** | Undefined |
 | **Array** | Undefined | Undefined | Undefined | Undefined | Undefined | Undefined | **Ok** |
 
-For comparison operators such as ``>``, ``>=``, ``!=``, ``<``, and ``<=``, comparison across types or between two objects or arrays produces ``undefined``.
+For comparison operators such as `>`, `>=`, `!=`, `<`, and `<=`, comparison across types or between two objects or arrays produces `Undefined`.  
 
-If the result of the scalar expression is ``undefined``, the item isn't included in the result, because ``undefined`` doesn't equate to ``true``.
+If the result of the scalar expression is `Undefined`, the item isn't included in the result, because `Undefined` doesn't equal `true`.
 
-For example, the following query's comparison between a number and string value produces ``undefined``. Therefore, the filter doesn't include any results.
+For example, the following query's comparison between a number and string value produces `Undefined`. Therefore, the filter does not include any results.
 
-```nosql
-SELECT
-    *
-FROM
-    products p
-WHERE 
-    0 = "true"
+```sql
+SELECT *
+FROM c
+WHERE 7 = 'a'
 ```
 
-## Related content
+## Next steps
 
-- [``SELECT`` clause](select.md)
+- [Azure Cosmos DB .NET samples](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [Keywords](keywords.md)
-- [Logical operators](logical-operators.md)
+- [SELECT clause](select.md)

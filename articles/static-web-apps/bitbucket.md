@@ -121,7 +121,6 @@ Now that the repository is created, you can create a static web app from the Azu
             name: Deploy to test
             deployment: test
             script:
-              - chown -R 165536:165536 $BITBUCKET_CLONE_DIR
               - pipe: microsoft/azure-static-web-apps-deploy:main
                 variables:
                     APP_LOCATION: '$BITBUCKET_CLONE_DIR/src'
@@ -139,7 +138,6 @@ Now that the repository is created, you can create a static web app from the Azu
             name: Deploy to test
             deployment: test
             script:
-              - chown -R 165536:165536 $BITBUCKET_CLONE_DIR
               - pipe: microsoft/azure-static-web-apps-deploy:main
                 variables:
                     APP_LOCATION: '$BITBUCKET_CLONE_DIR'
@@ -157,11 +155,10 @@ Now that the repository is created, you can create a static web app from the Azu
             name: Deploy to test
             deployment: test
             script:
-              - chown -R 165536:165536 $BITBUCKET_CLONE_DIR
               - pipe: microsoft/azure-static-web-apps-deploy:main
                 variables:
                     APP_LOCATION: '$BITBUCKET_CLONE_DIR/Client'
-                    OUTPUT_LOCATION: 'wwwroot'
+                    OUTPUT_LOCATION: '$BITBUCKET_CLONE_DIR/wwwroot'
                     API_TOKEN: $deployment_token
     ```
 
@@ -175,7 +172,6 @@ Now that the repository is created, you can create a static web app from the Azu
             name: Deploy to test
             deployment: test
             script:
-              - chown -R 165536:165536 $BITBUCKET_CLONE_DIR
               - pipe: microsoft/azure-static-web-apps-deploy:main
                 variables:
                     APP_LOCATION: '$BITBUCKET_CLONE_DIR'
@@ -193,7 +189,6 @@ Now that the repository is created, you can create a static web app from the Azu
             name: Deploy to test
             deployment: test
             script:
-              - chown -R 165536:165536 $BITBUCKET_CLONE_DIR
               - pipe: microsoft/azure-static-web-apps-deploy:main
                 variables:
                     APP_LOCATION: '$BITBUCKET_CLONE_DIR'

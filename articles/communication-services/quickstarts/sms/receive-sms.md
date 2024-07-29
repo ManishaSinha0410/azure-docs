@@ -2,15 +2,14 @@
 title: Quickstart - Receive and Reply to SMS
 titleSuffix: Azure Communication Services
 description: "In this quickstart, you'll learn how to receive an SMS message by using Azure Communication Services."
-author: tophpalmer
+author: ddematheu2
 manager: shahen
 services: azure-communication-services
-ms.author: chpalm
+ms.author: dademath
 ms.date: 02/09/2023
 ms.topic: quickstart
 ms.service: azure-communication-services
 ms.subservice: sms
-ms.custom: devx-track-extended-java, devx-track-js
 zone_pivot_groups: acs-js-power
 ---
 
@@ -33,7 +32,7 @@ The `SMSReceived` event generated when an SMS is sent to an Azure Communication 
     "MessageId": "Incoming_20200918002745d29ebbea-3341-4466-9690-0a03af35228e",
     "From": "15555555555",
     "To": "15555555555",
-    "Message": "Great to connect with Azure Communication Services events",
+    "Message": "Great to connect with ACS events",
     "ReceivedTimestamp": "2020-09-18T00:27:45.32Z"
   },
   "eventType": "Microsoft.Communication.SMSReceived",

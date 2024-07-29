@@ -4,9 +4,7 @@ description: Learn how to handle errors in the Durable Functions extension for A
 ms.topic: conceptual
 ms.date: 02/14/2023
 ms.author: azfuncdf
-ms.devlang: csharp
-# ms.devlang: csharp, javascript, powershell, python, java
-ms.custom: devx-track-js
+ms.devlang: csharp, javascript, powershell, python, java
 ---
 
 # Handling errors in Durable Functions (Azure Functions)
@@ -396,7 +394,7 @@ await ctx.CallActivityWithRetryAsync("FlakeyActivity", retryOptions, null);
 TaskOptions retryOptions = TaskOptions.FromRetryHandler(retryContext =>
 {
     // Don't retry anything that derives from ApplicationException
-    if (retryContext.LastFailure.IsCausedBy<ApplicationException>())
+    if (!retryContext.LastFailure.IsCausedBy<ApplicationException>())
     {
         return false;
     }

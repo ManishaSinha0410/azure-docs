@@ -6,7 +6,7 @@ ms.subservice: single-server
 ms.author: sunila
 author: sunilagarwal
 ms.reviewer: ""
-ms.custom: mvc, mode-api, devx-track-go
+ms.custom: mvc, mode-api
 ms.devlang: golang
 ms.topic: quickstart
 ms.date: 06/24/2022

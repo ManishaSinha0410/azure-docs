@@ -107,4 +107,4 @@ The App Service app pulls from the container registry every time it starts. If y
 > [Configure custom container](../../configure-custom-container.md)
 
 > [!div class="nextstepaction"]
-> [Sidecar container tutorial](../../tutorial-custom-container-sidecar.md)
+> [Multi-container app tutorial](../../tutorial-multi-container-app.md)

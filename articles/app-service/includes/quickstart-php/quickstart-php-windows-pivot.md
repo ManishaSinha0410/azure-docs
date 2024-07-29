@@ -1,6 +1,3 @@
----
-ms.custom: linux-related-content
----
 [!INCLUDE [php-eol-notice](../php-windows-eol-notice.md)]
 
 [Azure App Service](../../overview.md) provides a highly scalable, self-patching web hosting service.  This quickstart tutorial shows how to deploy a PHP app to Azure App Service on Windows.
@@ -185,3 +182,4 @@ The PHP sample code is running in an Azure App Service web app.
     The web app menu provides different options for configuring your app.
 
 [!INCLUDE [cli-samples-clean-up](../../../../includes/cli-samples-clean-up.md)]
+

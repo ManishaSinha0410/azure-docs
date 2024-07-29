@@ -6,11 +6,10 @@ author: dlepow
 ms.author: danlep
 ms.topic: how-to
 ms.date: 03/20/2023
+
 ---
 
 # Connect privately to API Management using an inbound private endpoint
-
-[!INCLUDE [premium-dev-standard-basic.md](../../includes/api-management-availability-premium-dev-standard-basic.md)]
 
 You can configure an inbound [private endpoint](../private-link/private-endpoint-overview.md) for your API Management instance to allow clients in your private network to securely access the instance over [Azure Private Link](../private-link/private-link-overview.md). 
 
@@ -23,6 +22,9 @@ You can configure an inbound [private endpoint](../private-link/private-endpoint
 :::image type="content" source="media/private-endpoint/api-management-private-endpoint.png" alt-text="Diagram that shows a secure inbound connection to API Management using private endpoint.":::
 
 [!INCLUDE [api-management-private-endpoint](../../includes/api-management-private-endpoint.md)]
+
+
+[!INCLUDE [premium-dev-standard-basic.md](../../includes/api-management-availability-premium-dev-standard-basic.md)]
 
 ## Limitations
 
@@ -156,7 +158,6 @@ After the private endpoint is created, it appears in the list on the API Managem
 You can also use the [Private Endpoint Connection - List By Service](/rest/api/apimanagement/current-ga/private-endpoint-connection/list-by-service) REST API to list private endpoint connections to the service instance.
 
 
-
 Note the endpoint's **Connection status**:
 
 * **Approved** indicates that the API Management resource automatically approved the connection. 
@@ -171,18 +172,15 @@ If you have sufficient permissions, approve a private endpoint connection on the
 You can also use the API Management [Private Endpoint Connection - Create Or Update](/rest/api/apimanagement/current-ga/private-endpoint-connection/create-or-update) REST API.
 
 ```rest
-PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{apimServiceName}privateEndpointConnections/{privateEndpointConnectionName}?api-version=2021-08-01
+PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{apimServiceName}privateEndpointConnections/{privateEndpointConnectionName}?api-version=2021-08-01
 ```
 
 ### Optionally disable public network access
 
-To optionally limit incoming traffic to the API Management instance only to private endpoints, disable public network access. Use the [API Management Service - Create Or Update](/rest/api/apimanagement/current-ga/api-management-service/create-or-update) REST API to set the `publicNetworkAccess` property to `Disabled`.
-
-> [!NOTE] 
-> The `publicNetworkAccess` property can only be used to disable public access to API Management instances configured with a private endpoint, not with other networking configurations such as VNet injection.
+To optionally limit incoming traffic to the API Management instance only to private endpoints, disable public network access. Use the [API Management Service - Create Or Update](/rest/api/apimanagement/current-ga/api-management-service/create-or-update) REST API.
 
 ```rest
-PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{apimServiceName}?api-version=2021-08-01
+PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{apimServiceName}?api-version=2021-08-01
 Authorization: Bearer {{authToken.response.body.access_token}}
 Content-Type: application/json
 
@@ -241,4 +239,3 @@ To connect to 'Microsoft.ApiManagement/service/my-apim-service', please use the 
 * Learn more about [managing private endpoint connections](../private-link/manage-private-endpoint.md).
 * [Troubleshoot Azure private endpoint connectivity problems](../private-link/troubleshoot-private-endpoint-connectivity.md).
 * Use a [Resource Manager template](https://azure.microsoft.com/resources/templates/api-management-private-endpoint/) to create an API Management instance and a private endpoint with private DNS integration.
-

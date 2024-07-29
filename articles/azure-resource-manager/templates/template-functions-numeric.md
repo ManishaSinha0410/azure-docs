@@ -1,9 +1,9 @@
 ---
 title: Template functions - numeric
 description: Describes the functions to use in an Azure Resource Manager template (ARM template) to work with numbers.
-ms.topic: reference
+ms.topic: conceptual
 ms.custom: devx-track-arm-template
-ms.date: 03/20/2024
+ms.date: 04/18/2023
 ---
 
 # Numeric functions for ARM templates

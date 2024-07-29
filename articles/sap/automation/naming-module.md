@@ -1,6 +1,6 @@
 ---
 title: Configure custom naming for the automation framework
-description: Explanation of how to implement custom naming conventions for SAP Deployment Automation Framework.
+description: Explanation of how to implement custom naming conventions for the SAP on Azure Deployment Automation Framework.
 author: kimforss
 ms.author: kimforss
 ms.reviewer: kimforss
@@ -10,33 +10,34 @@ ms.service: sap-on-azure
 ms.subservice: sap-automation
 ---
 
-# Configure custom naming for the automation framework
+# Overview
 
-[SAP Deployment Automation Framework](deployment-framework.md) uses a standard naming convention for Azure [resource naming](naming.md).
+The [SAP on Azure Deployment Automation Framework](deployment-framework.md) uses a standard naming convention for Azure [resource naming](naming.md).
 
-The Terraform module `sap_namegenerator` defines the names of all resources that the automation framework deploys. The module is located at `/deploy/terraform/terraform-units/modules/sap_namegenerator/` in the repository. The framework also supports providing your own names for some of the resources by using the [parameter files](configure-system.md).
+The Terraform module `sap_namegenerator` defines the names of all resources that the automation framework deploys. The module is located at `/deploy/terraform/terraform-units/modules/sap_namegenerator/` in the repository. The framework also supports providing your own names for some of the resources using the [parameter files](configure-system.md).
 
 The naming of the resources uses the following format:
 
 resource prefix + resource_group_prefix + separator + resource name + resource suffix.
 
-If these capabilities aren't enough, you can also use custom naming logic by either providing a custom JSON file that contains the resource names or by modifying the naming module used by the automation.
 
-## Provide name overrides by using a JSON file
+If these capabilities are not enough, you can also use custom naming logic by either providing a custom json file containing the resource names or by modifying the naming module used by the automation.
 
-You can specify a custom naming JSON file in your `tfvars` parameter file by using the `name_override_file` parameter.
+## Provide name overrides using a json file
 
-The JSON file has sections for the different resource types.
+You can specify a custom naming json file in your tfvars parameter file using the 'name_override_file' parameter.
+
+The json file has sections for the different resource types.
 
 The deployment types are:
 
-- DEPLOYER (control plane)
-- SDU (SAP system infrastructure)
-- WORKLOAD_ZONE (workload zone)
+- DEPLOYER (Control Plane)
+- SDU (SAP System Infrastructure)
+- WORKLOAD_ZONE (Workload zone)
 
 ### Availability set names
 
-The names for the availability sets are defined in the `availabilityset_names` structure. The following example lists the availability set names for a deployment.
+The names for the availability sets are defined in the "availabilityset_names" structure. The example below lists the availability set names for a deployment.
 
 ```json
   "availabilityset_names" : {
@@ -46,10 +47,9 @@ The names for the availability sets are defined in the `availabilityset_names` s
         "web": "web-avset"
     }
 ```
+### Key Vault names
 
-### Key vault names
-
-The names for the key vaults are defined in the `keyvault_names` structure. The following example lists the key vault names for a deployment in the `DEV` environment in West Europe.
+The names for the key vaults are defined in the "keyvault_names" structure. The example below lists the key vault names for a deployment in the "DEV" environment in West Europe.
 
 ```json
 "keyvault_names": {
@@ -68,13 +68,14 @@ The names for the key vaults are defined in the `keyvault_names` structure. The 
     }
 ```
 
-The key vault names need to be unique across Azure. SAP Deployment Automation Framework appends three random characters (ABC in the example) at the end of the key vault name to reduce the likelihood for name conflicts.
+> [!NOTE]
+> This key vault names need to be unique across Azure, SAP on Azure Deployment Automation Framework appends 3 random characters (ABC in the example) at the end of the key vault name to reduce the likelihood for name conflicts.
 
-The `private_access` names are currently not used.
+The "private_access" names are currently not used.
 
-### Storage account names
+### Storage Account names
 
-The names for the storage accounts are defined in the `storageaccount_names` structure. The following example lists the storage account names for a deployment in the `DEV` environment in West Europe.
+The names for the storage accounts are defined in the "storageaccount_names" structure. The example below lists the storage account names for a deployment in the "DEV" environment in West Europe.
 
 ```json
 "storageaccount_names": {
@@ -92,14 +93,14 @@ The names for the storage accounts are defined in the `storageaccount_names` str
     }
 ```
 
+> [!NOTE]
+> This key vault names need to be unique across Azure, SAP on Azure Deployment Automation Framework appends 3 random characters (abc in the example) at the end of the key vault name to reduce the likelihood for name conflicts.
 
-The key vault names need to be unique across Azure. SAP Deployment Automation Framework appends three random characters (abc in the example) at the end of the key vault name to reduce the likelihood for name conflicts.
+### Virtual Machine names
 
-### Virtual machine names
+The names for the virtual machines are defined in the "virtualmachine_names" structure. Both the computer and the virtual machine names can be provided.
 
-The names for the virtual machines are defined in the `virtualmachine_names` structure. Both the computer and the virtual machine names can be provided.
-
-The following example lists the virtual machine names for a deployment in the `DEV` environment in West Europe. The deployment has a database server, two application servers, a central services server, and a web dispatcher.
+The example below lists the virtual machine names for a deployment in the "DEV" environment in West Europe. The deployment has a database server, two application servers, a Central Services server and a web dispatcher.
 
 ```json
     "virtualmachine_names": {
@@ -170,31 +171,30 @@ The following example lists the virtual machine names for a deployment in the `D
     }
 ```
 
-## Configure the custom naming module
+## Configure custom naming module
 
 There are multiple files within the module for naming resources:
 
-- Virtual machine and computer names are defined in (`vm.tf`).
-- Resource group naming is defined in (`resourcegroup.tf`).
-- Key vaults are defined in (`keyvault.tf`).
-- Resource suffixes are defined in (`variables_local.tf`).
+- Virtual machine (VM) and computer names are defined in (`vm.tf`)
+- Resource group naming is defined in (`resourcegroup.tf`)
+- Key vaults in (`keyvault.tf`)
+- Resource suffixes (`variables_local.tf`)
 
-The different resource names are identified by prefixes in the Terraform code:
+The different resource names are identified by prefixes in the Terraform code.
+- SAP deployer deployments use resource names with the prefix `deployer_`
+- SAP library deployments use resource names with the prefix `library`
+- SAP landscape deployments use resource names with the prefix `vnet_`
+- SAP system deployments use resource names with the prefix `sdu_`
 
-- SAP deployer deployments use resource names with the prefix `deployer_`.
-- SAP library deployments use resource names with the prefix `library`.
-- SAP landscape deployments use resource names with the prefix `vnet_`.
-- SAP system deployments use resource names with the prefix `sdu_`.
+The calculated names are returned in a data dictionary, which is used by all the terraform modules.
 
-The calculated names are returned in a data dictionary, which is used by all the Terraform modules.
+## Using custom names
 
-## Use custom names
-
-Some of the resource names can be changed by providing parameters in the `tfvars` parameter file.
+Some of the resource names can be changed by providing parameters in the tfvars parameter file.
 
 | Resource               | Parameter               | Notes                                                              |
 | ---------------------- | ----------------------- | ------------------------------------------------------------------ |
-| `Prefix`               | `custom_prefix`         | Used as prefix for all the resources in the resource group |
+| `Prefix`               | `custom_prefix`         | This is used as prefix for all the resources in the resource group |
 | `Resource group`       | `resourcegroup_name`    |                                                                    |
 | `admin subnet name`    | `admin_subnet_name`     |                                                                    |
 | `admin nsg name`       | `admin_subnet_nsg_name` |                                                                    |
@@ -206,20 +206,20 @@ Some of the resource names can be changed by providing parameters in the `tfvars
 | `web nsg name`         | `web_subnet_nsg_name`   |                                                                    |
 | `admin nsg name`       | `admin_subnet_nsg_name` |                                                                    |
 
-## Change the naming module
+## Changing the naming module
 
-To prepare your Terraform environment for custom naming, you first need to create a custom naming module. The easiest way is to copy the existing module and make the required changes in the copied module.
+To prepare your Terraform environment for custom naming, you first need to create custom naming module. The easiest way is to copy the existing module and make the required changes in the copied module.
 
-1. Create a root-level folder in your Terraform environment. An example is `Azure_SAP_Automated_Deployment`.
-1. Go to your new root-level folder.
+1. Create a root-level folder in your Terraform environment. For example, `Azure_SAP_Automated_Deployment`.
+1. Navigate to your new root-level folder.
 1. Clone the [automation framework repository](https://github.com/Azure/sap-automation). This step creates a new folder `sap-automation`.
 1. Create a folder within the root-level folder called `Contoso_naming`.
-1. Go to the `sap-automation` folder.
-1. Check out the appropriate branch in Git.
-1. Go to `\deploy\terraform\terraform-units\modules` within the `sap-automation` folder.
+1. Navigate to the `sap-automation` folder.
+1. Check out the appropriate branch in git.
+1. Navigate to `\deploy\terraform\terraform-units\modules` within the `sap-automation` folder.
 1. Copy the folder `sap_namegenerator` to the `Contoso_naming` folder.
 
-The naming module is called from the root `terraform` folders:
+The naming module is called from the root terraform folders:
 
 ```terraform
 module "sap_namegenerator" {
@@ -261,7 +261,7 @@ For each file, change the source for the module `sap_namegenerator` to point to 
 
 ## Change resource group naming logic
 
-To change your resource group's naming logic, go to your custom naming module folder (for example, `Workspaces\Contoso_naming`). Then, edit the file `resourcegroup.tf`. Modify the following code with your own naming logic.
+To change your resource group's naming logic, navigate to your custom naming module folder (for example, `Workspaces\Contoso_naming`). Then, edit the file `resourcegroup.tf`. Modify the following code with your own naming logic.
 
 ```terraform
 locals {
@@ -288,10 +288,10 @@ locals {
 
 ## Change resource suffixes
 
-To change your resource suffixes, go to your custom naming module folder (for example, `Workspaces\Contoso_naming`). Then, edit the file `variables_local.tf`. Modify the following map with your own resource suffixes.
+To change your resource suffixes, navigate to your custom naming module folder (for example, `Workspaces\Contoso_naming`). Then, edit the file `variables_local.tf`. Modify the following map with your own resource suffixes.
 
 > [!NOTE]
-> Only change the map *values*. Don't change the map *key*, which the Terraform code uses.
+> Only change the map **values**. Don't change the map **key**, which the Terraform code uses.
 > For example, if you want to rename the administrator network interface component, change `"admin-nic"           = "-admin-nic"` to `"admin-nic"           = "yourNICname"`.
 
 ```terraform
@@ -362,7 +362,7 @@ variable resource_suffixes {
 }
 ```
 
-## Next step
+## Next steps
 
 > [!div class="nextstepaction"]
 > [Learn about naming conventions](naming.md)

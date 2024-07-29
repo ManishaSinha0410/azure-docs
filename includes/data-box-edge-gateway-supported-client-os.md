@@ -1,12 +1,12 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 03/25/2019
-ms.author: shaas
+ms.author: alkohli
 ---
 
-The following list contains supported operating systems for use by clients or hosts connected to your device. These operating system versions were tested in-house.
+Here is a list of the supported operating systems for clients or hosts connected to your device. These operating system versions were tested in-house.
 
 | **Operating system/platform** | **Versions** |
 | --- | --- |
@@ -16,4 +16,3 @@ The following list contains supported operating systems for use by clients or ho
 | Ubuntu |16.04.3 LTS|
 | CentOS | 7.0 |
 | Mac OS | 10.14.1 |
-

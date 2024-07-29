@@ -7,6 +7,7 @@ ms.date: 10/14/2020
 author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
+ms.custom: 
 ---
 
 # Azure Cloud Services (extended support) config networkConfiguration schema
@@ -17,7 +18,7 @@ You can use the following resource to learn more about Virtual Networks and the 
 
 - [Cloud Service (extended support) Configuration Schema](schema-cscfg-file.md).
 - [Cloud Service (extended support) Definition Schema](schema-csdef-file.md).
-- [Create a Virtual Network](../virtual-network/manage-virtual-network.yml).
+- [Create a Virtual Network](../virtual-network/manage-virtual-network.md).
 
 ## NetworkConfiguration element
 The following example shows the `NetworkConfiguration` element and its child elements.

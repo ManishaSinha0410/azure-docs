@@ -5,35 +5,39 @@ keywords: azure, app service, web app, windows, linux, java, maven, quickstart
 ms.assetid: 582bb3c2-164b-42f5-b081-95bfcb7a502a
 ms.devlang: java
 ms.topic: quickstart
-ms.date: 02/10/2024
-ms.custom: mvc, mode-other, devdivchpfy22, devx-track-java, devx-track-javaee-jbosseap-appsvc, devx-track-javaee-jbosseap, devx-track-javaee, devx-track-extended-java
-zone_pivot_groups: app-service-java-hosting
+ms.date: 03/08/2023
+ms.custom: mvc, seo-java-july2019, seo-java-august2019, seo-java-september2019, mode-other, devdivchpfy22, devx-track-java, devx-track-javaee-jbosseap-appsvc, devx-track-javaee-jbosseap, devx-track-javaee
+zone_pivot_groups: app-service-platform-environment
 adobe-target: true
 adobe-target-activity: DocsExp–386541–A/B–Enhanced-Readability-Quickstarts–2.19.2021
 adobe-target-experience: Experience B
 adobe-target-content: ./quickstart-java-uiex
-author: cephalin
-ms.author: cephalin
 ---
 
 # Quickstart: Create a Java app on Azure App Service
 
 
-::: zone pivot="java-maven-tomcat"
+::: zone pivot="platform-linux-development-environment-maven"
 
-[!INCLUDE [quickstart-java-linux-maven-pivot.md](./includes/quickstart-java/quickstart-java-tomcat.md)]
-
-::: zone-end
-
-::: zone pivot="java-maven-javase"
-
-[!INCLUDE [quickstart-java-windows-maven-pivot.md](./includes/quickstart-java/quickstart-java-javase.md)]
+[!INCLUDE [quickstart-java-linux-maven-pivot.md](./includes/quickstart-java/quickstart-java-linux-maven-pivot.md)]
 
 ::: zone-end
 
-::: zone pivot="java-maven-jboss"
+::: zone pivot="platform-windows-development-environment-maven"
 
-[!INCLUDE [quickstart-java-windows-maven-pivot.md](./includes/quickstart-java/quickstart-java-jboss.md)]
+[!INCLUDE [quickstart-java-windows-maven-pivot.md](./includes/quickstart-java/quickstart-java-windows-maven-pivot.md)]
+
+::: zone-end
+
+::: zone pivot="platform-linux-development-environment-azure-portal"
+
+[!INCLUDE [quickstart-java-azure-portal-pivot.md](./includes/quickstart-java/quickstart-java-linux-azure-portal-pivot.md)]
+
+::: zone-end
+
+::: zone pivot="platform-windows-development-environment-azure-portal"
+
+[!INCLUDE [quickstart-java-azure-portal-pivot.md](./includes/quickstart-java/quickstart-java-windows-azure-portal-pivot.md)]
 
 ::: zone-end
 

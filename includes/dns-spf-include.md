@@ -1,9 +1,9 @@
 ---
-author: greg-lindsay
+author: vhorne
 ms.service: dns
 ms.topic: include
-ms.date: 11/21/2023
-ms.author: greglin
+ms.date: 11/25/2018
+ms.author: victorh
 ---
 Sender policy framework (SPF) records are used to specify which email servers can send email on behalf of a domain name. Correct configuration of SPF records is important to prevent recipients from marking your email as junk.
 

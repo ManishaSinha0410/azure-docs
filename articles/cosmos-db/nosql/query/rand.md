@@ -1,48 +1,50 @@
 ---
-title: RAND
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a randomly generated numeric value from zero to one.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: RAND in Azure Cosmos DB query language
+description: Learn about SQL system function RAND in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/16/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# RAND (NoSQL query)
-
+# RAND (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a randomly generated numeric value from zero to one.
-
+ Returns a randomly generated numeric value from [0,1).
+ 
 ## Syntax
-
-```nosql
-RAND()
-```
+  
+```sql
+RAND ()  
+```  
 
 ## Return types
 
-Returns a numeric expression.
-
-## Examples
-
-The following example returns randomly generated numeric values.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/rand/query.novalidate.sql" highlight="2-3":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/rand/result.novalidate.json":::
+  Returns a numeric expression.
 
 ## Remarks
 
-- This function doesn't use the index.
-- This function is nondeterministic. Repetitive calls of this function don't return the same results.
+  `RAND` is a nondeterministic function. Repetitive calls of `RAND` do not return the same results. This system function will not utilize the index.
 
-## Related content
 
-- [System functions](system-functions.yml)
-- [`IS_NUMBER`](is-number.md)
+## Examples
+  
+  The following example returns a randomly generated numeric value.
+  
+```sql
+SELECT RAND() AS rand 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"rand": 0.87860053195618093}]  
+``` 
+
+## Next steps
+
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

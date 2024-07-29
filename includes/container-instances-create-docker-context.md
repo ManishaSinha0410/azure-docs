@@ -16,9 +16,8 @@ ms.custom: include file
 To use Docker commands to run containers in Azure Container Instances, first log into Azure:
 
 ```bash
-docker login azure --tenant-id "[tenant ID]"
+docker login azure
 ```
-Browse to the Microsoft Entra ID properties to find your tenant ID.
 
 When prompted, enter or select your Azure credentials.
 

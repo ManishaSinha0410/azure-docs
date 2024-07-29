@@ -1,50 +1,55 @@
 ---
-title: GetCurrentTimestamp
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a timestamp value.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: GetCurrentTimestamp in Azure Cosmos DB query language
+description: Learn about SQL system function GetCurrentTimestamp in Azure Cosmos DB.
+author: seesharprun
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 02/03/2021
+ms.author: sidandrews
+ms.reviewer: jucocchi
+ms.custom: query-reference, ignite-2022
 ---
-
-# GetCurrentTimestamp (NoSQL query)
-
+# GetCurrentTimestamp (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the number of milliseconds that have elapsed since `00:00:00 Thursday, 1 January 1970`.
-
+ Returns the number of milliseconds that have elapsed since 00:00:00 Thursday, 1 January 1970.
+  
 ## Syntax
-
-```nosql
-GetCurrentTimestamp()  
-```
-
+  
+```sql
+GetCurrentTimestamp ()  
+```  
+  
 ## Return types
-
-Returns a signed numeric value that represents the current number of milliseconds that have elapsed since the Unix epoch (`00:00:00 Thursday, 1 January 1970`).
-
-## Examples
-
-The following example shows how to get the current timestamp.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/getcurrenttimestamp/query.novalidate.sql" highlight="2":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/getcurrenttimestamp/result.novalidate.json":::
+  
+Returns a signed numeric value, the current number of milliseconds that have elapsed since the Unix epoch i.e. the number of milliseconds that have elapsed since 00:00:00 Thursday, 1 January 1970.
 
 ## Remarks
 
-- This function is nondeterministic.
-- The result returned is UTC (Coordinated Universal Time).
-- This function doesn't use the index.
-- If you need to compare values to the current time, obtain the current time before query execution and use that constant string value in the `WHERE` clause.
+GetCurrentTimestamp() is a nondeterministic function. The result returned is UTC (Coordinated Universal Time).
 
-## Related content
+> [!NOTE]
+> This system function will not utilize the index. If you need to compare values to the current time, obtain the current time before query execution and use that constant string value in the `WHERE` clause.
 
-- [System functions](system-functions.yml)
-- [`GetCurrentTimestampStatic`](getcurrenttimestampstatic.md)
+## Examples
+  
+  The following example shows how to get the current timestamp using the GetCurrentTimestamp() built-in function.
+  
+```sql
+SELECT GetCurrentTimestamp() AS currentUtcTimestamp
+```  
+  
+ Here is an example result set.
+  
+```json
+[{
+  "currentUtcTimestamp": 1556916469065
+}]  
+```
+
+## Next steps
+
+- [Date and time functions Azure Cosmos DB](date-time-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

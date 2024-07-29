@@ -1,10 +1,10 @@
 ---
-title: Upload files from devices to Azure storage
-description: How to configure, implement, and manage file uploads from your devices to your IoT Central application.
+title: Upload files from devices to Azure storage | Microsoft Docs
+description: How to configure file uploads from your devices to the cloud. After you've configured file uploads, implement file uploads on your devices, and manage uploads in IoT Central.
 services: iot-central
 author: dominicbetts
 ms.author: dobett
-ms.date: 11/27/2023
+ms.date: 08/25/2022
 ms.topic: how-to
 ms.service: iot-central
 

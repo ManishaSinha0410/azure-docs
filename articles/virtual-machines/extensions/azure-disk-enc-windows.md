@@ -27,16 +27,14 @@ For a full list of prerequisites, see [Azure Disk Encryption for Windows VMs](..
 ## Extension Schema
 
 There are two versions of extension schema for Azure Disk Encryption (ADE):
-- v2.2 - A newer recommended schema that does not use Microsoft Entra properties.
-- v1.1 - An older schema that requires Microsoft Entra properties.
+- v2.2 - A newer recommended schema that does not use Azure Active Directory (Azure AD) properties.
+- v1.1 - An older schema that requires Azure Active Directory (Azure AD) properties.
 
 To select a target schema, the `typeHandlerVersion` property must be set equal to version of schema you want to use.
 
-<a name='schema-v22-no-azure-ad-recommended'></a>
+### Schema v2.2: No Azure AD (recommended)
 
-### Schema v2.2: No Microsoft Entra ID (recommended)
-
-The v2.2 schema is recommended for all new VMs and does not require Microsoft Entra properties.
+The v2.2 schema is recommended for all new VMs and does not require Azure Active Directory properties.
 
 ```json
 {
@@ -63,9 +61,7 @@ The v2.2 schema is recommended for all new VMs and does not require Microsoft En
 }
 ```
 
-<a name='schema-v11-with-azure-ad'></a>
-
-### Schema v1.1: with Microsoft Entra ID
+### Schema v1.1: with Azure AD
 
 The 1.1 schema requires `aadClientID` and either `aadClientSecret` or `AADClientCertificate` and is not recommended for new VMs.
 

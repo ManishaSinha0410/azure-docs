@@ -1,8 +1,10 @@
 ---
 title: Use condition in templates
 description: Learn how to deploy Azure resources based on conditions. Shows how to either deploy a new resource or use an existing resource.
-ms.date: 03/20/2024
+author: mumian
+ms.date: 04/23/2020
 ms.topic: tutorial
+ms.author: jgao
 ---
 
 # Tutorial: Use condition in ARM templates
@@ -122,7 +124,7 @@ Here is the procedure to make the changes:
 1. Update the `storageUri` property of the virtual machine resource definition with the following value:
 
     ```json
-    "storageUri": "[format('https://{0}.blob.core.windows.net', parameters('storageAccountName'))]"
+    "storageUri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net')]"
     ```
 
     This change is necessary when you use an existing storage account under a different resource group.

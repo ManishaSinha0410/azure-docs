@@ -1,53 +1,54 @@
 ---
-title: ARRAY_LENGTH
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the number of items in an array.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ARRAY_LENGTH in Azure Cosmos DB query language
+description: Learn about how the Array length SQL system function in Azure Cosmos DB returns the number of elements of the specified array expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ARRAY_LENGTH (NoSQL query)
-
+# ARRAY_LENGTH (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the number of elements in the specified array expression.
+ Returns the number of elements of the specified array expression.  
   
 ## Syntax
   
-```nosql
-ARRAY_LENGTH(<array_expr>)  
+```sql
+ARRAY_LENGTH(<arr_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`array_expr`** | An array expression. |
-
+  
+*arr_expr*  
+   Is an array expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
   
-The following example illustrates how to get the length of an array using the function.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/array-length/query.sql" highlight="2-4":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/array-length/result.json":::
-
+  The following example how to get the length of an array using `ARRAY_LENGTH`.  
+  
+```sql
+SELECT ARRAY_LENGTH(["apples", "strawberries", "bananas"]) AS len  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"len": 3}]  
+```  
+  
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`ARRAY_SLICE`](array-slice.md)
+- [Array functions Azure Cosmos DB](array-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

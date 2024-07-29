@@ -2,11 +2,11 @@
 title: Manage Azure Managed Disks
 description: Learn about managing Azure Managed Disk from the Azure portal.
 ms.topic: how-to
-ms.date: 03/21/2024
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
+ms.date: 03/27/2023
+author: jyothisuri
+ms.author: jsuri
 ms.service: backup
-ms.custom: engagement-fy24
+ms.custom: engagement-fy23
 ---
 
 # Manage Azure Managed Disks
@@ -17,11 +17,9 @@ This article explains how to manage Azure Managed Disk from the Azure portal.
 
 The Azure Backup service creates a job for scheduled backups or if you trigger on-demand backup operation for tracking. To view the backup job status:
 
-1. Go to the **Backup center** and select **Backup instances**.
+1. Go to the **Backup instance** screen. It shows the jobs dashboard with operation and status for the past seven days.
 
-   The **Backup instances** blade shows the jobs dashboard with operation and status for the past seven days.
-
-   :::image type="content" source="./media/backup-managed-disks/jobs-dashboard.png" alt-text="Screenshot shows the jobs dashboard." lightbox="./media/backup-managed-disks/jobs-dashboard.png":::
+   ![Screenshot shows the jobs dashboard.](./media/backup-managed-disks/jobs-dashboard.png)
 
 1. To view the status of the backup operation, select **View all** to show ongoing and past jobs of this backup instance.
 
@@ -35,9 +33,7 @@ The Azure Backup service creates a job for scheduled backups or if you trigger o
 
 After you trigger the restore operation, the backup service creates a job for tracking. Azure Backup displays notifications about the job in the portal. To view the restore job progress:
 
-1. Go to the **Backup center** and select **Backup instances**
-
-   The **Backup instances** blade shows the jobs dashboard with operation and status for the past seven days.
+1. Go to the **Backup instance** screen. It shows the jobs dashboard with operation and status for the past seven days.
 
     ![Screenshot shows the Jobs dashboard that lists all jobs and the statuses.](./media/restore-managed-disks/jobs-dashboard.png)
 

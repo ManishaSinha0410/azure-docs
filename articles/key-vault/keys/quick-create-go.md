@@ -3,12 +3,11 @@ title: Quickstart - Azure Key Vault Go client library - manage keys
 description: Learn how to create, retrieve, and delete keys from an Azure key vault using the Go client library
 author: Duffney
 ms.author: jduffney
-ms.date: 12/27/2023
+ms.date: 02/28/2022
 ms.service: key-vault
 ms.subservice: keys
 ms.topic: quickstart
 ms.devlang: golang
-ms.custom: devx-track-go
 ---
 
 # Quickstart: Azure Key Vault keys client library for Go
@@ -86,10 +85,7 @@ func main() {
 	}
 
 	// create azkeys client
-	client, err := azkeys.NewClient(keyVaultUrl, cred, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	client := azkeys.NewClient(keyVaultUrl, cred, nil)
 
 	// create RSA Key
 	rsaKeyParams := azkeys.CreateKeyParameters{

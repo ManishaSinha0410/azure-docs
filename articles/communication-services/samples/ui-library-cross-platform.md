@@ -11,7 +11,6 @@ ms.date: 08/30/2021
 ms.topic: overview
 ms.service: azure-communication-services
 ms.subservice: calling
-ms.custom: devx-track-dotnet
 zone_pivot_groups: acs-maui-xamarin-react
 ---
 

@@ -1,57 +1,94 @@
 ---
-title: StringToBoolean
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a string expression converted to a boolean.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: StringToBoolean in Azure Cosmos DB query language
+description: Learn about SQL system function StringToBoolean in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# StringToBoolean (NoSQL query)
-
+# StringToBoolean (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Converts a string expression to a boolean.
+ Returns expression translated to a Boolean. If expression can't be translated, returns undefined.  
   
 ## Syntax
   
-```nosql
-StringToBoolean(<string_expr>)  
+```sql
+StringToBoolean(<str_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
-
+  
+*str_expr*  
+   Is a string expression to be parsed as a Boolean expression.  
+  
 ## Return types
-
-Returns a boolean value.
+  
+  Returns a Boolean expression or undefined.  
   
 ## Examples
   
-The following example illustrates how this function works with various data types.
+  The following example shows how `StringToBoolean` behaves across different types. 
+ 
+ The following are examples with valid input.
 
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/stringtoboolean/query.sql" highlight="2-8":::
+Whitespace is allowed only before or after `true`/`false`.
 
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/stringtoboolean/result.json":::
+```sql
+SELECT 
+    StringToBoolean("true") AS b1, 
+    StringToBoolean("    false") AS b2,
+    StringToBoolean("false    ") AS b3
+```  
+  
+ Here's the result set.  
+  
+```json
+[{"b1": true, "b2": false, "b3": false}]
+```  
+
+The following are examples with invalid input.
+
+ Booleans are case sensitive and must be written with all lowercase characters such as `true` and `false`.
+
+```sql
+SELECT 
+    StringToBoolean("TRUE"),
+    StringToBoolean("False")
+```  
+
+Here's the result set.  
+  
+```json
+[{}]
+``` 
+
+The expression passed will be parsed as a Boolean expression; these inputs don't evaluate to type Boolean and thus return undefined.
+
+```sql
+SELECT 
+    StringToBoolean("null"),
+    StringToBoolean(undefined),
+    StringToBoolean(NaN), 
+    StringToBoolean(false), 
+    StringToBoolean(true)
+```  
+
+Here's the result set.  
+  
+```json
+[{}]
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
-- If the expression can't be converted, the function returns `undefined`.
+This system function won't utilize the index.
 
-> [!NOTE]
-> For more information on the JSON format, see [https://json.org](https://json.org/).
+## Next steps
 
-## Related content
-
-- [System functions](system-functions.yml)
-- [`StringToNumber`](stringtonumber.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

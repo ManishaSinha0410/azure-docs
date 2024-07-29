@@ -4,7 +4,8 @@ description: Read an example that shows how to delete Azure Blob storage based o
 services: storage
 author: stevenmatthew
 
-ms.service: azure-storage
+ms.service: storage
+ms.subservice: blobs
 ms.devlang: powershell
 ms.topic: sample
 ms.date: 06/13/2017

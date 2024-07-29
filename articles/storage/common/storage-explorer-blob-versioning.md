@@ -3,8 +3,7 @@ title: Azure Storage Explorer blob versioning guide
 description: Blob versioning guidance for Azure Storage Explorer
 services: storage
 author: JasonYeMSFT
-ms.service: azure-storage
-ms.subservice: storage-common-concepts
+ms.service: storage
 ms.topic: conceptual
 ms.date: 08/19/2020
 ms.author: chuye

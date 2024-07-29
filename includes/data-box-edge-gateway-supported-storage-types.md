@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 10/25/2018
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Here is a list of the supported storage types for the device.

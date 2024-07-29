@@ -4,8 +4,7 @@ description: Learn how to implement a status monitor using the Durable Functions
 ms.topic: conceptual
 ms.date: 12/07/2018
 ms.author: azfuncdf
-ms.devlang: csharp
-# ms.devlang: csharp, javascript
+ms.devlang: csharp, javascript
 ---
 
 # Monitor scenario in Durable Functions - Weather watcher sample

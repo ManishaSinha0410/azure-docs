@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 10/15/2020
-ms.author: shaas
+ms.author: alkohli
 ---
 
 A proper SSL certificate ensures that you're sending encrypted information to the right server. Besides encryption, the certificate also allows for authentication. You can upload your own trusted SSL certificate via the PowerShell interface of the device.
@@ -18,10 +18,5 @@ A proper SSL certificate ensures that you're sending encrypted information to th
      The following example shows the usage of this cmdlet:
 
      ```
-     $pwd="<CertificatePassword>"
-     $password=ConvertTo-SecureString -String $pwd -AsPlainText -Force
-     $cred=New-Object System.Management.Automation.PSCredential('Administrator',$password)
-
-     Set-HcsCertificate -Scope LocalWebUI -CertificateFilePath \\myfileshare\certificates\mycert.pfx -CertificatePassword $cred -Credential "Username"
+     Set-HcsCertificate -Scope LocalWebUI -CertificateFilePath "\\myfileshare\certificates\mycert.pfx" -CertificatePassword "mypassword" -Credential "Username"
      ```
-

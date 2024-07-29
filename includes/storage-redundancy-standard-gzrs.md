@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
-ms.service: azure-storage
+author: tamram
+ms.service: storage
 ms.topic: include
-ms.date: 02/12/2024
-ms.author: shaas
+ms.date: 09/28/2022
+ms.author: tamram
 ---
 
 GZRS is available for a subset of Azure regions:
@@ -23,7 +23,6 @@ GZRS is available for a subset of Azure regions:
 - (Europe) Switzerland North
 - (Europe) UK South
 - (Europe) West Europe
-- (Middle East) UAE North
 - (North America) Canada Central
 - (North America) Central US
 - (North America) East US

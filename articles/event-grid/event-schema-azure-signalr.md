@@ -21,48 +21,6 @@ SignalR Service emits the following event types:
 
 ## Example event
 
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of a client connection connected event: 
-
-```json
-[{
-  "source": "/subscriptions/{subscription-id}/resourceGroups/signalr-rg/providers/Microsoft.SignalRService/SignalR/signalr-resource",
-  "subject": "/hub/chat",
-  "type": "Microsoft.SignalRService.ClientConnectionConnected",
-  "time": "2019-06-10T18:41:00.9584103Z",
-  "id": "831e1650-001e-001b-66ab-eeb76e069631",
-  "data": {
-    "timestamp": "2019-06-10T18:41:00.9584103Z",
-    "hubName": "chat",
-    "connectionId": "crH0uxVSvP61p5wkFY1x1A",
-    "userId": "user-eymwyo23"
-  },
-  "specversion": "1.0"
-}]
-```
-
-The schema for a client connection disconnected event is similar: 
-
-```json
-[{
-  "source": "/subscriptions/{subscription-id}/resourceGroups/signalr-rg/providers/Microsoft.SignalRService/SignalR/signalr-resource",
-  "subject": "/hub/chat",
-  "type": "Microsoft.SignalRService.ClientConnectionDisconnected",
-  "time": "2019-06-10T18:41:00.9584103Z",
-  "id": "831e1650-001e-001b-66ab-eeb76e069631",
-  "data": {
-    "timestamp": "2019-06-10T18:41:00.9584103Z",
-    "hubName": "chat",
-    "connectionId": "crH0uxVSvP61p5wkFY1x1A",
-    "userId": "user-eymwyo23",
-    "errorMessage": "Internal server error."
-  },
-  "specversion": "1.0"
-}]
-```
-
 # [Event Grid event schema](#tab/event-grid-event-schema)
 The following example shows the schema of a client connection connected event: 
 
@@ -105,25 +63,52 @@ The schema for a client connection disconnected event is similar:
 }]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of a client connection connected event: 
+
+```json
+[{
+  "source": "/subscriptions/{subscription-id}/resourceGroups/signalr-rg/providers/Microsoft.SignalRService/SignalR/signalr-resource",
+  "subject": "/hub/chat",
+  "type": "Microsoft.SignalRService.ClientConnectionConnected",
+  "time": "2019-06-10T18:41:00.9584103Z",
+  "id": "831e1650-001e-001b-66ab-eeb76e069631",
+  "data": {
+    "timestamp": "2019-06-10T18:41:00.9584103Z",
+    "hubName": "chat",
+    "connectionId": "crH0uxVSvP61p5wkFY1x1A",
+    "userId": "user-eymwyo23"
+  },
+  "specversion": "1.0"
+}]
+```
+
+The schema for a client connection disconnected event is similar: 
+
+```json
+[{
+  "source": "/subscriptions/{subscription-id}/resourceGroups/signalr-rg/providers/Microsoft.SignalRService/SignalR/signalr-resource",
+  "subject": "/hub/chat",
+  "type": "Microsoft.SignalRService.ClientConnectionDisconnected",
+  "time": "2019-06-10T18:41:00.9584103Z",
+  "id": "831e1650-001e-001b-66ab-eeb76e069631",
+  "data": {
+    "timestamp": "2019-06-10T18:41:00.9584103Z",
+    "hubName": "chat",
+    "connectionId": "crH0uxVSvP61p5wkFY1x1A",
+    "userId": "user-eymwyo23",
+    "errorMessage": "Internal server error."
+  },
+  "specversion": "1.0"
+}]
+```
+
 ---
 
 
 ### Event properties
 
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-An event has the following top-level data:
-
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| `source` | string | Full resource path to the event source. This field isn't writeable. Event Grid provides this value. |
-| `subject` | string | Publisher-defined path to the event subject. |
-| `type` | string | One of the registered event types for this event source. |
-| `time` | string | The time the event is generated based on the provider's UTC time. |
-| `id` | string | Unique identifier for the event. |
-| `data` | object | SignalR Service event data. |
-| `specversion` | string | CloudEvents schema specification version. |
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 An event has the following top-level data:
@@ -139,6 +124,19 @@ An event has the following top-level data:
 | `dataVersion` | string | The schema version of the data object. The publisher defines the schema version. |
 | `metadataVersion` | string | The schema version of the event metadata. Event Grid defines the schema of the top-level properties. Event Grid provides this value. |
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+An event has the following top-level data:
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| `source` | string | Full resource path to the event source. This field isn't writeable. Event Grid provides this value. |
+| `subject` | string | Publisher-defined path to the event subject. |
+| `type` | string | One of the registered event types for this event source. |
+| `time` | string | The time the event is generated based on the provider's UTC time. |
+| `id` | string | Unique identifier for the event. |
+| `data` | object | SignalR Service event data. |
+| `specversion` | string | CloudEvents schema specification version. |
 
 ---
 

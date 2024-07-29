@@ -4,8 +4,7 @@ description: Find Go examples on GitHub for common tasks in Azure Cosmos DB, inc
 author: soferreira
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.devlang: golang
-ms.custom: devx-track-go
+ms.devlang: go
 ms.topic: sample
 ms.date: 10/17/2022
 ms.author: soferreira

@@ -60,7 +60,6 @@ The following words are reserved:
 - SKYPE
 - VISIO
 - VISUALSTUDIO
-- WEB.CONFIG
 - XBOX
 
 The following words can't be used as either a whole word or a substring in the name:

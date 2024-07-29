@@ -4,7 +4,8 @@ description: In this quickstart, you learn how to use the Azure Storage Files Sh
 author: kyle-patterson
 ms.author: kylepa
 ms.date: 06/22/2021
-ms.service: azure-file-storage
+ms.service: storage
+ms.subservice: files
 ms.topic: quickstart
 ms.devlang: cpp
 ms.custom: mode-api

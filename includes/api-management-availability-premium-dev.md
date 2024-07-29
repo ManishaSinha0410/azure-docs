@@ -2,8 +2,11 @@
 author: dlepow
 ms.service: api-management
 ms.topic: include
-ms.date: 03/06/2024
+ms.date: 11/27/2018
 ms.author: danlep
 ---
-**APPLIES TO: Developer | Premium**
 
+## Availability
+
+> [!IMPORTANT]
+> This feature is available in the **Premium** and **Developer** tiers of API Management.

@@ -1,6 +1,6 @@
 ---
-title: Turn on transparent data encryption in SQL Managed Instance enabled by Azure Arc (preview)
-description: How-to guide to turn on transparent data encryption in an SQL Managed Instance enabled by Azure Arc (preview)
+title: Turn on transparent data encryption in Azure Arc-enabled SQL Managed Instance (preview)
+description: How-to guide to turn on transparent data encryption in an Azure Arc-enabled SQL Managed Instance (preview)
 author: MikeRayMSFT
 ms.author: mikeray
 services: azure-arc
@@ -8,15 +8,16 @@ ms.service: azure-arc
 ms.subservice: azure-arc-data-sqlmi
 ms.reviewer: mikeray
 ms.topic: how-to
-ms.date: 06/06/2023
-ms.custom: template-how-to, devx-track-azurecli
+ms.date: 01/20/2023
+ms.custom: template-how-to, event-tier1-build-2022
 ---
 
-# Enable transparent data encryption on SQL Managed Instance enabled by Azure Arc (preview)
+# Enable transparent data encryption on Azure Arc-enabled SQL Managed Instance (preview)
 
-This article describes how to enable and disable transparent data encryption (TDE) at-rest on a SQL Managed Instance enabled by Azure Arc. In this article, the term *managed instance* refers to a deployment of SQL Managed Instance enabled by Azure Arc and enabling/disabling TDE will apply to all databases running on a managed instance.
+This article describes how to enable and disable transparent data encryption (TDE) at-rest on an Azure Arc-enabled SQL Managed Instance. In this article, the term *managed instance* refers to a deployment of Azure Arc-enabled SQL Managed Instance and enabling/disabling TDE will apply to all databases running on a managed instance.
 
-For more info on TDE, please refer to [Transparent data encryption](/sql/relational-databases/security/encryption/transparent-data-encryption).
+Enabling service-managed transparent data encryption will require the managed instance to use a service-managed database master key as well as the service-managed server certificate. These credentials will be automatically created when service-managed transparent data encryption is enabled. For more info on TDE, please refer to [Transparent data encryption](/sql/relational-databases/security/encryption/transparent-data-encryption).
+
 
 Turning on the TDE feature does the following:
 
@@ -27,71 +28,31 @@ Turning on the TDE feature does the following:
 
 ## Prerequisites
 
-Before you proceed with this article, you must have a SQL Managed Instance enabled by Azure Arc resource created and connect to it.
+Before you proceed with this article, you must have an Azure Arc-enabled SQL Managed Instance resource created and connect to it.
 
-- [Create a SQL Managed Instance enabled by Azure Arc](./create-sql-managed-instance.md)
-- [Connect to SQL Managed Instance enabled by Azure Arc](./connect-managed-instance.md)
+- [Create an Azure Arc-enabled SQL Managed Instance](./create-sql-managed-instance.md)
+- [Connect to Azure Arc-enabled SQL Managed Instance](./connect-managed-instance.md)
 
 ## Limitations
 
-The following limitations apply when you enable automatic TDE:
+The following limitations must be considered when deploying Service-Managed TDE:
 
 - Only General Purpose Tier is supported.
-- Failover groups aren't supported.
+- Failover Groups are not supported.
 
+## Turn on transparent data encryption on the managed instance
+### Prerequisites
 
-## Create a managed instance with TDE enabled (Azure CLI)
+Turning on TDE on the managed instance will result in the following operations taking place:
 
-The following example creates a SQL Managed Instance enabled by Azure Arc with one replica, TDE enabled:
+1. Adding the service-managed database master key in the `master` database.
+2. Adding the service-managed certificate protector.
+3. Adding the associated Database Encryption Keys (DEK) on all databases on the managed instance.
+4. Enabling encryption on all databases on the managed instance.
 
-```azurecli
-az sql mi-arc create --name sqlmi-tde --k8s-namespace arc --tde-mode ServiceManaged --use-k8s
-```
+### [Service-managed mode](#tab/service-managed-mode)
 
-## Turn on TDE on the managed instance
-
-When TDE is enabled on Arc-enabled SQL Managed Instance, the data service automatically does the following tasks:
-
-1. Adds the service-managed database master key in the `master` database.
-2. Adds the service-managed certificate protector.
-3. Adds the associated Database Encryption Keys (DEK) on all databases on the managed instance.
-4. Enables encryption on all databases on the managed instance.
-
-You can set SQL Managed Instance enabled by Azure Arc TDE in one of two modes:
-
-- Service-managed
-- Customer-managed
-
-In service-managed mode, TDE requires the managed instance to use a service-managed database master key as well as the service-managed server certificate. These credentials are automatically created when service-managed TDE is enabled. 
-
-In customer-managed mode, TDE uses a service-managed database master key and uses keys you provide for the server certificate. To configure customer-managed mode:
-
-1. Create a certificate.
-1. Store the certificate as a secret in the same Kubernetes namespace as the instance.
-
-### Enable
-
-# [Service-managed](#tab/service-managed)
-
-The following section explains how to enable TDE in service-managed mode.
-
-# [Customer-managed](#tab/customer-managed)
-
-The following section explains how to enable TDE in customer-managed mode.
-
----
-
-# [Azure CLI](#tab/azure-cli/service-managed)
-
-To enable TDE in service managed mode, run the following command:
-
-```azurecli
-az sql mi-arc update --tde-mode ServiceManaged
-```
-
-# [Kubernetes native tools](#tab/kubernetes-native/service-managed)
-
-To enable TDE in service-managed mode, run kubectl patch to enable service-managed TDE:
+Run kubectl patch to enable service-managed TDE
 
 ```console
 kubectl patch sqlmi <sqlmi-name> --namespace <namespace> --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "ServiceManaged" } } } }'
@@ -100,102 +61,34 @@ kubectl patch sqlmi <sqlmi-name> --namespace <namespace> --type merge --patch '{
 Example:
 
 ```console
-kubectl patch sqlmi sqlmi-tde --namespace arc --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "ServiceManaged" } } } }'
+kubectl patch sqlmi contososqlmi --namespace arc --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "ServiceManaged" } } } }'
 ```
-
-# [Azure CLI](#tab/azure-cli/customer-managed)
-
-To enable TDE in customer-managed mode with Azure CLI:
-
-1. Create a certificate. 
-
-   ```console
-   openssl req -x509 -newkey rsa:2048 -nodes -keyout <key-file> -days 365 -out <cert-file>
-   ```
-
-1. Create a secret for the certificate.
-
-   > [!IMPORTANT]
-   > Store the secret in the same namespace as the managed instance
-
-   ```console
-   kubectl create secret generic <tde-secret-name> --from-literal=privatekey.pem="$(cat <key-file>)" --from-literal=certificate.pem="$(cat <cert-file>) --namespace <namespace>"
-   ```
-
-1. Update and run the following example to enable customer-managed TDE:
-
-   ```azurecli
-   az sql mi-arc update --tde-mode CustomerManaged --tde-protector-private-key-file <key-file> --tde-protector-public-key-file <cert-file>
-   ```
-
-# [Kubernetes native tools](#tab/kubernetes-native/customer-managed)
-
-To enable TDE in customer-managed mode:
-
-1. Create a certificate. 
-
-   ```console
-   openssl req -x509 -newkey rsa:2048 -nodes -keyout <key-file> -days 365 -out <cert-file>
-   ```
-
-1. Create a secret for the certificate.
-
-   > [!IMPORTANT]
-   > Store the secret in the same namespace as the managed instance
-
-   ```console
-   kubectl create secret generic <tde-secret-name> --from-literal=privatekey.pem="$(cat <key-file>)" --from-literal=certificate.pem="$(cat <cert-file>) --namespace <namespace>"
-   ```
-
-1. Run `kubectl patch ...` to enable customer-managed TDE
-
-   ```console
-   kubectl patch sqlmi <sqlmi-name> --namespace <namespace> --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "CustomerManaged", "protectorSecret": "<tde-secret-name>" } } } }'
-   ```
-
-   Example:
-
-   ```console
-   kubectl patch sqlmi sqlmi-tde --namespace arc --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "CustomerManaged", "protectorSecret": "sqlmi-tde-protector-cert-secret" } } } }'
-   ```
-
-
 ---
 
-## Turn off TDE on the managed instance
+## Turn off transparent data encryption on the managed instance
 
-When TDE is disabled on Arc-enabled SQL Managed Instance, the data service automatically does the following tasks:
+Turning off TDE on the managed instance will result in the following operations taking place:
 
-1. Disables encryption on all databases on the managed instance.
-2. Drops the associated DEKs on all databases on the managed instance.
-3. Drops the service-managed certificate protector.
-4. Drops the service-managed database master key in the `master` database.
+1. Disabling encryption on all databases on the managed instance.
+2. Dropping the associated DEKs on all databases on the managed instance.
+3. Dropping the service-managed certificate protector.
+4. Dropping the service-managed database master key in the `master` database.
 
-# [Azure CLI](#tab/azure-cli)
+### [Service-managed mode](#tab/service-managed-mode)
 
-To disable TDE:
-
-```azurecli
-az sql mi-arc update --tde-mode Disabled
-```
-
-# [Kubernetes native tools](#tab/kubernetes-native)
-
-Run kubectl patch to disable service-managed TDE.
+Run kubectl patch to disable service-managed TDE
 
 ```console
-kubectl patch sqlmi <sqlmi-name> --namespace <namespace> --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "Disabled" } } } }'
+kubectl patch sqlmi <sqlmi-name> --namespace <namespace> --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": null } } } }'
 ```
 
 Example:
 ```console
-kubectl patch sqlmi sqlmi-tde --namespace arc --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": "Disabled" } } } }'
+kubectl patch sqlmi contososqlmi --namespace arc --type merge --patch '{ "spec": { "security": { "transparentDataEncryption": { "mode": null } } } }'
 ```
-
-
 ---
 
-## Back up a TDE credential
+## Back up a transparent data encryption credential
 
 When you back up credentials from the managed instance, the credentials are stored within the container. To store credentials on a persistent volume, specify the mount path in the container. For example, `var/opt/mssql/data`. The following example backs up a certificate from the managed instance:
 
@@ -248,13 +141,11 @@ When you back up credentials from the managed instance, the credentials are stor
    ```console
    kubectl cp --namespace arc-ns --container arc-sqlmi sql-0:/var/opt/mssql/data/servercert.crt $HOME/sqlcerts/servercert.crt
    ```
-
    ---
 
 3. Copy the private key from the container to your file system.
 
    ### [Windows](#tab/windows)
-
    ```console
     kubectl exec -n <namespace> -c arc-sqlmi <pod-name> -- cat <pod-private-key-path> > <local-private-key-path>
    ```
@@ -266,7 +157,6 @@ When you back up credentials from the managed instance, the credentials are stor
    ```
 
    ### [Linux](#tab/linux)
-
    ```console
    kubectl cp --namespace <namespace> --container arc-sqlmi <pod-name>:<pod-private-key-path> <local-private-key-path>
    ```
@@ -276,7 +166,6 @@ When you back up credentials from the managed instance, the credentials are stor
    ```console
    kubectl cp --namespace arc-ns --container arc-sqlmi sql-0:/var/opt/mssql/data/servercert.key $HOME/sqlcerts/servercert.key
    ```
-
    ---
 
 4. Delete the certificate and private key from the container.
@@ -291,10 +180,9 @@ When you back up credentials from the managed instance, the credentials are stor
    kubectl exec -it --namespace arc-ns --container arc-sqlmi sql-0 -- bash -c "rm /var/opt/mssql/data/servercert.crt /var/opt/mssql/data/servercert.key"
    ```
 
-## Restore a TDE credential to a managed instance
+## Restore a transparent data encryption credential to a managed instance
 
 Similar to above, to restore the credentials, copy them into the container and run the corresponding T-SQL afterwards.
-
 
 
 > [!NOTE]
@@ -302,9 +190,7 @@ Similar to above, to restore the credentials, copy them into the container and r
 > To restore database backups that have been taken before enabling TDE, you would need to disable TDE on the SQL Managed Instance, restore the database backup and enable TDE again.
 
 1. Copy the certificate from your file system to the container.
-
    ### [Windows](#tab/windows)
-
    ```console
    type <local-certificate-path> | kubectl exec -i -n <namespace> -c arc-sqlmi <pod-name> -- tee <pod-certificate-path>
    ```
@@ -316,7 +202,6 @@ Similar to above, to restore the credentials, copy them into the container and r
    ```
 
    ### [Linux](#tab/linux)
-
    ```console
    kubectl cp --namespace <namespace> --container arc-sqlmi <local-certificate-path> <pod-name>:<pod-certificate-path>
    ```
@@ -326,13 +211,10 @@ Similar to above, to restore the credentials, copy them into the container and r
    ```console
    kubectl cp --namespace arc-ns --container arc-sqlmi $HOME/sqlcerts/servercert.crt sql-0:/var/opt/mssql/data/servercert.crt
    ```
-
    ---
 
 2. Copy the private key from your file system to the container.
-
-   # [Windows](#tab/windows)
-   
+   ### [Windows](#tab/windows)
    ```console
    type <local-private-key-path> | kubectl exec -i -n <namespace> -c arc-sqlmi <pod-name> -- tee <pod-private-key-path>
    ```
@@ -344,7 +226,6 @@ Similar to above, to restore the credentials, copy them into the container and r
    ```
 
    ### [Linux](#tab/linux)
-
    ```console
    kubectl cp --namespace <namespace> --container arc-sqlmi <local-private-key-path> <pod-name>:<pod-private-key-path>
    ```
@@ -392,6 +273,6 @@ Similar to above, to restore the credentials, copy them into the container and r
    kubectl exec -it --namespace arc-ns --container arc-sqlmi sql-0 -- bash -c "rm /var/opt/mssql/data/servercert.crt /var/opt/mssql/data/servercert.key"
    ```
 
-## Related content
+## Next steps
 
 [Transparent data encryption](/sql/relational-databases/security/encryption/transparent-data-encryption)

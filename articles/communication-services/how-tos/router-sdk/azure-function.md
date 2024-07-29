@@ -62,11 +62,12 @@ public static class GetPriority
 Inspect your deployed function in the Azure portal and locate the function Uri and authentication key. Then use the SDK to configure a policy that uses a rule engine to point to that function.
 
 ```csharp
-await administrationClient.CreateClassificationPolicyAsync(
-    new CreateClassificationPolicyOptions("policy-1") {
-        PrioritizationRule = new FunctionRouterRule(new Uri("<insert function uri>")) {
-            Credential = new FunctionRouterRuleCredential("<insert function key>")
-        }});
+await client.CreateClassificationPolicyAsync(
+    options: new CreateClassificationPolicyOptions("policy-1")
+    {
+        PrioritizationRule = new FunctionRule("<insert function uri>", new FunctionRuleCredential("<insert function key>"))
+    }
+);
 ```
 
 When a new job is submitted or updated, this function will be called to determine the priority of the job.
@@ -74,7 +75,3 @@ When a new job is submitted or updated, this function will be called to determin
 ## Errors
 
 If the Azure Function fails or returns a non-200 code, the job will move to the `ClassificationFailed` state and you'll receive a `JobClassificationFailedEvent` from Event Grid containing details of the error.
-
-## Next steps
-
-- [How to customize how workers are ranked for the best worker distribution mode](customize-worker-scoring.md)

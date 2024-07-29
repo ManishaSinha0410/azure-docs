@@ -1,58 +1,89 @@
 ---
-title: OFFSET LIMIT
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL clause that skips and takes a specified number of results.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: OFFSET LIMIT clause in Azure Cosmos DB
+description: Learn how to use the OFFSET LIMIT clause to skip and take some certain values when querying in Azure Cosmos DB
+author: seesharprun
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.custom: ignite-2022
+ms.topic: conceptual
+ms.date: 07/29/2020
+ms.author: sidandrews
+ms.reviewer: jucocchi
 ---
-
-# OFFSET LIMIT (NoSQL query)
-
+# OFFSET LIMIT clause in Azure Cosmos DB
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-The ``OFFSET LIMIT`` clause is an optional clause to **skip** and then **take** some number of values from the query. The ``OFFSET`` count and the ``LIMIT`` count are required in the OFFSET LIMIT clause.
+The OFFSET LIMIT clause is an optional clause to skip then take some number of values from the query. The OFFSET count and the LIMIT count are required in the OFFSET LIMIT clause.
 
-When ``OFFSET LIMIT`` is used with an ``ORDER BY`` clause, the result set is produced by doing skip and take on the ordered values. If no ``ORDER BY`` clause is used, it results in a deterministic order of values.
+When OFFSET LIMIT is used in conjunction with an ORDER BY clause, the result set is produced by doing skip and take on the ordered values. If no ORDER BY clause is used, it will result in a deterministic order of values.
 
 ## Syntax
-
-```nosql  
+  
+```sql  
 OFFSET <offset_amount> LIMIT <limit_amount>
 ```  
-
+  
 ## Arguments
 
-| | Description |
-| --- | --- |
-| **``<offset_amount>``** | Specifies the integer number of items that the query results should skip. |
-| **``<limit_amount>``** | Specifies the integer number of items that the query results should include. |
+- `<offset_amount>`
+
+   Specifies the integer number of items that the query results should skip.
+
+- `<limit_amount>`
+  
+   Specifies the integer number of items that the query results should include
+
+## Remarks
+  
+  Both the `OFFSET` count and the `LIMIT` count are required in the `OFFSET LIMIT` clause. If an optional `ORDER BY` clause is used, the result set is produced by doing the skip over the ordered values. Otherwise, the query will return a fixed order of values.
+
+  The RU charge of a query with `OFFSET LIMIT` will increase as the number of terms being offset increases. For queries that have [multiple pages of results](pagination.md), we typically recommend using [continuation tokens](pagination.md#continuation-tokens). Continuation tokens are a "bookmark" for the place where the query can later resume. If you use `OFFSET LIMIT`, there is no "bookmark". If you wanted to return the query's next page, you would have to start from the beginning.
+  
+  You should use `OFFSET LIMIT` for cases when you would like to skip items entirely and save client resources. For example, you should use `OFFSET LIMIT` if you want to skip to the 1000th query result and have no need to view results 1 through 999. On the backend, `OFFSET LIMIT` still loads each item, including those that are skipped. The performance advantage is a savings in client resources by avoiding processing items that are not needed.
 
 ## Examples
 
-For the example in this section, this reference set of items is used. Each item includes a ``name`` property.
+For example, here's a query that skips the first value and returns the second value (in order of the resident city's name):
 
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/offset-limit/seed.json" range="1-2,4,6-7,9,11-12,14,16-17,19,21-22,24,26-27" highlight="3,6,9,12,15":::
+```sql
+    SELECT f.id, f.address.city
+    FROM Families f
+    ORDER BY f.address.city
+    OFFSET 1 LIMIT 1
+```
 
-This example includes a query using the ``OFFSET LIMIT`` clause to return a subset of the matching items by skipping **one** item and taking the next **three**.
+The results are:
 
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/offset-limit/query.sql" range="1-5,8-10" highlight="8":::
+```json
+    [
+      {
+        "id": "AndersenFamily",
+        "city": "Seattle"
+      }
+    ]
+```
 
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/offset-limit/result.json":::
+Here's a query that skips the first value and returns the second value (without ordering):
 
-## Remarks
+```sql
+    SELECT f.id, f.address.city
+    FROM Families f
+    OFFSET 1 LIMIT 1
+```
 
-- Both the ``OFFSET`` count and the ``LIMIT`` count are required in the ``OFFSET LIMIT`` clause. If an optional ``ORDER BY`` clause is used, the result set is produced by doing the skip over the ordered values. Otherwise, the query returns a fixed order of values.
-- The RU charge of a query with ``OFFSET LIMIT`` increases as the number of terms being offset increases. For queries that have [multiple pages of results](pagination.md), we typically recommend using [continuation tokens](pagination.md#continuation-tokens). Continuation tokens are a "bookmark" for the place where the query can later resume. If you use ``OFFSET LIMIT``, there's no "bookmark." If you wanted to return the query's next page, you would have to start from the beginning.
-- You should use ``OFFSET LIMIT`` for cases when you would like to skip items entirely and save client resources. For example, you should use ``OFFSET LIMIT`` if you want to skip to the 1000th query result and have no need to view results 1 through 999. On the backend, ``OFFSET LIMIT`` still loads each item, including those items that are skipped. The performance advantage is measured in reducing client resources by avoiding processing items that aren't needed.
+The results are:
 
-## Related content
+```json
+    [
+      {
+        "id": "WakefieldFamily",
+        "city": "Seattle"
+      }
+    ]
+```
 
-- [``GROUP BY`` clause](group-by.md)
-- [``ORDER BY`` clause](order-by.md)
+## Next steps
+
+- [Getting started](getting-started.md)
+- [SELECT clause](select.md)
+- [ORDER BY clause](order-by.md)

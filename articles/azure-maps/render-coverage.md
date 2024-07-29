@@ -1,10 +1,10 @@
 ---
 title: Render coverage
 titleSuffix: Microsoft Azure Maps
-description: Render coverage tables list the countries/regions that support Azure Maps road tiles.
+description: Render coverage tables list the countries that support Azure Maps road tiles.
 author: eriklindeman
 ms.author: eriklind
-ms.date: 09/21/2023
+ms.date: 03/23/2022
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
@@ -12,22 +12,15 @@ services: azure-maps
 
 # Azure Maps render coverage
 
-The render coverage tables below list the countries/regions that support Azure Maps road tiles. Both raster and vector tiles are supported. At the lowest resolution, the entire world fits in a single tile. At the highest resolution, a single tile represents 38 square meters. You'll see more details about continents, regions, cities, and individual streets as you zoom in the map. For more information about tiles, see [Zoom levels and tile grid].
-
-> [!NOTE]
->
-> **Azure Maps Render v1 service retirement**
->
-> The Azure Maps [Render v1] service is now deprecated and will be retired on 9/17/26. To avoid service disruptions, all calls to Render v1 API will need to be updated to use [Render v2] API by 9/17/26.
+The render coverage tables below list the countries that support Azure Maps road tiles. Both raster and vector tiles are supported. At the lowest resolution, the entire world fits in a single tile. At the highest resolution, a single tile represents 38 square meters. You'll see more details about continents, regions, cities, and individual streets as you zoom in the map. For more information about tiles, see [Zoom levels and tile grid](zoom-levels-and-tile-grid.md).
 
 ### Legend
 
-| Symbol | Meaning                                                   |
-|:------:|-----------------------------------------------------------|
-| ✓      | Country/region is provided with detailed data.            |
-| ◑      | Country/region is provided with simplified data.          |
-| v2     | Country/region is only supported in the Render v2 service. |
-| Country/region is missing | Country/region data isn't provided.     |
+| Symbol             | Meaning                                   |
+|--------------------|-------------------------------------------|
+|        ✓           | Country is provided with detailed data.   |
+|        ◑           | Country is provided with simplified data. |
+| Country is missing | Country data isn't provided.              |
 
 ## Americas
 
@@ -83,13 +76,11 @@ The render coverage tables below list the countries/regions that support Azure M
 | Brunei         |    ✓     |
 | Cambodia       |    ✓     |
 | Guam           |    ✓     |
-| China          |    v2    |
-| Hong Kong Special Administrative Region     |    ✓     |
+| Hong Kong      |    ✓     |
 | India          |    ✓     |
 | Indonesia      |    ✓     |
-| Japan          |    v2     |
 | Laos           |    ✓     |
-| Macao Special Administrative Region         |    ✓     |
+| Macao          |    ✓     |
 | Malaysia       |    ✓     |
 | Myanmar        |    ✓     |
 | New Zealand    |    ✓     |
@@ -129,12 +120,12 @@ The render coverage tables below list the countries/regions that support Azure M
 | Liechtenstein      |    ✓     |
 | Lithuania          |    ✓     |
 | Luxembourg         |    ✓     |
+| Macedonia          |    ✓     |
 | Malta              |    ✓     |
 | Moldova            |    ✓     |
 | Monaco             |    ✓     |
 | Montenegro         |    ✓     |
 | Netherlands        |    ✓     |
-| North Macedonia    |    ✓     |
 | Norway             |    ✓     |
 | Poland             |    ✓     |
 | Portugal           |    ✓     |
@@ -208,11 +199,7 @@ The render coverage tables below list the countries/regions that support Azure M
 > [Zoom levels and tile grid](zoom-levels-and-tile-grid.md)
 
 > [!div class="nextstepaction"]
-> [Get map tiles](/rest/api/maps/render/get-map-tile)
+> [Get map tiles](/rest/api/maps/render/getmaptile)
 
 > [!div class="nextstepaction"]
 > [Azure Maps routing coverage](routing-coverage.md)
-
-[Zoom levels and tile grid]: zoom-levels-and-tile-grid.md
-[Render v1]: /rest/api/maps/render
-[Render v2]: /rest/api/maps/render

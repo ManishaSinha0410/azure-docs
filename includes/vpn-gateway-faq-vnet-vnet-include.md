@@ -2,7 +2,7 @@
  author: cherylmc
  ms.service: vpn-gateway
  ms.topic: include
- ms.date: 10/18/2023
+ ms.date: 04/22/2022
  ms.author: cherylmc
 
 ---
@@ -16,11 +16,9 @@ VNet-to-VNet traffic within the same region is free for both directions when you
 
 No. VNet-to-VNet traffic travels across the Microsoft Azure backbone, not the internet.
 
-<a name='can-i-establish-a-vnet-to-vnet-connection-across-azure-active-directory-tenants'></a>
+### Can I establish a VNet-to-VNet connection across Azure Active Directory tenants?
 
-### Can I establish a VNet-to-VNet connection across Microsoft Entra tenants?
-
-Yes, VNet-to-VNet connections that use Azure VPN gateways work across Microsoft Entra tenants.
+Yes, VNet-to-VNet connections that use Azure VPN gateways work across Azure AD tenants.
 
 ### Is VNet-to-VNet traffic secure?
 
@@ -48,7 +46,7 @@ Yes. Virtual network connectivity can be used simultaneously with multi-site VPN
 
 ### How many on-premises sites and virtual networks can one virtual network connect to?
 
-See the [Gateway requirements](../articles/vpn-gateway/about-gateway-skus.md#benchmark) table.
+See the [Gateway requirements](../articles/vpn-gateway/vpn-gateway-about-vpn-gateway-settings.md#benchmark) table.
 
 ### Can I use VNet-to-VNet to connect VMs or cloud services outside of a VNet?
 

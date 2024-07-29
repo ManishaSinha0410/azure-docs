@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/08/2022
 ms.author: danlep
 ---
 
 # Set request method
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `set-method` policy allows you to change the HTTP request method for a request.
 
@@ -31,7 +29,7 @@ The value of the element specifies the HTTP method, such as `POST`, `GET`, and s
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, on-error
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Example
 
@@ -67,6 +65,6 @@ This example uses the `set-method` policy to send a message to a Slack chat room
 
 ## Related policies
 
-* [Transformation](api-management-policies.md#transformation)
+* [API Management advanced policies](api-management-advanced-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

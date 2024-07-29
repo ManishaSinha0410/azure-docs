@@ -2,7 +2,6 @@
 title: Seattle Safety Data
 description: Learn how to use the Seattle Safety dataset in Azure Open Datasets.
 ms.service: open-datasets
-ms.custom: devx-track-python
 ms.topic: sample
 ms.date: 04/16/2021
 ---
@@ -59,6 +58,8 @@ This dataset is sourced from city of Seattle government. For more information, s
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureNotebooks&package=azureml-opendatasets&registryId=city_safety_seattle -->
 
+> [!TIP]
+> Contents of _DownloadNotebook?serviceType=AzureNotebooks&package=azureml-opendatasets&registryId=city_safety_seattle_. **[Open in GitHub](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureNotebooks&package=azureml-opendatasets&registryId=city_safety_seattle)**.
 
 ```
 # This is a package in preview.
@@ -84,6 +85,8 @@ safety.info()
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureNotebooks&package=azure-storage&registryId=city_safety_seattle -->
 
+> [!TIP]
+> **[Download the notebook instead](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureNotebooks&package=azure-storage&registryId=city_safety_seattle)**.
 
 ```python
 # Pip install packages
@@ -163,6 +166,8 @@ Sample not available for this platform/package combination.
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureDatabricks&package=azureml-opendatasets&registryId=city_safety_seattle -->
 
+> [!TIP]
+> **[Download the notebook instead](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureDatabricks&package=azureml-opendatasets&registryId=city_safety_seattle)**.
 
 ```
 # This is a package in preview.
@@ -193,6 +198,8 @@ Sample not available for this platform/package combination.
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureDatabricks&package=pyspark&registryId=city_safety_seattle -->
 
+> [!TIP]
+> **[Download the notebook instead](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureDatabricks&package=pyspark&registryId=city_safety_seattle)**.
 
 ```python
 # Azure storage access info
@@ -238,6 +245,8 @@ Sample not available for this platform/package combination.
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureSynapse&package=azureml-opendatasets&registryId=city_safety_seattle -->
 
+> [!TIP]
+> **[Download the notebook instead](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureSynapse&package=azureml-opendatasets&registryId=city_safety_seattle)**.
 
 ```python
 # This is a package in preview.
@@ -268,6 +277,8 @@ Sample not available for this platform/package combination.
 
 <!-- nbstart https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureSynapse&package=pyspark&registryId=city_safety_seattle -->
 
+> [!TIP]
+> **[Download the notebook instead](https://opendatasets-api.azure.com/discoveryapi/OpenDataset/DownloadNotebook?serviceType=AzureSynapse&package=pyspark&registryId=city_safety_seattle)**.
 
 ```python
 # Azure storage access info

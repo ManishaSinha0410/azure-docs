@@ -9,7 +9,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.custom: synapse
 ms.topic: conceptual
-ms.date: 01/05/2024
+ms.date: 04/21/2023
 ---
 
 # Flatten transformation in mapping data flow
@@ -195,7 +195,7 @@ source foldDown(unroll(goods.orders.shipped.orderItems, goods.orders),
     skipDuplicateMapOutputs: false) 
 ```    
 
-## Related content
+## Next steps
 
 * Use the [Pivot transformation](data-flow-pivot.md) to pivot rows to columns.
 * Use the [Unpivot transformation](data-flow-unpivot.md) to pivot columns to rows.

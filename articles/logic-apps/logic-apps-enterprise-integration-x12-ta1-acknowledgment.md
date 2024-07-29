@@ -7,7 +7,7 @@ author: praveensri
 ms.author: psrivas
 ms.reviewer: estfan, divswa, azla
 ms.topic: reference
-ms.date: 01/04/2024
+ms.date: 08/20/2022
 ---
 
 # TA1 technical acknowledgments and error codes for X12 messages in Azure Logic Apps

@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: pod
 ms.topic: include
 ms.date: 10/21/2021
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Take the following steps if returning the device in the United Arab Emirates.
@@ -24,4 +24,3 @@ Take the following steps if returning the device in the United Arab Emirates.
     - Call 04-2924545.
     - Email [ecom.ae@dhl.com](mailto:ecom.ae@dhl.com) with details of the issue(s), and put the waybill number in the Subject: line.
     - Call DHL Customer Support at 600 567567.
-

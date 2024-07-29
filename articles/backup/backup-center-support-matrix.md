@@ -1,19 +1,15 @@
 ---
-title: Support matrix for Backup center for Azure Backup
+title: Support matrix for Backup center
 description: This article summarizes the scenarios that Backup center supports for each workload type
-ms.topic: reference
-ms.date: 03/27/2024
+ms.topic: conceptual
+ms.date: 03/31/2023
 ms.service: backup
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
-ms.custom: engagement-fy24
+author: jyothisuri
+ms.author: jsuri
 ---
-
 # Support matrix for Backup center
 
-This article summarizes the scenarios that Backup center supports for each workload type.
-
-Backup center helps enterprises to [govern, monitor, operate, and analyze backups at scale](backup-center-overview.md).
+Backup center helps enterprises to [govern, monitor, operate, and analyze backups at scale](backup-center-overview.md). This article summarizes the scenarios that Backup center supports for each workload type.
 
 ## Supported scenarios
 
@@ -49,7 +45,6 @@ The following table lists all supported scenarios:
 
 ## Next steps
 
-* [About Backup center](backup-center-overview.md)
 * [Review the support matrix for Azure Backup](./backup-support-matrix.md)
 * [Review the support matrix for Azure VM backup](./backup-support-matrix-iaas.md)
 * [Review the support matrix for Azure Database for PostgreSQL Server backup](backup-azure-database-postgresql-support-matrix.md)

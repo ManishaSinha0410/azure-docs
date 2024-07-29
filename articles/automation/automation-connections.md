@@ -5,7 +5,7 @@ services: automation
 ms.subservice: shared-capabilities
 ms.date: 04/12/2023
 ms.topic: conceptual
-ms.custom: devx-track-azurepowershell, devx-track-python
+ms.custom: devx-track-azurepowershell
 ---
 
 # Manage connections in Azure Automation

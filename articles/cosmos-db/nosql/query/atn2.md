@@ -1,55 +1,54 @@
 ---
-title: ATN2
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric arctangent of y / x in radians.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ATN2 in Azure Cosmos DB query language
+description: Learn about how the ATN2 SQL system function in Azure Cosmos DB returns the principal value of the arc tangent of y/x, expressed in radians
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ATN2 (NoSQL query)
-
+# ATN2 (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the principal value of the arctangent of `y/x`, expressed in radians.  
-
+ Returns the principal value of the arc tangent of y/x, expressed in radians.  
+  
 ## Syntax
-
-```nosql
+  
+```sql
 ATN2(<numeric_expr>, <numeric_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr_y`** | A numeric expression for the `y` component. |
-| **`numeric_expr_x`** | A numeric expression for the `x` component. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
-
-The following example calculates the arctangent for the specified `x` and `y` components.  
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/atn2/query.sql" highlight="2":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/atn2/result.json":::
+  
+  The following example calculates the ATN2 for the specified x and y components.  
+  
+```sql
+SELECT ATN2(35.175643, 129.44) AS atn2  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"atn2": 1.3054517947300646}]  
+```  
 
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`TAN`](tan.md)
-- [`ATAN`](atan.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

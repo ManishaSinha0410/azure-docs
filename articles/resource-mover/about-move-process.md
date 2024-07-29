@@ -2,9 +2,10 @@
 title: About the move process in Azure Resource Mover
 description: Learn about the process for moving resources across regions with Azure Resource Mover
 author: ankitaduttaMSFT
+manager: evansma
 ms.service: resource-mover
 ms.topic: overview
-ms.date: 03/29/2024
+ms.date: 02/02/2023
 ms.author: ankitadutta
 ms.custom: UpdateFrequency.5
 #Customer intent: As an Azure admin, I want to understand how Azure Resource Mover works.
@@ -12,9 +13,7 @@ ms.custom: UpdateFrequency.5
 
 # About the move process
 
-[Azure Resource Mover](overview.md) helps you to move Azure resources across Azure regions. 
-
-This article summarizes the components used by Resource Mover and describes the move process. 
+[Azure Resource Mover](overview.md) helps you to move Azure resources across Azure regions. This article summarizes the components used by Resource Mover and describes the move process. 
 
 
 ## Components
@@ -79,6 +78,6 @@ The table summarizes what's impacted when you're moving across regions.
 
 ## Next steps
 
-- [Move](tutorial-move-region-virtual-machines.md) Azure VMs to another region.
-- [Move](tutorial-move-region-sql.md) Azure SQL resources to another region.
+[Move](tutorial-move-region-virtual-machines.md) Azure VMs to another region.
+[Move](tutorial-move-region-sql.md) Azure SQL resources to another region.
 

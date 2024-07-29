@@ -6,8 +6,8 @@ ms.subservice: hpc
 ms.topic: overview
 ms.date: 03/10/2023
 ms.reviewer: cynthn
-ms.author: jushiman
-author: ju-shim
+ms.author: mamccrea
+author: mamccrea
 ---
 
 # High-performance computing on InfiniBand enabled HB-series and N-series VMs

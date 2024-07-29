@@ -5,7 +5,8 @@ author: toddysm
 ms.author: memladen
 ms.service: container-registry
 ms.topic: overview
-ms.date: 10/31/2023
+ms.date: 10/11/2022
+ms.custom: ignite-fall-2021
 ---
 
 # Using connected registry with Azure IoT Edge

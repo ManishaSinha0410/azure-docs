@@ -1,54 +1,54 @@
 ---
-title: SQRT
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the square root of the specified numeric value.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: SQRT in Azure Cosmos DB query language
+description: Learn about SQL system function SQRT in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# SQRT (NoSQL query)
-
+# SQRT (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the square root of the specified numeric value.  
-
+ Returns the square root of the specified numeric value.  
+  
 ## Syntax
-
-```nosql
+  
+```sql
 SQRT(<numeric_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **``numeric_expr``** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
+  
+  Returns a numeric expression.  
   
 ## Examples
   
-The following example returns the square roots of various numeric values.
+  The following example returns the square roots of numbers 1-3.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/sqrt/query.sql" highlight="2-6":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/sqrt/result.json":::
+```sql
+SELECT SQRT(1) AS s1, SQRT(2.0) AS s2, SQRT(3) AS s3  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{s1: 1, s2: 1.4142135623730952, s3: 1.7320508075688772}]  
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
-- If you attempt to find the square root value that results in an imaginary number, you get an error that the value can't be represented in JSON. For example, ``SQRT(-25)`` gives this error.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [``POWER``](power.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

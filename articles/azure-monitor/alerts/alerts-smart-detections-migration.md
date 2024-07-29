@@ -1,10 +1,8 @@
 ---
 title: Upgrade Azure Monitor Application Insights smart detection to alerts (preview) | Microsoft Docs
 description: Learn about the steps required to upgrade your Azure Monitor Application Insights smart detection to alert rules.
-ms.author: abbyweisberg
-ms.reviewer: yagil
 ms.topic: conceptual
-ms.date: 04/01/2024
+ms.date: 2/23/2022
 ---
 
 # Migrate Azure Monitor Application Insights smart detection to alerts (preview)
@@ -70,8 +68,8 @@ To migrate smart detection in your resource:
 1. Select **Smart detection** under the **Investigate** heading in your Application Insights resource.
 
 1. Select the banner reading **Migrate smart detection to alerts (Preview)**. The migration dialog appears.
-   <!-- convertborder later -->
-   :::image type="content" source="media/alerts-smart-detections-migration/smart-detection-feed-banner.png" lightbox="media/alerts-smart-detections-migration/smart-detection-feed-banner.png" alt-text="Screenshot that shows the Smart Detection feed banner." border="false":::
+
+   ![Screenshot that shows the Smart Detection feed banner.](media/alerts-smart-detections-migration/smart-detection-feed-banner.png)
 
 1. Select the **Migrate all Application Insights resources in this subscription** option. Or you can leave the option cleared if you want to migrate only the current resource you're in.
    > [!NOTE]
@@ -80,8 +78,8 @@ To migrate smart detection in your resource:
 1. Select an action group to be configured for the new alert rules. You can use the default action group as explained or use one of your existing action groups.
 
 1. Select **Migrate** to start the migration process.
-   <!-- convertborder later -->
-   :::image type="content" source="media/alerts-smart-detections-migration/smart-detection-migration-dialog.png" lightbox="media/alerts-smart-detections-migration/smart-detection-migration-dialog.png" alt-text="Screenshot that shows the Smart Detection migration dialog." border="false":::
+
+   ![Screenshot that shows the Smart Detection migration dialog.](media/alerts-smart-detections-migration/smart-detection-migration-dialog.png)
 
 After the migration, new alert rules are created for your Application Insight resource, as explained.
 
@@ -303,11 +301,11 @@ Use the following templates for this purpose. Edit them as needed to provide you
 
 After migration, you can view your smart detection alerts by selecting the **Alerts** entry in your Application Insights resource. For **Signal type**, select **Smart Detector** to filter and present only smart detection alerts. You can select an alert to see its detection details.
 
-:::image type="content" source="media/alerts-smart-detections-migration/smart-detector-alerts.png" lightbox="media/alerts-smart-detections-migration/smart-detector-alerts.png" alt-text="Screenshot that shows smart detection alerts.":::
+![Screenshot that shows smart detection alerts.](media/alerts-smart-detections-migration/smart-detector-alerts.png)
 
 You can also still see the available detections in the **Smart Detection** feed of your Application Insights resource.
-<!-- convertborder later -->
-:::image type="content" source="media/alerts-smart-detections-migration/smart-detection-feed.png" lightbox="media/alerts-smart-detections-migration/smart-detection-feed.png" alt-text="Screenshot that shows the Smart Detection feed." border="false":::
+
+![Screenshot that shows the Smart Detection feed.](media/alerts-smart-detections-migration/smart-detection-feed.png)
 
 ## Manage smart detection alert rules settings after migration
 
@@ -318,16 +316,16 @@ Use the Azure portal or ARM templates to manage smart detection alert rules sett
 After the migration is finished, you access the new smart detection alert rules in a similar way to other alert rules defined for the resource.
 
 1. Select **Alerts** under the **Monitoring** heading in your Application Insights resource.
-   <!-- convertborder later -->
-   :::image type="content" source="media/alerts-smart-detections-migration/application-insights-alerts.png" lightbox="media/alerts-smart-detections-migration/application-insights-alerts.png" alt-text="Screenshot that shows the Alerts menu." border="false":::
+
+   ![Screenshot that shows the Alerts menu.](media/alerts-smart-detections-migration/application-insights-alerts.png)
 
 1. Select **Manage alert rules**.
-   <!-- convertborder later -->
-   :::image type="content" source="media/alerts-smart-detections-migration/manage-alert-rules.png" lightbox="media/alerts-smart-detections-migration/manage-alert-rules.png" alt-text="Screenshot that shows Manage alert rules." border="false":::
+
+   ![Screenshot that shows Manage alert rules.](media/alerts-smart-detections-migration/manage-alert-rules.png)
 
 1. For **Signal type**, select **Smart Detector** to filter and present the smart detection alert rules.
 
-   :::image type="content" source="media/alerts-smart-detections-migration/smart-detector-rules.png" lightbox="media/alerts-smart-detections-migration/smart-detector-rules.png" alt-text="Screenshot that shows smart detection rules.":::
+   ![Screenshot that shows smart detection rules.](media/alerts-smart-detections-migration/smart-detector-rules.png)
 
 ### Enable or disable smart detection alert rules
 

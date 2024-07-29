@@ -8,7 +8,7 @@ ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
 ms.devlang: csharp
-ms.custom: devx-track-csharp, mode-api, passwordless-dotnet, devx-track-dotnet
+ms.custom: devx-track-csharp, mode-api, passwordless-dotnet
 ---
 
 # Quickstart: Azure Key Vault secret client library for .NET
@@ -27,7 +27,7 @@ For more information about Key Vault and secrets, see:
 
 * An Azure subscription - [create one for free](https://azure.microsoft.com/free/dotnet)
 * [.NET 6 SDK or later](https://dotnet.microsoft.com/download)
-* [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell)
+* [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-az-ps)
 * A Key Vault - you can create one using [Azure portal](../general/quick-create-portal.md), [Azure CLI](../general/quick-create-cli.md), or [Azure PowerShell](../general/quick-create-powershell.md)
 
 This quickstart is using `dotnet` and Azure CLI or Azure PowerShell.
@@ -55,7 +55,11 @@ This quickstart is using Azure Identity library with Azure CLI to authenticate u
 
 ### Grant access to your key vault
 
-[!INCLUDE [Using RBAC to provide access to a key vault](../../../includes/key-vault-quickstart-rbac.md)]
+Create an access policy for your key vault that grants secret permissions to your user account
+
+```azurecli
+az keyvault set-policy --name <YourKeyVaultName> --upn user@domain.com --secret-permissions delete get list set purge
+```
 
 ### [Azure PowerShell](#tab/azure-powershell)
 
@@ -78,7 +82,12 @@ This quickstart is using Azure Identity library with Azure PowerShell to authent
 
 ### Grant access to your key vault
 
-[!INCLUDE [Using RBAC to provide access to a key vault](../../../includes/key-vault-quickstart-rbac.md)]
+Create an access policy for your key vault that grants secret permissions to your user account
+
+```azurepowershell
+Set-AzKeyVaultAccessPolicy -VaultName "<YourKeyVaultName>" -UserPrincipalName "user@domain.com" -PermissionsToSecrets delete,get,list,set,purge
+```
+
 ---
 
 ### Create new .NET console app
@@ -158,11 +167,7 @@ In this example, the name of your key vault is expanded to the key vault URI, in
 
 ### Save a secret
 
-Now that the console app is authenticated, add a secret to the key vault. For this task, use the [SetSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.setsecretasync) method.
-
-The method's first parameter accepts a name for the secret. In this sample, the variable `secretName` stores the string "mySecret".
-
-The method's second parameter accepts a value for the secret. In this sample, the secret is input by the user via the commandline and stored in the variable `secretValue`.
+Now that the console app is authenticated, add a secret to the key vault. For this task, use the [SetSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.setsecretasync) method. The method's first parameter accepts a name for the secret&mdash;"mySecret" in this sample.
 
 ```csharp
 await client.SetSecretAsync(secretName, secretValue);
@@ -170,6 +175,7 @@ await client.SetSecretAsync(secretName, secretValue);
 
 > [!NOTE]
 > If secret name exists, the code will create new version of that secret.
+
 
 ### Retrieve a secret
 
@@ -183,14 +189,14 @@ Your secret is now saved as `secret.Value`.
 
 ### Delete a secret
 
-Finally, let's delete the secret from your key vault with the [StartDeleteSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.startdeletesecretasync) and [PurgeDeletedSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.purgedeletedsecretasync) methods.
+Finally, let's delete the secret from your key vault with the [StartDeleteSecretAsync](/dotnet/api/azure.security.keyvault.secrets.secretclient.startdeletesecretasync) and [PurgeDeletedSecretAsync](/dotnet/api/azure.security.keyvault.keys.keyclient) methods.
 
 ```csharp
-var operation = await client.StartDeleteSecretAsync(secretName);
+var operation = await client.StartDeleteSecretAsync("mySecret");
 // You only need to wait for completion if you want to purge or recover the key.
 await operation.WaitForCompletionAsync();
 
-await client.PurgeDeletedSecretAsync(secretName);
+await client.PurgeDeletedSecretAsync("mySecret");
 ```
 
 ## Sample code

@@ -5,16 +5,14 @@ services: api-management
 author: dlepow
 
 ms.service: api-management
-ms.topic: article
-ms.date: 05/02/2024
+ms.topic: reference
+ms.date: 03/07/2023
 ms.author: danlep
 ---
 
 # HTTP data source for a resolver
 
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
-
-The `http-data-source` resolver policy configures the HTTP request and optionally the HTTP response to resolve data for an object type and field in a GraphQL schema. The schema must be imported to API Management as a GraphQL API.  
+The `http-data-source` resolver policy configures the HTTP request and optionally the HTTP response to resolve data for an object type and field in a GraphQL schema. The schema must be imported to API Management.  
 
 [!INCLUDE [api-management-policy-generic-alert](../../includes/api-management-policy-generic-alert.md)]
 
@@ -91,12 +89,11 @@ The `http-data-source` resolver policy configures the HTTP request and optionall
 ## Usage
 
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) GraphQL resolver
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption
 
 ### Usage notes
 
-* To configure and manage a resolver with this policy, see [Configure a GraphQL resolver](configure-graphql-resolver.md).
-* This policy is invoked only when resolving a single field in a matching GraphQL operation type in the schema. 
+* This policy is invoked only when resolving a single field in a matching GraphQL query, mutation, or subscription. 
 
 ## Examples
 
@@ -169,7 +166,7 @@ type User {
 
 ### Resolver for GraphQL mutation
 
-The following example resolves a mutation that inserts data by making a `POST` request to an HTTP data source. The policy expression in the `set-body` policy of the HTTP request modifies a `name` argument that is passed in the GraphQL query as its body. The body that is sent will look like the following JSON:
+The following example resolves a mutation that inserts data by making a `POST` request to an HTTP data source. The policy expression in the `set-body` policy of the HTTP request modifies a `name` argument that is passed in the GraphQL query as its body.  The body that is sent will look like the following JSON:
 
 ``` json
 {
@@ -200,12 +197,12 @@ type User {
 <http-data-source>
     <http-request>
         <set-method>POST</set-method>
-        <set-url>https://data.contoso.com/user/create </set-url>
+        <set-url> https://data.contoso.com/user/create </set-url>
         <set-header name="Content-Type" exists-action="override">
             <value>application/json</value>
         </set-header>
         <set-body>@{
-            var args = context.GraphQL.Arguments;  
+            var args = context.Request.Body.As<JObject>(true)["arguments"];  
             JObject jsonObject = new JObject();
             jsonObject.Add("name", args["name"])
             return jsonObject.ToString();
@@ -214,65 +211,8 @@ type User {
 </http-data-source>
 ```
 
-### Resolver for GraphQL union type
-
-The following example resolves the `orderById` query by making an HTTP `GET` call to a backend data source and returns a JSON object that includes the customer ID and type. The customer type is a union of `RegisteredCustomer` and `GuestCustomer` types.
-
-#### Example schema
-
-```graphql
-type Query {
-  orderById(orderId: Int): Order
-}
-
-type Order {
-  customerId: Int!
-  orderId: Int!  
-  customer: Customer
-}
-
-enum AccountType {
-  Registered
-  Guest
-}
-
-union Customer = RegisteredCustomer | GuestCustomer
-
-type RegisteredCustomer {
-  accountType: AccountType!
-  customerId: Int!
-  customerGuid: String!
-  firstName: String!
-  lastName: String!
-  isActive: Boolean!
-}
-
-type GuestCustomer {
-  accountType: AccountType!
-  firstName: String!
-  lastName: String!
-}
-```
-
-#### Example policy
-
-For this example, we mock the customer results from an external source, and hard code the fetched results in the `set-body` policy. The `__typename` field is used to determine the type of the customer.
-
-```xml
-<http-data-source>
-    <http-request>
-        <set-method>GET</set-method>
-        <set-url>https://data.contoso.com/orders/</set-url>
-    </http-request>
-    <http-response>
-        <set-body>{"customerId": 12345, "accountType": "Registered", "__typename": "RegisteredCustomer" }
-        </set-body>
-    </http-response>
-</http-data-source>
-```
-
 ## Related policies
 
-* [GraphQL resolvers](api-management-policies.md#graphql-resolvers)
+* [GraphQL resolver policies](api-management-policies.md#graphql-resolver-policies)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

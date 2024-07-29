@@ -1,6 +1,7 @@
 ---
 title: include file
 description: include file
+services: data-lake-analytics
 ms.service: data-lake-analytics
 author: jasonwhowell
 ms.author: jasonh

@@ -10,7 +10,7 @@ ms.service: machine-learning
 ms.subservice: mlops
 ms.date: 04/15/2022
 ms.topic: how-to
-ms.custom: devx-track-python, mlflow
+ms.custom: devx-track-python, mlflow, event-tier1-build-2022
 ---
 
 # Convert custom ML models to MLflow formatted models

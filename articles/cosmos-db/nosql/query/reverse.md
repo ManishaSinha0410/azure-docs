@@ -1,53 +1,54 @@
 ---
-title: REVERSE
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a reversed string.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: REVERSE in Azure Cosmos DB query language
+description: Learn about SQL system function REVERSE in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# REVERSE (NoSQL query)
-
+# REVERSE (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the reverse order of a string value.  
-
+ Returns the reverse order of a string value.  
+  
 ## Syntax
-
-```nosql
-REVERSE(<string_expr>)  
-```
-
+  
+```sql
+REVERSE(<str_expr>)  
+```  
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
-
+  
+*str_expr*  
+   Is a string expression.  
+  
 ## Return types
-
-Returns a string expression.  
-
+  
+  Returns a string expression.  
+  
 ## Examples
-
-The following example shows how to use this function to reverse multiple strings.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/reverse/query.sql" highlight="2-4":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/reverse/result.json":::
+  
+  The following example shows how to use `REVERSE` in a query.  
+  
+```sql
+SELECT REVERSE("Abc") AS reverse  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"reverse": "cbA"}]  
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`LENGTH`](length.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

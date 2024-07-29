@@ -1,14 +1,14 @@
 ---
 title: Use Node.js to connect and query Azure Cosmos DB for PostgreSQL
 description: See how to use Node.js to connect and run SQL statements on Azure Cosmos DB for PostgreSQL.
-ms.author: nlarin
-author: niklarin
+ms.author: sasriram
+author: saimicrosoft
 ms.service: cosmos-db
 ms.subservice: postgresql
-ms.custom: devx-track-js
+ms.custom: ignite-2022
 ms.topic: quickstart
 recommendations: false
-ms.date: 06/05/2023
+ms.date: 10/27/2022
 ---
 
 # Use Node.js to connect and run SQL commands on Azure Cosmos DB for PostgreSQL
@@ -42,7 +42,7 @@ const pool = new Pool({
   max: 300,
   connectionTimeoutMillis: 5000,
 
-  host: 'c-<cluster>.<uniqueID>.postgres.cosmos.azure.com',
+  host: 'c.<cluster>.postgres.database.azure.com',
   port: 5432,
   user: 'citus',
   password: '<password>',
@@ -349,7 +349,7 @@ const { Pool } = require('pg');
 const { sleep } = require('sleep');
 
 const pool = new Pool({
-  host: 'c-<cluster>.<uniqueID>.postgres.cosmos.azure.com',
+  host: 'c.<cluster>.postgres.database.azure.com',
   port: 5432,
   user: 'citus',
   password: '<password>',

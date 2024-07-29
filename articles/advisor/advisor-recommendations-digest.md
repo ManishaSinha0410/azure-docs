@@ -1,8 +1,12 @@
 ---
+
 title: Recommendation digest for Azure Advisor
 description: Get periodic summary for your active recommendations
+author: orspod
 ms.topic: article
 ms.date: 03/16/2020
+ms.author: orspodek
+
 ---
 
 # Configure periodic summary for recommendations

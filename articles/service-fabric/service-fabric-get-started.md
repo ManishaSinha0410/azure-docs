@@ -1,6 +1,6 @@
 ---
 title: Set up a Windows development environment
-description: Install the runtime, SDK, and tools and create a local development cluster. After completing this setup, you'll be ready to build applications on Windows.
+description: Install the runtime, SDK, and tools and create a local development cluster. After completing this setup, you will be ready to build applications on Windows.
 ms.topic: how-to
 ms.author: tomcassidy
 author: tomvcassidy
@@ -22,41 +22,29 @@ To build and run [Azure Service Fabric applications][1] on your Windows developm
 
 ## Prerequisites
 
-Ensure you're using a supported [Windows version](service-fabric-versions.md#supported-windows-versions-and-support-end-date).
+Ensure you are using a supported [Windows version](service-fabric-versions.md#supported-windows-versions-and-support-end-date).
 
-## Download and install the runtime and SDK
+## Install the SDK and tools
 > [!NOTE]
 > WebPI used previously for SDK/Tools installation was deprecated on July 1 2022 
 
-The runtime can be installed independently. However, the SDK requires the runtime, so for a development environment, you must install both the runtime and SDK. The following links are download for the latest versions of both the runtime and SDK:
+For latest Runtime and SDK you can download from below:
 
 | Package |Version|
 | --- | --- |
-|[Install Service Fabric Runtime for Windows](https://download.microsoft.com/download/b/8/a/b8a2fb98-0ec1-41e5-be98-9d8b5abf7856/MicrosoftServiceFabric.10.1.1951.9590.exe) | 10.1.1951.9590 |
-|[Install Service Fabric SDK](https://download.microsoft.com/download/b/8/a/b8a2fb98-0ec1-41e5-be98-9d8b5abf7856/MicrosoftServiceFabricSDK.7.1.1951.msi) | 7.1.1951 |
+|[Install Service Fabric Runtime for Windows](https://download.microsoft.com/download/b/8/a/b8a2fb98-0ec1-41e5-be98-9d8b5abf7856/MicrosoftServiceFabric.9.1.1653.9590.exe) | 9.1.1653 |
+|[Install Service Fabric SDK](https://download.microsoft.com/download/b/8/a/b8a2fb98-0ec1-41e5-be98-9d8b5abf7856/MicrosoftServiceFabricSDK.6.1.1653.msi) | 6.1.1653 |
 
-You can find direct links to the installers for previous releases on [Service Fabric Releases.](https://github.com/microsoft/service-fabric/tree/master/release_notes)
+You can find direct links to the installers for previous releases on [Service Fabric Releases](https://github.com/microsoft/service-fabric/tree/master/release_notes)
 
-For supported versions, see [Service Fabric versions.](service-fabric-versions.md)
-
-### Install the runtime
-
-The runtime installer must be run from a command line shell, and you must use the `/accepteula` flag. We recommend that you run your command line shell with elevated privileges to retain the log printouts. The following example is in PowerShell:
-
-```powershell
-.\MicrosoftServiceFabric.<version>.exe /accepteula
-```
-
-### Install the SDK
-
-Once the runtime is installed, you can install the SDK successfully. You can run the installer from the command line shell or your file explorer.
+For supported versions, see [Service Fabric versions](service-fabric-versions.md)
 
 > [!NOTE]
 > Single machine clusters (OneBox) are not supported for Application or Cluster upgrades; delete the OneBox cluster and recreate it if you need to perform a Cluster upgrade, or have any issues performing an Application upgrade.
 
 ### To use Visual Studio 2017 or 2019 
 
-The Service Fabric Tools are part of the Azure Development workload in Visual Studio 2019 and 2017. Enable this workload as part of your Visual Studio installation. In addition, you need to install the Microsoft Azure Service Fabric SDK and runtime as described above [Download and install the runtime and SDK.](#download-and-install-the-runtime-and-sdk)
+The Service Fabric Tools are part of the Azure Development workload in Visual Studio 2019 and 2017. Enable this workload as part of your Visual Studio installation. In addition, you need to install the Microsoft Azure Service Fabric SDK and runtime as described above [Install the SDK and tools](#install-the-sdk-and-tools)
 
 ## Enable PowerShell script execution
 
@@ -68,11 +56,11 @@ Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force -Scope CurrentUser
 
 ## Install Docker (optional)
 
-[Service Fabric is a container orchestrator](service-fabric-containers-overview.md) for deploying microservices across a cluster of machines. To run Windows container applications on your local development cluster, you must first install Docker for Windows. Get [Docker CE for Windows (stable)](https://store.docker.com/editions/community/docker-ce-desktop-windows?tab=description). After you install and start Docker, right-click on the tray icon and select **Switch to Windows containers**. This step is required to run Docker images based on Windows.
+[Service Fabric is a container orchestrator](service-fabric-containers-overview.md) for deploying microservices across a cluster of machines. To run Windows container applications on your local development cluster, you must first install Docker for Windows. Get [Docker CE for Windows (stable)](https://store.docker.com/editions/community/docker-ce-desktop-windows?tab=description). After installing and starting Docker, right-click on the tray icon and select **Switch to Windows containers**. This step is required to run Docker images based on Windows.
 
 ## Next steps
 
-Now that you finished setting up your development environment, start building and running apps.
+Now that you've finished setting up your development environment, start building and running apps.
 
 * [Learn how to create, deploy, and manage applications](service-fabric-tutorial-create-dotnet-app.md)
 * [Learn about the programming models: Reliable Services and Reliable Actors](service-fabric-choose-framework.md)

@@ -1,5 +1,5 @@
 ---
-author: Leah-Xia-Microsoft
+author: leahxia
 ms.author: leahxia
 ms.date: 01/04/2023
 ms.topic: include
@@ -49,7 +49,7 @@ In Xcode, create a new project:
     
     target 'UILibraryQuickStart' do
         use_frameworks!
-        pod 'AzureCommunicationUIChat', '1.0.0-beta.4'
+        pod 'AzureCommunicationUIChat', '1.0.0-beta.3'
     end
     ```
 

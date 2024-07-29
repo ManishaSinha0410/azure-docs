@@ -9,6 +9,7 @@ ms.author: sidandrews
 ms.reviewer: mjbrown
 ms.topic: conceptual
 ms.date: 02/20/2023
+ms.custom: seodec18, ignite-2022
 ---
 
 # Azure Cosmos DB conceptual whitepapers

@@ -3,9 +3,8 @@ title: Learn modules for Bicep
 description: Provides an overview of the Learn modules for Bicep.
 ms.topic: conceptual
 ms.custom: devx-track-bicep
-ms.date: 03/20/2024
+ms.date: 09/05/2022
 ---
-
 # Learn modules for Bicep
 
 Ready to see how Bicep can help simplify and accelerate your deployments to Azure? Check out the many hands-on courses.

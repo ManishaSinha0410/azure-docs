@@ -1,19 +1,17 @@
 ---
-title: Azure Kubernetes Service (AKS) external or internal ingresses for Istio service mesh add-on
-description: Deploy external or internal ingresses for Istio service mesh add-on for Azure Kubernetes Service
-ms.topic: how-to
-ms.service: azure-kubernetes-service
-author: shashankbarsin
-ms.date: 08/07/2023
+title: Deploy external or internal ingresses for Istio service mesh add-on for Azure Kubernetes Service (preview)
+description: Deploy external or internal ingresses for Istio service mesh add-on for Azure Kubernetes Service (preview)
+ms.topic: article
+ms.custom: devx-track-azurecli
+ms.date: 04/09/2023
 ms.author: shasb
 ---
 
-# Azure Kubernetes Service (AKS) external or internal ingresses for Istio service mesh add-on deployment
+# Deploy external or internal ingresses for Istio service mesh add-on for Azure Kubernetes Service (preview)
 
 This article shows you how to deploy external or internal ingresses for Istio service mesh add-on for Azure Kubernetes Service (AKS) cluster.
 
-> [!NOTE]
-> When performing a [minor revision upgrade](./istio-upgrade.md#minor-revision-upgrades-with-the-ingress-gateway) of the Istio add-on, another deployment for the external / internal gateways will be created for the new control plane revision.
+[!INCLUDE [preview features callout](./includes/preview/preview-callout.md)]
 
 ## Prerequisites
 
@@ -44,7 +42,7 @@ Applications aren't accessible from outside the cluster by default after enablin
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: bookinfo-gateway-external
@@ -59,7 +57,7 @@ spec:
     hosts:
     - "*"
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: bookinfo-vs-external
@@ -143,7 +141,7 @@ Applications aren't mapped to the Istio ingress gateway after enabling the ingre
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: bookinfo-internal-gateway
@@ -158,7 +156,7 @@ spec:
     hosts:
     - "*"
 ---
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: bookinfo-vs-internal
@@ -236,10 +234,4 @@ If you want to clean up all the resources created from the Istio how-to guidance
 az group delete --name ${RESOURCE_GROUP} --yes --no-wait
 ```
 
-## Next steps
-
-* [Secure ingress gateway for Istio service mesh add-on][istio-secure-gateway]
-
 [istio-deploy-addon]: istio-deploy-addon.md
-[istio-secure-gateway]: istio-secure-gateway.md
-

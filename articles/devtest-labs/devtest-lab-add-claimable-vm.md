@@ -4,8 +4,7 @@ description: Learn how to use the Azure portal to add a claimable virtual machin
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 12/21/2022
 ---
 
 # Create and manage claimable VMs in Azure DevTest Labs

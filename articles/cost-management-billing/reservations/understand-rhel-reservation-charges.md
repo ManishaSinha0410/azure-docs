@@ -2,12 +2,11 @@
 title: Red Hat reservation plan discounts - Azure
 description: Learn how Red Hat plan discounts are applied to Red Hat software on virtual machines.
 author: bandersmsft
-ms.reviewer: primittal
+ms.reviewer: nitinarora
 ms.service: cost-management-billing
 ms.subservice: reservations
-ms.custom: linux-related-content
 ms.topic: conceptual
-ms.date: 03/21/2024
+ms.date: 01/30/2023
 ms.author: banders
 ---
 # Understand how the Red Hat Linux Enterprise software reservation plan discount is applied for Azure
@@ -27,7 +26,22 @@ For example, if you buy a plan for Red Hat Linux Enterprise Server for a VM with
 - 1 deployed VMs with 1 to 4 vCPUs,
 - or 0.46 or about 46% of Red Hat Enterprise Linux costs for a VM with 5 or more vCPUs.
 
-For more information to [Review RedHat VM usage before you buy](understand-suse-reservation-charges.md#review-redhat-vm-usage-before-you-buy)
+### Red Hat Enterprise Linux
+
+Azure portal marketplace names:
+- Red Hat Enterprise Linux 6.7
+- Red Hat Enterprise Linux 6.8
+- Red Hat Enterprise Linux 6.9
+- Red Hat Enterprise Linux 6.10
+- Red Hat Enterprise Linux 7
+- Red Hat Enterprise Linux 7.2
+- Red Hat Enterprise Linux 7.3
+- Red Hat Enterprise Linux 7.4
+- Red Hat Enterprise Linux 7.5
+- Red Hat Enterprise Linux 7.6
+- Red Hat Enterprise Linux 8.2
+
+[Check Red Hat Enterprise Linux meters that the plan applies to](https://phoenixnap.com/kb/how-to-check-redhat-version)
 
 ## Next steps
 
@@ -40,6 +54,6 @@ To learn more about reservations, see the following articles:
 - [Understand reservation usage for your Pay-As-You-Go subscription](understand-reserved-instance-usage.md)
 - [Understand reservation usage for your Enterprise enrollment](understand-reserved-instance-usage-ea.md)
 
-## Related content
+## Need help? Contact us
 
 If you have questions or need help, [create a support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest).

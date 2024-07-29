@@ -26,12 +26,12 @@ Users authorized with the following roles can view security impacted resource in
 **Subscription level**
 - Subscription Owner
 - Subscription Admin
-- Custom Roles with Microsoft.ResourceHealth/events/fetchEventDetails/action permissions or Microsoft.ResourceHealth/events/action permissions
+- Service Health Security Reader (New custom role)
 
 **Tenant level**
 - Security Admin/Security Reader
 - Global Admin/Tenant Admin
-- Custom Roles with Microsoft.ResourceHealth/events/fetchEventDetails/action permissions or Microsoft.ResourceHealth/events/action permissions
+- Azure Service Health Privacy reader (New custom role)
 
 ## Viewing Impacted Resources for Security Incidents on the Service Health Portal
 

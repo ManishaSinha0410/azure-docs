@@ -1,13 +1,13 @@
 ---
 title: Switch activity in Azure Data Factory 
 description: The Switch activity allows you to control the processing flow based on a condition.
-author: kromerm
-ms.author: makromer
+author: chez-charlie
+ms.author: chez
 ms.reviewer: jburchel
 ms.service: data-factory
 ms.subservice: orchestration
 ms.topic: conceptual
-ms.date: 10/20/2023
+ms.date: 10/25/2022
 ms.custom: devx-track-azurepowershell
 ---
 
@@ -336,7 +336,7 @@ Write-Host "\nActivity 'Error' section:" -foregroundcolor "Yellow"
 $result.Error -join "`r`n"
 ```
 
-## Related content
+## Next steps
 
 See other control flow activities supported by Data Factory: 
 

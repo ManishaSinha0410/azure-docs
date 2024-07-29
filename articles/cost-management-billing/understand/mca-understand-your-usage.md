@@ -3,10 +3,11 @@ title: Microsoft Customer Agreement Azure usage and charges file terms
 description: Learn how to read and understand the sections of the Azure usage and charges CSV for your billing profile.
 author: bandersmsft
 ms.reviewer: amberb
+tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 03/21/2024
+ms.date: 04/04/2023
 ms.author: banders
 ---
 
@@ -68,7 +69,7 @@ If you're an EA customer, notice that the terms in the Azure billing profile usa
 
 If you have questions or need help, [create a support request](https://go.microsoft.com/fwlink/?linkid=2083458).
 
-## Related content
+## Next steps
 
 - [View and download your Microsoft Azure invoice](download-azure-invoice.md)
 - [View and download your Microsoft Azure usage and charges](download-azure-daily-usage.md)

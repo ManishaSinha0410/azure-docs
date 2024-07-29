@@ -6,14 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/07/2022
 ms.author: danlep
 ---
 
 # Store value in cache
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
-
 The `cache-store-value` performs cache storage by key. The key can have an arbitrary string value and is typically provided using a policy expression.
 
 > [!NOTE]
@@ -44,7 +41,7 @@ The `cache-store-value` performs cache storage by key. The key can have an arbit
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, outbound, backend, on-error
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Example
 
@@ -58,6 +55,6 @@ For more information and examples of this policy, see [Custom caching in Azure A
 
 ## Related policies
 
-* [Caching](api-management-policies.md#caching)
+* [API Management caching policies](api-management-caching-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

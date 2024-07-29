@@ -1,5 +1,5 @@
 ---
-description: Learn how to use the Calling composite in the Web UI Library.
+description: In this tutorial, you learn how to use the Calling composite on Web
 author: garchiro7
 
 ms.author: jorgegarc
@@ -8,6 +8,9 @@ ms.topic: include
 ms.service: azure-communication-services
 ---
 
-For detailed documentation and quickstarts about the Web UI Library, see the [Web UI Library Storybook](https://azure.github.io/communication-ui-library).
+> [!NOTE]
+> For detailed documentation and quickstarts about the Web UI Library visit the [**Web UI Library Storybook**](https://azure.github.io/communication-ui-library).
 
-To learn more, see [Custom User Data Model](https://azure.github.io/communication-ui-library/?path=/docs/customuserdatamodel--page) in the Web UI Library.
+### You can access the following link to learn more
+
+- [Custom User Data Model](https://azure.github.io/communication-ui-library/?path=/docs/customuserdatamodel--page)

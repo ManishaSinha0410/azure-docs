@@ -1,8 +1,9 @@
 ---
 title: "Quickstart: Scale compute for an Azure Synapse dedicated SQL pool in a Synapse workspace with the Azure portal"
 description: Learn how to scale compute for an Azure Synapse dedicated SQL pool in a Synapse workspace with the Azure portal.
-author: WilliamDAssafMSFT
-ms.author: wiassaf
+author: kedodd
+ms.author: kedodd
+manager: craigg
 ms.reviewer: sngun
 ms.date: 02/22/2023
 ms.service: synapse-analytics

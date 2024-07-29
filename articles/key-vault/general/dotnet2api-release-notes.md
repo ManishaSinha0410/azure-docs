@@ -3,10 +3,12 @@ title: Key Vault .NET 2.x API Release Notes| Microsoft Docs
 description: Learn how to update apps written for earlier versions of Azure Key Vault to work with the 2.0 version of the Azure Key Vault library for C# and .NET.
 services: key-vault
 author: msmbaldwin
+editor: bryanla
+
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
-ms.date: 02/20/2024
+ms.date: 05/02/2017
 ms.author: mbaldwin
 
 ---

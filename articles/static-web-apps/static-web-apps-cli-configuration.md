@@ -5,7 +5,7 @@ services: static-web-apps
 author: craigshoemaker
 ms.service: static-web-apps
 ms.topic:  conceptual
-ms.date: 02/02/2024
+ms.date: 09/30/2022
 ms.author: cshoe
 ---
 
@@ -22,12 +22,9 @@ The Azure Static Web Apps (SWA) CLI gets configuration information for your stat
 The configuration file can contain multiple configurations, each identified by a unique configuration name.
 
 - If only a single configuration is present in the *swa-cli.config.json* file, `swa start` uses it by default.
+- If options are loaded from a config file, then command line options are ignored. For example, if you run `swa start app --ssl`, the `ssl=true` option is not be picked up by the CLI.
 
-- If options are loaded from a config file, then command line options are ignored.
-
-## Example configuration file
-
-The following code snippet shows the configuration file's shape.
+## Configuration file example
 
 ```json
 {
@@ -42,11 +39,9 @@ The following code snippet shows the configuration file's shape.
 }
 ```
 
-When you only have one configuration section, as shown by this example, then the `swa start` command automatically uses these values.
-
 ## Initialize a configuration file
 
-You can initialize your configuration file with the `swa init` command. If you run the command against an existing project, then `swa init` tries to guess the configuration settings for you.
+Use `swa init` to kickstart the workflow to create a configuration file for a new or existing project. If the project exists, `swa init` tries to guess the configuration settings for you.
 
 By default, the process creates these settings in a *swa-cli.config.json* in the current working directory of your project. This directory is the default file name and location used by `swa` when searching for project configuration values.
 
@@ -54,19 +49,19 @@ By default, the process creates these settings in a *swa-cli.config.json* in the
 swa --config <PATH>
 ```
 
-If the file contains only one named configuration, then that configuration is used by default. If multiple configurations are defined, then you pass the desired configuration name in as an option.
+If the file contains only one named configuration, then it is used by default. If multiple configurations are defined, you need to specify the one to use as an option.
 
 ```azstatic-cli
-swa --<CONFIG_NAME>
+swa --config-name
 ```
 
 When the configuration file option is used, the settings are stored in JSON format. Once created, you can manually edit the file to update settings or use `swa init` to make updates.
 
 ## View configuration
 
-The Static Webs CLI provides a `--print-config` option so you can review your current configuration.
+The Static Webs CLI provides a `--print-config` option so you can determine resolved options for your current setup.
 
-Here's an example of what that output looks like when run on a new project with default settings.
+Here is an example of what that output looks like when run on a new project with default settings.
 
 ```azstatic-cli
 swa --print-config
@@ -110,4 +105,4 @@ Running `swa --print-config` provide's the current configuration defaults.
 
 ## Validate configuration
 
-You can validate the *swa-cli.config.json* file against the following schema: https://aka.ms/azure/static-web-apps-cli/schema
+The swa-cli.config.json file can be validated against the following schema: https://aka.ms/azure/static-web-apps-cli/schema

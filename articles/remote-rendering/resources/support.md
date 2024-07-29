@@ -1,8 +1,8 @@
 ---
 title: Azure Remote Rendering support options
 description: Lists ways how to get support for Azure Remote Rendering
-author: FlorianBorn71
-ms.author: flborn
+author: jakrams
+ms.author: jakras
 ms.date: 04/22/2020
 ms.topic: troubleshooting
 ---

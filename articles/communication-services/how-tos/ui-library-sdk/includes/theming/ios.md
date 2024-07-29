@@ -1,5 +1,5 @@
 ---
-description: Learn how to use the Calling composite on iOS.
+description: In this tutorial, you learn how to use the Calling composite on iOS
 author: garchiro7
 
 ms.author: jorgegarc
@@ -8,11 +8,11 @@ ms.topic: include
 ms.service: azure-communication-services
 ---
 
-For more information, see the [open-source iOS UI Library](https://github.com/Azure/communication-ui-library-ios) and the [sample application code](https://github.com/Azure-Samples/communication-services-ios-quickstarts/tree/main/ui-calling).
+Azure Communication UI [open source library](https://github.com/Azure/communication-ui-library-ios) for iOS and the sample application code can be found [here](https://github.com/Azure-Samples/communication-services-ios-quickstarts/tree/main/ui-calling)
 
-### Defining a theme
+### Defining a Theme
 
-You can customize the theme by changing the primary color and its associated tints. You also have the option of overriding the light and dark modes in the color scheme.
+You can customize the theme by changing the primary color and its associated tints and the option of overriding the light and dark  mode color scheme.
 
 #### Affected UI
 
@@ -29,7 +29,7 @@ You can customize the theme by changing the primary color and its associated tin
 
 #### Implementation
 
-You can create custom theme options that implement the `ThemeOptions` protocol. You need to include an instance of that new class in `CallCompositeOptions`.
+Contoso developers can create custom theme options that implement the `ThemeOptions` protocol. They'll need to include an instance of that new class in your `CallCompositeOptions`.
 
 ```swift
 class CustomThemeOptions: ThemeOptions {
@@ -58,8 +58,8 @@ class CustomThemeOptions: ThemeOptions {
 let callCompositeOptions = CallCompositeOptions(theme: CustomThemeOptions())
 ```
 
-### Defining color assets
+#### Define Color Assets
 
-Define each color in the assets, with a shade for the light and dark modes. The following reference image shows how to configure the assets on an Xcode project.
+Define each color in the assets, with a shade for the light and dark modes. Like the below reference image, describe how Contoso can configure the assets on the XCODE project.
 
-:::image type="content" source="media/ios-theming.png" alt-text="Screenshot of an example configuration of iOS color assets.":::
+:::image type="content" source="media/ios-theming.png" alt-text="Screenshot of a I O S color assets example configuration.":::

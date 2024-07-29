@@ -7,7 +7,8 @@ ms.topic: article
 ms.date: 03/29/2021
 ms.author: msangapu
 ms.devlang: csharp
-ms.custom: devx-track-dotnet
+ms.custom: seodec18
+
 ---
 # At-scale discovery of .NET web apps
 

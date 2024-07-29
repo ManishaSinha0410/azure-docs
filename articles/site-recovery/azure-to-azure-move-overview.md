@@ -4,7 +4,7 @@ description: Using Azure Site Recovery to move Azure VMs from one Azure region t
 author: ankitaduttaMSFT
 ms.service: site-recovery
 ms.topic: tutorial
-ms.date: 02/19/2024
+ms.date: 09/10/2020
 ms.author: ankitadutta
 ms.custom: MVC, engagement-fy23
 ---
@@ -86,7 +86,9 @@ Based on the [architectures](#typical-architectures-for-a-multi-tier-deployment)
 
 ## Next steps
 
-- [Move Azure VMs to another region](azure-to-azure-tutorial-migrate.md)
-- [Move Azure VMs into Availability Zones](move-azure-vms-avset-azone.md)
-
+> [!div class="nextstepaction"]
+> 
+> * [Move Azure VMs to another region](azure-to-azure-tutorial-migrate.md)
+> 
+> * [Move Azure VMs into Availability Zones](move-azure-vms-avset-azone.md)
 

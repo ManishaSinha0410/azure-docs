@@ -97,28 +97,6 @@ See [Schema examples](#event-schema-examples) that follow.
 
 ### JobStateChange
 
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **JobStateChange** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
-    "type": "Microsoft.Media.JobStateChange",
-    "time": "2018-04-20T21:26:13.8978772",
-    "id": "b9d38923-9210-4c2b-958f-0054467d4dd7",
-    "data": {
-      "previousState": "Processing",
-      "state": "Finished"
-    },
-    "specversion": "1.0"
-  }
-]
-```
-
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
 The following example shows the schema of the **JobStateChange** event:
@@ -141,6 +119,26 @@ The following example shows the schema of the **JobStateChange** event:
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **JobStateChange** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
+    "type": "Microsoft.Media.JobStateChange",
+    "time": "2018-04-20T21:26:13.8978772",
+    "id": "b9d38923-9210-4c2b-958f-0054467d4dd7",
+    "data": {
+      "previousState": "Processing",
+      "state": "Finished"
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -157,63 +155,6 @@ Where the Job state can be one of the values: *Queued*, *Scheduled*, *Processing
 > *Queued* is only going to be present in the **previousState** property but not in the **state** property.
 
 ### JobScheduled, JobProcessing, JobCanceling
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-For each non-final Job state change (such as JobScheduled, JobProcessing, JobCanceling), the example schema looks similar to the following:
-
-```json
-[{
-  "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-  "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
-  "type": "Microsoft.Media.JobProcessing",
-  "time": "2018-10-12T16:12:18.0839935",
-  "id": "a0a6efc8-f647-4fc2-be73-861fa25ba2db",
-  "data": {
-    "previousState": "Scheduled",
-    "state": "Processing",
-    "correlationData": {
-      "testKey1": "testValue1",
-      "testKey2": "testValue2"
-    }
-  },
-  "specversion": "1.0"
-}]
-```
-
-### JobFinished, JobCanceled, JobErrored
-
-For each final Job state change (such as JobFinished, JobCanceled, JobErrored), the example schema looks similar to the following:
-
-```json
-[{
-  "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-  "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
-  "type": "Microsoft.Media.JobFinished",
-  "time": "2018-10-12T16:25:56.4115495",
-  "id": "9e07e83a-dd6e-466b-a62f-27521b216f2a",
-  "data": {
-    "outputs": [
-      {
-        "@odata.type": "#Microsoft.Media.JobOutputAsset",
-        "assetName": "output-7640689F",
-        "error": null,
-        "label": "VideoAnalyzerPreset_0",
-        "progress": 100,
-        "state": "Finished"
-      }
-    ],
-    "previousState": "Processing",
-    "state": "Finished",
-    "correlationData": {
-      "testKey1": "testValue1",
-      "testKey2": "testValue2"
-    }
-  },
-  "specversion": "1.0"
-}]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -273,6 +214,61 @@ For each final Job state change (such as JobFinished, JobCanceled, JobErrored), 
 }]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+For each non-final Job state change (such as JobScheduled, JobProcessing, JobCanceling), the example schema looks similar to the following:
+
+```json
+[{
+  "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+  "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
+  "type": "Microsoft.Media.JobProcessing",
+  "time": "2018-10-12T16:12:18.0839935",
+  "id": "a0a6efc8-f647-4fc2-be73-861fa25ba2db",
+  "data": {
+    "previousState": "Scheduled",
+    "state": "Processing",
+    "correlationData": {
+      "testKey1": "testValue1",
+      "testKey2": "testValue2"
+    }
+  },
+  "specversion": "1.0"
+}]
+```
+
+### JobFinished, JobCanceled, JobErrored
+
+For each final Job state change (such as JobFinished, JobCanceled, JobErrored), the example schema looks similar to the following:
+
+```json
+[{
+  "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+  "subject": "transforms/VideoAnalyzerTransform/jobs/<job-id>",
+  "type": "Microsoft.Media.JobFinished",
+  "time": "2018-10-12T16:25:56.4115495",
+  "id": "9e07e83a-dd6e-466b-a62f-27521b216f2a",
+  "data": {
+    "outputs": [
+      {
+        "@odata.type": "#Microsoft.Media.JobOutputAsset",
+        "assetName": "output-7640689F",
+        "error": null,
+        "label": "VideoAnalyzerPreset_0",
+        "progress": 100,
+        "state": "Finished"
+      }
+    ],
+    "previousState": "Processing",
+    "state": "Finished",
+    "correlationData": {
+      "testKey1": "testValue1",
+      "testKey2": "testValue2"
+    }
+  },
+  "specversion": "1.0"
+}]
+```
 
 ---
 
@@ -348,7 +344,7 @@ For each JobOutput state change, the example schema looks similar to the followi
 
 The example schema looks similar to the following:
 
-```json
+ ```json
 [{
   "topic": "/subscriptions/<subscription-id>/resourceGroups/belohGroup/providers/Microsoft.Media/mediaservices/<account-name>",
   "subject": "transforms/VideoAnalyzerTransform/jobs/job-5AB6DE32",
@@ -407,29 +403,6 @@ You can find the error result codes in [live Event error codes](/azure/media-ser
 
 ### LiveEventEncoderConnected
 
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventEncoderConnected** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventEncoderConnected",
-    "time": "2018-08-07T23:08:09.1710643",
-    "id": "<id>",
-    "data": {
-      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml",
-      "streamId": "15864-stream0",
-      "encoderIp": "131.107.147.xxx",
-      "encoderPort": "27485"
-    },
-    "specversion": "1.0"
-  }
-]
-```
-
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
 The following example shows the schema of the **LiveEventEncoderConnected** event:
@@ -454,6 +427,28 @@ The following example shows the schema of the **LiveEventEncoderConnected** even
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventEncoderConnected** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventEncoderConnected",
+    "time": "2018-08-07T23:08:09.1710643",
+    "id": "<id>",
+    "data": {
+      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml",
+      "streamId": "15864-stream0",
+      "encoderIp": "131.107.147.xxx",
+      "encoderPort": "27485"
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -467,31 +462,6 @@ The data object has the following properties:
 | `encoderPort` | string | Port of the encoder from where this stream is coming. |
 
 ### LiveEventEncoderDisconnected
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventEncoderDisconnected** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventEncoderDisconnected",
-    "time": "2018-08-07T23:08:09.1710872",
-    "id": "<id>",
-    "data": {
-      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml",
-      "streamId": "15864-stream0",
-      "encoderIp": "131.107.147.xxx",
-      "encoderPort": "27485",
-      "resultCode": "S_OK"
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -514,6 +484,30 @@ The following example shows the schema of the **LiveEventEncoderDisconnected** e
     },
     "dataVersion": "1.0",
     "metadataVersion": "1"
+  }
+]
+```
+
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventEncoderDisconnected** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventEncoderDisconnected",
+    "time": "2018-08-07T23:08:09.1710872",
+    "id": "<id>",
+    "data": {
+      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml",
+      "streamId": "15864-stream0",
+      "encoderIp": "131.107.147.xxx",
+      "encoderPort": "27485",
+      "resultCode": "S_OK"
+    },
+    "specversion": "1.0"
   }
 ]
 ```
@@ -546,31 +540,6 @@ The graceful disconnect result codes are:
 
 ### LiveEventIncomingDataChunkDropped
 
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventIncomingDataChunkDropped** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaServices/<account-name>",
-    "subject": "/LiveEvents/MyLiveEvent1",
-    "type": "Microsoft.Media.LiveEventIncomingDataChunkDropped",
-    "time": "2018-01-16T01:57:26.005121Z",
-    "id": "03da9c10-fde7-48e1-80d8-49936f2c3e7d",
-    "data": {
-      "trackType": "Video",
-      "trackName": "Video",
-      "bitrate": 300000,
-      "timestamp": 36656620000,
-      "timescale": 10000000,
-      "resultCode": "FragmentDrop_OverlapTimestamp"
-    },
-    "specversion": "1.0"
-  }
-]
-```
-
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
 The following example shows the schema of the **LiveEventIncomingDataChunkDropped** event:
@@ -597,6 +566,30 @@ The following example shows the schema of the **LiveEventIncomingDataChunkDroppe
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventIncomingDataChunkDropped** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaServices/<account-name>",
+    "subject": "/LiveEvents/MyLiveEvent1",
+    "type": "Microsoft.Media.LiveEventIncomingDataChunkDropped",
+    "time": "2018-01-16T01:57:26.005121Z",
+    "id": "03da9c10-fde7-48e1-80d8-49936f2c3e7d",
+    "data": {
+      "trackType": "Video",
+      "trackName": "Video",
+      "bitrate": 300000,
+      "timestamp": 36656620000,
+      "timescale": 10000000,
+      "resultCode": "FragmentDrop_OverlapTimestamp"
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -612,35 +605,6 @@ The data object has the following properties:
 | `resultCode` | string | Reason of the data chunk drop. **FragmentDrop_OverlapTimestamp** or **FragmentDrop_NonIncreasingTimestamp**. |
 
 ### LiveEventIncomingStreamReceived
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventIncomingStreamReceived** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventIncomingStreamReceived",
-    "time": "2018-08-07T23:08:10.5069288Z",
-    "id": "7f939a08-320c-47e7-8250-43dcfc04ab4d",
-    "data": {
-      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml/Streams(15864-stream0)15864-stream0",
-      "trackType": "video",
-      "trackName": "video",
-      "bitrate": 2962000,
-      "encoderIp": "131.107.147.xxx",
-      "encoderPort": "27485",
-      "timestamp": "15336831655032322",
-      "duration": "20000000",
-      "timescale": "10000000"
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -671,6 +635,34 @@ The following example shows the schema of the **LiveEventIncomingStreamReceived*
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventIncomingStreamReceived** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventIncomingStreamReceived",
+    "time": "2018-08-07T23:08:10.5069288Z",
+    "id": "7f939a08-320c-47e7-8250-43dcfc04ab4d",
+    "data": {
+      "ingestUrl": "http://mle1-amsts03mediaacctgndos-ts031.channel.media.azure-test.net:80/ingest.isml/Streams(15864-stream0)15864-stream0",
+      "trackType": "video",
+      "trackName": "video",
+      "bitrate": 2962000,
+      "encoderIp": "131.107.147.xxx",
+      "encoderPort": "27485",
+      "timestamp": "15336831655032322",
+      "duration": "20000000",
+      "timescale": "10000000"
+    },
+    "specversion": "1.0"
+  }
+]
+```
+
 ---
 
 The data object has the following properties:
@@ -687,32 +679,6 @@ The data object has the following properties:
 | `timescale` | string | Timescale in which timestamp is represented. |
 
 ### LiveEventIncomingStreamsOutOfSync
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventIncomingStreamsOutOfSync** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventIncomingStreamsOutOfSync",
-    "time": "2018-08-10T02:26:20.6269183Z",
-    "id": "b9d38923-9210-4c2b-958f-0054467d4dd7",
-    "data": {
-      "minLastTimestamp": "319996",
-      "typeOfStreamWithMinLastTimestamp": "Audio",
-      "maxLastTimestamp": "366000",
-      "typeOfStreamWithMaxLastTimestamp": "Video",
-      "timescaleOfMinLastTimestamp": "10000000",
-      "timescaleOfMaxLastTimestamp": "10000000"
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -740,6 +706,31 @@ The following example shows the schema of the **LiveEventIncomingStreamsOutOfSyn
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventIncomingStreamsOutOfSync** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventIncomingStreamsOutOfSync",
+    "time": "2018-08-10T02:26:20.6269183Z",
+    "id": "b9d38923-9210-4c2b-958f-0054467d4dd7",
+    "data": {
+      "minLastTimestamp": "319996",
+      "typeOfStreamWithMinLastTimestamp": "Audio",
+      "maxLastTimestamp": "366000",
+      "typeOfStreamWithMaxLastTimestamp": "Video",
+      "timescaleOfMinLastTimestamp": "10000000",
+      "timescaleOfMaxLastTimestamp": "10000000"
+    },
+    "specversion": "1.0"
+  }
+]
+```
+
 ---
 
 The data object has the following properties:
@@ -754,30 +745,6 @@ The data object has the following properties:
 | `timescaleOfMaxLastTimestamp`| string | Gets the timescale in which "MaxLastTimestamp" is represented.|
 
 ### LiveEventIncomingVideoStreamsOutOfSync
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventIncomingVideoStreamsOutOfSync** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaServices/<account-name>",
-    "subject": "/LiveEvents/LiveEvent1",
-    "type": "Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync",
-    "time": "2018-01-16T01:57:26.005121Z",
-    "id": "6dd4d862-d442-40a0-b9f3-fc14bcf6d750",
-    "data": {
-      "firstTimestamp": "2162058216",
-      "firstDuration": "2000",
-      "secondTimestamp": "2162057216",
-      "secondDuration": "2000",
-      "timescale": "10000000"
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -804,6 +771,29 @@ The following example shows the schema of the **LiveEventIncomingVideoStreamsOut
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventIncomingVideoStreamsOutOfSync** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaServices/<account-name>",
+    "subject": "/LiveEvents/LiveEvent1",
+    "type": "Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync",
+    "time": "2018-01-16T01:57:26.005121Z",
+    "id": "6dd4d862-d442-40a0-b9f3-fc14bcf6d750",
+    "data": {
+      "firstTimestamp": "2162058216",
+      "firstDuration": "2000",
+      "secondTimestamp": "2162057216",
+      "secondDuration": "2000",
+      "timescale": "10000000"
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -818,39 +808,6 @@ The data object has the following properties:
 | `timescale` | string | Timescale of timestamps and duration.|
 
 ### LiveEventIngestHeartbeat
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-
-The following example shows the schema of the **LiveEventIngestHeartbeat** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventIngestHeartbeat",
-    "time": "2018-08-07T23:17:57.4610506",
-    "id": "7f450938-491f-41e1-b06f-c6cd3965d786",
-    "data": {
-      "trackType": "audio",
-      "trackName": "audio",
-      "bitrate": 160000,
-      "incomingBitrate": 155903,
-      "lastTimestamp": "15336837535253637",
-      "timescale": "10000000",
-      "overlapCount": 0,
-      "discontinuityCount": 0,
-      "nonincreasingCount": 0,
-      "unexpectedBitrate": false,
-      "state": "Running",
-      "healthy": true
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -888,6 +845,37 @@ The following example shows the schema of the **LiveEventIngestHeartbeat** event
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+
+The following example shows the schema of the **LiveEventIngestHeartbeat** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventIngestHeartbeat",
+    "time": "2018-08-07T23:17:57.4610506",
+    "id": "7f450938-491f-41e1-b06f-c6cd3965d786",
+    "data": {
+      "trackType": "audio",
+      "trackName": "audio",
+      "bitrate": 160000,
+      "incomingBitrate": 155903,
+      "lastTimestamp": "15336837535253637",
+      "timescale": "10000000",
+      "overlapCount": 0,
+      "discontinuityCount": 0,
+      "nonincreasingCount": 0,
+      "unexpectedBitrate": false,
+      "state": "Running",
+      "healthy": true
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -914,33 +902,6 @@ The data object has the following properties:
 
 
 ### LiveEventTrackDiscontinuityDetected
-
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-The following example shows the schema of the **LiveEventTrackDiscontinuityDetected** event:
-
-```json
-[
-  {
-    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
-    "subject": "liveEvent/mle1",
-    "type": "Microsoft.Media.LiveEventTrackDiscontinuityDetected",
-    "time": "2018-08-07T23:18:06.1270405Z",
-    "id": "5f4c510d-5be7-4bef-baf0-64b828be9c9b",
-    "data": {
-      "trackName": "video",
-      "previousTimestamp": "15336837615032322",
-      "trackType": "video",
-      "bitrate": 2962000,
-      "newTimestamp": "15336837619774273",
-      "discontinuityGap": "575284",
-      "timescale": "10000000"
-    },
-    "specversion": "1.0"
-  }
-]
-```
 
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
@@ -969,6 +930,31 @@ The following example shows the schema of the **LiveEventTrackDiscontinuityDetec
 ]
 ```
 
+# [Cloud event schema](#tab/cloud-event-schema)
+
+The following example shows the schema of the **LiveEventTrackDiscontinuityDetected** event:
+
+```json
+[
+  {
+    "source": "/subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Media/mediaservices/<account-name>",
+    "subject": "liveEvent/mle1",
+    "type": "Microsoft.Media.LiveEventTrackDiscontinuityDetected",
+    "time": "2018-08-07T23:18:06.1270405Z",
+    "id": "5f4c510d-5be7-4bef-baf0-64b828be9c9b",
+    "data": {
+      "trackName": "video",
+      "previousTimestamp": "15336837615032322",
+      "trackType": "video",
+      "bitrate": 2962000,
+      "newTimestamp": "15336837619774273",
+      "discontinuityGap": "575284",
+      "timescale": "10000000"
+    },
+    "specversion": "1.0"
+  }
+]
+```
 
 ---
 
@@ -986,21 +972,6 @@ The data object has the following properties:
 
 ### Common event properties
 
-
-# [Cloud event schema](#tab/cloud-event-schema)
-
-An event has the following top-level data:
-
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| `source` | string | The Event Grid topic. This property has the resource ID for the Media Services account. |
-| `subject` | string | The resource path for the Media Services channel under the Media Services account. Concatenating the topic and subject give you the resource ID for the job. |
-| `type` | string | One of the registered event types for this event source. For example, "Microsoft.Media.JobStateChange". |
-| `time` | string | The time the event is generated based on the provider's UTC time. |
-| `id` | string | Unique identifier for the event. |
-| `data` | object | Media Services event data. |
-| `specversion` | string | CloudEvents schema specification version. |
-
 # [Event Grid event schema](#tab/event-grid-event-schema)
 
 An event has the following top-level data:
@@ -1015,6 +986,20 @@ An event has the following top-level data:
 | `data` | object | Media Services event data. |
 | `dataVersion` | string | The schema version of the data object. The publisher defines the schema version. |
 | `metadataVersion` | string | The schema version of the event metadata. Event Grid defines the schema of the top-level properties. Event Grid provides this value. |
+
+# [Cloud event schema](#tab/cloud-event-schema)
+
+An event has the following top-level data:
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| `source` | string | The Event Grid topic. This property has the resource ID for the Media Services account. |
+| `subject` | string | The resource path for the Media Services channel under the Media Services account. Concatenating the topic and subject give you the resource ID for the job. |
+| `type` | string | One of the registered event types for this event source. For example, "Microsoft.Media.JobStateChange". |
+| `time` | string | The time the event is generated based on the provider's UTC time. |
+| `id` | string | Unique identifier for the event. |
+| `data` | object | Media Services event data. |
+| `specversion` | string | CloudEvents schema specification version. |
 
 
 ---

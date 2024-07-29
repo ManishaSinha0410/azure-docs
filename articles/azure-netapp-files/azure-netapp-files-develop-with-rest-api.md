@@ -2,8 +2,15 @@
 title: Develop for Azure NetApp Files with REST API | Microsoft Docs
 description: The REST API for the Azure NetApp Files service defines HTTP operations for resources such as the NetApp account, the capacity pool, the volumes, and snapshots.
 services: azure-netapp-files
+documentationcenter: ''
 author: b-hchen
+manager: ''
+editor: ''
+
+ms.assetid:
 ms.service: azure-netapp-files
+ms.workload: storage
+ms.tgt_pltfrm: na
 ms.topic: how-to
 ms.date: 09/30/2022
 ms.author: anfdocs
@@ -29,7 +36,7 @@ The REST API specification for Azure NetApp Files is published through [GitHub](
 ## Access the Azure NetApp Files REST API  
 
 1. [Install the Azure CLI](/cli/azure/install-azure-cli) if you haven't done so already.
-2. Create a service principal in your Microsoft Entra ID:
+2. Create a service principal in your Azure Active Directory (Azure AD):
    1. Verify that you have [sufficient permissions](../active-directory/develop/howto-create-service-principal-portal.md#permissions-required-for-registering-an-app).
 
    2. Enter the following command in the Azure CLI: 
@@ -197,4 +204,4 @@ The following example shows how to create a snapshot of a volume:
 
 ## Next steps
 
-* [Azure NetApp Files REST API reference](/rest/api/netapp/)
+[See the Azure NetApp Files REST API reference](/rest/api/netapp/)

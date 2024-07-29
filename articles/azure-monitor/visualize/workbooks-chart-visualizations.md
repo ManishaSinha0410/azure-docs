@@ -2,9 +2,10 @@
 title: Azure Monitor workbook chart visualizations
 description: Learn about all the Azure Monitor workbook chart visualizations.
 services: azure-monitor
+ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
-ms.date: 06/21/2023
+ms.date: 07/05/2022
 ---
 
 # Chart visualizations
@@ -49,8 +50,8 @@ The following example shows the trend of requests to an app over the previous da
 1. Use the query editor to enter the [KQL](/azure/kusto/query/) for your analysis. An example is trend of requests.
 1. Set **Visualization** to **Area**, **Bar**, **Bar (categorical)**, **Line**, **Pie**, **Scatter**, or **Time**.
 1. Set other parameters like time range, visualization, size, color palette, and legend, if needed.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart.png" lightbox="./media/workbooks-chart-visualizations/log-chart.png" alt-text="Screenshot that shows a log chart in edit mode." border="false":::
+
+[![Screenshot that shows a log chart in edit mode.](./media/workbooks-chart-visualizations/log-chart.png)](./media/workbooks-chart-visualizations/log-chart.png#lightbox)
 
 ### Log chart parameters
 
@@ -78,8 +79,8 @@ The following query returns a table with two columns: `timestamp` and `Requests`
 requests
 | summarize Requests = count() by bin(timestamp, 1h)
 ```
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-line-simple.png" lightbox="./media/workbooks-chart-visualizations/log-chart-line-simple.png" alt-text="Screenshot that shows a simple time-series log line chart." border="false":::
+
+[![Screenshot that shows a simple time-series log line chart.](./media/workbooks-chart-visualizations/log-chart-line-simple.png)](./media/workbooks-chart-visualizations/log-chart-line-simple.png#lightbox)
 
 #### Time series with multiple metrics
 
@@ -89,8 +90,8 @@ The following query returns a table with three columns: `timestamp`, `Requests`,
 requests
 | summarize Requests = count(), Users = dcount(user_Id) by bin(timestamp, 1h)
 ```
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-line-multi-metric.png" lightbox="./media/workbooks-chart-visualizations/log-chart-line-multi-metric.png" alt-text="Screenshot that shows a time series with multiple metrics log line chart." border="false":::
+
+[![Screenshot that shows a time series with multiple metrics log line chart.](./media/workbooks-chart-visualizations/log-chart-line-multi-metric.png)](./media/workbooks-chart-visualizations/log-chart-line-multi-metric.png#lightbox)
 
 #### Segmented time series
 
@@ -100,8 +101,8 @@ The following query returns a table with three columns: `timestamp`, `Requests`,
 requests
 | summarize Request = count() by bin(timestamp, 1h), RequestName = name
 ```
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-line-segmented.png" lightbox="./media/workbooks-chart-visualizations/log-chart-line-segmented.png" alt-text="Screenshot that shows a segmented time-series log line chart." border="false":::
+
+[![Screenshot that shows a segmented time-series log line chart.](./media/workbooks-chart-visualizations/log-chart-line-segmented.png)](./media/workbooks-chart-visualizations/log-chart-line-segmented.png#lightbox)
 
 ### Summarize vs. make-series
 
@@ -122,8 +123,8 @@ The following query shows a similar chart with the `summarize` operator:
 requests
 | summarize Request = count() by bin(timestamp, 1h), RequestName = name
 ```
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-line-make-series.png" lightbox="./media/workbooks-chart-visualizations/log-chart-line-make-series.png" alt-text="Screenshot that shows a log line chart made from a make-series query." border="false":::
+
+[![Screenshot that shows a log line chart made from a make-series query.](./media/workbooks-chart-visualizations/log-chart-line-make-series.png)](./media/workbooks-chart-visualizations/log-chart-line-make-series.png#lightbox)
 
 ### Categorical bar chart or histogram
 
@@ -136,8 +137,8 @@ requests
 ```
 
 The query returns two columns: `Requests` metric and `Result` category. Each value of the `Result` column is represented by a bar in the chart with height proportional to the `Requests metric`.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-categorical-bar.png" lightbox="./media/workbooks-chart-visualizations/log-chart-categorical-bar.png" alt-text="Screenshot that shows a categorical bar chart for requests by result code." border="false":::
+
+[![Screenshot that shows a categorical bar chart for requests by result code.](./media/workbooks-chart-visualizations/log-chart-categorical-bar.png)](./media/workbooks-chart-visualizations/log-chart-categorical-bar.png#lightbox)
 
 ### Pie charts
 
@@ -150,8 +151,8 @@ requests
 ```
 
 The query returns two columns: `Requests` metric and `Result` category. Each value of the `Result` column gets its own slice in the pie with size proportional to the `Requests` metric.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/log-chart-pie-chart.png" lightbox="./media/workbooks-chart-visualizations/log-chart-pie-chart.png" alt-text="Screenshot that shows a pie chart with slices representing result code." border="false":::
+
+[![Screenshot that shows a pie chart with slices representing result code.](./media/workbooks-chart-visualizations/log-chart-pie-chart.png)](./media/workbooks-chart-visualizations/log-chart-pie-chart.png#lightbox)
 
 ## Metric charts
 
@@ -165,8 +166,8 @@ The following example shows the number of transactions in a storage account over
 1. Use the **Add metric** link to add a metric control to the workbook.
 1. Select a resource type, for example, **Storage account**. Select the resources to target, the metric namespace and name, and the aggregation to use.
 1. Set other parameters like time range, split by, visualization, size, and color palette, if needed.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/metric-chart.png" lightbox="./media/workbooks-chart-visualizations/metric-chart.png" alt-text="Screenshot that shows a metric chart in edit mode." border="false":::
+
+[![Screenshot that shows a metric chart in edit mode.](./media/workbooks-chart-visualizations/metric-chart.png)](./media/workbooks-chart-visualizations/metric-chart.png#lightbox)
 
 ### Metric chart parameters
 
@@ -186,16 +187,16 @@ The following example shows the number of transactions in a storage account over
 ### Examples
 
 Transactions split by API name as a line chart:
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/metric-chart-storage-split-line.png" lightbox="./media/workbooks-chart-visualizations/metric-chart-storage-split-line.png" alt-text="Screenshot that shows a metric line chart for storage transactions split by API name." border="false":::
+
+[![Screenshot that shows a metric line chart for storage transactions split by API name.](./media/workbooks-chart-visualizations/metric-chart-storage-split-line.png)](./media/workbooks-chart-visualizations/metric-chart-storage-split-line.png#lightbox)
 
 Transactions split by response type as a large bar chart:
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/metric-chart-storage-bar-large.png" lightbox="./media/workbooks-chart-visualizations/metric-chart-storage-bar-large.png" alt-text="Screenshot that shows a large metric bar chart for storage transactions split by response type." border="false":::
+
+[![Screenshot that shows a large metric bar chart for storage transactions split by response type.](./media/workbooks-chart-visualizations/metric-chart-storage-bar-large.png)](./media/workbooks-chart-visualizations/metric-chart-storage-bar-large.png#lightbox)
 
 Average latency as a scatter chart:
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/metric-chart-storage-scatter.png" lightbox="./media/workbooks-chart-visualizations/metric-chart-storage-scatter.png" alt-text="Screenshot that shows a metric scatter chart for storage latency." border="false":::
+
+[![Screenshot that shows a metric scatter chart for storage latency.](./media/workbooks-chart-visualizations/metric-chart-storage-scatter.png)](./media/workbooks-chart-visualizations/metric-chart-storage-scatter.png#lightbox)
 
 ## Chart settings
 
@@ -216,8 +217,8 @@ The **Settings** tab controls:
 - **X-axis Settings**, **Y-axis Settings**: Includes which fields. You can use custom formatting to set the number formatting to the axis values and custom ranges.
 - **Grouping Settings**: Includes which field. Sets the limits before an "Others" group is created.
 - **Legend Settings**: Shows metrics like series name, colors, and numbers at the bottom, and a legend like series names and colors.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/chart-settings.png" lightbox="./media/workbooks-chart-visualizations/chart-settings.png" alt-text="Screenshot that shows chart settings." border="false":::
+
+![Screenshot that shows chart settings.](./media/workbooks-chart-visualizations/chart-settings.png)
 
 #### Custom formatting
 
@@ -233,8 +234,8 @@ Number formatting options are shown in this table.
 | Maximum fractional digits  | Maximum number of fractional digits to use.                                                            |
 | Minimum significant digits | Minimum number of significant digits to use (default 1).                                               |
 | Maximum significant digits | Maximum number of significant digits to use.                                                           |
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/number-format-settings.png" lightbox="./media/workbooks-chart-visualizations/number-format-settings.png" alt-text="Screenshot that shows x-axis settings." border="false":::
+
+![Screenshot that shows x-axis settings.](./media/workbooks-chart-visualizations/number-format-settings.png)
 
 ### Series Settings tab
 
@@ -242,8 +243,8 @@ You can adjust the labels and colors shown for series in the chart with the **Se
 
 - **Series name**: This field is used to match a series in the data and, if matched, the display label and color are displayed.
 - **Comment**: This field is useful for template authors because this comment might be used by translators to localize the display labels.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-chart-visualizations/series-settings.png" lightbox="./media/workbooks-chart-visualizations/series-settings.png" alt-text="Screenshot that shows series settings." border="false":::
+
+![Screenshot that shows series settings.](./media/workbooks-chart-visualizations/series-settings.png)
 
 ## Next steps
 

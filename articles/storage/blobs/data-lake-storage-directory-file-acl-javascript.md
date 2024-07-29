@@ -5,9 +5,10 @@ description: Use Azure Storage Data Lake client library for JavaScript to manage
 author: pauljewellmsft
 
 ms.author: pauljewell
-ms.service: azure-data-lake-storage
+ms.service: storage
 ms.date: 02/07/2023
 ms.topic: how-to
+ms.subservice: data-lake-storage-gen2
 ms.reviewer: prishet
 ms.devlang: javascript
 ms.custom: devx-track-js
@@ -47,17 +48,13 @@ StorageSharedKeyCredential
 } = require("@azure/storage-file-datalake");
 ```
 
-[!INCLUDE [data-lake-storage-sdk-note](../../../includes/data-lake-storage-sdk-note.md)]
-
 ## Connect to the account
 
 To use the snippets in this article, you'll need to create a **DataLakeServiceClient** instance that represents the storage account.
 
-<a name='connect-by-using-azure-active-directory-azure-ad'></a>
+### Connect by using Azure Active Directory (Azure AD)
 
-### Connect by using Microsoft Entra ID
-
-You can use the [Azure identity client library for JS](https://www.npmjs.com/package/@azure/identity) to authenticate your application with Microsoft Entra ID.
+You can use the [Azure identity client library for JS](https://www.npmjs.com/package/@azure/identity) to authenticate your application with Azure AD.
 
 Create a [DataLakeServiceClient](/javascript/api/@azure/storage-file-datalake/datalakeserviceclient) instance and pass in a new instance of the [DefaultAzureCredential](/javascript/api/@azure/identity/defaultazurecredential) class.
 
@@ -93,7 +90,7 @@ function GetDataLakeServiceClient(accountName, accountKey) {
 
 ```
 
-This method of authorization works only for Node.js applications. If you plan to run your code in a browser, you can authorize by using Microsoft Entra ID.
+This method of authorization works only for Node.js applications. If you plan to run your code in a browser, you can authorize by using Azure Active Directory (Azure AD).
 
 [!INCLUDE [storage-shared-key-caution](../../../includes/storage-shared-key-caution.md)]
 

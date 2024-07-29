@@ -6,10 +6,10 @@ author: jiaochenlu
 ms.author: chenlujiao
 ms.reviewer: mopeakande
 ms.service: machine-learning
-ms.subservice: enterprise-readiness
+ms.subservice: core
 ms.date: 10/10/2022
 ms.topic: how-to
-ms.custom: build-spring-2022, cliv2, sdkv2, devx-track-azurecli
+ms.custom: build-spring-2022, cliv2, sdkv2, event-tier1-build-2022
 ---
 
 # Configure a secure online endpoint with TLS/SSL

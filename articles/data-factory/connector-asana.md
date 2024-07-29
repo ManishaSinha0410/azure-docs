@@ -8,7 +8,7 @@ ms.service: data-factory
 ms.subservice: data-movement
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 01/05/2024
+ms.date: 05/20/2022
 ---
 
 #  Transform data in Asana (Preview) using Azure Data Factory or Synapse Analytics
@@ -28,7 +28,7 @@ This Asana connector is supported for the following capabilities:
 |---------| --------|
 |[Mapping data flow](concepts-data-flow-overview.md) (source/-)|&#9312; |
 
-*&#9312; Azure integration runtime &#9313; Self-hosted integration runtime*
+<small>*&#9312; Azure integration runtime &#9313; Self-hosted integration runtime*</small>
 
 For a list of data stores that are supported as sources/sinks, see the [Supported data stores](connector-overview.md#supported-data-stores) table.
 
@@ -113,6 +113,6 @@ source(allowSchemaDrift: true,
     entityType: 'teams') ~> AsanaSource
 ```
 
-## Related content
+## Next steps
 
 For a list of data stores supported as sources and sinks by the copy activity, see [Supported data stores](copy-activity-overview.md#supported-data-stores-and-formats).

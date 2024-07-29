@@ -6,14 +6,12 @@ author: expekesheth
 ms.service: healthcare-apis
 ms.subservice: fhir
 ms.topic: quickstart
-ms.date: 09/27/2023
+ms.date: 06/03/2022
 ms.author: kesheth
 ms.custom: devx-track-azurepowershell
 ---
 
 # Quickstart: Deploy Azure API for FHIR using PowerShell
-
-[!INCLUDE [retirement banner](../includes/healthcare-apis-azure-api-fhir-retirement.md)]
 
 In this quickstart, you'll learn how to deploy Azure API for FHIR using PowerShell.
 

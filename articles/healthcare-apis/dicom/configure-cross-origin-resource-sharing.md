@@ -3,15 +3,17 @@ title: Configure cross-origin resource sharing in DICOM service in Azure Health 
 description: This article describes how to configure cross-origin resource sharing in DICOM service in Azure Health Data Services
 author: mmitrik
 ms.author: mmitrik
-ms.date: 10/09/2023
+ms.date: 06/14/2022
 ms.topic: how-to
 ms.service: healthcare-apis
-ms.subservice: dicom
+ms.subservice: fhir
 ---
 
-# Configure cross-origin resource sharing
+# Configure cross-origin resource sharing in DICOM service in Azure Health Data Services
 
-The DICOM&reg; service in Azure Health Data Services supports [cross-origin resource sharing (CORS)](https://wikipedia.org/wiki/Cross-Origin_Resource_Sharing). CORS allows you to configure settings so that applications from one domain (origin) can access resources from a different domain, known as a cross-domain request.
+## What is cross-origin resource sharing in DICOM service in Azure Health Data Services?
+
+DICOM service in Azure Health Data Services (hereby called DICOM service) supports [cross-origin resource sharing (CORS)](https://wikipedia.org/wiki/Cross-Origin_Resource_Sharing). CORS allows you to configure settings so that applications from one domain (origin) can access resources from a different domain, known as a cross-domain request.
 
 CORS is often used in a single-page app that must call a RESTful API to a different domain.
 
@@ -20,9 +22,6 @@ CORS is often used in a single-page app that must call a RESTful API to a differ
 To configure a CORS setting in the DICOM service, specify the following settings:
 
 - **Origins (Access-Control-Allow-Origin)**. A list of domains allowed to make cross-origin requests to the DICOM service. Each domain (origin) must be entered in a separate line. You can enter an asterisk (*) to allow calls from any domain, but we don't recommend it because it's a security risk.
-
-> [!NOTE]
-> You can't specify different settings for different domain origins. All settings (**Headers**, **Methods**, **Max age**, and **Allow credentials**) apply to all origins specified in the Origins setting.
 
 - **Headers (Access-Control-Allow-Headers)**. A list of headers that the origin request will contain. To allow all headers, enter an asterisk (*).
 
@@ -34,4 +33,12 @@ To configure a CORS setting in the DICOM service, specify the following settings
 
 :::image type="content" source="media/dicom-cors-settings.png" alt-text="Screenshot of DICOM cross origin resource settings." lightbox="./media/dicom-cors-settings.png":::
 
-[!INCLUDE [DICOM trademark statement](../includes/healthcare-apis-dicom-trademark.md)]
+> [!NOTE]
+> You can't specify different settings for different domain origins. All settings (**Headers**, **Methods**, **Max age**, and **Allow credentials**) apply to all origins specified in the Origins setting.
+
+## Next steps
+
+For more information about DICOM service, see
+
+> [!div class="nextstepaction"]
+> [Overview of the DICOM service](./dicom-services-overview.md)

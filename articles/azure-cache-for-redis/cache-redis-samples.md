@@ -4,7 +4,7 @@ description: 'Learn how to use Azure Cache for Redis with these code samples: co
 author: flang-msft
 ms.author: franlanglois
 ms.service: cache
-ms.custom:
+ms.custom: devx-track-dotnet
 ms.topic: sample
 ms.date: 05/11/2021
 ---

@@ -2,9 +2,8 @@
 title: Use the Azure Batch client library for JavaScript
 description: Learn the basic concepts of Azure Batch and build a simple solution using JavaScript.
 ms.topic: how-to
-ms.date: 05/16/2023
+ms.date: 01/01/2021
 ms.devlang: javascript
-ms.custom: devx-track-js, linux-related-content
 ---
 
 # Get started with Batch SDK for JavaScript
@@ -82,7 +81,7 @@ Following code snippet first imports the azure-batch JavaScript module and then 
 
 import { BatchServiceClient, BatchSharedKeyCredentials } from "@azure/batch";
 
-// Replace values below with Batch Account details
+// Replace values below with Batch Account details 
 const batchAccountName = '<batch-account-name>';
 const batchAccountKey = '<batch-account-key>';
 const batchEndpoint = '<batch-account-url>';
@@ -118,13 +117,13 @@ The following code snippet creates the configuration parameter objects.
 const imgRef = {
     publisher: "Canonical",
     offer: "UbuntuServer",
-    sku: "20.04-LTS",
+    sku: "18.04-LTS",
     version: "latest"
 }
 // Creating the VM configuration object with the SKUID
 const vmConfig = {
     imageReference: imgRef,
-    nodeAgentSKUId: "batch.node.ubuntu 20.04"
+    nodeAgentSKUId: "batch.node.ubuntu 18.04"
 };
 // Number of VMs to create in a pool
 const numVms = 4;
@@ -206,10 +205,10 @@ Following is a sample result object returned by the pool.get function.
     imageReference: {
       publisher: 'Canonical',
       offer: 'UbuntuServer',
-      sku: '20.04-LTS',
+      sku: '18.04-LTS',
       version: 'latest'
     },
-    nodeAgentSKUId: 'batch.node.ubuntu 20.04'
+    nodeAgentSKUId: 'batch.node.ubuntu 18.04'
   },
   resizeTimeout: 'PT15M',
   currentDedicatedNodes: 4,
@@ -262,8 +261,8 @@ var jobPrepTaskConfig = {id:"installprereq",commandLine:"sudo sh startup_prereq.
 
 If there are no prerequisites to be installed for your tasks to run, you can skip the preparation tasks. Following code creates a job with display name "process csv files."
 
-```javascript
-// Setting Batch Pool ID
+ ```javascript
+ // Setting Batch Pool ID
 const poolInfo = { poolId: poolId };
 // Batch job configuration object
 const jobId = "processcsvjob";
@@ -273,14 +272,13 @@ const jobConfig = {
     jobPreparationTask: jobPrepTaskConfig,
     poolInfo: poolInfo
 };
-// Adding Azure batch job to the pool
-const job = batchClient.job.add(jobConfig, function (error, result) {
+ // Adding Azure batch job to the pool
+ const job = batchClient.job.add(jobConfig, function (error, result) {
         if (error !== null) {
             console.log("An error occurred while creating the job...");
             console.log(error.response);
         }
-    }
-);
+    });
 ```
 
 ### Step 5: Submit Azure Batch tasks for a job

@@ -2,10 +2,9 @@
 title: Rotate and revoke a customer-managed key 
 description: Learn how to rotate, update, and revoke a customer-managed key on Azure Container Registry.
 ms.topic: tutorial
-ms.date: 10/31/2023
+ms.date: 08/5/2022
 ms.custom: subject-rbac-steps, devx-track-azurecli
 ms.author: tejaswikolli
-ms.service: container-registry
 ---
 
 # Rotate and revoke a customer-managed key 
@@ -93,7 +92,7 @@ To change the access policy of the managed identity that your registry uses, run
 az keyvault delete-policy \
   --resource-group <resource-group-name> \
   --name <key-vault-name> \
-  --object-id <key-vault-key-id>
+  --key_id <key-vault-key-id>
 ```
 
 To delete the individual versions of a key, run the [az-keyvault-key-delete](/cli/azure/keyvault/key#az-keyvault-key-delete) command. This operation requires the *keys/delete* permission.

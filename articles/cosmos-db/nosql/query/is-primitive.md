@@ -1,53 +1,61 @@
 ---
-title: IS_PRIMITIVE
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns true if the type of the specified expression is a primitive (string, boolean, numeric, or null).
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: IS_PRIMITIVE in Azure Cosmos DB query language
+description: Learn about SQL system function IS_PRIMITIVE in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# IS_PRIMITIVE (NoSQL query)
-
+# IS_PRIMITIVE (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a boolean value indicating if the type of the specified expression is a primitive (string, boolean, numeric, or null).
-
+ Returns a Boolean value indicating if the type of the specified expression is a primitive (string, Boolean, numeric, or null).  
+  
 ## Syntax
-
-```nosql
+  
+```sql
 IS_PRIMITIVE(<expr>)  
 ```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`expr`** | Any expression. |
+  
+*expr*  
+   Is any expression.  
   
 ## Return types
   
-Returns a boolean expression.  
+  Returns a Boolean expression.  
   
 ## Examples
-
-The following example various values to see if they're a primitive.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/is-primitive/query.sql" highlight="2-10":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/is-primitive/result.json":::
+  
+  The following example checks objects of JSON Boolean, number, string, null, object, array and undefined types using the `IS_PRIMITIVE` function.  
+  
+```sql
+SELECT   
+           IS_PRIMITIVE(true) AS isPrim1,   
+           IS_PRIMITIVE(1) AS isPrim2,  
+           IS_PRIMITIVE("value") AS isPrim3,   
+           IS_PRIMITIVE(null) AS isPrim4,  
+           IS_PRIMITIVE({prop: "value"}) AS isPrim5,   
+           IS_PRIMITIVE([1, 2, 3]) AS isPrim6,  
+           IS_PRIMITIVE({prop: "value"}.prop2) AS isPrim7  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"isPrim1": true, "isPrim2": true, "isPrim3": true, "isPrim4": true, "isPrim5": false, "isPrim6": false, "isPrim7": false}]  
+```  
 
 ## Remarks
 
-- This function benefits from a [range index](../../index-policy.md#includeexclude-strategy).
+This system function will benefit from a [range index](../../index-policy.md#includeexclude-strategy).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`IS_OBJECT`](is-object.md)
+- [Type checking functions Azure Cosmos DB](type-checking-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

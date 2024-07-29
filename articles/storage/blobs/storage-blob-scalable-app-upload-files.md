@@ -1,11 +1,12 @@
 ---
 title: Upload large amounts of random data in parallel to Azure Storage 
 description: Learn how to use the Azure Storage client library to upload large amounts of random data in parallel to an Azure Storage account
-author: akashdubey-ms
-ms.service: azure-blob-storage
+author: roygara
+ms.service: storage
 ms.topic: tutorial
 ms.date: 02/04/2021
-ms.author: akashdubey
+ms.author: rogarana
+ms.subservice: blobs
 ms.devlang: csharp
 ---
 

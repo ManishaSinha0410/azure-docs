@@ -7,7 +7,8 @@ ms.service: dns
 ms.devlang: azurecli
 ms.topic: how-to
 ms.custom: H1Hack27Feb2017, devx-track-azurecli
-ms.date: 11/30/2023
+ms.workload: infrastructure-services
+ms.date: 09/27/2022
 ms.author: greglin
 ---
 

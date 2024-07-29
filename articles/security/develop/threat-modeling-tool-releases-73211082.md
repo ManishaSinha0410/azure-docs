@@ -1,8 +1,8 @@
 ---
 title: Microsoft Threat Modeling Tool release 11/08/2022 - Azure
 description: Documenting the release notes for the threat modeling tool release 7.3.21108.2.
-author: myagley
-ms.author: miyagley
+author: chmg
+ms.author: chmg
 ms.service: security
 ms.topic: article
 ms.date: 11/08/2022

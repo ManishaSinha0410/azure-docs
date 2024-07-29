@@ -5,8 +5,9 @@ ms.author: jonels
 author: jonels-msft
 ms.service: cosmos-db
 ms.subservice: postgresql
+ms.custom: ignite-2022
 ms.topic: conceptual
-ms.date: 10/01/2023
+ms.date: 05/06/2019
 ---
 
 # Table colocation in Azure Cosmos DB for PostgreSQL
@@ -17,13 +18,13 @@ Colocation means storing related information together on the same nodes. Queries
 
 ## Data colocation for hash-distributed tables
 
-In Azure Cosmos DB for PostgreSQL, a row is stored in a shard if the hash of the value in the distribution column falls within the shard's hash range. Shards with the same hash range are always placed on the same node. Rows with equal distribution column values are always on the same node across tables. The concept of hash-distributed tables is also known as [row-based sharding](concepts-sharding-models.md#row-based-sharding). In [schema-based sharding](concepts-sharding-models.md#schema-based-sharding), tables within a distributed schema are always colocated.
+In Azure Cosmos DB for PostgreSQL, a row is stored in a shard if the hash of the value in the distribution column falls within the shard's hash range. Shards with the same hash range are always placed on the same node. Rows with equal distribution column values are always on the same node across tables.
 
 :::image type="content" source="media/concepts-colocation/colocation-shards.png" alt-text="Diagram shows shards with the same hash range placed on the same node for events shards and page shards." border="false":::
 
 ## A practical example of colocation
 
-Consider the following tables that might be part of a multitenant web
+Consider the following tables that might be part of a multi-tenant web
 analytics SaaS:
 
 ```sql
@@ -152,4 +153,4 @@ In some cases, queries and table schemas must be changed to include the tenant I
 
 ## Next steps
 
-- See how tenant data is colocated in the [multitenant tutorial](tutorial-design-database-multi-tenant.md).
+- See how tenant data is colocated in the [multi-tenant tutorial](tutorial-design-database-multi-tenant.md).

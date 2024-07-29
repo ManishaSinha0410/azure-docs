@@ -1,6 +1,7 @@
 ---
 title: Export an Azure Stream Analytics job Azure Resource Manager template 
 description: This article describes how to export an Azure Resource Manager template for your Azure Stream Analytics job.
+services: stream-analytics
 author: xujxu
 ms.author: xujiang1
 ms.service: stream-analytics
@@ -55,7 +56,7 @@ You're ready to deploy your Azure Stream Analytics job using the Azure Resource 
 
 In a PowerShell window, run the following command. Be sure to replace the *ResourceGroupName*, *TemplateFile*, and *TemplateParameterFile* with your actual resource group name, and the complete file paths to the *JobTemplate.json* and *JobTemplate.parameters.json* files in the **Deploy Folder** of your job workspace.
 
-If you don't have Azure PowerShell configured, follow the steps in [Install Azure PowerShell module](/powershell/azure/install-azure-powershell).
+If you don't have Azure PowerShell configured, follow the steps in [Install Azure PowerShell module](/powershell/azure/install-Az-ps).
 
 ```azurepowershell
 New-AzResourceGroupDeployment -ResourceGroupName "<your resource group>" -TemplateFile "<path to JobTemplate.json>" -TemplateParameterFile "<path to JobTemplate.parameters.json>"

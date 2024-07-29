@@ -2,13 +2,12 @@
 title: Enable end-to-end encryption using encryption at host - Azure portal - managed disks
 description: Use encryption at host to enable end-to-end encryption on your Azure managed disks - Azure portal.
 author: roygara
-ms.service: azure-disk-storage
+ms.service: storage
 ms.topic: how-to
-ms.date: 11/02/2023
+ms.date: 03/28/2023
 ms.author: rogarana
-ms.custom:
-  - references_regions
-  - ignite-2023
+ms.subservice: disks
+ms.custom: references_regions
 ---
 
 # Use the Azure portal to enable end-to-end encryption using encryption at host
@@ -22,10 +21,6 @@ Temporary disks and ephemeral OS disks are encrypted at rest with platform-manag
 ## Restrictions
 
 [!INCLUDE [virtual-machines-disks-encryption-at-host-restrictions](../../includes/virtual-machines-disks-encryption-at-host-restrictions.md)]
-
-## Regional availability
-
-[!INCLUDE [virtual-machines-disks-encryption-at-host-regions](../../includes/virtual-machines-disks-encryption-at-host-regions.md)]
 
 ### Supported VM sizes
 
@@ -54,7 +49,7 @@ You must enable the feature for your subscription before you can use encryption 
    ```
    ---
 
-1. Confirm that the registration state is **Registered** (registration might take a few minutes) using the following command before trying out the feature.
+1. Confirm that the registration state is **Registered** (registration may take a few minutes) using the following command before trying out the feature.
 
    ### [Azure PowerShell](#tab/azure-powershell)
 

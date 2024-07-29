@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/08/2022
 ms.author: danlep
 ---
 
 # Log to event hub
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `log-to-eventhub` policy sends messages in the specified format to an event hub defined by a [Logger](/rest/api/apimanagement/current-ga/logger) entity. As its name implies, the policy is used for saving selected request or response context information for online or offline analysis.  
 
@@ -42,7 +40,7 @@ The `log-to-eventhub` policy sends messages in the specified format to an event 
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, outbound, backend, on-error
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ### Usage notes
 
@@ -67,6 +65,6 @@ Any string can be used as the value to be logged in Event Hubs. In this example 
 
 ## Related policies
 
-* [Integration and external communication](api-management-policies.md#integration-and-external-communication)
+* [API Management advanced policies](api-management-advanced-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

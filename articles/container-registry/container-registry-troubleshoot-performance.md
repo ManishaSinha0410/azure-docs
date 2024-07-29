@@ -4,8 +4,7 @@ description: Symptoms, causes, and resolution of common problems with the perfor
 ms.topic: article
 author: tejaswikolli-web
 ms.author: tejaswikolli
-ms.date: 10/31/2023
-ms.service: container-registry
+ms.date: 10/11/2022
 ---
 
 # Troubleshoot registry performance

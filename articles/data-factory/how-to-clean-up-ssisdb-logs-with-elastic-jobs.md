@@ -4,7 +4,7 @@ description: This article describes how to clean up SSIS project deployment and 
 ms.service: data-factory
 ms.subservice: integration-services
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.date: 08/09/2022
 author: chugugrace
 ms.author: chugu
 ---
@@ -386,7 +386,7 @@ SELECT * FROM jobs.job_executions WHERE is_active = 1
 ORDER BY start_time DESC
 ```
 
-## Related content
+## Next steps
 
 To manage and monitor your Azure-SSIS IR, see the following articles.
 

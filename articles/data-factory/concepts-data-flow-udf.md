@@ -8,7 +8,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.custom: synapse
 ms.topic: conceptual
-ms.date: 01/05/2024
+ms.date: 06/10/2022
 ---
 
 # User defined functions in mapping data flow 

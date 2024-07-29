@@ -1,7 +1,8 @@
 ---
 title: Azure managed applications with notifications
 description: Configure an Azure managed application with webhook endpoints to receive notifications about creates, updates, deletes, and errors on the managed application instances.
-ms.topic: how-to
+ms.topic: conceptual
+ms.custom: ignite-2022
 ms.date: 08/18/2022
 ---
 

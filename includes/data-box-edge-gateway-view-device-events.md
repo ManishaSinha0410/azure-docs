@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 10/11/2021
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Take the following steps in the Azure portal to view a device event. 

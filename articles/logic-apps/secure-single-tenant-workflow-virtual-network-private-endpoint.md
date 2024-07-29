@@ -6,8 +6,9 @@ ms.suite: integration
 ms.reviewer: estfan, azla
 ms.topic: how-to
 ms.custom: engagement-fy23
-ms.date: 01/10/2024
-# Customer intent: As a developer, I want to connect to my Standard logic app workflows with virtual networks using private endpoints and virtual network integration.
+ms.date: 02/22/2023
+
+# As a developer, I want to connect to my Standard logic app workflows with virtual networks using private endpoints and virtual network integration.
 ---
 
 # Secure traffic between Standard logic apps and Azure virtual networks using private endpoints

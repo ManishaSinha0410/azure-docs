@@ -1,9 +1,9 @@
 ---
-title: CI/CD with Azure Pipelines, Bicep, and bicepparam files
-description: In this quickstart, you learn how to configure continuous integration in Azure Pipelines by using Bicep and bicepparam files. It shows how to use an Azure CLI task to deploy a bicepparam file.
+title: CI/CD with Azure Pipelines and Bicep files
+description: In this quickstart, you learn how to configure continuous integration in Azure Pipelines by using Bicep files. It shows how to use an Azure CLI task to deploy a Bicep file.
 ms.topic: quickstart
 ms.custom: devx-track-bicep, devx-track-azurecli
-ms.date: 02/29/2024
+ms.date: 01/10/2023
 ---
 
 # Quickstart: Integrate Bicep with Azure Pipelines
@@ -22,25 +22,23 @@ You need to have configured a [service connection](/azure/devops/pipelines/libra
 
 You need a [Bicep file](./quickstart-create-bicep-use-visual-studio-code.md) that defines the infrastructure for your project. This file is in a repository.
 
-You need a [bicepparam file](/azure/azure-resource-manager/bicep/parameter-files) that defines the parameters used by your bicep file. This file is in a repository.
-
 ## Create pipeline
 
-1. From your Azure DevOps organization, select **Pipelines** and **Create pipeline**.
+1. From your Azure DevOps organization, select **Pipelines** and **New pipeline**.
 
-    :::image type="content" source="./media/add-template-to-azure-pipelines/new-pipeline.png" alt-text="Screenshot of creating new pipeline.":::
+   ![Add new pipeline](./media/add-template-to-azure-pipelines/new-pipeline.png)
 
-1. Specify where your code is stored. This quickstart uses Azure Repos Git.
+1. Specify where your code is stored.
 
-    :::image type="content" source="./media/add-template-to-azure-pipelines/select-source.png" alt-text="Screenshot of selecting code source.":::
+   ![Select code source](./media/add-template-to-azure-pipelines/select-source.png)
 
 1. Select the repository that has the code for your project.
 
-    :::image type="content" source="./media/add-template-to-azure-pipelines/select-repo.png" alt-text="Screenshot of selecting repository.":::
+   ![Select repository](./media/add-template-to-azure-pipelines/select-repo.png)
 
 1. Select **Starter pipeline** for the type of pipeline to create.
 
-    :::image type="content" source="./media/add-template-to-azure-pipelines/select-pipeline.png" alt-text="Screenshot of selecting pipeline.":::
+   ![Select pipeline](./media/add-template-to-azure-pipelines/select-pipeline.png)
 
 ## Deploy Bicep files
 
@@ -48,105 +46,79 @@ You can use Azure Resource Group Deployment task or Azure CLI task to deploy a B
 
 ### Use Azure Resource Manager Template Deployment task
 
-> [!NOTE]
-> As of version 3.235.0 of the [Azure Resource Manager Template Deployment task](/azure/devops/pipelines/tasks/reference/azure-resource-manager-template-deployment-v3), usage of [bicepparam](/azure/azure-resource-manager/bicep/parameter-files) files is supported.
+Replace your starter pipeline with the following YAML. It creates a resource group and deploys a Bicep file by using an [Azure Resource Manager Template Deployment task](/azure/devops/pipelines/tasks/reference/azure-resource-manager-template-deployment-v3).
 
-> [!NOTE]
-> The `AzureResourceManagerTemplateDeployment@3` task requires both Bicep and bicepparam files be provided when using bicepparam. The Bicep file can reference all supported locations for module references. The bicepparam file must reference the local Bicep file in the `using` statement.
+```yml
+trigger:
+- master
 
-1. Replace your starter pipeline with the following YAML. It creates a resource group and deploys a Bicep and bicepparam file by using the Azure Resource Manager Template Deployment task.
+name: Deploy Bicep files
 
-    ```yml
-    trigger:
-    - main
+variables:
+  vmImageName: 'ubuntu-latest'
 
-    name: Deploy Bicep files
+  azureServiceConnection: '<your-connection-name>'
+  resourceGroupName: 'exampleRG'
+  location: '<your-resource-group-location>'
+  templateFile: './main.bicep'
+pool:
+  vmImage: $(vmImageName)
 
-    parameters:
-    - name: azureServiceConnection
-      type: string
-      default: '<your-connection-name>'
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: '$(azureServiceConnection)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    location: '$(location)'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(templateFile)'
+    overrideParameters: '-storageAccountType Standard_LRS'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
+```
 
-    variables:
-      vmImageName: 'ubuntu-latest'
-      resourceGroupName: 'exampleRG'
-      location: '<your-resource-group-location>'
-      templateFile: './main.bicep'
-      csmParametersFile: './main.bicepparam'
+For the descriptions of the task inputs, see [Azure Resource Manager Template Deployment task](/azure/devops/pipelines/tasks/reference/azure-resource-manager-template-deployment-v3).
 
-    pool:
-      vmImage: $(vmImageName)
-
-    steps:
-    - task: AzureResourceManagerTemplateDeployment@3
-      inputs:
-        deploymentScope: 'Resource Group'
-        azureSubscription: '${{ parameters.azureServiceConnection }}'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: '$(resourceGroupName)'
-        location: '$(location)'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(templateFile)'
-        csmParametersFile: '$(csmParametersFile)'
-        overrideParameters: '-storageAccountType Standard_LRS'
-        deploymentMode: 'Incremental'
-        deploymentName: 'DeployPipelineTemplate'
-    ```
-
-1. Update the values of `azureServiceConnection` and `location`.
-1. Verify you have a valid `main.bicep` file in your repo.
-1. Verify you have a valid `main.bicepparam` file in your repo that contains a [using](/azure/azure-resource-manager/bicep/bicep-using) statement.
-1. Select **Save**. The build pipeline automatically runs. Go back to the summary for your build pipeline, and watch the status.
+Select **Save**. The build pipeline automatically runs. Go back to the summary for your build pipeline, and watch the status.
 
 ### Use Azure CLI task
 
-> [!NOTE]
-> The [az deployment group create](/cli/azure/deployment/group?view=azure-cli-latest#az-deployment-group-create&preserve-view=true) command requires only a bicepparam file. The `using` statement in the bicepparam file can target any supported location to reference the Bicep file. A Bicep file is only required in your repository when `using` from a local disk path with Azure CLI.
+Replace your starter pipeline with the following YAML. It creates a resource group and deploys a Bicep file by using an [Azure CLI task](/azure/devops/pipelines/tasks/reference/azure-cli-v2):
 
-> [!NOTE]
-> When you use a *[bicepparam](/azure/azure-resource-manager/bicep/parameter-files)* file with the [az deployment group create](/cli/azure/deployment/group?view=azure-cli-latest#az-deployment-group-create&preserve-view=true) command, you can't override parameters.
+```yml
+trigger:
+- master
 
-1. Replace your starter pipeline with the following YAML. It creates a resource group and deploys a [bicepparam](/azure/azure-resource-manager/bicep/parameter-files) file by using an [Azure CLI task](/azure/devops/pipelines/tasks/reference/azure-cli-v2):
+name: Deploy Bicep files
 
-    ```yml
-    trigger:
-    - main
+variables:
+  vmImageName: 'ubuntu-latest'
 
-    name: Deploy Bicep files
+  azureServiceConnection: '<your-connection-name>'
+  resourceGroupName: 'exampleRG'
+  location: '<your-resource-group-location>'
+  templateFile: 'main.bicep'
+pool:
+  vmImage: $(vmImageName)
 
-    parameters:
-      azureServiceConnection: '<your-connection-name>'
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: $(azureServiceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    useGlobalConfig: false
+    inlineScript: |
+      az --version
+      az group create --name $(resourceGroupName) --location $(location)
+      az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile)
+```
 
-    variables:
-      vmImageName: 'ubuntu-latest'
-      resourceGroupName: 'exampleRG'
-      location: '<your-resource-group-location>'
-      bicepParamFile: './main.bicepparam'
+For the descriptions of the task inputs, see [Azure CLI task](/azure/devops/pipelines/tasks/reference/azure-cli-v2). When using the task on air-gapped cloud, you must set the `useGlobalConfig` property of the task to `true`. The default value is `false`.
 
-    pool:
-      vmImage: $(vmImageName)
-
-    steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: '${{ parameters.azureServiceConnection }}'
-        scriptType: bash
-        scriptLocation: inlineScript
-        useGlobalConfig: false
-        inlineScript: |
-          az --version
-          az group create --name $(resourceGroupName) --location $(location)
-          az deployment group create `
-            --resource-group $(resourceGroupName) `
-            --parameters $(bicepParamFile) `
-            --name DeployPipelineTemplate
-    ```
-
-    For the descriptions of the task inputs, see [Azure CLI task](/azure/devops/pipelines/tasks/reference/azure-cli-v2). When using the task on air-gapped cloud, you must set the `useGlobalConfig` property of the task to `true`. The default value is `false`.
-
-1. Update the values of `azureServiceConnection` and `location`.
-1. Verify you have a valid `main.bicepparam` file in your repo that contains a [using](/azure/azure-resource-manager/bicep/bicep-using) statement.
-1. Select **Save**. The build pipeline automatically runs. Go back to the summary for your build pipeline, and watch the status.
+Select **Save**. The build pipeline automatically runs. Go back to the summary for your build pipeline, and watch the status.
 
 ## Clean up resources
 

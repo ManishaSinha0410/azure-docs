@@ -9,7 +9,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 05/15/2024
+ms.date: 08/04/2022
 ---
 
 # Lookup transformations in mapping data flow
@@ -98,7 +98,7 @@ SQLProducts, DimProd lookup(ProductID == ProductKey,
     broadcast: 'auto')~> LookupKeys
 ```
 
-## Related content
+## Next steps
 
 * The [join](data-flow-join.md) and [exists](data-flow-exists.md) transformations both take in multiple stream inputs
 * Use a [conditional split transformation](data-flow-conditional-split.md) with ```isMatch()``` to split rows on matching and non-matching values

@@ -2,15 +2,19 @@
 title: Azure infrastructure monitoring
 description: Learn about infrastructure monitoring aspects of the Azure production network, such as vulnerability scanning.
 services: security
+documentationcenter: na
 author: TerryLanfear
-manager: rkarlin
+manager: barbkess
+editor: TomSh
 
 ms.assetid: 61e95a87-39c5-48f5-aee6-6f90ddcd336e
-ms.service: security
-ms.subservice: security-fundamentals
+ms.service: azure-monitor
 ms.topic: article
-ms.date: 08/29/2023
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/28/2018
 ms.author: terrylan
+
 ---
 
 # Azure infrastructure monitoring   
@@ -52,4 +56,3 @@ To learn more about what Microsoft does to secure the Azure infrastructure, see:
 - [Azure production operations and management](infrastructure-operations.md)
 - [Azure infrastructure integrity](infrastructure-integrity.md)
 - [Azure customer data protection](protection-customer-data.md)
-

@@ -8,71 +8,95 @@ ms.subservice: mongodb
 ms.devlang: csharp
 ms.topic: quickstart
 ms.date: 07/06/2022
-ms.custom: devx-track-csharp, mode-api, devguide-csharp, cosmos-db-dev-journey, devx-track-azurecli, devx-track-dotnet, devx-track-extended-azdevcli
-zone_pivot_groups: azure-cosmos-db-quickstart-env
+ms.custom: devx-track-csharp, mode-api, ignite-2022, devguide-csharp, cosmos-db-dev-journey, devx-track-azurecli
 ---
 
 # Quickstart: Azure Cosmos DB for MongoDB for .NET with the MongoDB driver
 
 [!INCLUDE[MongoDB](../includes/appliesto-mongodb.md)]
 
-Get started with MongoDB to create databases, collections, and docs within your Azure Cosmos DB resource. Follow these steps to deploy a minimal solution to your environment using the Azure Developer CLI.
+Get started with MongoDB to create databases, collections, and docs within your Azure Cosmos DB resource. Follow these steps to  install the package and try out example code for basic tasks.
+
+> [!NOTE]
+> The [example code snippets](https://github.com/Azure-Samples/cosmos-db-mongodb-api-dotnet-samples) are available on GitHub as a .NET project.
 
 [API for MongoDB reference documentation](https://www.mongodb.com/docs/drivers/csharp) | [MongoDB Package (NuGet)](https://www.nuget.org/packages/MongoDB.Driver)
-packages/Microsoft.Azure.Cosmos) | [Azure Developer CLI](/azure/developer/azure-developer-cli/overview)
 
 ## Prerequisites
 
-[!INCLUDE [Developer Quickstart prerequisites](../nosql/includes/quickstart/dev-prereqs.md)]
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free).
+- [.NET 6.0](https://dotnet.microsoft.com/download)
+- [Azure Command-Line Interface (CLI)](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-az-ps)
+
+### Prerequisite check
+
+- In a terminal or command window, run ``dotnet --list-sdks`` to check that .NET 6.x is one of the available versions.
+- Run ``az --version`` (Azure CLI) or ``Get-Module -ListAvailable AzureRM`` (Azure PowerShell) to check that you have the appropriate Azure command-line tools installed.
 
 ## Setting up
 
-Deploy this project's development container to your environment. Then, use the Azure Developer CLI (`azd`) to create an Azure Cosmos DB for MongoDB account and deploy a containerized sample application. The sample application uses the client library to manage, create, read, and query sample data.
+This section walks you through creating an Azure Cosmos DB account and setting up a project that uses the MongoDB NuGet packages.
 
-::: zone pivot="devcontainer-codespace"
+### Create an Azure Cosmos DB account
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/azure-samples/cosmos-db-mongodb-dotnet-quickstart?template=false&quickstart=1&azure-portal=true)
+This quickstart will create a single Azure Cosmos DB account using the API for MongoDB.
 
-::: zone-end
+#### [Azure CLI](#tab/azure-cli)
 
-::: zone pivot="devcontainer-vscode"
+[!INCLUDE [Azure CLI - create resources](<./includes/azure-cli-create-resource-group-and-resource.md>)]
 
-[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/cosmos-db-mongodb-dotnet-quickstart)
+#### [PowerShell](#tab/azure-powershell)
 
-::: zone-end
+[!INCLUDE [Powershell - create resource group and resources](<./includes/powershell-create-resource-group-and-resource.md>)]
 
-[!INCLUDE [dev-setup](../nosql/includes/quickstart/dev-setup.md)]
+#### [Portal](#tab/azure-portal)
+
+[!INCLUDE [Portal - create resource](<./includes/portal-create-resource.md>)]
 
 ---
 
-### Install the client library
+### Get MongoDB connection string
 
-The client library is available through NuGet, as the `Microsoft.Azure.Cosmos` package.
+#### [Azure CLI](#tab/azure-cli)
 
-1. Open a terminal and navigate to the `/src/web` folder.
+[!INCLUDE [Azure CLI - get connection string](<./includes/azure-cli-get-connection-string.md>)]
 
-    ```bash
-    cd ./src/web
-    ```
+#### [PowerShell](#tab/azure-powershell)
 
-1. If not already installed, install the `MongoDb.Driver` package using `dotnet add package`.
+[!INCLUDE [Powershell - get connection string](<./includes/powershell-get-connection-string.md>)]
 
-    ```bash
-    dotnet add package MongoDb.Driver
-    ```
+#### [Portal](#tab/azure-portal)
 
-1. Also, install the `Azure.Identity` package if not already installed.
+[!INCLUDE [Portal - get connection string](<./includes/portal-get-connection-string-from-resource.md>)]
 
-    ```bash
-    dotnet add package Azure.Identity
-    ```
+---
+
+### Create a new .NET app
+
+Create a new .NET application in an empty folder using your preferred terminal. Use the [``dotnet new console``](/dotnet/core/tools/dotnet-new) to create a new console app.
+
+```console
+dotnet new console -o <app-name>
+```
+
+### Install the NuGet package
+
+Add the [MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver) NuGet package to the new .NET project. Use the [``dotnet add package``](/dotnet/core/tools/dotnet-add-package) command specifying the name of the NuGet package.
+
+```console
+dotnet add package MongoDb.Driver
+```
+
+### Configure environment variables
+
+[!INCLUDE [Multi-tab](<./includes/environment-variables-connection-string.md>)]
 
 ## Object model
 
 Before you start building the application, let's look into the hierarchy of resources in Azure Cosmos DB. Azure Cosmos DB has a specific object model used to create and access resources. The Azure Cosmos DB creates resources in a hierarchy that consists of accounts, databases, collections, and docs.
 
 :::image type="complex" source="media/quickstart-dotnet/resource-hierarchy.png" alt-text="Diagram of the Azure Cosmos DB hierarchy including accounts, databases, collections, and docs.":::
-    Hierarchical diagram showing an Azure Cosmos DB account at the top. The account has two child database shards. One of the database shards includes two child collection shards. The other database shard includes a single child collection shard. That single collection shard has three child doc shards.
+    Hierarchical diagram showing an Azure Cosmos DB account at the top. The account has two child database nodes. One of the database nodes includes two child collection nodes. The other database node includes a single child collection node. That single collection node has three child doc nodes.
 :::image-end:::
 
 You'll use the following MongoDB classes to interact with these resources:
@@ -166,7 +190,7 @@ Sand Surfboard
 
 ## Clean up resources
 
-When you no longer need the Azure Cosmos DB for MongoDB account, you can delete the corresponding resource group.
+When you no longer need the Azure Cosmos DB for NoSQL account, you can delete the corresponding resource group.
 
 ### [Azure CLI / Resource Manager template](#tab/azure-cli)
 

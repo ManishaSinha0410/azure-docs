@@ -2,13 +2,13 @@
 title: Administer Azure Data Box/Azure Data Box Heavy using local web UI
 description: Describes how to use the local web UI to administer your Data Box and Data Box Heavy devices
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: pod
 ms.topic: article
 ms.date: 08/31/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 # Use the local web UI to administer your Data Box and Data Box Heavy

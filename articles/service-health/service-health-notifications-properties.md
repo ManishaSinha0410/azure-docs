@@ -56,7 +56,7 @@ Properties.communicationId | The communication with which this event is associat
 - Warning - Emergency maintenance
 - Informational - Standard planned maintenance
 
-**Information** (properties.incidentType == Informational)
+**Information** (properties.incidentType == Information)
 - Informational - Administrator may be required to prevent impact to existing services.
 
 **Security** (properties.incidentType == Security)

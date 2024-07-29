@@ -14,7 +14,7 @@ As outlined in the [Azure Application Gateway Documentation](./application-gatew
 
 ## Example
 ```yaml
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: guestbook

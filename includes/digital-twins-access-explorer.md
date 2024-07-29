@@ -19,4 +19,5 @@ Azure Digital Twins Explorer might automatically connect to your instance. If no
 
 If you see this box, enter *https://* into the field, followed by the host name of your instance (this can be found back on the instance's **Overview** page in the portal). These values together make up the instance URL. Select **Save** to connect to your instance.
 
-[!INCLUDE [digital-twins-explorer-private-note.md](digital-twins-explorer-private-note.md)]
+>[!NOTE]
+> The hosted Azure Digital Twins Explorer can only access Azure Digital Twins instances with public access enabled. If you're using [Private Link](../articles/digital-twins/concepts-security.md#private-network-access-with-azure-private-link) to restrict access to your instance through a private endpoint, you can use Azure functions to deploy the Azure Digital Twins Explorer codebase privately in the cloud. For instructions on how to do this, see [Azure Digital Twins Explorer: Running in the cloud](https://github.com/Azure-Samples/digital-twins-explorer#running-in-the-cloud).

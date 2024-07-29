@@ -1,55 +1,76 @@
 ---
-title: ARRAY_SLICE
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a subset of the items in an array.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ARRAY_SLICE in Azure Cosmos DB query language
+description: Learn about how the Array slice SQL system function in Azure Cosmos DB returns part of an array expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ARRAY_SLICE (NoSQL query)
-
+# ARRAY_SLICE (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a subset of an array expression using the index and length specified.
+ Returns part of an array expression.
   
 ## Syntax
   
-```nosql
-ARRAY_SLICE(<array_expr>, <numeric_expr_1> [, <numeric_expr_2>])  
+```sql
+ARRAY_SLICE (<arr_expr>, <num_expr> [, <num_expr>])  
 ```  
   
 ## Arguments
+  
+*arr_expr*  
+   Is any array expression.  
+  
+*num_expr*  
+   Zero-based numeric index at which to begin the array. Negative values may be used to specify the starting index relative to the last element of the array i.e. -1 references the last element in the array.  
 
-| | Description |
-| --- | --- |
-| **`array_expr`** | An array expression. |
-| **`numeric_expr_1`** | A numeric expression indicating the index where to begin the array for the subset. Optionally, negative values can be used to specify the starting index relative to the last element of the array. |
-| **`numeric_expr_2` *(Optional)*** | An optional numeric expression indicating the maximum length of elements in the resulting array. |
+*num_expr*
+   Optional numeric expression that sets the maximum number of elements in the resulting array.    
 
 ## Return types
-
-Returns an array expression.  
-
+  
+  Returns an array expression.  
+  
 ## Examples
   
-The following example shows how to get different slices of an array using the function.  
+  The following example shows how to get different slices of an array using `ARRAY_SLICE`.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/array-slice/query.sql" highlight="2-9":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/array-slice/result.json":::
+```sql
+SELECT
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], 1) AS s1,  
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], 1, 1) AS s2,
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], -2, 1) AS s3,
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], -2, 2) AS s4,
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], 1, 0) AS s5,
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], 1, 1000) AS s6,
+           ARRAY_SLICE(["apples", "strawberries", "bananas"], 1, -100) AS s7      
+  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{  
+           "s1": ["strawberries", "bananas"],   
+           "s2": ["strawberries"],
+           "s3": ["strawberries"],  
+           "s4": ["strawberries", "bananas"], 
+           "s5": [],
+           "s6": ["strawberries", "bananas"],
+           "s7": [] 
+}]  
+```  
 
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`ARRAY_LENGTH`](array-length.md)
+- [Array functions Azure Cosmos DB](array-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

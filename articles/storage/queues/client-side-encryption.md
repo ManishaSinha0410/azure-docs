@@ -5,11 +5,12 @@ description: The Queue Storage client library supports client-side encryption an
 services: storage
 author: pauljewellmsft
 
-ms.service: azure-queue-storage
+ms.service: storage
 ms.topic: article
 ms.date: 07/11/2022
 ms.author: pauljewell
 ms.reviewer: ozgun
+ms.subservice: queues
 ms.custom: devx-track-csharp
 ---
 

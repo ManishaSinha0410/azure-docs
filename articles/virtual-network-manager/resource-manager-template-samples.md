@@ -5,9 +5,8 @@ description: This article has links to Azure Resource Manager template examples 
 services: virtual-network-manager
 author: mbender-ms
 ms.service: virtual-network-manager
-ms.custom: devx-track-arm-template
 ms.topic: sample
-ms.date: 03/28/2024
+ms.date: 03/28/2023
 ms.author: mbender
 ---
 
@@ -22,9 +21,7 @@ For the JSON syntax and properties to use in templates, see [Microsoft.Network r
 > [!IMPORTANT]
 > In cases where a template is deploying connectivity or security configurations, the template requires a custom deployment script to deploy the configuration. The script is located at the end of the ARM template, and it uses the `Microsoft.Resources/deploymentScripts` resource type. For more information on deployment scripts, review [Use deployment scripts in ARM templates](../azure-resource-manager/templates/deployment-script-template.md).
 
-[!INCLUDE [virtual-network-manager-preview](../../includes/virtual-network-manager-preview.md)]
-
 ## Samples
 | Example | Description |
 |-------- | ----------- |
-| [Hub-spoke network topology in Azure](/samples/mspnp/samples/hub-and-spoke-deployment-with-connected-groups/) | Creates a hub-spoke network pattern with customer-managed hub infrastructure components. |
+| [Hub-spoke network topology in Azure](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke?tabs=portal#use-virtual-network-manager-connected-groups) | Creates a hub-spoke network pattern with customer-managed hub infrastructure components. |

@@ -1,9 +1,9 @@
 ---
 title: Linter rule - use parent property
 description: Linter rule - use parent property
-ms.topic: reference
+ms.topic: conceptual
 ms.custom: devx-track-bicep
-ms.date: 03/20/2024
+ms.date: 01/30/2023
 ---
 
 # Linter rule - use parent property

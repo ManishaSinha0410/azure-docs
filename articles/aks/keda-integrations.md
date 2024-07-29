@@ -1,18 +1,20 @@
 ---
-title: Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS)
-description: Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS).
+title: Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS) (Preview)
+description: Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS) (Preview).
 author: tomkerkhove
 ms.topic: article
-ms.date: 09/27/2023
+ms.date: 05/24/2022
 ms.author: tomkerkhove
 ---
 
-# Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS)
+# Integrations with Kubernetes Event-driven Autoscaling (KEDA) on Azure Kubernetes Service (AKS) (Preview)
 
-The Kubernetes Event-driven Autoscaling (KEDA) add-on for AKS integrates with features provided by Azure and open-source projects.
+The Kubernetes Event-driven Autoscaling (KEDA) add-on integrates with features provided by Azure and open source projects.
+
+[!INCLUDE [preview features callout](./includes/preview/preview-callout.md)]
 
 > [!IMPORTANT]
-> The [AKS support policy][aks-support-policy] doesn't cover integrations with open-source projects.
+> Integrations with open source projects are not covered by the [AKS support policy][aks-support-policy].
 
 ## Observe your autoscaling with Kubernetes events
 
@@ -22,9 +24,9 @@ To learn about the available metrics, we recommend reading the [KEDA documentati
 
 ## Scalers for Azure services
 
-KEDA can integrate with various tools and services through [a rich catalog of Azure KEDA scalers][keda-scalers] and supports leading cloud platforms and open-source technologies.
+KEDA can integrate with various tools and services through [a rich catalog of 50+ KEDA scalers][keda-scalers]. It supports leading cloud platforms (such as Azure) and open-source technologies such as Redis and Kafka.
 
-KEDA leverages the following scalers for Azure services:
+It leverages the following scalers for Azure services:
 
 - [Azure Application Insights](https://keda.sh/docs/latest/scalers/azure-app-insights/)
 - [Azure Blob Storage](https://keda.sh/docs/latest/scalers/azure-storage-blob/)
@@ -36,13 +38,11 @@ KEDA leverages the following scalers for Azure services:
 - [Azure Service Bus](https://keda.sh/docs/latest/scalers/azure-service-bus/)
 - [Azure Storage Queue](https://keda.sh/docs/latest/scalers/azure-storage-queue/)
 
-As of KEDA version `2.10`, the [Prometheus scaler][prometheus-scaler] supports Azure managed service for Prometheus.
+Next to the built-in scalers, you can install external scalers yourself to autoscale on other Azure services:
 
-You can also install external scalers to autoscale on other Azure services:
 - [Azure Cosmos DB (Change feed)](https://github.com/kedacore/external-scaler-azure-cosmos-db)
 
-> [!IMPORTANT]
-> External scalers *aren't supported as part of the add-on* and rely on community support.
+However, these external scalers aren't supported as part of the add-on and rely on community support.
 
 ## Next steps
 
@@ -50,7 +50,6 @@ You can also install external scalers to autoscale on other Azure services:
 * [Enable the KEDA add-on with the Azure CLI][keda-cli]
 * [Troubleshoot KEDA add-on problems][keda-troubleshoot]
 * [Autoscale a .NET Core worker processing Azure Service Bus Queue message][keda-sample]
-* [View the upstream KEDA docs][keda]
 
 <!-- LINKS - internal -->
 [aks-support-policy]: support-policies.md
@@ -62,6 +61,3 @@ You can also install external scalers to autoscale on other Azure services:
 [keda-scalers]: https://keda.sh/docs/latest/scalers/
 [keda-event-docs]: https://keda.sh/docs/latest/operate/events/
 [keda-sample]: https://github.com/kedacore/sample-dotnet-worker-servicebus-queue
-[prometheus-scaler]: https://keda.sh/docs/2.11/scalers/prometheus/
-[keda]: https://keda.sh/docs/2.12/
-

@@ -4,8 +4,8 @@ description: This article describes how to access the slow query logs in Azure D
 ms.service: mysql
 ms.subservice: single-server
 ms.topic: how-to
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli
 ms.date: 06/20/2022

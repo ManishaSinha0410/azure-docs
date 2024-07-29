@@ -7,6 +7,7 @@ author: eamonoreilly
 
 ms.service: automation
 ms.topic: tutorial
+ms.workload: infrastructure-services
 ms.date: 07/07/2020
 ms.author: eamono
 ---

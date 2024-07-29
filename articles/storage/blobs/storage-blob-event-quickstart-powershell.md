@@ -6,7 +6,8 @@ ms.author: normesta
 ms.reviewer: dastanfo
 ms.date: 08/23/2018
 ms.topic: article
-ms.service: azure-blob-storage
+ms.service: storage
+ms.subservice: blobs 
 ms.custom: devx-track-azurepowershell
 ---
 
@@ -24,7 +25,7 @@ When you're finished, you see that the event data has been sent to the web app.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-This article requires that you're running the latest version of Azure PowerShell. If you need to install or upgrade, see [Install and configure Azure PowerShell](/powershell/azure/install-azure-powershell).
+This article requires that you're running the latest version of Azure PowerShell. If you need to install or upgrade, see [Install and configure Azure PowerShell](/powershell/azure/install-Az-ps).
 
 ## Sign in to Azure
 
@@ -69,8 +70,7 @@ $storageAccount = New-AzStorageAccount -ResourceGroupName $resourceGroup `
   -Location $location `
   -SkuName Standard_LRS `
   -Kind BlobStorage `
-  -AccessTier Hot `
-  -AllowBlobPublicAccess $false  
+  -AccessTier Hot
 
 $ctx = $storageAccount.Context
 ```

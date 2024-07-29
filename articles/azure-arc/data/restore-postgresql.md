@@ -4,7 +4,6 @@ description: Explains how to restore Arc-enabled PostgreSQL server. You can rest
 services: azure-arc
 ms.service: azure-arc
 ms.subservice: azure-arc-data-postgresql
-ms.custom: devx-track-azurecli
 author: dhanmm
 ms.author: dhmahaja
 ms.reviewer: mikeray
@@ -56,7 +55,7 @@ For details about all the parameters available for restore review the output of 
 az postgres server-arc restore --help
 ```
 
-## Related content
+## Next steps
 
 - [Configure automated backup - Azure Arc-enabled PostgreSQL servers](backup-restore-postgresql.md)
 - [Scaling up or down (increasing/decreasing memory/vcores)](scale-up-down-postgresql-server-using-cli.md) your server.

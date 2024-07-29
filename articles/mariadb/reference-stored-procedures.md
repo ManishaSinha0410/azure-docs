@@ -2,15 +2,13 @@
 title: Management stored procedures - Azure Database for MariaDB
 description: Learn which stored procedures in Azure Database for MariaDB are useful to help you configure data-in replication, set the timezone, and kill queries.
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: conceptual
 ms.date: 06/24/2022
 ---
 
 # Azure Database for MariaDB management stored procedures
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 Stored procedures are available on Azure Database for MariaDB servers to help manage your MariaDB server. This includes managing your server's connections, queries, and setting up Data-in Replication.
 

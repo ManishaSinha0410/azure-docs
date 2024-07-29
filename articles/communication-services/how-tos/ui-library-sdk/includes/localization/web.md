@@ -1,5 +1,5 @@
 ---
-description: Learn how to use the Calling composite in the Web UI Library.
+description: In this tutorial, you learn how to use the Calling composite on Web
 author: jorgegarc
 
 ms.author: jorgegarc
@@ -8,6 +8,9 @@ ms.topic: include
 ms.service: azure-communication-services
 ---
 
-For detailed documentation and quickstarts about the Web UI Library, see the [Web UI Library Storybook](https://azure.github.io/communication-ui-library).
+> [!NOTE]
+> For detailed documentation and quickstarts about the Web UI Library visit the [**Web UI Library Storybook**](https://azure.github.io/communication-ui-library).
 
-To learn more, see [Localization](https://azure.github.io/communication-ui-library/?path=/docs/localization--page#localization) in the Web UI Library.
+### You can access the following link to learn more
+
+- [Localization](https://azure.github.io/communication-ui-library/?path=/docs/localization--page#localization)

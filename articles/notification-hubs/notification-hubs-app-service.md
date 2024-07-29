@@ -6,6 +6,7 @@ manager: femila
 services: notification-hubs
 
 ms.service: notification-hubs
+ms.workload: mobile
 ms.tgt_pltfrm: multiple
 ms.topic: overview
 ms.custom: mvc

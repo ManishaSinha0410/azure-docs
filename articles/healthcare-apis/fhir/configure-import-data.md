@@ -1,160 +1,89 @@
 ---
 title: Configure import settings in the FHIR service - Azure Health Data Services
 description: This article describes how to configure import settings in the FHIR service.
-author: Expekesheth
+author: RuiyiC
 ms.service: healthcare-apis
 ms.subservice: fhir
 ms.topic: how-to
 ms.date: 06/06/2022
-ms.author: kesheth
+ms.author: chenrui 
 ---
 
-# Configure FHIR import settings
+# Configure bulk-import settings
 
-This article walks you through the steps to configure settings on the FHIR service for `import` operations. To configure settings, you need to:
+The FHIR service supports $import operation that allows you to import data into FHIR service account from a storage account.
 
-1. Enable a managed identity on the FHIR service.
-1. Create an Azure storage account or use an existing storage account, and then grant permissions to the FHIR service to access it.
-1. Set the import configuration of the FHIR service.
-1. Use one of the options to securely import FHIR data into the FHIR service from an Azure Data Lake Storage Gen2 account.
+The three steps below are used in configuring import settings in the FHIR service:
 
-## Step 1: Enable a managed identity on the FHIR service
+- Enable managed identity for the FHIR service.
+- Create an Azure storage account or use an existing storage account, and then grant permissions to the FHIR service to access it.
+- Set the import configuration in the FHIR service.
 
-The first step is to enable a system-wide managed identity on the service. This identity is used to grant FHIR service access to the storage account. For more information about managed identities in Azure, see [About managed identities for Azure resources](../../active-directory/managed-identities-azure-resources/overview.md).
+## Enable managed identity on the FHIR service
 
-To enable a managed identity on the FHIR service:
+The first step in configuring the FHIR service for import is to enable system wide managed identity on the service, which will be used to grant the service to access the storage account. For more information about managed identities in Azure, see [About managed identities for Azure resources](../../active-directory/managed-identities-azure-resources/overview.md).
 
-1. In the Azure portal, browse to your FHIR service.
-2. On the left menu, select **Identity**.
-3. Set the **Status** option to **On**, and then select **Save**.
-4. Select **Yes**.
+In this step, browse to your FHIR service in the Azure portal, and select the **Identity** blade. Select the **Status** option to **On** , and then select **Save**. The **Yes** and **No** buttons will display. Select **Yes** to enable the managed identity for FHIR service. After the system identity has been enabled, you'll see a system assigned GUID value. 
 
-After you enable the managed identity, a system-assigned GUID value appears.
+[![Enable Managed Identity](media/export-data/fhir-mi-enabled.png)](media/export-data/fhir-mi-enabled.png#lightbox)
 
-[![Screenshot that shows selections for enabling a managed identity for the FHIR service.](media/export-data/fhir-mi-enabled.png)](media/export-data/fhir-mi-enabled.png#lightbox)
 
-## Step 2: Assign permissions to the FHIR service
+## Assign permissions to the FHIR service to access the storage account
 
-Use the following steps to assign permissions to access the storage account:
+Browse to the **Access Control (IAM)** in the storage account, and then select **Add role assignment**. If the add role assignment option is grayed out, you'll need to ask your Azure Administrator to assign you permission to perform this task.
 
-1. In the storage account, browse to **Access Control (IAM)**.
-2. Select **Add role assignment**. If the option for adding a role assignment is unavailable, ask your Azure administrator to assign you permission to perform this step.
+For more information about assigning roles in the Azure portal, see [Azure built-in roles](../../role-based-access-control/role-assignments-portal.md).
 
-   For more information about assigning roles in the Azure portal, see [Azure built-in roles](../../role-based-access-control/role-assignments-portal.yml).
-3. Add the [Storage Blob Data Contributor](../../role-based-access-control/built-in-roles.md#storage-blob-data-contributor) role to the FHIR service.
-4. Select **Save**.
+Add the role [Storage Blob Data Contributor](../../role-based-access-control/built-in-roles.md#storage-blob-data-contributor) to the FHIR service, and then select **Save**.
 
-[![Screenshot of the page for adding a role assignment.](media/bulk-import/add-role-assignment-page.png)](media/bulk-import/add-role-assignment-page.png#lightbox)
+[![Screen shot of the Add role assignment page.](media/bulk-import/add-role-assignment-page.png)](media/bulk-import/add-role-assignment-page.png#lightbox)
 
-Now you're ready to select the storage account for import.
+Now you're ready to select the storage account in the FHIR service as a default storage account for import.
 
-## Step 3: Set the import configuration of the FHIR service
+## Set import configuration of the FHIR service
+
+The final step is to set the import configuration of the FHIR service, which contains specify storage account, enable import and enable initial import mode.
 
 > [!NOTE]
-> If you haven't assigned storage access permissions to the FHIR service, the `import` operation will fail.
+> If you haven't assigned storage access permissions to the FHIR service, the import operations ($import) will fail.
 
-For this step, you need to get the request URL and JSON body:
+To specify the Azure Storage account, you need to use [REST API](/rest/api/healthcareapis/services/create-or-update) to update the FHIR service.
 
-1. In the Azure portal, browse to your FHIR service.
-2. Select **Overview**.
-3. Select **JSON View**.
-4. Select the API version as **2022-06-01** or later.
+To get the request URL and body, browse to the Azure portal of your FHIR service. Select **Overview**, and then **JSON View**.
 
-To specify the Azure storage account in JSON view, you need to use the [REST API](/rest/api/healthcareapis/services/create-or-update) to update the FHIR service.
+[![Screenshot of Get JSON View](media/bulk-import/fhir-json-view.png)](media/bulk-import/fhir-json-view.png#lightbox)
 
-[![Screenshot of selections for opening the JSON view.](media/bulk-import/fhir-json-view.png)](media/bulk-import/fhir-json-view.png#lightbox)
+Select the API version to **2022-06-01** or later version. 
 
-The following steps walk you through setting configurations for initial and incremental import modes. Choose the right import mode for your use case.
+Copy the URL as request URL and do following changes of the JSON as body:
+- Set enabled in importConfiguration to **true**
+- add or change the integrationDataStore with target storage account name 
+- Set initialImportMode in importConfiguration to **true**
+- Drop off provisioningState.
 
-### Set the import configuration for initial import mode
+[![Screenshot of the importer configuration code example](media/bulk-import/import-url-and-body.png)](media/bulk-import/import-url-and-body.png#lightbox)
 
-Make the following changes to JSON:
+After you've completed this final step, you're ready to import data using $import.
 
-1. In `importConfiguration`, set `enabled` to `true`.
-2. Update `integrationDataStore` with the target storage account name.
-3. In `importConfiguration`, set `initialImportMode` to `true`.
-4. Delete the `provisioningState` line.
+You can also use the **Deploy to Azure** button below to open custom Resource Manager template that updates the configuration for $import.
 
-[![Screenshot of a code example for import configuration.](media/bulk-import/import-url-and-body.png)](media/bulk-import/import-url-and-body.png#lightbox)
+ [![Deploy to Azure Button.](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.healthcareapis%2Ffhir-import%2Fazuredeploy.json)
 
-You're now ready to perform initial-mode import by using `import`.
-
-### Set the import configuration for incremental import mode
-
-Make the following changes to JSON:
-
-1. In `importConfiguration`, set `enabled` to `true`.
-2. Update `integrationDataStore` with the target storage account name.
-3. In `importConfiguration`, set `initialImportMode` to `false`.
-4. Delete the `provisioningState` line.
-
-You're now ready to perform incremental-mode import by using `import`.
-
-You can also use the **Deploy to Azure** button to open a custom Azure Resource Manager template that updates the configuration for `import`.
-
-[![Screenshot that shows the Deploy to Azure button.](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.healthcareapis%2Ffhir-import%2Fazuredeploy.json)
-
-## Step 4: Secure the FHIR service's import operation
-
-To securely import FHIR data into the FHIR service from an Azure Data Lake Storage Gen2 account, you have three options:
-
-* Enable the FHIR service as a trusted Microsoft service.
-* Allow specific IP addresses associated with the FHIR service to access the storage account from other Azure regions.
-* Allow specific IP addresses associated with the FHIR service to access the storage account in the same region as the FHIR service.
-
-### Enable the FHIR service as a trusted Microsoft service
-
-1. In the Azure portal, go to your Data Lake Storage Gen2 account in the Azure portal.
-
-1. On the left menu, select **Networking**.
-
-1. On the **Firewalls and virtual networks** tab, select **Enabled from selected virtual networks and IP addresses**.
-
-   [![Screenshot of Azure Storage networking settings.](media/export-data/storage-networking-1.png)](media/export-data/storage-networking-1.png#lightbox)
-  
-1. In the **Resource type** dropdown list, select **Microsoft.HealthcareApis/workspaces**. In the **Instance name** dropdown list, select your workspace.
-
-1. In the **Exceptions** section, select the **Allow trusted Microsoft services to access this storage account** checkbox.
-
-   [![Screenshot that shows the option to allow trusted Microsoft services to access this storage account.](media/export-data/exceptions.png)](media/export-data/exceptions.png#lightbox)
-  
-1. Select **Save** to retain the settings.
-
-1. Run the following PowerShell command to install the `Az.Storage` PowerShell module in your local environment. You can use this module to configure your Azure storage accounts by using PowerShell.
-
-   ```PowerShell
-   Install-Module Az.Storage -Repository PsGallery -AllowClobber -Force 
-   ```
-
-1. Use the following PowerShell command to set the selected FHIR service instance as a trusted resource for the storage account. Make sure that all listed parameters are defined in your PowerShell environment.
-
-   You need to run the `Add-AzStorageAccountNetworkRule` command as an administrator in your local environment. For more information, see [Configure Azure Storage firewalls and virtual networks](../../storage/common/storage-network-security.md).
-
-   ```PowerShell
-   $subscription="xxx"
-   $tenantId = "xxx"
-   $resourceGroupName = "xxx"
-   $storageaccountName = "xxx"
-   $workspacename="xxx"
-   $fhirname="xxx"
-   $resourceId = "/subscriptions/$subscription/resourceGroups/$resourceGroupName/providers/Microsoft.HealthcareApis/workspaces/$workspacename/fhirservices/$fhirname"
-
-   Add-AzStorageAccountNetworkRule -ResourceGroupName $resourceGroupName -Name $storageaccountName -TenantId $tenantId -ResourceId $resourceId
-   ```
-
-1. Confirm that under **Resource instances**, **2 selected** appears in the **Instance name** dropdown list. The two selected instances are the name of the workspace instance and the name of the FHIR service instance that you registered as trusted Microsoft resources.
-
-   [![Screenshot of Azure Storage networking settings with resource type and instance names.](media/export-data/storage-networking-2.png)](media/export-data/storage-networking-2.png#lightbox)
-  
-You're now ready to securely import FHIR data from the storage account. The storage account is on selected networks and isn't publicly accessible. To securely access the files, you can use [private endpoints](../../storage/common/storage-private-endpoints.md) for the storage account.
-
-[!INCLUDE [Specific IP ranges for storage account](../includes/common-ip-address-storage-account.md)]
 
 ## Next steps
 
-In this article, you learned how the FHIR service supports the `import` operation and how you can import data into the FHIR service from a storage account. You also learned about the steps for configuring import settings in the FHIR service. For more information about converting data to FHIR, exporting settings to set up a storage account, and moving data to Azure Synapse Analytics, see:
+In this article, you've learned the FHIR service supports $import operation and how it allows you to import data into FHIR service account from a storage account. You also learned about the three steps used in configuring import settings in the FHIR service. For more information about converting data to FHIR, exporting settings to set up a storage account, and moving data to Azure Synapse, see
 
 >[!div class="nextstepaction"]
->[Import FHIR data](import-data.md)
+>[Use $import](import-data.md)
+
+>[!div class="nextstepaction"]
+>[Converting your data to FHIR](convert-data.md)
+
+>[!div class="nextstepaction"]
+>[Configure export settings and set up a storage account](configure-export-data.md)
+
+>[!div class="nextstepaction"]
+>[Copy data from FHIR service to Azure Synapse Analytics](copy-to-synapse.md)
 
 FHIR&#174; is a registered trademark of [HL7](https://hl7.org/fhir/) and is used with the permission of HL7.

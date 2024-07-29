@@ -3,9 +3,10 @@ title: Deploy a ZRS managed disk
 description: Learn how to deploy a managed disk that uses zone-redundant storage (ZRS).
 author: roygara
 ms.author: rogarana
-ms.date: 05/05/2023
+ms.date: 12/14/2022
 ms.topic: how-to
-ms.service: azure-disk-storage
+ms.service: storage
+ms.subservice: disks
 ms.custom: references_regions, devx-track-azurepowershell, devx-track-azurecli 
 ms.devlang: azurecli
 ---
@@ -20,16 +21,16 @@ For conceptual information on ZRS, see [Zone-redundant storage for managed disks
 
 [!INCLUDE [disk-storage-zrs-limitations](../../includes/disk-storage-zrs-limitations.md)]
 
-## Regional availability
-
-[!INCLUDE [disk-storage-zrs-regions](../../includes/disk-storage-zrs-regions.md)]
-
 # [Azure portal](#tab/portal)
 
 ### Create a VM with a ZRS OS disk
 
 1. Sign in to the [Azure portal](https://portal.azure.com/).
 1. Navigate to **Virtual machines** and follow the normal VM creation process.
+1. Select a supported region and set **Availability options** to **No infrastructure redundancy required**.
+
+    :::image type="content" source="media/disks-deploy-zrs/disks-zrs-portal-basic.png" alt-text="Screenshot of the VM creation workflow, basic pane, redundancy and regions are highlighted." lightbox="media/disks-deploy-zrs/disks-zrs-portal-basic.png":::
+
 1. Proceed to the **Disks** pane.
 1. Select your disk and select one of the ZRS disks in the drop-down.
 
@@ -140,7 +141,7 @@ dataDiskSku=Premium_ZRS
 az vmss create -g $rgName \
 -n $vmssName \
 --encryption-at-host \
---image Ubuntu2204 \
+--image UbuntuLTS \
 --upgrade-policy automatic \
 --generate-ssh-keys \
 --data-disk-sizes-gb 128 \

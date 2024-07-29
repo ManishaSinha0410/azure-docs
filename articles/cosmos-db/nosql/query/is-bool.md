@@ -1,53 +1,61 @@
 ---
-title: IS_BOOL
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a boolean indicating whether an expression is a boolean.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: IS_BOOL in Azure Cosmos DB query language
+description: Learn about SQL system function IS_BOOL in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# IS_BOOL (NoSQL query)
-
+# IS_BOOL (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a boolean value indicating if the type of the specified expression is a boolean.  
+ Returns a Boolean value indicating if the type of the specified expression is a Boolean.  
   
 ## Syntax
   
-```nosql
+```sql
 IS_BOOL(<expr>)  
 ```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`expr`** | Any expression. |
+  
+*expr*  
+   Is any expression.  
   
 ## Return types
   
-Returns a boolean expression.  
+  Returns a Boolean expression.  
   
 ## Examples
   
-The following example checks objects of various types using the function.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/is-bool/query.sql" highlight="2-10":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/is-bool/result.json":::
+  The following example checks objects of JSON Boolean, number, string, null, object, array, and undefined types using the `IS_BOOL` function.  
+  
+```sql
+SELECT   
+    IS_BOOL(true) AS isBool1,   
+    IS_BOOL(1) AS isBool2,  
+    IS_BOOL("value") AS isBool3,   
+    IS_BOOL(null) AS isBool4,  
+    IS_BOOL({prop: "value"}) AS isBool5,   
+    IS_BOOL([1, 2, 3]) AS isBool6,  
+    IS_BOOL({prop: "value"}.prop2) AS isBool7  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"isBool1":true,"isBool2":false,"isBool3":false,"isBool4":false,"isBool5":false,"isBool6":false,"isBool7":false}]
+```  
 
 ## Remarks
 
-- This function benefits from a [range index](../../index-policy.md#includeexclude-strategy).
+This system function will benefit from a [range index](../../index-policy.md#includeexclude-strategy).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`IS_NUMBER`](is-number.md)
+- [Type checking functions Azure Cosmos DB](type-checking-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

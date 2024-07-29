@@ -4,8 +4,7 @@ description: Learn how to specify mandatory artifacts to install at creation of 
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 01/12/2022
 ---
 
 # Specify mandatory artifacts for DevTest Labs VMs

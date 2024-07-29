@@ -1,11 +1,9 @@
 ---
 title: Azure Event Grid on Kubernetes - Filter events
 description: This article describes how to filter events when creating an Azure Event Grid subscription.
-author: robece
+author: jfggdl
 ms.subservice: kubernetes
-ms.custom:
-  - build-2024
-ms.author: robece
+ms.author: jafernan
 ms.date: 05/25/2021
 ms.topic: conceptual
 ---

@@ -3,13 +3,13 @@ title: List of Azure regions that support geo-zone-redundant storage (GZRS)
 titleSuffix: Azure Storage
 description: List of Azure regions that support geo-zone-redundant storage (GZRS)
 services: storage
-author: stevenmatthew
+author: jimmart-dev
 
-ms.service: azure-storage
+ms.service: storage
 ms.topic: reference
 ms.date: 04/28/2023
-ms.author: shaas
-ms.subservice: storage-common-concepts
+ms.author: jammart
+ms.subservice: common 
 ms.custom: engagement-fy23, references_regions
 ---
 

@@ -4,7 +4,6 @@ description: Learn about available Red Hat Enterprise Linux images in Azure Mark
 author: mathapli
 ms.service: virtual-machines
 ms.subservice: redhat
-ms.custom: linux-related-content
 ms.collection: linux
 ms.topic: article
 ms.date: 04/07/2023
@@ -210,3 +209,5 @@ Current policy is to keep all previously published images. We reserve the right 
 - To learn more about the Azure Red Hat Update Infrastructure, see [Red Hat Update Infrastructure for on-demand RHEL VMs in Azure](./redhat-rhui.md).
 - To learn more about the RHEL BYOS offer, see [Red Hat Enterprise Linux bring-your-own-subscription Gold Images in Azure](./byos.md).
 - For information on Red Hat support policies for all versions of RHEL, see [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata).
+
+

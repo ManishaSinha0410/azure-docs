@@ -6,6 +6,7 @@ services: front-door
 author: duongau
 ms.service: frontdoor
 ms.topic: conceptual
+ms.workload: infrastructure-services
 ms.date: 04/04/2023
 ms.author: duau
 zone_pivot_groups: front-door-tiers
@@ -14,8 +15,6 @@ zone_pivot_groups: front-door-tiers
 # Origins and origin groups in Azure Front Door
 
 ::: zone pivot="front-door-classic"
-
-[!INCLUDE [Azure Front Door (classic) retirement notice](../../includes/front-door-classic-retirement.md)]
 
 > [!NOTE]
 > *Origin* and *origin group* in this article refers to the backend and backend pool of the Azure Front Door (classic) configuration.
@@ -58,10 +57,7 @@ For example, a request made for `www.contoso.com` has the host header `www.conto
 
 Most app backends (Azure Web Apps, Blob storage, and Cloud Services) require the host header to match the domain of the backend. However, the frontend host that routes to your origin uses a different hostname such as `www.contoso.net`.
 
-If your origin requires the host header to match the origin hostname, make sure that the origin host header includes the hostname of the origin.
-
-> [!NOTE]
-> If you're using an App Service as an origin, make sure that the App Service also has the custom domain name configured. For more information, see [map an existing custom DNS name to Azure App Service](../app-service/app-service-web-tutorial-custom-domain.md#map-an-existing-custom-dns-name-to-azure-app-service).
+If your origin requires the host header to match the origin hostname, make sure that the origin host header includes the hostname of the origin. 
 
 #### Configure the origin host header for the origin
 

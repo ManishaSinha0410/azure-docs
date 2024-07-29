@@ -2,15 +2,13 @@
 title: Firewall rules - Azure Database for MariaDB
 description: Learn about using firewall rules to enable connections to your Azure Database for MariaDB server.
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: conceptual
 ms.date: 06/24/2022
 ---
 
 # Azure Database for MariaDB server firewall rules
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 Firewalls prevent all access to your database server until you specify which computers have permission. The firewall grants access to the server based on the originating IP address of each request.
 

@@ -4,7 +4,8 @@
  ms.topic: include
  ms.date: 05/04/2023
  ms.author: cherylmc
-ms.custom: include file, linux-related-content
+ ms.custom: include file
+
 #Customer intent: This file is duplicated as vpn-gateway-config-openvpn-linux.md. If the steps and screenshots in this file are updated, they need to be also updated in the other file unless specific to Virtual WAN.
 ---
 

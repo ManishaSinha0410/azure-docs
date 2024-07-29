@@ -1,3 +1,4 @@
+[!INCLUDE [Public Preview](../../../../includes/public-preview-include-document.md)]
 
 In this quickstart, you learn how to start a 1:1 video call using the Azure Communication Services Calling SDK for Windows.
 
@@ -8,7 +9,7 @@ In this quickstart, you learn how to start a 1:1 video call using the Azure Comm
 To complete this tutorial, you need the following prerequisites:
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with Universal Windows Platform development workload.
+- Install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) with Universal Windows Platform development workload.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
 - A [User Access Token](../../../identity/access-tokens.md) for your Azure Communication Service. You can also use the Azure CLI and run the command with your connection string to create a user and an access token.
 
@@ -28,7 +29,7 @@ In Visual Studio, create a new project with the **Blank App (Universal Windows)*
 
 #### Install the package
 
-Right click your project and go to `Manage Nuget Packages` to install `Azure.Communication.Calling.WindowsClient` [1.2.0-beta.1](https://www.nuget.org/packages/Azure.Communication.Calling.WindowsClient/1.2.0-beta.1) or superior version. Make sure Include Preleased is checked.
+Right click your project and go to `Manage Nuget Packages` to install `Azure.Communication.Calling` [1.0.0-beta.33](https://www.nuget.org/packages/Azure.Communication.Calling/1.0.0-beta.33) or superior version. Make sure Include Preleased is checked.
 
 #### Request access
 
@@ -65,26 +66,15 @@ Open the `MainPage.xaml` of your project and replace the content with following 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid x:Name="MainGrid" HorizontalAlignment="Stretch">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="800" Height="600">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60*"/>
             <RowDefinition Height="200*"/>
             <RowDefinition Height="60*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" x:Name="AppTitleBar" Background="LightSeaGreen">
-            <!-- Width of the padding columns is set in LayoutMetricsChanged handler. -->
-            <!-- Using padding columns instead of Margin ensures that the background paints the area under the caption control buttons (for transparent buttons). -->
-            <TextBlock x:Name="QuickstartTitle" Text="Calling Quickstart sample title bar" Style="{StaticResource CaptionTextBlockStyle}" Padding="4,4,0,0"/>
-        </Grid>
-
-        <TextBox Grid.Row="1" x:Name="CalleeTextBox" PlaceholderText="Who would you like to call?" TextWrapping="Wrap" VerticalAlignment="Center" />
-
-        <Grid Grid.Row="2" Background="LightGray">
+        <TextBox x:Name="CalleeTextBox" Text="Who would you like to call?" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Height="40" Margin="10,10,10,10" />
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -92,22 +82,14 @@ Open the `MainPage.xaml` of your project and replace the content with following 
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <MediaPlayerElement x:Name="LocalVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="0" VerticalAlignment="Center" AutoPlay="True" />
-            <MediaPlayerElement x:Name="RemoteVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="1" VerticalAlignment="Center" AutoPlay="True" />
+            <MediaElement x:Name="LocalVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="0" VerticalAlignment="Center"/>
+            <MediaElement x:Name="RemoteVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="1" VerticalAlignment="Center"/>
         </Grid>
-        <StackPanel Grid.Row="3" Orientation="Vertical" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBlock VerticalAlignment="Center">Cameras:</TextBlock>
-                <ComboBox x:Name="CameraList" HorizontalAlignment="Left" Grid.Column="0" DisplayMemberPath="Name" SelectionChanged="CameraList_SelectionChanged" Margin="10"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="CallButton" Content="Start/Join call" Click="CallButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="123"/>
-                <Button x:Name="HangupButton" Content="Hang up" Click="HangupButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="123"/>
-                <CheckBox x:Name="MuteLocal" Content="Mute" Margin="10,0,0,0" Click="MuteLocal_Click" Width="74"/>
-                <CheckBox x:Name="BackgroundBlur" Content="Background blur" Width="142" Margin="10,0,0,0" Click="BackgroundBlur_Click"/>
-            </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="CallButton" Content="Start Call" Click="CallButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="200"/>
+            <Button x:Name="HangupButton" Content="Hang Up" Click="HangupButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="200"/>
+            <TextBlock x:Name="State" Text="Status" TextWrapping="Wrap" VerticalAlignment="Center" Margin="40,0,0,0" Height="40" Width="200"/>
         </StackPanel>
-        <TextBox Grid.Row="4" x:Name="Stats" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Margin="0,2,0,0" BorderThickness="2" IsReadOnly="True" Foreground="LightSlateGray" />
     </Grid>
 </Page>
 ```
@@ -119,63 +101,31 @@ using CallingQuickstart;
 
 Open the `MainPage.xaml.cs` (right click and choose View Code) and replace the content with following implementation: 
 ```C#
-using Azure.Communication.Calling.WindowsClient;
+using Azure.Communication.Calling;
+using Azure.WinRT.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Core;
-using Windows.Media.Core;
-using Windows.Networking.PushNotifications;
-using Windows.UI;
+using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace CallingQuickstart
 {
     public sealed partial class MainPage : Page
     {
-        private const string authToken = "<Azure Communication Services auth token>";
-    
-        private CallClient callClient;
-        private CallTokenRefreshOptions callTokenRefreshOptions;
-        private CallAgent callAgent;
-        private CommunicationCall call = null;
+        CallAgent callAgent;
+        Call call;
+        DeviceManager deviceManager;
+        Dictionary<string, RemoteParticipant> remoteParticipantDictionary = new Dictionary<string, RemoteParticipant>();
 
-        private LocalOutgoingAudioStream micStream;
-        private LocalOutgoingVideoStream cameraStream;
-
-        #region Page initialization
         public MainPage()
         {
             this.InitializeComponent();
-            
-            // Hide default title bar.
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-
-            QuickstartTitle.Text = $"{Package.Current.DisplayName} - Ready";
-            Window.Current.SetTitleBar(AppTitleBar);
-
-            CallButton.IsEnabled = true;
-            HangupButton.IsEnabled = !CallButton.IsEnabled;
-            MuteLocal.IsChecked = MuteLocal.IsEnabled = !CallButton.IsEnabled;
-
-            ApplicationView.PreferredLaunchViewSize = new Windows.Foundation.Size(800, 600);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            Task.Run(() => this.InitCallAgentAndDeviceManagerAsync()).Wait();
         }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            await InitCallAgentAndDeviceManagerAsync();
-
-            base.OnNavigatedTo(e);
-        }
-#endregion
 
         private async Task InitCallAgentAndDeviceManagerAsync()
         {
@@ -199,40 +149,10 @@ namespace CallingQuickstart
 
         private async void Call_OnStateChangedAsync(object sender, PropertyChangedEventArgs args)
         {
-            var call = sender as CommunicationCall;
-
-            if (call != null)
-            {
-                var state = call.State;
-
-                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                {
-                    QuickstartTitle.Text = $"{Package.Current.DisplayName} - {state.ToString()}";
-                    Window.Current.SetTitleBar(AppTitleBar);
-
-                    HangupButton.IsEnabled = state == CallState.Connected || state == CallState.Ringing;
-                    CallButton.IsEnabled = !HangupButton.IsEnabled;
-                    MuteLocal.IsEnabled = !CallButton.IsEnabled;
-                });
-
-                switch (state)
-                {
-                    case CallState.Connected:
-                        {
-                            break;
-                        }
-                    case CallState.Disconnected:
-                        {
-                            break;
-                        }
-                    default: break;
-                }
-            }
-        }
-        
-        private async void CameraList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Handle camera selection
+            var state = (sender as Call)?.State;
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
+                State.Text = state.ToString();
+            });
         }
     }
 }
@@ -246,8 +166,8 @@ The following classes and interfaces handle some of the major features of the Az
 | ------------------------------------- | ------------------------------------------------------------ |
 | `CallClient` | The `CallClient` is the main entry point to the Calling client library. |
 | `CallAgent` | The `CallAgent` is used to start and join calls. |
-| `CommunicationCall` | The `CommunicationCall` is used to manage placed or joined calls. |
-| `CallTokenCredential` | The `CallTokenCredential` is used as the token credential to instantiate the `CallAgent`.|
+| `Call` | The `Call` is used to manage placed or joined calls. |
+| `CommunicationTokenCredential` | The `CommunicationTokenCredential` is used as the token credential to instantiate the `CallAgent`.|
 | `CommunicationUserIdentifier` | The `CommunicationUserIdentifier` is used to represent the identity of the user, which can be one of the following options: `CommunicationUserIdentifier`, `PhoneNumberIdentifier` or `CallingApplication`. |
 
 ### Authenticate the client
@@ -260,179 +180,80 @@ Once you have a token, initialize a `CallAgent` instance with it, which enable u
 
 Add the following code to the `InitCallAgentAndDeviceManagerAsync` function. 
 ```C#
-this.callClient = new CallClient(new CallClientOptions() {
-    Diagnostics = new CallDiagnosticsOptions() { 
-        AppName = "CallingQuickstart",
-        AppVersion="1.0",
-        Tags = new[] { "Calling", "ACS", "Windows" }
-        }
-    });
+var callClient = new CallClient();
+this.deviceManager = await callClient.GetDeviceManager();
 
-// Set up local video stream using the first camera enumerated
-var deviceManager = await this.callClient.GetDeviceManagerAsync();
-var camera = deviceManager?.Cameras?.FirstOrDefault();
-var mic = deviceManager?.Microphones?.FirstOrDefault();
-micStream = new LocalOutgoingAudioStream();
-
-CameraList.ItemsSource = deviceManager.Cameras.ToList();
-
-if (camera != null)
-{
-    CameraList.SelectedIndex = 0;
-}
-
-callTokenRefreshOptions = new CallTokenRefreshOptions(false);
-callTokenRefreshOptions.TokenRefreshRequested += OnTokenRefreshRequestedAsync;
-
-var tokenCredential = new CallTokenCredential(authToken, callTokenRefreshOptions);
-
+var tokenCredential = new CommunicationTokenCredential("<AUTHENTICATION_TOKEN>");
 var callAgentOptions = new CallAgentOptions()
 {
-    DisplayName = "Contoso",
-    //https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/all/all.csv
-    EmergencyCallOptions = new EmergencyCallOptions() { CountryCode = "840" }
+    DisplayName = "<DISPLAY_NAME>"
 };
 
-
-try
-{
-    this.callAgent = await this.callClient.CreateCallAgentAsync(tokenCredential, callAgentOptions);
-    //await this.callAgent.RegisterForPushNotificationAsync(await this.RegisterWNS());
-    this.callAgent.CallsUpdated += OnCallsUpdatedAsync;
-    this.callAgent.IncomingCallReceived += OnIncomingCallAsync;
-
-}
-catch(Exception ex)
-{
-    if (ex.HResult == -2147024809)
-    {
-        // E_INVALIDARG
-        // Handle possible invalid token
-    }
-}
+this.callAgent = await callClient.CreateCallAgent(tokenCredential, callAgentOptions);
+this.callAgent.OnCallsUpdated += Agent_OnCallsUpdatedAsync;
+this.callAgent.OnIncomingCall += Agent_OnIncomingCallAsync;
 ```
 
 ### Start a call with video
 
-Add the implementation to the `CallButton_Click` to start a call with video. We need to enumerate the cameras with device manager instance and construct `LocalOutgoingVideoStream`. We need to set the `VideoOptions` with `LocalVideoStream` and pass it with `startCallOptions` to set initial options for the call. By attaching `LocalOutgoingVideoStream` to a `MediaElement`, we can see the preview of the local video.
+Add the implementation to the `CallButton_Click` to start a call with video. We need to enumerate the cameras with device manager instance and construct `LocalVideoStream`. We need to set the `VideoOptions` with `LocalVideoStream` and pass it with `startCallOptions` to set initial options for the call. By attaching `LocalVideoStream` to a `MediaElement`, we can see the preview of the local video.
 
 ```C#
-var callString = CalleeTextBox.Text.Trim();
+var startCallOptions = new StartCallOptions();
 
-if (!string.IsNullOrEmpty(callString))
+if ((LocalVideo.Source == null) && (this.deviceManager.Cameras?.Count > 0))
 {
-    if (callString.StartsWith("8:")) // 1:1 Azure Communication Services call
+    var videoDeviceInfo = this.deviceManager.Cameras?.FirstOrDefault();
+    if (videoDeviceInfo != null)
     {
-        call = await StartAcsCallAsync(callString);
-    }
-    else if (callString.StartsWith("+")) // 1:1 phone call
-    {
-        call = await StartPhoneCallAsync(callString, "+12133947338");
-    }
-    else if (Guid.TryParse(callString, out Guid groupId))// Join group call by group guid
-    {
-        call = await JoinGroupCallByIdAsync(groupId);
-    }
-    else if (Uri.TryCreate(callString, UriKind.Absolute, out Uri teamsMeetinglink)) //Teams meeting link
-    {
-        call = await JoinTeamsMeetingByLinkAsync(teamsMeetinglink);
+        var localVideoStream = new LocalVideoStream(videoDeviceInfo);
+
+        var localUri = await localVideoStream.MediaUriAsync();
+
+        await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+        {
+            LocalVideo.Source = localUri;
+            LocalVideo.Play();
+        });
+
+        startCallOptions.VideoOptions = new VideoOptions(new[] { localVideoStream });
     }
 }
 
-if (call != null)
-{
-    call.RemoteParticipantsUpdated += OnRemoteParticipantsUpdatedAsync;
-    call.StateChanged += OnStateChangedAsync;
-}
-```
+var callees = new ICommunicationIdentifier[1] { new CommunicationUserIdentifier(CalleeTextBox.Text.Trim()) };
 
-Add the methods to start or join the different types of Call (1:1 Azure Communication Services call, 1:1 phone call, Azure Communication Services Group call, Teams meeting join, etc.).
-
-```C#
-private async Task<CommunicationCall> StartAcsCallAsync(string acsCallee)
-{
-    var options = await GetStartCallOptionsAsynnc();
-    var call = await this.callAgent.StartCallAsync( new [] { new UserCallIdentifier(acsCallee) }, options);
-    return call;
-}
-
-private async Task<CommunicationCall> StartPhoneCallAsync(string acsCallee, string alternateCallerId)
-{
-    var options = await GetStartCallOptionsAsynnc();
-    options.AlternateCallerId = new PhoneNumberCallIdentifier(alternateCallerId);
-
-    var call = await this.callAgent.StartCallAsync( new [] { new PhoneNumberCallIdentifier(acsCallee) }, options);
-    return call;
-}
-
-private async Task<CommunicationCall> JoinGroupCallByIdAsync(Guid groupId)
-{
-    var joinCallOptions = await GetJoinCallOptionsAsync();
-
-    var groupCallLocator = new GroupCallLocator(groupId);
-    var call = await this.callAgent.JoinAsync(groupCallLocator, joinCallOptions);
-    return call;
-}
-
-private async Task<CommunicationCall> JoinTeamsMeetingByLinkAsync(Uri teamsCallLink)
-{
-    var joinCallOptions = await GetJoinCallOptionsAsync();
-
-    var teamsMeetingLinkLocator = new TeamsMeetingLinkLocator(teamsCallLink.AbsoluteUri);
-    var call = await callAgent.JoinAsync(teamsMeetingLinkLocator, joinCallOptions);
-    return call;
-}
-
-private async Task<StartCallOptions> GetStartCallOptionsAsynnc()
-{
-    return new StartCallOptions() {
-        OutgoingAudioOptions = new OutgoingAudioOptions() { IsOutgoingAudioMuted = true, OutgoingAudioStream = micStream  },
-        OutgoingVideoOptions = new OutgoingVideoOptions() { OutgoingVideoStreams = new OutgoingVideoStream[] { cameraStream } }
-    };
-}
-
-private async Task<JoinCallOptions> GetJoinCallOptionsAsync()
-{
-    return new JoinCallOptions() {
-        OutgoingAudioOptions = new OutgoingAudioOptions() { IsOutgoingAudioMuted = true },
-        OutgoingVideoOptions = new OutgoingVideoOptions() { OutgoingVideoStreams = new OutgoingVideoStream[] { cameraStream } }
-    };
-}
-```
-
-Add the code to create the LocalVideoStream depending on the selected camera on the `CameraList_SelectionChanged` method.
-
-```C#
-var selectedCamerea = CameraList.SelectedItem as VideoDeviceDetails;
-cameraStream = new LocalOutgoingVideoStream(selectedCamerea);
-
- var localUri = await cameraStream.StartPreviewAsync();
-await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-{
-    LocalVideo.Source = MediaSource.CreateFromUri(localUri);
-});
-
-if (call != null)
-{
-    await call?.StartVideoAsync(cameraStream);
-}
+this.call = await this.callAgent.StartCallAsync(callees, startCallOptions);
+this.call.OnRemoteParticipantsUpdated += Call_OnRemoteParticipantsUpdatedAsync;
+this.call.OnStateChanged += Call_OnStateChangedAsync;
 ```
 
 ### Accept an incoming call
 
-Add the implementation to the `OnIncomingCallAsync` to answer an incoming call with video, pass the `LocalVideoStream` to `acceptCallOptions`. 
+Add the implementation to the `Agent_OnIncomingCallAsync` to answer an incoming call with video, pass the `LocalVideoStream` to `acceptCallOptions`. 
 
 ```C#
-var incomingCall = args.IncomingCall;
+var acceptCallOptions = new AcceptCallOptions();
 
-var acceptCallOptions = new AcceptCallOptions() { 
-    IncomingVideoOptions = new IncomingVideoOptions()
+if (this.deviceManager.Cameras?.Count > 0)
+{
+    var videoDeviceInfo = this.deviceManager.Cameras?.FirstOrDefault();
+    if (videoDeviceInfo != null)
     {
-        IncomingVideoStreamKind = VideoStreamKind.RemoteIncoming
-    } 
-};
+        var localVideoStream = new LocalVideoStream(videoDeviceInfo);
 
-_ = await incomingCall.AcceptAsync(acceptCallOptions);
+        var localUri = await localVideoStream.MediaUriAsync();
+
+        await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+        {
+            LocalVideo.Source = localUri;
+            LocalVideo.Play();
+        });
+
+        acceptCallOptions.VideoOptions = new VideoOptions(new[] { localVideoStream });
+    }
+}
+
+call = await incomingCall.AcceptAsync(acceptCallOptions);
 ```
 
 ### Remote participant and remote video streams
@@ -459,96 +280,33 @@ private async void Call_OnVideoStreamsUpdatedAsync(object sender, RemoteVideoStr
 
 private async void Agent_OnCallsUpdatedAsync(object sender, CallsUpdatedEventArgs args)
 {
-    var removedParticipants = new List<RemoteParticipant>();
-    var addedParticipants = new List<RemoteParticipant>();
-
-    foreach(var call in args.RemovedCalls)
-    {
-        removedParticipants.AddRange(call.RemoteParticipants.ToList<RemoteParticipant>());
-    }
-
     foreach (var call in args.AddedCalls)
     {
-        addedParticipants.AddRange(call.RemoteParticipants.ToList<RemoteParticipant>());
-    }
-
-    await OnParticipantChangedAsync(removedParticipants, addedParticipants);
-}
-
-private async Task OnParticipantChangedAsync(IEnumerable<RemoteParticipant> removedParticipants, IEnumerable<RemoteParticipant> addedParticipants)
-{
-    foreach (var participant in removedParticipants)
-    {
-        foreach(var incomingVideoStream in  participant.IncomingVideoStreams)
+        foreach (var remoteParticipant in call.RemoteParticipants)
         {
-            var remoteVideoStream = incomingVideoStream as RemoteIncomingVideoStream;
-            if (remoteVideoStream != null)
-            {
-                await remoteVideoStream.StopPreviewAsync();
-            }
+            var remoteParticipantMRI = remoteParticipant.Identifier.ToString();
+            this.remoteParticipantDictionary.TryAdd(remoteParticipantMRI, remoteParticipant);
+            await AddVideoStreamsAsync(remoteParticipant.VideoStreams);
+            remoteParticipant.OnVideoStreamsUpdated += Call_OnVideoStreamsUpdatedAsync;
         }
-        participant.VideoStreamStateChanged -= OnVideoStreamStateChanged;
-    }
-
-    foreach (var participant in addedParticipants)
-    {
-        participant.VideoStreamStateChanged += OnVideoStreamStateChanged;
     }
 }
 
-private void OnVideoStreamStateChanged(object sender, VideoStreamStateChangedEventArgs e)
+private async void Call_OnRemoteParticipantsUpdatedAsync(object sender, ParticipantsUpdatedEventArgs args)
 {
-    CallVideoStream callVideoStream = e.CallVideoStream;
-
-    switch (callVideoStream.StreamDirection)
+    foreach (var remoteParticipant in args.AddedParticipants)
     {
-        case StreamDirection.Outgoing:
-            OnOutgoingVideoStreamStateChanged(callVideoStream as OutgoingVideoStream);
-            break;
-        case StreamDirection.Incoming:
-            OnIncomingVideoStreamStateChanged(callVideoStream as IncomingVideoStream);
-            break;
-    }
-}
-
-private async void OnIncomingVideoStreamStateChanged(IncomingVideoStream incomingVideoStream)
-{
-    switch (incomingVideoStream.State)
-    {
-        case VideoStreamState.Available:
-        {
-            switch (incomingVideoStream.Kind)
-            {
-                case VideoStreamKind.RemoteIncoming:
-                    var remoteVideoStream = incomingVideoStream as RemoteIncomingVideoStream;
-                    var uri = await remoteVideoStream.StartPreviewAsync();
-
-                    await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                    {
-                        RemoteVideo.Source = MediaSource.CreateFromUri(uri);
-                    });
-                    break;
-
-                case VideoStreamKind.RawIncoming:
-                    break;
-            }
-            break;
-        }
-        case VideoStreamState.Started:
-            break;
-        case VideoStreamState.Stopping:
-            break;
-        case VideoStreamState.Stopped:
-            if (incomingVideoStream.Kind == VideoStreamKind.RemoteIncoming)
-            {
-                var remoteVideoStream = incomingVideoStream as RemoteIncomingVideoStream;
-                await remoteVideoStream.StopPreviewAsync();
-            }
-            break;
-        case VideoStreamState.NotAvailable:
-            break;
+        String remoteParticipantMRI = remoteParticipant.Identifier.ToString();
+        this.remoteParticipantDictionary.TryAdd(remoteParticipantMRI, remoteParticipant);
+        await AddVideoStreamsAsync(remoteParticipant.VideoStreams);
+        remoteParticipant.OnVideoStreamsUpdated += Call_OnVideoStreamsUpdatedAsync;
     }
 
+    foreach (var remoteParticipant in args.RemovedParticipants)
+    {
+        String remoteParticipantMRI = remoteParticipant.Identifier.ToString();
+        this.remoteParticipantDictionary.Remove(remoteParticipantMRI);
+    }
 }
 ```
 
@@ -609,17 +367,9 @@ private async void Call_OnStateChanged(object sender, PropertyChangedEventArgs a
 End the current call when the `Hang Up` button is clicked. Add the implementation to the HangupButton_Click to end a call with the callAgent we created, and tear down the participant update and call state event handlers.
 
 ```C#
-var call = this.callAgent?.Calls?.FirstOrDefault();
-if (call != null)
-{
-    try
-    {
-        await call.HangUpAsync(new HangUpOptions() { ForEveryone = true });
-    }
-    catch(Exception ex) 
-    {
-    }
-}
+this.call.OnRemoteParticipantsUpdated -= Call_OnRemoteParticipantsUpdatedAsync;
+this.call.OnStateChanged -= Call_OnStateChangedAsync;
+await this.call.HangUpAsync(new HangUpOptions());
 ```
 
 ### Run the code
@@ -639,8 +389,8 @@ For more information on user IDs (identity) check the [User Access Tokens](../..
 To complete this tutorial, you need the following prerequisites:
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F). 
-- Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) and [Windows App SDK version 1.2 preview 2](/windows/apps/windows-app-sdk/preview-channel#version-12-preview-2-120-preview2). 
-- Basic understanding of how to create a WinUI 3 app. [Create your first WinUI 3 (Windows App SDK) project](/windows/apps/winui/winui3/create-your-first-winui3-app?pivots=winui3-packaged-csharp) is a good resource to start with.
+- Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) and [Windows App SDK version 1.2 preview 2](https://learn.microsoft.com/windows/apps/windows-app-sdk/preview-channel#version-12-preview-2-120-preview2). 
+- Basic understanding of how to create a WinUI 3 app. [Create your first WinUI 3 (Windows App SDK) project](https://learn.microsoft.com/windows/apps/winui/winui3/create-your-first-winui3-app?pivots=winui3-packaged-csharp) is a good resource to start with.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
 - A [User Access Token](../../../identity/access-tokens.md) for your Azure Communication Service. You can also use the Azure CLI and run the command with your connection string to create a user and an access token.
 
@@ -660,7 +410,7 @@ In Visual Studio, create a new project with the **Blank App, Packaged (WinUI 3 i
 
 #### Install the package
 
-Right click your project and go to `Manage Nuget Packages` to install `Azure.Communication.Calling.WindowsClient` [1.0.0](https://www.nuget.org/packages/Azure.Communication.Calling.WindowsClient/1.0.0) or superior version. Make sure Include Preleased is checked.
+Right click your project and go to `Manage Nuget Packages` to install `Azure.Communication.Calling` [1.0.0-beta.33](https://www.nuget.org/packages/Azure.Communication.Calling/1.0.0-beta.33) or superior version. Make sure Include Preleased is checked.
 
 #### Request access
 
@@ -681,33 +431,22 @@ We also need to preview the local video and render the remote video of the other
 Open the `MainWindow.xaml` of your project and replace the content with following implementation. 
 
 ```C#
-<Page
-    x:Class="CallingQuickstart.MainPage"
+<Window
+    x:Class="CallingQuickstart.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CallingQuickstart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid x:Name="MainGrid">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60*"/>
             <RowDefinition Height="200*"/>
             <RowDefinition Height="60*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" x:Name="AppTitleBar" Background="LightSeaGreen">
-            <!-- Width of the padding columns is set in LayoutMetricsChanged handler. -->
-            <!-- Using padding columns instead of Margin ensures that the background paints the area under the caption control buttons (for transparent buttons). -->
-            <TextBlock x:Name="QuickstartTitle" Text="Calling Quickstart sample title bar" Style="{StaticResource CaptionTextBlockStyle}" Padding="4,4,0,0"/>
-        </Grid>
-
-        <TextBox Grid.Row="1" x:Name="CalleeTextBox" PlaceholderText="Who would you like to call?" TextWrapping="Wrap" VerticalAlignment="Center" />
-
-        <Grid Grid.Row="2" Background="LightGray">
+        <TextBox x:Name="CalleeTextBox" Text="Who would you like to call?" TextWrapping="Wrap" VerticalAlignment="Center" Height="40" Margin="10,10,10,10" />
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -715,24 +454,16 @@ Open the `MainWindow.xaml` of your project and replace the content with followin
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <MediaPlayerElement x:Name="LocalVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="0" VerticalAlignment="Center" AutoPlay="True" />
-            <MediaPlayerElement x:Name="RemoteVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="1" VerticalAlignment="Center" AutoPlay="True" />
+            <MediaPlayerElement x:Name="LocalVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="0" VerticalAlignment="Center"/>
+            <MediaPlayerElement x:Name="RemoteVideo" HorizontalAlignment="Center" Stretch="UniformToFill" Grid.Column="1" VerticalAlignment="Center"/>
         </Grid>
-        <StackPanel Grid.Row="3" Orientation="Vertical" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBlock VerticalAlignment="Center">Cameras:</TextBlock>
-                <ComboBox x:Name="CameraList" HorizontalAlignment="Left" Grid.Column="0" DisplayMemberPath="Name" SelectionChanged="CameraList_SelectionChanged" Margin="10"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="CallButton" Content="Start/Join call" Click="CallButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="123"/>
-                <Button x:Name="HangupButton" Content="Hang up" Click="HangupButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="123"/>
-                <CheckBox x:Name="MuteLocal" Content="Mute" Margin="10,0,0,0" Click="MuteLocal_Click" Width="74"/>
-                <CheckBox x:Name="BackgroundBlur" Content="Background blur" Width="142" Margin="10,0,0,0" Click="BackgroundBlur_Click"/>
-            </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="CallButton" Content="Start Call" Click="CallButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="200"/>
+            <Button x:Name="HangupButton" Content="Hang Up" Click="HangupButton_Click" VerticalAlignment="Center" Margin="10,0,0,0" Height="40" Width="200"/>
+            <TextBlock x:Name="State" Text="Status" TextWrapping="Wrap" VerticalAlignment="Center" Margin="40,0,0,0" Height="40" Width="200"/>
         </StackPanel>
-        <TextBox Grid.Row="4" x:Name="Stats" Text="" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Margin="0,2,0,0" BorderThickness="2" IsReadOnly="True" Foreground="LightSlateGray" />
-    </Grid>    
-</Page>
+    </Grid>
+</Window>
 ```
 
 Open to `App.xaml.cs` (right click and choose View Code) and add this line to the top:
@@ -742,7 +473,7 @@ using CallingQuickstart;
 
 Open the `MainWindow.xaml.cs` (right click and choose View Code) and replace the content with following implementation: 
 ```C#
-using Azure.Communication.Calling.WindowsClient;
+using Azure.Communication.Calling;
 using Azure.WinRT.Communication;
 using Microsoft.UI.Xaml;
 using System;
@@ -806,8 +537,8 @@ The following classes and interfaces handle some of the major features of the Az
 | ------------------------------------- | ------------------------------------------------------------ |
 | `CallClient` | The `CallClient` is the main entry point to the Calling client library. |
 | `CallAgent` | The `CallAgent` is used to start and join calls. |
-| `CommunicationCall` | The `CommunicationCall` is used to manage placed or joined calls. |
-| `CallTokenCredential` | The `CallTokenCredential` is used as the token credential to instantiate the `CallAgent`.|
+| `Call` | The `Call` is used to manage placed or joined calls. |
+| `CommunicationTokenCredential` | The `CommunicationTokenCredential` is used as the token credential to instantiate the `CallAgent`.|
 | `CommunicationUserIdentifier` | The `CommunicationUserIdentifier` is used to represent the identity of the user, which can be one of the following options: `CommunicationUserIdentifier`, `PhoneNumberIdentifier` or `CallingApplication`. |
 
 ### Authenticate the client
@@ -821,15 +552,15 @@ Once you have a token initialize a `CallAgent` instance with it, which enable us
 Add the following code to the `InitCallAgentAndDeviceManagerAsync` function. 
 ```C#
 var callClient = new CallClient();
-this.deviceManager = await callClient.GetDeviceManagerAsync();
+this.deviceManager = await callClient.GetDeviceManager();
 
-var tokenCredential = new CallTokenCredential("<AUTHENTICATION_TOKEN>");
+var tokenCredential = new CommunicationTokenCredential("<AUTHENTICATION_TOKEN>");
 var callAgentOptions = new CallAgentOptions()
 {
     DisplayName = "<DISPLAY_NAME>"
 };
 
-this.callAgent = await callClient.CreateCallAgentAsync(tokenCredential, callAgentOptions);
+this.callAgent = await callClient.CreateCallAgent(tokenCredential, callAgentOptions);
 this.callAgent.OnCallsUpdated += Agent_OnCallsUpdatedAsync;
 this.callAgent.OnIncomingCall += Agent_OnIncomingCallAsync;
 ```
@@ -845,16 +576,16 @@ if (this.deviceManager.Cameras?.Count > 0)
     var videoDeviceInfo = this.deviceManager.Cameras?.FirstOrDefault();
     if (videoDeviceInfo != null)
     {
-        var selectedCamerea = CameraList.SelectedItem as VideoDeviceDetails;
-        cameraStream = new LocalOutgoingVideoStream(selectedCamerea);
+        var localVideoStream = new LocalVideoStream(videoDeviceInfo);
 
-        var localUri = await cameraStream.StartPreviewAsync();
-        await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-        {
+        var localUri = await localVideoStream.MediaUriAsync();
+
+        this.DispatcherQueue.TryEnqueue(() => {
             LocalVideo.Source = MediaSource.CreateFromUri(localUri);
+            LocalVideo.MediaPlayer.Play();
         });
 
-        startCallOptions.VideoOptions = new OutgoingVideoOptions(new[] { cameraStream });
+        startCallOptions.VideoOptions = new VideoOptions(new[] { localVideoStream });
     }
 }
 
@@ -880,16 +611,16 @@ if (this.deviceManager.Cameras?.Count > 0)
     var videoDeviceInfo = this.deviceManager.Cameras?.FirstOrDefault();
     if (videoDeviceInfo != null)
     {
-        var selectedCamerea = CameraList.SelectedItem as VideoDeviceDetails;
-        cameraStream = new LocalOutgoingVideoStream(selectedCamerea);
+        var localVideoStream = new LocalVideoStream(videoDeviceInfo);
 
-        var localUri = await cameraStream.StartPreviewAsync();
-        await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-        {
+        var localUri = await localVideoStream.MediaUriAsync();
+
+        this.DispatcherQueue.TryEnqueue(() => {
             LocalVideo.Source = MediaSource.CreateFromUri(localUri);
+            LocalVideo.MediaPlayer.Play();
         });
 
-        acceptCallOptions.VideoOptions = new OutgoingVideoOptions(new[] { localVideoStream });
+        acceptCallOptions.VideoOptions = new VideoOptions(new[] { localVideoStream });
     }
 }
 
@@ -1012,7 +743,7 @@ await this.call.HangUpAsync(new HangUpOptions());
 
 ### Run the code
 
-You can build and run the code on Visual Studio. For solution platforms, we support `ARM64`, `x64` and `x86`. 
+You can build and run the code on Visual Studio. For solution platforms we support `ARM64`, `x64` and `x86`. 
 
 You can make an outbound video call by providing a user ID in the text field and clicking the `Start Call` button. 
 

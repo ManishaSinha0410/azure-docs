@@ -6,7 +6,6 @@ ms.service: cosmos-db
 ms.topic: how-to
 ms.date: 10/27/2022
 ms.author: gahllevy
-ms.subservice: mongodb
 ---
 
 # Configure multi-region writes in Azure Cosmos DB for MongoDB
@@ -36,8 +35,8 @@ MongoDB connection strings supports the “appName” parameter, which is a mean
 The appName parameter can be in one of the following formats​:
 
 ```powershell
-appName=<user-workload-name>
-appName=<user-workload-name>@<preferred-write-region>
+appName=<user-workload-name>​
+appName=<user-workload-name>@<preferred-write-region>​
 appName=<user-workload-name>@<cosmosdb-account-name>@<preferred-write-region>
 ```
 

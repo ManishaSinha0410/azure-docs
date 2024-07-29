@@ -8,7 +8,7 @@ ms.author: shsagir
 ms.reviewer: shsagir
 ms.service: synapse-analytics
 ms.subservice: data-explorer
-ms.custom: mode-ui
+ms.custom: ignite-fall-2021, mode-ui
 ---
 
 # Quickstart: Create a Data Explorer pool using Synapse Studio (Preview)

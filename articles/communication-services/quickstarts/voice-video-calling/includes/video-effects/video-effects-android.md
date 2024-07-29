@@ -12,6 +12,9 @@ ms.subservice: calling
 ms.custom: mode-other
 ---
 
+> [!IMPORTANT]
+> The Calling Video Effects are available starting on the public preview version [2.5.1-beta.4](https://central.sonatype.com/artifact/com.azure.android/azure-communication-calling/2.5.1-beta.4) of the Android Calling SDK. Please ensure that you use this or a newer SDK when using Video Effects. This API is provided as a preview ('beta') for developers and may change based on feedback that we receive.
+
 > [!Note]
 > In order to use Video Effects on the Android Calling SDK, a machine learning model is downloaded to the customer's device. We encourage you to review the privacy notes in your application and update them accordingly, if necessary.
 
@@ -21,15 +24,12 @@ This quickstart builds on [Quickstart: Add 1:1 video calling to your app](../../
 
 ## Using video effects
 
-> [!Note]
-> Video effects support on Android is limited to the **last four** major versions of Android. For example, when a new, major version of Android is released, the Android requirement is the new version and the three most recent versions that precede it.
-
 Currently there's one available Video Effect: Background Blur.
 
 The `VideoEffectsLocalVideoStreamFeature` object has the following API structure:
 
 - `enableEffect`: Enables a Video Effect on the `LocalVideoStream` instance.
-- `disableEffect`: Disables a Video Effect on the `LocalVideoStream` instance.
+- `disableEffects`: Disables all the currently running Video Effects:
 - `OnVideoEffectEnabledListener`: Event that is triggered when a Video Effect has been enabled successfully.
 - `OnVideoEffectDisabledListener`: Event that is triggered when a Video Effect has been disabled successfully.
 - `OnVideoEffectErrorListener`: Event that is triggered when a Video Effect operation fails.
@@ -44,7 +44,7 @@ To use Video Effects with the Azure Communication Calling SDK, once you've creat
 
 ```java
 // Obtain the Video Effects feature from the LocalVideoStream object that is sending the video.
-VideoEffectsLocalVideoStreamFeature videoEffectsFeature = currentVideoStream.feature(Features.LOCAL_VIDEO_EFFECTS);
+VideoEffectsLocalVideoStreamFeature videoEffectsFeature = currentVideoStream.feature(Features.VIDEO_EFFECTS);
 ```
 
 ```java
@@ -57,16 +57,16 @@ private void handleOnVideoEffectError(VideoEffectErrorEvent args) {
 }
  
 // Subscribe to the events
-videoEffectsFeature.addOnVideoEffectEnabledListener(this::handleOnVideoEffectEnabled);
-videoEffectsFeature.addOnVideoEffectDisabledListener(this::handleOnVideoEffectDisabled);
+videoEffectsFeature.addOnVideoEffectEnabledListener(this::handleOnVideoEffectStarted);
+videoEffectsFeature.addOnVideoEffectDisabledListener(this::handleOnVideoEffectStopped);
 videoEffectsFeature.addOnVideoEffectErrorListener(this::handleOnVideoEffectError);
 ```
 
 and start using the APIs to enable and disable Video Effects:
 
 ```java
-videoEffectsFeature.enableEffect( {{VIDEO_EFFECT_TO_DISABLE}} );
-videoEffectsFeature.disableEffect( {{VIDEO_EFFECT_TO_DISABLE}} );
+videoEffectsFeature.enableEffect( {{VIDEO_EFFECT_TO ENABLE}} );
+videoEffectsFeature.disableEffects();
 ```
 
 ### Background blur
@@ -91,9 +91,9 @@ private void handleOnVideoEffectError(VideoEffectErrorEvent args) {
 
 VideoEffectsLocalVideoStreamFeature videoEffectsFeature;
 public void createVideoEffectsFeature() {
-    videoEffectsFeature = currentVideoStream.feature(Features.LOCAL_VIDEO_EFFECTS);
-    videoEffectsFeature.addOnVideoEffectEnabledListener(this::handleOnVideoEffectEnabled);
-    videoEffectsFeature.addOnVideoEffectDisabledListener(this::handleOnVideoEffectDisabled);
+    videoEffectsFeature = currentVideoStream.feature(Features.VIDEO_EFFECTS);
+    videoEffectsFeature.addOnVideoEffectEnabledListener(this::handleOnVideoEffectStarted);
+    videoEffectsFeature.addOnVideoEffectDisabledListener(this::handleOnVideoEffectStopped);
     videoEffectsFeature.addOnVideoEffectErrorListener(this::handleOnVideoEffectError);
 }
 
@@ -117,73 +117,6 @@ To disable Background Blur Video Effect:
 
 ```java
 public void disableBackgroundBlur() {
-    videoEffectsFeature.disableEffect(backgroundBlurEffect);
-}
-```
-
-### Background replacement
-
-Background Replacement is a Video Effect that allows a person's background to be replaced. In order to use Background Video Effect, you need to obtain a `VideoEffectsLocalVideoStreamFeature` feature from a valid `LocalVideoStream`.
-
-To enable Background Replacement Video Effect:
-
-- Create a method that obtains the `VideoEFfects` Feature subscribes to the events:
-
-```java
-private void handleOnVideoEffectEnabled(VideoEffectEnabledEvent args) {
-   Log.i("VideoEfects", "Effect enabled for effect " + args.getVideoEffectName());
-}
-private void handleOnVideoEffectDisabled(VideoEffectDisabledEvent args) {
-   Log.i("VideoEfects", "Effect disabled for effect " + args.getVideoEffectName());
-}
-private void handleOnVideoEffectError(VideoEffectErrorEvent args) {
-   Log.i("VideoEfects", "Error " + args.getCode() + ":" + args.getMessage()
-           + " for effect " + args.getVideoEffectName());
-}
-
-VideoEffectsLocalVideoStreamFeature videoEffectsFeature;
-public void createVideoEffectsFeature() {
-    videoEffectsFeature = currentVideoStream.feature(Features.LOCAL_VIDEO_EFFECTS);
-    videoEffectsFeature.addOnVideoEffectEnabledListener(this::handleOnVideoEffectEnabled);
-    videoEffectsFeature.addOnVideoEffectDisabledListener(this::handleOnVideoEffectDisabled);
-    videoEffectsFeature.addOnVideoEffectErrorListener(this::handleOnVideoEffectError);
-}
-
-```
-
-- Create a new Background Replacement Video Effect object:
-
-```java
-BackgroundReplacementEffect backgroundReplacementVideoEffect = new BackgroundReplacementEffect();
-```
-
-- Set a custom background by passing in the image through a buffer.
-
-```java
-//example of where we can get an image from, in this case, this is from assets in Android folder
-InputStream inputStream = getAssets().open("image.jpg");
-Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-ByteArrayOutputStream stream = new ByteArrayOutputStream();
-bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-byte[] data = stream.toByteArray();
-ByteBuffer dataBuffer = ByteBuffer.allocateDirect(data.length);
-dataBuffer.put(data);
-dataBuffer.rewind();
-backgroundReplacementVideoEffect.setBuffer(dataBuffer);
-```
-
-- Call `EnableEffect` on the `videoEffectsFeature` object:
-
-```java
-public void enableBackgroundReplacement() {
-    videoEffectsFeature.enableEffect(backgroundReplacementVideoEffect);
-}
-```
-
-To disable Background Replacement Video Effect:
-
-```java
-public void disableBackgroundReplacement() {
-    videoEffectsFeature.disableEffect(backgroundReplacementVideoEffect);
+    videoEffectsFeature.disableEffects(backgroundBlurEffect);
 }
 ```

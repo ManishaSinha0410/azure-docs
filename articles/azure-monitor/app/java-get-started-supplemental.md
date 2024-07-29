@@ -1,16 +1,16 @@
 ---
 title: Application Insights with containers
-description: This article shows you how to set up Application Insights.
+description: This article shows you how to set-up Application Insights
 ms.topic: conceptual
-ms.date: 04/22/2024
+ms.date: 04/21/2023
 ms.devlang: java
-ms.custom: devx-track-java, devx-track-extended-java
+ms.custom: devx-track-java
 ms.reviewer: mmcc
 ---
 
 # Get Started (Supplemental)
 
-In the following sections, learn how to get Java autoinstrumentation for specific technical environments.
+In the following sections, you will find information on how to get Java auto-instrumentation for specific technical environments.
 
 ## Azure App Service
 
@@ -18,29 +18,26 @@ For more information, see [Application monitoring for Azure App Service and Java
 
 ## Azure Functions
 
-For more information, see [Monitoring Azure Functions with Azure Monitor Application Insights](./monitor-functions.md#distributed-tracing-for-java-applications).
+For more information, see [Monitoring Azure Functions with Azure Monitor Application Insights](./monitor-functions.md#distributed-tracing-for-java-applications-preview).
 
 ## Azure Spring Apps
 
-For more information, see [Use Application Insights Java In-Process Agent in Azure Spring Apps](../../spring-apps/enterprise/how-to-application-insights.md).
+For more information, see [Use Application Insights Java In-Process Agent in Azure Spring Apps](../../spring-apps/how-to-application-insights.md).
 
 ## Containers
 
-> [!NOTE]
-> With Spring Boot Native Image applications, use the [Azure Monitor OpenTelemetry Distro / Application Insights in Spring Boot native image Java application](https://aka.ms/AzMonSpringNative) project instead of the Application Insights Java agent.
-
 ### Docker entry point
 
-If you're using the *exec* form, add the parameter `-javaagent:"path/to/applicationinsights-agent-3.5.2.jar"` to the parameter list somewhere before the `"-jar"` parameter, for example:
+If you're using the *exec* form, add the parameter `-javaagent:"path/to/applicationinsights-agent-3.4.12.jar"` to the parameter list somewhere before the `"-jar"` parameter, for example:
 
-```dockerfile
-ENTRYPOINT ["java", "-javaagent:path/to/applicationinsights-agent-3.5.2.jar", "-jar", "<myapp.jar>"]
+```
+ENTRYPOINT ["java", "-javaagent:path/to/applicationinsights-agent-3.4.12.jar", "-jar", "<myapp.jar>"]
 ```
 
-If you're using the *shell* form, add the Java Virtual Machine (JVM) arg `-javaagent:"path/to/applicationinsights-agent-3.5.2.jar"` somewhere before `-jar`, for example:
+If you're using the *shell* form, add the JVM arg `-javaagent:"path/to/applicationinsights-agent-3.4.12.jar"` somewhere before `-jar`, for example:
 
-```dockerfile
-ENTRYPOINT java -javaagent:"path/to/applicationinsights-agent-3.5.2.jar" -jar <myapp.jar>
+```
+ENTRYPOINT java -javaagent:"path/to/applicationinsights-agent-3.4.12.jar" -jar <myapp.jar>
 ```
 
 
@@ -48,25 +45,25 @@ ENTRYPOINT java -javaagent:"path/to/applicationinsights-agent-3.5.2.jar" -jar <m
 
 A Dockerfile example:
 
-```dockerfile
+```
 FROM ...
 
 COPY target/*.jar app.jar
 
-COPY agent/applicationinsights-agent-3.5.2.jar applicationinsights-agent-3.5.2.jar 
+COPY agent/applicationinsights-agent-3.4.12.jar applicationinsights-agent-3.4.12.jar 
 
 COPY agent/applicationinsights.json applicationinsights.json
 
 ENV APPLICATIONINSIGHTS_CONNECTION_STRING="CONNECTION-STRING"
         
-ENTRYPOINT["java", "-javaagent:applicationinsights-agent-3.5.2.jar", "-jar", "app.jar"]
+ENTRYPOINT["java", "-javaagent:applicationinsights-agent-3.4.12.jar", "-jar", "app.jar"]
 ```
 
-In this example, you copy the `applicationinsights-agent-3.5.2.jar` and `applicationinsights.json` files from an `agent` folder (you can choose any folder of your machine). These two files have to be in the same folder in the Docker container.
+In this example we have copied the `applicationinsights-agent-3.4.12.jar` and `applicationinsights.json` files from an `agent` folder (you can choose any folder of your machine). These two files have to be in the same folder in the Docker container.
 
-### Partner container images
+### Third-party container images
 
-If you're using a partner container image that you can't modify, mount the Application Insights Java agent jar into the container from outside. Set the environment variable for the container
+If you're using a third-party container image that you can't modify, mount the Application Insights Java agent jar into the container from outside. Set the environment variable for the container
 `JAVA_TOOL_OPTIONS=-javaagent:/path/to/applicationinsights-agent.jar`.
 
 ## Spring Boot
@@ -75,27 +72,25 @@ For more information, see [Using Azure Monitor Application Insights with Spring 
 
 ## Java Application servers
 
-For information on setting up the Application Insights Java agent, see [Enabling Azure Monitor OpenTelemetry for Java](./opentelemetry-enable.md?tabs=java). The following sections provide details that might be helpful when configuring the `-javaagent:...` JVM arg on different application servers.
-
 ### Tomcat 8 (Linux)
 
 #### Tomcat installed via apt-get or yum
 
 If you installed Tomcat via `apt-get` or `yum`, you should have a file `/etc/tomcat8/tomcat8.conf`. Add this line to the end of that file:
 
-```console
-JAVA_OPTS="$JAVA_OPTS -javaagent:path/to/applicationinsights-agent-3.5.2.jar"
+```
+JAVA_OPTS="$JAVA_OPTS -javaagent:path/to/applicationinsights-agent-3.4.12.jar"
 ```
 
 #### Tomcat installed via download and unzip
 
 If you installed Tomcat via download and unzip from [https://tomcat.apache.org](https://tomcat.apache.org), you should have a file `<tomcat>/bin/catalina.sh`. Create a new file in the same directory named `<tomcat>/bin/setenv.sh` with the following content:
 
-```console
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:path/to/applicationinsights-agent-3.5.2.jar"
+```
+CATALINA_OPTS="$CATALINA_OPTS -javaagent:path/to/applicationinsights-agent-3.4.12.jar"
 ```
 
-If the file `<tomcat>/bin/setenv.sh` already exists, modify that file and add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to `CATALINA_OPTS`.
+If the file `<tomcat>/bin/setenv.sh` already exists, modify that file and add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to `CATALINA_OPTS`.
 
 ### Tomcat 8 (Windows)
 
@@ -103,38 +98,36 @@ If the file `<tomcat>/bin/setenv.sh` already exists, modify that file and add `-
 
 Locate the file `<tomcat>/bin/catalina.bat`. Create a new file in the same directory named `<tomcat>/bin/setenv.bat` with the following content:
 
-```console
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.5.2.jar
+```
+set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.4.12.jar
 ```
 
 Quotes aren't necessary, but if you want to include them, the proper placement is:
 
-```console
-set "CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.5.2.jar"
+```
+set "CATALINA_OPTS=%CATALINA_OPTS% -javaagent:path/to/applicationinsights-agent-3.4.12.jar"
 ```
 
-If the file `<tomcat>/bin/setenv.bat` already exists, modify that file and add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to `CATALINA_OPTS`.
+If the file `<tomcat>/bin/setenv.bat` already exists, modify that file and add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to `CATALINA_OPTS`.
 
 #### Run Tomcat as a Windows service
 
-Locate the file `<tomcat>/bin/tomcat8w.exe`. Run that executable and add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the `Java Options` under the `Java` tab.
+Locate the file `<tomcat>/bin/tomcat8w.exe`. Run that executable and add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to the `Java Options` under the `Java` tab.
 
-### JBoss Enterprise Application Platform 7
-
-In Red Hat JBoss Enterprise Application Platform (EAP) 7, you can set up a standalone server or a domain server.
+### JBoss EAP 7
 
 #### Standalone server
 
-Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `JAVA_OPTS` environment variable in the file `JBOSS_HOME/bin/standalone.conf` (Linux) or `JBOSS_HOME/bin/standalone.conf.bat` (Windows):
+Add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to the existing `JAVA_OPTS` environment variable in the file `JBOSS_HOME/bin/standalone.conf` (Linux) or `JBOSS_HOME/bin/standalone.conf.bat` (Windows):
 
 ```java    ...
-    JAVA_OPTS="-javaagent:path/to/applicationinsights-agent-3.5.2.jar -Xms1303m -Xmx1303m ..."
+    JAVA_OPTS="-javaagent:path/to/applicationinsights-agent-3.4.12.jar -Xms1303m -Xmx1303m ..."
     ...
 ```
 
 #### Domain server
 
-Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jvm-options` in `JBOSS_HOME/domain/configuration/host.xml`:
+Add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to the existing `jvm-options` in `JBOSS_HOME/domain/configuration/host.xml`:
 
 ```xml
 ...
@@ -144,7 +137,7 @@ Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jv
         <jvm-options>
             <option value="-server"/>
             <!--Add Java agent jar file here-->
-            <option value="-javaagent:path/to/applicationinsights-agent-3.5.2.jar"/>
+            <option value="-javaagent:path/to/applicationinsights-agent-3.4.12.jar"/>
             <option value="-XX:MetaspaceSize=96m"/>
             <option value="-XX:MaxMetaspaceSize=256m"/>
         </jvm-options>
@@ -153,7 +146,7 @@ Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jv
 ...
 ```
 
-If you're running multiple managed servers on a single host, you need to add `applicationinsights.agent.id` to the `system-properties` for each `server`:
+If you're running multiple managed servers on a single host, you'll need to add `applicationinsights.agent.id` to the `system-properties` for each `server`:
 
 ```xml
 ...
@@ -175,27 +168,27 @@ If you're running multiple managed servers on a single host, you need to add `ap
 ...
 ```
 
-The specified `applicationinsights.agent.id` value must be unique. You use the value to create a subdirectory under the Application Insights directory. Each JVM process needs its own local Application Insights config and local Application Insights log file. Also, if reporting to the central collector, multiple managed servers share the `applicationinsights.properties` file, so the specified `applicationinsights.agent.id` is needed to override the `agent.id` setting in that shared file. The `applicationinsights.agent.rollup.id` can be similarly specified in the server's `system-properties` if you need to override the `agent.rollup.id` setting per managed server.
+The specified `applicationinsights.agent.id` value must be unique. It's used to create a subdirectory under the Application Insights directory. Each JVM process needs its own local Application Insights config and local Application Insights log file. Also, if reporting to the central collector, the `applicationinsights.properties` file is shared by the multiple managed servers, so the specified `applicationinsights.agent.id` is needed to override the `agent.id` setting in that shared file. The `applicationinsights.agent.rollup.id` can be similarly specified in the server's `system-properties` if you need to override the `agent.rollup.id` setting per managed server.
 
 ### Jetty 9
 
 Add these lines to `start.ini`:
 
-```console
+```
 --exec
--javaagent:path/to/applicationinsights-agent-3.5.2.jar
+-javaagent:path/to/applicationinsights-agent-3.4.12.jar
 ```
 
 ### Payara 5
 
-Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jvm-options` in `glassfish/domains/domain1/config/domain.xml`:
+Add `-javaagent:path/to/applicationinsights-agent-3.4.12.jar` to the existing `jvm-options` in `glassfish/domains/domain1/config/domain.xml`:
 
 ```xml
 ...
 <java-config ...>
     <!--Edit the JVM options here-->
     <jvm-options>
-        -javaagent:path/to/applicationinsights-agent-3.5.2.jar>
+        -javaagent:path/to/applicationinsights-agent-3.4.12.jar>
     </jvm-options>
         ...
 </java-config>
@@ -205,12 +198,16 @@ Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jv
 ### WebSphere 8
 
 1. Open Management Console.
-1. Go to **Servers** > **WebSphere application servers** > **Application servers**. Choose the appropriate application servers and select **Java and Process Management** > **Process definition** > **Java Virtual Machine**.
+1. Go to **Servers** > **WebSphere application servers** > **Application servers**. Choose the appropriate application servers and select:
 
-1. In `Generic JVM arguments`, add the following JVM argument.
+    ```
+    Java and Process Management > Process definition >  Java Virtual Machine
+    ```
 
-    ```console
-    -javaagent:path/to/applicationinsights-agent-3.5.2.jar
+1. In `Generic JVM arguments`, add the following JVM argument:
+
+    ```
+    -javaagent:path/to/applicationinsights-agent-3.4.12.jar
     ```
 
 1. Save and restart the application server.
@@ -219,10 +216,11 @@ Add `-javaagent:path/to/applicationinsights-agent-3.5.2.jar` to the existing `jv
 
 Create a new file `jvm.options` in the server directory (for example, `<openliberty>/usr/servers/defaultServer`), and add this line:
 
-```console
--javaagent:path/to/applicationinsights-agent-3.5.2.jar
+```
+-javaagent:path/to/applicationinsights-agent-3.4.12.jar
 ```
 
 ### Others
 
 See your application server documentation on how to add JVM args.
+

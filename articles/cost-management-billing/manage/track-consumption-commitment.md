@@ -3,10 +3,11 @@ title: Track your Microsoft Azure Consumption Commitment (MACC)
 description: Learn how to track your Microsoft Azure Consumption Commitment (MACC) for a Microsoft Customer Agreement.
 author: bandersmsft
 ms.reviewer: amberb
+tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 03/21/2024
+ms.date: 09/19/2022
 ms.author: banders
 ---
 

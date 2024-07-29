@@ -2,13 +2,13 @@
 title: Microsoft Azure Data Box security overview | Microsoft Docs in data 
 description: Describes Azure Data Box security features in the device, service, and data that resides on Data Box.
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: pod
 ms.topic: conceptual
 ms.date: 04/13/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 # Azure Data Box security and data protection
 
@@ -100,7 +100,7 @@ Azure Data Box collects and displays personal information in the following key i
 
 - **Shipping address** – After the order is placed, Data Box service provides the shipping address to third-party carriers such as UPS or DHL. 
 
-For more information, review the Microsoft Privacy policy at [Trust Center](https://www.microsoft.com/trust-center).
+For more information, review the Microsoft Privacy policy at [Trust Center](https://www.microsoft.com/trustcenter).
 
 
 ## Security guidelines reference

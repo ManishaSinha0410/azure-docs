@@ -2,13 +2,13 @@
 title: Tutorial to ship Azure Data Box back in export order | Microsoft Docs
 description: Learn how to ship your Azure Data Box to Microsoft after the export order is complete
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: pod
 ms.topic: tutorial
 ms.date: 06/16/2022
-ms.author: shaas
+ms.author: alkohli
 zone_pivot_groups: data-box-shipping
 
 # Customer intent: As an IT admin, I need to be able to return Data Box to upload on-premises data from my server onto Azure.
@@ -91,7 +91,7 @@ If using Microsoft managed shipping, follow these steps.
 
 [!INCLUDE [data-box-shipping-in-singapore](../../includes/data-box-shipping-in-singapore.md)]
 
-### [Hong Kong Special Administrative Region](#tab/in-hk)
+### [Hong Kong](#tab/in-hk)
 
 [!INCLUDE [data-box-shipping-in-hk](../../includes/data-box-shipping-in-hk.md)]
 

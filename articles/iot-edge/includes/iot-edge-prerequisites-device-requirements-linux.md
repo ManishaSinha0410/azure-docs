@@ -4,7 +4,6 @@ ms.date: 01/05/2023
 author: micahl
 ms.author: micahl
 ms.service: iot-edge
-ms.custom: linux-related-content
 services: iot-edge
 ---
 

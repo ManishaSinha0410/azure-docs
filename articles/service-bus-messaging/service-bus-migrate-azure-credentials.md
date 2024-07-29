@@ -1,11 +1,11 @@
 ---
 title: Migrate applications to use passwordless authentication with Azure Service Bus
 titleSuffix: Azure Service Bus
-description: Learn to migrate existing Service Bus applications away from connection strings to use Microsoft Entra ID and Azure RBAC for enhanced security.
+description: Learn to migrate existing Service Bus applications away from connection strings to use Azure AD and Azure RBAC for enhanced security.
 author: alexwolfmsft
 ms.author: alexwolf
 ms.reviewer: randolphwest
-ms.date: 06/12/2023
+ms.date: 04/12/2023
 ms.service: service-bus-messaging
 ms.topic: how-to
 ms.custom:
@@ -13,7 +13,6 @@ ms.custom:
 - devx-track-azurecli
 - devx-track-azurepowershell
 - passwordless-dotnet
-- passwordless-go
 - passwordless-java
 - passwordless-js
 - passwordless-python
@@ -30,19 +29,7 @@ The following code example demonstrates how to connect to Azure Service Bus usin
 ## [.NET](#tab/dotnet)
 
 ```csharp
-await using ServiceBusClient client = new("<CONNECTION-STRING>");
-```
-
-## [Go](#tab/go)
-
-```go
-client, err := azservicebus.NewClientFromConnectionString(
-    "<CONNECTION-STRING>",
-    nil)
-
-if err != nil {
-    // handle error
-}
+await using var client = new ServiceBusClient("<CONNECTION-STRING>");
 ```
 
 ## [Java](#tab/java)
@@ -51,7 +38,7 @@ if err != nil {
 
 ```java
 ConnectionFactory factory = new ServiceBusJmsConnectionFactory(
-    "<CONNECTION-STRING>",
+    "<CONNECTION-STRING>", 
     new ServiceBusJmsConnectionFactorySettings());
 ```
 
@@ -108,7 +95,7 @@ The following steps explain how to migrate an existing application to use passwo
 
 ### Sign-in and migrate the app code to use passwordless connections
 
-For local development, make sure you're authenticated with the same Microsoft Entra account you assigned the role to for the Service Bus namespace. You can authenticate via the Azure CLI, Visual Studio, Azure PowerShell, or other tools such as IntelliJ.
+For local development, make sure you're authenticated with the same Azure AD account you assigned the role to for the Service Bus namespace. You can authenticate via the Azure CLI, Visual Studio, Azure PowerShell, or other tools such as IntelliJ.
 
 [!INCLUDE [default-azure-credential-sign-in](../../includes/passwordless/default-azure-credential-sign-in.md)]
 
@@ -131,46 +118,11 @@ Next, update your code to use passwordless connections.
 1. Identify the code that creates a `ServiceBusClient` object to connect to Azure Service Bus. Update your code to match the following example:
 
    ```csharp
-    var serviceBusNamespace = $"https://{namespace}.servicebus.windows.net";
-    ServiceBusClient client = new(
-        serviceBusNamespace,
+    // TODO: Replace the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
+    var client = new ServiceBusClient(
+        "<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net",
         new DefaultAzureCredential());
    ```
-
-## [Go](#tab/go)
-
-1. To use `DefaultAzureCredential` in a Go application, install the `azidentity` module:
-
-    ```bash
-    go get -u github.com/Azure/azure-sdk-for-go/sdk/azidentity
-    ```
-
-1. At the top of your file, add the following code:
-
-    ```go
-    import (
-        "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-    )
-    ```
-
-1. Identify the locations in your code that create a `Client` instance to connect to Azure Service Bus. Update your code to match the following example:
-
-    ```go
-    credential, err := azidentity.NewDefaultAzureCredential(nil)
-
-    if err != nil {
-        // handle error
-    }
-
-    serviceBusNamespace := fmt.Sprintf(
-        "https://%s.servicebus.windows.net",
-        namespace)
-    client, err := azservicebus.NewClient(serviceBusNamespace, credential, nil)
-
-    if err != nil {
-        // handle error
-    }
-    ```
 
 ## [Java](#tab/java)
 
@@ -201,12 +153,11 @@ Next, update your code to use passwordless connections.
        ```java
         DefaultAzureCredential credential = new DefaultAzureCredentialBuilder()
             .build();
-        String serviceBusNamespace = 
-            "https://" + namespace + ".servicebus.windows.net";
     
+        // TODO: Replace the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
         ConnectionFactory factory = new ServiceBusJmsConnectionFactory(
             credential,
-            serviceBusNamespace,
+            "<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net",
             new ServiceBusJmsConnectionFactorySettings());
        ```
 
@@ -217,11 +168,10 @@ Next, update your code to use passwordless connections.
         ```java
         DefaultAzureCredential credential = new DefaultAzureCredentialBuilder()
             .build();
-        String serviceBusNamespace = 
-            "https://" + namespace + ".servicebus.windows.net";
     
+        // TODO: Update the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
         ServiceBusReceiverClient receiver = new ServiceBusClientBuilder()
-            .credential(serviceBusNamespace, credential)
+            .credential("<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net", credential)
             .receiver()
             .topicName("<TOPIC-NAME>")
             .subscriptionName("<SUBSCRIPTION-NAME>")
@@ -233,11 +183,10 @@ Next, update your code to use passwordless connections.
         ```java
         DefaultAzureCredential credential = new DefaultAzureCredentialBuilder()
             .build();
-        String serviceBusNamespace = 
-            "https://" + namespace + ".servicebus.windows.net";
     
+        // TODO: Update the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
         ServiceBusSenderClient client = new ServiceBusClientBuilder()
-            .credential(serviceBusNamespace, credential)
+            .credential("<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net", credential)
             .sender()
             .queueName("<QUEUE-NAME>")
             .buildClient();
@@ -261,10 +210,10 @@ Next, update your code to use passwordless connections.
 
     ```nodejs
     const credential = new DefaultAzureCredential();
-    const serviceBusNamespace = `https://${namespace}.servicebus.windows.net`;    
-
+    
+    // TODO: Update the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
     const client = new ServiceBusClient(
-      serviceBusNamespace,
+      "<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net",
       credential
     );
     ```
@@ -287,10 +236,10 @@ Next, update your code to use passwordless connections.
 
     ```python
     credential = DefaultAzureCredential()
-    service_bus_namespace = "https://%s.servicebus.windows.net" % namespace
 
+    # TODO: Update the <SERVICE-BUS-NAMESPACE-NAME> placeholder.
     client = ServiceBusClient(
-        fully_qualified_namespace = service_bus_namespace,
+        fully_qualified_namespace = "<SERVICE-BUS-NAMESPACE-NAME>.servicebus.windows.net",
         credential = credential
     )
     ```

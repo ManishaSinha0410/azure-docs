@@ -2,8 +2,8 @@
 title: Enable Profiler for Azure Service Fabric applications
 description: Profile live Azure Service Fabric apps with Application Insights.
 ms.topic: conceptual
-ms.custom:
-ms.date: 09/22/2023
+ms.custom: devx-track-dotnet
+ms.date: 07/15/2022
 ---
 
 # Enable Profiler for Azure Service Fabric applications

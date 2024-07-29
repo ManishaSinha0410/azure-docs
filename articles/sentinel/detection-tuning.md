@@ -5,6 +5,7 @@ author: yelevin
 ms.author: yelevin
 ms.topic: how-to
 ms.date: 11/09/2021
+ms.custom: ignite-fall-2021
 ---
 
 # Get fine-tuning recommendations for your analytics rules in Microsoft Sentinel

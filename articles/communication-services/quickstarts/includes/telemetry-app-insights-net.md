@@ -65,12 +65,9 @@ Use the following code to begin:
 
 ```csharp
 using System;
-using System.Diagnostics;
 using Azure.Communication;
 using Azure.Communication.Identity;
 using Azure.Monitor.OpenTelemetry.Exporter;
-using OpenTelemetry;
-using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 namespace TelemetryAppInsightsQuickstart

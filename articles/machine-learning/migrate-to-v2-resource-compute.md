@@ -8,7 +8,7 @@ ms.subservice: mldata
 ms.topic: reference
 author: vijetajo
 ms.author: vijetaj
-ms.date: 04/15/2024
+ms.date: 02/14/2023
 ms.reviewer: franksolomon
 ms.custom: migration
 monikerRange: 'azureml-api-1 || azureml-api-2'
@@ -18,7 +18,8 @@ monikerRange: 'azureml-api-1 || azureml-api-2'
 
 The compute management functionally remains unchanged with the v2 development platform.
 
-This article gives a comparison of scenarios in SDK v1 and SDK v2.
+This article gives a comparison of scenario(s) in SDK v1 and SDK v2.
+
 
 ## Create compute instance
 
@@ -93,5 +94,5 @@ This article gives a comparison of scenarios in SDK v1 and SDK v2.
 
 ## Next steps
 
-* [Create an Azure Machine Learning compute instance](how-to-create-compute-instance.md)
+* [Create and manage an Azure Machine Learning compute instance](how-to-create-manage-compute-instance.md)
 * [Create an Azure Machine Learning compute cluster](how-to-create-attach-compute-cluster.md)

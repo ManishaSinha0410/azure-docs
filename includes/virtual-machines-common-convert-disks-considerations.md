@@ -1,9 +1,9 @@
 ---
-author: jushiman
+author: cynthn
 ms.service: virtual-machines
 ms.topic: include
 ms.date: 10/26/2018
-ms.author: jushiman
+ms.author: cynthn
 ---
 
 * The migration will restart the VM, so schedule the migration of your VMs during a pre-existing maintenance window. 

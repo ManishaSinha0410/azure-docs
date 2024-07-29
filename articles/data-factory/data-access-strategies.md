@@ -6,7 +6,7 @@ author: lrtoyou1223
 ms.service: data-factory
 ms.subservice: integration-runtime
 ms.topic: conceptual
-ms.date: 01/05/2024
+ms.date: 08/03/2022
 ---
 
 # Data access strategies
@@ -75,7 +75,7 @@ For more information about supported network security mechanisms on data stores 
     | Azure laaS                     | SQL Server,   Oracle,   etc.                                  | Yes       | -                   |
     | On-premise   laaS              | SQL Server,   Oracle,   etc.                                  | Yes       | -                   |
 
-## Related content
+## Next steps
 
 For more information, see the following related articles:
 * [Supported data stores](./copy-activity-overview.md#supported-data-stores-and-formats)

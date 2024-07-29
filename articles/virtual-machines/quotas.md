@@ -1,12 +1,14 @@
 ---
 title: vCPU quotas
 description: Check your vCPU quotas for Azure virtual-machines.
-author: ju-shim
+author: cynthn
 ms.service: virtual-machines
 ms.subservice: sizes
+ms.workload: infrastructure-services
 ms.topic: how-to
 ms.date: 02/15/2023
-ms.author: jushiman
+ms.author: cynthn
+
 ---
 
 # Check vCPU quotas

@@ -5,6 +5,7 @@ author: Heidilohr
 ms.topic: how-to
 ms.date: 07/23/2021
 ms.author: helohr 
+manager: femila
 ---
 
 # Delete a host pool

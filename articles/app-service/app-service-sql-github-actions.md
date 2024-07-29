@@ -1,7 +1,6 @@
 ---
 title: "Tutorial: Use GitHub Actions to deploy to an App Service custom container and connect to a database"
 description: Learn how to deploy an ASP.NET core app to Azure and to Azure SQL Database with GitHub Actions
-author: cephalin
 ms.devlang: csharp
 ms.topic: tutorial
 ms.date: 01/09/2023
@@ -48,11 +47,11 @@ Open the Azure Cloud Shell at https://shell.azure.com. You can alternately use t
 
 ## Generate deployment credentials
 
-[!INCLUDE [include](~/reusable-content/github-actions/generate-openid-credentials.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/generate-openid-credentials.md)]
 
 ## Configure the GitHub secret for authentication
 
-[!INCLUDE [include](~/reusable-content/github-actions/create-secrets-openid-only.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/create-secrets-openid-only.md)]
 
 ## Add a SQL Server secret
 

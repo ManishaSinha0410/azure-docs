@@ -5,7 +5,9 @@ author: tedvilutis
 ms.author: tvilutis
 manager: cnovak
 ms.reviewer: orspodek
+ms.workload: big-data
 ms.service: time-series-insights
+services: time-series-insights
 ms.topic: conceptual
 ms.date: 03/18/2021
 ---

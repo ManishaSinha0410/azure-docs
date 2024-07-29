@@ -1,16 +1,14 @@
 ---
 title: Define projections
-titleSuffix: Azure AI Search
+titleSuffix: Azure Cognitive Search
 description: Learn how to define table, object, and file projections in a knowledge store by reviewing syntax and examples.
 
 manager: nitinme
 author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
-ms.custom:
-  - ignite-2023
 ms.topic: conceptual
-ms.date: 03/18/2024
+ms.date: 01/31/2023
 ---
 
 # Define projections in a knowledge store
@@ -35,7 +33,6 @@ Recall that projections are defined under the "knowledgeStore" property of a ski
         "files": [ ]
       }
     ]
-}
 ```
 
 If you need more background before getting started, review [this check list](knowledge-store-projection-overview.md#checklist-for-getting-started) for tips and workflow.

@@ -4,32 +4,31 @@ description: Check startup, liveness, and readiness with Azure Container Apps he
 services: container-apps
 author: craigshoemaker
 ms.service: container-apps
+ms.custom: event-tier1-build-2022, ignite-2022
 ms.topic: conceptual
-ms.date: 08/29/2023
+ms.date: 10/28/2022
 ms.author: cshoe
 ---
 
 # Health probes in Azure Container Apps
 
-Azure Container Apps health probes allow the Container Apps runtime to regularly inspect the status of your container apps.
+Health probes in Azure Container Apps are based on [Kubernetes health probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/). You can set up probes using either TCP or HTTP(S) exclusively.
 
-You can set up probes using either TCP or HTTP(S) exclusively.
+Container Apps support the following probes:
 
-Container Apps supports the following probes:
+- **Liveness**: Reports the overall health of your replica.
+- **Readiness**: Signals that a replica is ready to accept traffic.
+- **Startup**: Delay reporting on a liveness or readiness state for slower apps with a startup probe.
 
-| Probe | Description |
-|---|---|
-| Startup | Checks if your application has successfully started. This check is separate from the liveness probe and executes during the initial startup phase of your application. |
-| Liveness | Checks if your application is still running and responsive. |
-| Readiness | Checks to see if a replica is ready to handle incoming requests. |
 
-For a full list of the probe specification supported in Azure Container Apps, refer to [Azure REST API specs](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/app/resource-manager/Microsoft.App/stable/2022-03-01/CommonDefinitions.json#L119-L236).
+For a full listing of the specification supported in Azure Container Apps, refer to [Azure REST API specs](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/app/resource-manager/Microsoft.App/stable/2022-03-01/CommonDefinitions.json#L119-L236).
+
+> [!NOTE]
+> TCP startup probes are not supported for Consumption workload profiles in the [Consumption + Dedicated plan structure](./plans.md#consumption-dedicated).
 
 ## HTTP probes
 
-HTTP probes allow you to implement custom logic to check the status of application dependencies before reporting a healthy status.
-
-Configure your health probe endpoints to respond with an HTTP status code greater than or equal to `200` and less than `400` to indicate success. Any other response code outside this range indicates a failure.
+HTTP probes allow you to implement custom logic to check the status of application dependencies before reporting a healthy status. Configure your health probe endpoints to respond with an HTTP status code greater than or equal to `200` and less than `400` to indicate success. Any other response code outside this range indicates a failure.
 
 The following example demonstrates how to implement a liveness endpoint in JavaScript.
 
@@ -56,14 +55,14 @@ app.get('/liveness', (req, res) => {
 
 ## TCP probes
 
-TCP probes wait to establish a connection with the server to indicate success. The probe fails if it can't establish a connection to your application.
+TCP probes wait for a connection to be established with the server to indicate success. A probe failure is registered if no connection is made.
 
 ## Restrictions
 
 - You can only add one of each probe type per container.
 - `exec` probes aren't supported.
 - Port values must be integers; named ports aren't supported.
-- gRPC isn't supported.
+- gRPC is not supported.
 
 ## Examples
 
@@ -158,22 +157,19 @@ containers:
 
 ---
 
-The optional `failureThreshold` setting defines the number of attempts Container Apps tries to execute the probe if execution fails. Attempts that exceed the `failureThreshold` amount cause different results for each probe type.
+The optional `failureThreshold` setting defines the number of attempts Container Apps tries if the probe if execution fails. Attempts that exceed the `failureThreshold` amount cause different results for each probe.
 
 ## Default configuration
 
 If ingress is enabled, the following default probes are automatically added to the main app container if none is defined for each type.
 
-> [!NOTE]
-> Default probes are currently not applied on workload profile environments when using the Consumption plan. This behavior may change in the future.
-
 | Probe type | Default values |
 | -- | -- |
-| Startup | Protocol: TCP<br>Port: ingress target port<br>Timeout: 3 seconds<br>Period: 1 second<br>Initial delay: 1 second<br>Success threshold: 1<br>Failure threshold: 240 |
-| Readiness | Protocol: TCP<br>Port: ingress target port<br>Timeout: 5 seconds<br>Period: 5 seconds<br>Initial delay: 3 seconds<br>Success threshold: 1<br>Failure threshold: 48 |
+| Startup | Protocol: TCP<br>Port: ingress target port<br>Timeout: 1 second<br>Period: 1 second<br>Initial delay: 1 second<br>Success threshold: 1<br>Failure threshold: `timeoutSeconds` |
+| Readiness | Protocol: TCP<br>Port: ingress target port<br>Timeout: 5 seconds<br>Period: 5 seconds<br>Initial delay: 3 seconds<br>Success threshold: 1<br>Failure threshold: `timeoutSeconds / 5` |
 | Liveness | Protocol: TCP<br>Port: ingress target port |
 
-If your app takes an extended amount of time to start (which is common in Java) you often need to customize the probes so your container doesn't crash.
+If your app takes an extended amount of time to start, which is very common in Java, you often need to customize the probes so your container won't crash.
 
 The following example demonstrates how to configure the liveness and readiness probes in order to extend the startup times.
 
@@ -199,7 +195,7 @@ The following example demonstrates how to configure the liveness and readiness p
            "port": 80
           },
           "timeoutSeconds": 5
-       }]
+       }
 ```
 
 ## Next steps

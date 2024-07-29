@@ -6,7 +6,8 @@ ms.author: yexu
 ms.service: data-factory
 ms.subservice: tutorials
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.custom: seo-lt-2019
+ms.date: 09/22/2022
 ---
 
 # Bulk copy from a database with a control table
@@ -90,6 +91,6 @@ The last three parameters, which define the path in your destination store are o
 	
 	:::image type="content" source="media/solution-template-bulk-copy-with-control-table/BulkCopyfromDB_with_ControlTable9.png" alt-text="Screenshot showing the Polybase setting.":::
 	   
-## Related content
+## Next steps
 
 - [Introduction to Azure Data Factory](introduction.md)

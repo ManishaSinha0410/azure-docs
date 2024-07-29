@@ -3,10 +3,11 @@ title: Pass trigger information to pipeline
 description: Learn how to reference trigger metadata in pipeline
 ms.service: data-factory
 ms.subservice: orchestration
-author: kromerm
-ms.author: makromer
+author: chez-charlie
+ms.author: chez
+ms.reviewer: 
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.date: 08/10/2022
 ---
 
 # Reference trigger metadata in pipeline runs
@@ -140,6 +141,6 @@ Under **pipelines** section, assign parameter values in **parameters** section. 
 
 To use the values in pipeline, utilize parameters _@pipeline().parameters.parameterName_, __not__ system variable, in pipeline definitions.
 
-## Related content
+## Next steps
 
 For detailed information about triggers, see [Pipeline execution and triggers](concepts-pipeline-execution-triggers.md#trigger-execution-with-json).

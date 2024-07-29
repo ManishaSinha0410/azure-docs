@@ -1,6 +1,6 @@
 ---
-title: Add students to a lab in the Azure Education Hub
-description: Learn how to add students to a lab in the Azure Education Hub by using REST APIs.
+title: Add a student to a lab in Azure Education Hub through REST APIs
+description: Learn how to add students to labs in Azure Education Hub through REST APIs
 author: vinnieangel
 ms.author: vangellotti
 ms.service: azure-education
@@ -9,25 +9,27 @@ ms.date: 03/11/2023
 ms.custom: template-how-to
 ---
 
-# Add students to a lab in the Azure Education Hub
+# Add students to a lab in Education Hub using REST APIs
 
-This article walks through how to add students to a lab in the Azure Education Hub by using REST APIs.
+This article walks through how to add students to a lab.
 
 ## Prerequisites
 
-- Know your billing account ID, billing profile ID, and invoice section ID.
-- Have an education-approved Azure account.
-- Have a lab already created in the Education Hub.
+- Know billing account ID, Billing profile ID, and Invoice Section ID
+- Have an Edu approved Azure account
+- Have already created a lab in Education Hub
 
-## Add each student to the lab
+## Add students to the lab
 
-Call the `add students` endpoint. Be sure to replace the sections that are surrounded by angle brackets (`<>`). The invoice section ID must be the same invoice section ID of the lab where you want to add this student.
+After a lab has been created, call the add students endpoint and make sure to replace the sections that are surrounded by <>.
+The invoice section ID must be the same invoice section ID of the lab you want to add this student to.
+
 
 ```json
 PUT https://management.azure.com/providers/Microsoft.Billing/billingAccounts/<BillingAccountID>/billingProfiles/<BillingProfileID>/invoiceSections/<InvoiceSectionID>/providers/Microsoft.Education/labs/default/students/<StudentID>?api-version=2021-12-01-preview
 ```
 
-Call the API with a body similar to the following example. Change the body to include details of the student that you want to add to the lab.
+Call the API with a body similar to the following. Change the body to include details of the student you want to add to the lab.
 
 ```json
 {
@@ -47,7 +49,7 @@ Call the API with a body similar to the following example. Change the body to in
 }
 ```
 
-The API response returns details of the newly added student:
+The API response returns details of the newly added student.
 
 ```json
 {
@@ -83,13 +85,13 @@ The API response returns details of the newly added student:
 
 ## Check the details of the students in a lab
 
-To see all of the students who are in the specified lab, call this API:
+Calling this API allows you to see all of the students that are in the specified lab.
 
 ```json
 GET https://management.azure.com/providers/Microsoft.Billing/billingAccounts/<BillingAccountID/billingProfiles/<BillingProfileID>/invoiceSections/<InvoiceSectionID>/providers/Microsoft.Education/labs/default/students?includeDeleted=true&api-version=2021-12-01-preview
 ```
 
-The API response includes information about the students in the lab:
+The API response includes information about the students in the lab.
 
 ```json
 {
@@ -128,7 +130,7 @@ The API response includes information about the students in the lab:
 }
 ```
 
-## Related content
+## Next steps
+- [Manage your Academic Grant using the Overview page](hub-overview-page.md)
 
-- [Manage your academic grant by using the Overview page](hub-overview-page.md)
-- [Learn about support options](educator-service-desk.md)
+- [Support options](educator-service-desk.md)

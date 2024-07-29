@@ -3,9 +3,9 @@ title: "include file"
 description: "include file"
 services: storage
 author: tamram
-ms.service: azure-storage
+ms.service: storage
 ms.topic: "include"
-ms.date: 06/07/2023
+ms.date: 09/22/2022
 ms.author: tamram
 ms.custom: "include file"
 ---

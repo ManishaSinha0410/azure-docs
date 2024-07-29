@@ -6,10 +6,11 @@ ms.service: virtual-machines
 ms.subservice: extensions
 author: bobbytreed
 ms.author: robreed
-ms.reviewer: jushiman
+ms.reviewer: erd
 ms.collection: windows
 ms.date: 03/06/2023
-ms.custom:
+ms.custom: devx-track-azurepowershell
+
 ---
 # Pass credentials to the Azure DSCExtension handler
 

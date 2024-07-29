@@ -9,7 +9,7 @@ ms.topic: quickstart
 ms.date: 05/04/2023
 ms.author: sidandrews
 ms.reviewer: mjbrown
-ms.custom: devx-track-python, mode-api, devx-track-azurecli, py-fresh-zinc
+ms.custom: devx-track-python, mode-api, devx-track-azurecli, ignite-2022, py-fresh-zinc
 ---
 
 # Quickstart: Build an API for Table app with Python SDK and Azure Cosmos DB
@@ -92,7 +92,7 @@ Azure Cosmos DB accounts are created using the [New-AzCosmosDBAccount](/powershe
 
 Azure Cosmos DB account names must be between 3 and 44 characters in length and may contain only lowercase letters, numbers, and the hyphen (-) character.  Azure Cosmos DB account names must also be unique across Azure.
 
-Azure PowerShell commands can be run in the [Azure Cloud Shell](https://shell.azure.com) or on a workstation with [Azure PowerShell installed](/powershell/azure/install-azure-powershell).
+Azure PowerShell commands can be run in the [Azure Cloud Shell](https://shell.azure.com) or on a workstation with [Azure PowerShell installed](/powershell/azure/install-az-ps).
 
 It typically takes several minutes for the Azure Cosmos DB account creation process to complete.
 

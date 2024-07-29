@@ -4,9 +4,7 @@ description: Learn how you can troubleshoot issues with your app in Azure App Se
 keywords: app service, azure app service, diagnostics, support, web app, troubleshooting, self-help
 
 ms.topic: article
-ms.date: 06/29/2023
-ms.author: msangapu
-author: msangapu-msft
+ms.date: 10/18/2019
 ms.custom: UpdateFrequency3
 
 ---

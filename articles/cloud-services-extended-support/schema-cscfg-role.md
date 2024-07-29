@@ -7,6 +7,7 @@ ms.date: 10/14/2020
 author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
+ms.custom: 
 ---
 
 # Azure Cloud Services (extended support) config role schema

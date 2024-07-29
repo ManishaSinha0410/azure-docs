@@ -1,7 +1,6 @@
 ---
 title: "Tutorial: Use GitHub Actions to deploy to App Service and connect to a database"
 description: Deploy a database-backed ASP.NET core app to Azure with GitHub Actions
-author: cephalin
 ms.devlang: csharp
 ms.topic: tutorial
 ms.date: 01/09/2023
@@ -50,11 +49,11 @@ az group create --name {resource-group-name} --location {resource-group-location
 
 ## Generate deployment credentials
 
-[!INCLUDE [include](~/reusable-content/github-actions/generate-openid-credentials.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/generate-openid-credentials.md)]
 
 ## Configure the GitHub secret for authentication
 
-[!INCLUDE [include](~/reusable-content/github-actions/create-secrets-openid-only.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/create-secrets-openid-only.md)]
 
 ## Add GitHub secrets for your build
 

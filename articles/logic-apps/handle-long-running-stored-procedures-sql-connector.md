@@ -5,7 +5,7 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: camerost, azla
 ms.topic: how-to
-ms.date: 01/04/2024
+ms.date: 08/20/2022
 ---
 
 # Handle stored procedure timeouts in the SQL connector for Azure Logic Apps

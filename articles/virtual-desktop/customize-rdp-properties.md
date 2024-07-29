@@ -1,11 +1,12 @@
 ---
-title: Customize RDP properties - Azure
-description: How to customize RDP Properties for Azure Virtual Desktop.
+title: Customize RDP properties with PowerShell - Azure
+description: How to customize RDP Properties for Azure Virtual Desktop with PowerShell cmdlets.
 author: Heidilohr
 ms.topic: how-to
-ms.date: 07/26/2022
+ms.date: 08/24/2022
 ms.author: helohr 
 ms.custom: devx-track-azurepowershell
+manager: femila
 ---
 # Customize Remote Desktop Protocol (RDP) properties for a host pool
 
@@ -28,14 +29,10 @@ RDP files have the following properties by default:
 |VideoPlayback|Enabled|
 |EnableCredssp|Enabled|
 
->[!IMPORTANT]
+>[!NOTE]
 >- Multi-monitor mode is only enabled for Desktop application groups and will be ignored for RemoteApp application groups.
->
 >- All default RDP file properties are exposed in the Azure Portal.
->
 >- A null CustomRdpProperty field will apply all default RDP properties to your host pool. An empty CustomRdpProperty field won't apply any default RDP properties to your host pool.
->
->- If you also configure device redirection settings using Group Policy objects (GPOs), the settings in the GPOs will override the RDP properties you specify on the host pool.
 
 ## Prerequisites
 

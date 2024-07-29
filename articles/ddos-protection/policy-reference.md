@@ -4,7 +4,8 @@ description: Lists Azure Policy built-in policy definitions for Azure DDoS Prote
 services: ddos-protection
 author: AbdullahBell
 ms.service: ddos-protection
-ms.date: 02/06/2024
+ms.workload: infrastructure-services
+ms.date: 02/21/2023
 ms.author: abell
 ms.custom: subject-policy-reference
 ms.topic: include

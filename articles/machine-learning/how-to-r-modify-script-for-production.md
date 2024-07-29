@@ -3,7 +3,6 @@ title: Adapt your R script to run in production
 titleSuffix: Azure Machine Learning
 description: 'Learn how to modify your existing R scripts to run in production on Azure Machine Learning'
 ms.service: machine-learning
-ms.subservice: core
 ms.date: 01/11/2023
 ms.topic: how-to
 author: wahalulu
@@ -252,7 +251,7 @@ mlflow_log_param(<key-name>, <value>)
 
 ## Create an environment
 
-To run your R script, you'll use the `ml` extension for Azure CLI, also referred to as CLI v2. The `ml` command uses a YAML job definitions file. For more information about submitting jobs with `az ml`, see [Train models with Azure Machine Learning CLI](how-to-train-model.md?tabs=azurecli#3-submit-the-training-job).
+To run your R script, you'll use the `ml` extension for Azure CLI, also referred to as CLI v2. The `ml` command uses a YAML job definitions file. For more information about submitting jobs with `az ml`, see [Train models with Azure Machine Learning CLI](how-to-train-model.md?tabs=azurecli#4-submit-the-training-job).
 
 The YAML job file specifies an [environment](concept-environments.md). You'll need to create this environment in your workspace before you can run the job.  
  

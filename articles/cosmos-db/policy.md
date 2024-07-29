@@ -6,7 +6,8 @@ ms.author: sidandrews
 ms.reviewer: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 09/23/2020
+ms.date: 09/23/2020 
+ms.custom: ignite-2022
 ---
 
 # Use Azure Policy to implement governance and controls for Azure Cosmos DB resources

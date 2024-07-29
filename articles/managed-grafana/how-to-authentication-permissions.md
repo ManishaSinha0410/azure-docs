@@ -3,9 +3,10 @@ title: How to set up authentication and permissions in Azure Managed Grafana
 description: Learn how to set up Azure Managed Grafana authentication permissions using a system-assigned Managed identity or a Service Principal
 ms.service: managed-grafana
 ms.topic: how-to
-author: maud-lv
-ms.author: malev
-ms.date: 02/21/2024
+author: mcleanbyron
+ms.author: mcleans
+ms.date: 12/13/2022
+ms.custom: engagement-fy23
 --- 
 
 # Set up Azure Managed Grafana authentication and permissions
@@ -42,7 +43,7 @@ Create a workspace with the Azure portal or the CLI.
 
 ### [Portal](#tab/azure-portal)
 
-#### Configure basic settings
+#### Create a workspace: basic and advanced settings
 
 1. In the upper-left corner of the home page, select **Create a resource**. In the **Search resources, services, and docs (G+/)** box, enter *Azure Managed Grafana* and select **Azure Managed Grafana**.
 
@@ -58,11 +59,15 @@ Create a workspace with the Azure portal or the CLI.
     | Resource group name | Create a resource group for your Azure Managed Grafana resources.                                                                                                                                                                                                                                                        | *my-resource-group* |
     | Location            | Use Location to specify the geographic location in which to host your resource. Choose the location closest to you.                                                                                                                                                                                                      | *(US) East US*      |
     | Name                | Enter a unique resource name. It will be used as the domain name in your Managed Grafana instance URL.                                                                                                                                                                                                                   | *my-grafana*        |
-    | Pricing Plan        | Choose between an Essential (preview) and a Standard plan. The Standard tier offers additional features. [More information about pricing plans](overview.md#service-tiers).                                                                                                                                                        | *Essential (preview)*          |
+    | Zone redundancy     | Zone redundancy is disabled by default. Zone redundancy automatically provisions and manages a standby replica of the Managed Grafana instance in a different availability zone within one region. There's an [additional charge](https://azure.microsoft.com/pricing/details/managed-grafana/#pricing) for this option. | *Disabled*          |
 
-1. Keep all other default values and select the tab **Permission** to control access rights for your Grafana instance and data sources:
+    :::image type="content" source="media/authentication/create-form-basics.png" alt-text="Screenshot of the Azure portal. Create workspace form. Basics.":::
 
-#### Configure permission settings
+1. Select **Next : Advanced >** to access API key creation and statics IP address options. **Enable API key creation** and **Deterministic outbound IP** options are set to **Disable** by default. Optionally enable API key creation and enable a static IP address.
+
+1. Select **Next : Permission >** to control access rights for your Grafana instance and data sources:
+
+#### Create a workspace: permission settings
 
 Review below different methods to manage permissions to access data sources within Azure Managed Grafana.
 
@@ -94,11 +99,13 @@ Azure Managed Grafana can also access data sources with managed identity disable
 > [!NOTE]
 > Turning off system-assigned managed identity disables the Azure Monitor data source plugin for your Azure Managed Grafana instance. In this scenario, use a service principal instead of Azure Monitor to access data sources.
 
-#### Review and create the new instance
+#### Create a workspace: tags and review + create
 
-Select the **Review + create** tab. After validation runs, select **Create**. Your Azure Managed Grafana resource is deploying.
+1. Select **Next : Tags** and optionally add tags to categorize resources.
 
-:::image type="content" source="media/authentication/create-form-validation.png" alt-text="Screenshot of the Azure portal. Create workspace form. Validation.":::
+1. Select **Next : Review + create >**. After validation runs, select **Create**. Your Azure Managed Grafana resource is deploying.
+
+    :::image type="content" source="media/authentication/create-form-validation.png" alt-text="Screenshot of the Azure portal. Create workspace form. Validation.":::
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -185,4 +192,4 @@ After your workspace has been created, you can still turn on or turn off system-
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Sync Grafana teams with Microsoft Entra groups](./how-to-sync-teams-with-azure-ad-groups.md)
+> [How to configure data sources](./how-to-data-source-plugins-managed-identity.md)

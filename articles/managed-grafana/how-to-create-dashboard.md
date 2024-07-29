@@ -1,13 +1,11 @@
 ---
 title: Create a Grafana dashboard with Azure Managed Grafana
-description: Learn how to import, duplicate or create a new Azure Managed Grafana dashboard from scratch, and configure it.
-#customerintent: As a developer of data analyst, I want to learn how to create and configure an Azure Managed Grafana dashboard so that I can visualize data from several sources in a dashboard.
-author: maud-lv
-ms.author: malev
+description: Learn how to create and configure Azure Managed Grafana dashboards.
+author: mcleanbyron
+ms.author: mcleans
 ms.service: managed-grafana
-ms.custom: devx-track-azurecli
 ms.topic: how-to
-ms.date: 04/12/2024
+ms.date: 03/07/2023
 ---
 
 # Create a dashboard in Azure Managed Grafana

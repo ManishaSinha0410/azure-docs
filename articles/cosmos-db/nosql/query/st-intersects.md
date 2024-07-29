@@ -1,55 +1,62 @@
 ---
-title: ST_INTERSECTS
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns whether two GeoJSON objects intersect.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ST_INTERSECTS in Azure Cosmos DB query language
+description: Learn about SQL system function ST_INTERSECTS in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/21/2021
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ST_INTERSECTS (NoSQL query)
-
+# ST_INTERSECTS (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a boolean indicating whether the GeoJSON object (**Point**, **Polygon**, **MultiPolygon**, or **LineString**) specified in the first argument intersects the GeoJSON object in the second argument.  
-
+ Returns a Boolean expression indicating whether the GeoJSON object (Point, Polygon, MultiPolygon, or LineString) specified in the first argument intersects the GeoJSON (Point, Polygon, MultiPolygon, or LineString) in the second argument.  
+  
 ## Syntax
-
-```nosql
-ST_INTERSECTS(<spatial_expr_1>, <spatial_expr_2>)  
+  
+```sql
+ST_INTERSECTS (<spatial_expr>, <spatial_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`spatial_expr_1`** | Any valid GeoJSON **Point**, **Polygon**, **MultiPolygon** or **LineString** expression. |
-| **`spatial_expr_2`** | Any valid GeoJSON **Point**, **Polygon**, **MultiPolygon** or **LineString** expression. |
-
+  
+*spatial_expr*  
+   Is a GeoJSON Point, Polygon, or LineString object expression.  
+  
 ## Return types
-
-Returns a boolean value.  
-
+  
+  Returns a Boolean value.  
+  
 ## Examples
-
-The following example shows how to find if two polygons intersect.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/st-intersect/query.sql" highlight="2-50":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/st-intersect/result.json":::
+  
+  The following example shows how to find all areas that intersect with the given polygon.  
+  
+```sql
+SELECT a.id
+FROM Areas a
+WHERE ST_INTERSECTS(a.location, {  
+    'type':'Polygon',
+    'coordinates': [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]  
+})  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{ "id": "IntersectingPolygon" }]  
+```  
 
 ## Remarks
 
-- This function benefits from a [geospatial index](../../index-policy.md#spatial-indexes) except in queries with aggregates.
-- The GeoJSON specification requires that points within a Polygon be specified in counter-clockwise order. A Polygon specified in clockwise order represents the inverse of the region within it.
+This system function will benefit from a [geospatial index](../../index-policy.md#spatial-indexes) except in queries with aggregates.
 
-## Related content
+> [!NOTE]
+> The GeoJSON specification requires that points within a Polygon be specified in counter-clockwise order. A Polygon specified in clockwise order represents the inverse of the region within it.
 
-- [System functions](system-functions.yml)
-- [`ST_WITHIN`](st-within.md)
+## Next steps
+
+- [Spatial functions Azure Cosmos DB](spatial-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

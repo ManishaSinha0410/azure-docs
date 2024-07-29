@@ -1,7 +1,7 @@
 ---
 title: Create UI definition conversion functions
 description: Describes the functions to use when converting values between data types and encodings.
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 07/13/2020
 ---
 

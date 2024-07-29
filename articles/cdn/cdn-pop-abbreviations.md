@@ -1,29 +1,30 @@
 ---
-title: Azure CDN POP locations by abbreviation
-description: This article lists Azure CDN POP locations, sorted by POP abbreviation, for Azure CDN from Edgio.
+title: Azure CDN POP locations by abbreviation | Microsoft Docs
+description: This article lists Azure CDN POP locations, sorted by POP abbreviation, for Azure CDN from Verizon.
 services: cdn
 author: duongau
 manager: kumudd
 ms.service: azure-cdn
+ms.workload: media
+ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 03/20/2024
+ms.date: 02/27/2023
 ms.author: duau
 ms.custom: references_regions
----
 
+---
 # Azure CDN POP locations by abbreviation
 
 > [!div class="op_single_selector"]
-> - [POP locations by region](cdn-pop-locations.md)
-> - [Microsoft POP locations by abbreviation](microsoft-pop-abbreviations.md)
-> - [Edgio POP locations by abbreviation](cdn-pop-abbreviations.md)
->
+> * [POP locations by region](cdn-pop-locations.md)
+> * [Microsoft POP locations by abbreviation](microsoft-pop-abbreviations.md)
+> * [Verizon POP locations by abbreviation](cdn-pop-abbreviations.md)
+> 
 
-This article lists POP locations, sorted by POP abbreviation, for **Azure CDN from Edgio**.
 
-<a name='verizon-pop-locations'></a>
+This article lists POP locations, sorted by POP abbreviation, for **Azure CDN from Verizon**.
 
-## Edgio POP locations
+## Verizon POP locations
 
 Abbreviation | Location | Region
 | --- | --- | --- |
@@ -57,9 +58,9 @@ CHE | Chicago, Illinois, USA | North America: Central US
 CMC | Chicago, Illinois, USA | North America: Central US
 CNJ | Newark, New Jersey, USA | North America: East US
 CPH | Copenhagen, Denmark | Europe
-Device Attestation and Authentication (DAA) | Dallas, Texas, USA | North America: Central US
+DAA | Dallas, Texas, USA | North America: Central US
 DAB | Dallas, Texas, USA | North America: Central US
-data-tier application (DAC) | Dallas, Texas, USA | North America: Central US
+DAC | Dallas, Texas, USA | North America: Central US
 DCB | Ashburn, Virginia, USA | North America: East US
 DCC | Ashburn, Virginia, USA | North America: East US
 DCD | Ashburn, Virginia, USA | North America: East US
@@ -106,7 +107,7 @@ MDE | Medellin, Colombia | Latin America
 MDR | Madrid, Spain | Europe
 MDW | Chicago, Illinois, USA | North America: Central US
 MEX | Mexico City, Mexico | North America
-mebibytes (mibibytes (MiB)) (mibibytes (MiB)) (mibibytes (MiB)) (mibibytes (MiB)) (mibibytes (MiB)) | Miami, Florida, USA | North America: East US
+MIB | Miami, Florida, USA | North America: East US
 MIC | Miami, Florida, USA | North America: East US
 MID | Miami, Florida, USA | North America: East US
 MIL | Milan, Italy | Europe
@@ -173,5 +174,5 @@ XIJ | Kuwait | Europe
 
 ## Next steps
 
-- View [Azure CDN from Edgio POP locations by metro](cdn-pop-locations.md#partners).
-- Learn how to [create an Azure CDN profile](cdn-create-new-endpoint.md).
+* View [Azure CDN from Verizon POP locations by metro](cdn-pop-locations.md#partners).
+* Learn how to [create an Azure CDN profile](cdn-create-new-endpoint.md).

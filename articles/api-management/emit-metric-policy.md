@@ -6,14 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/08/2022
 ms.author: danlep
-ms.custom: engagement-fy23
 ---
 
 # Emit custom metrics
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `emit-metric` policy sends custom metrics in the specified format to Application Insights.
 
@@ -37,7 +34,7 @@ The `emit-metric` policy sends custom metrics in the specified format to Applica
 | --------- | -------------------------- |  ------------------ | -------------- |
 | name      | A string. Name of custom metric. Policy expressions aren't allowed.      | Yes       | N/A            |
 | namespace | A string. Namespace of custom metric. Policy expressions aren't allowed. | No        | API Management |
-| value     |  Value of custom metric expressed as a double. Policy expressions are allowed.   | No           | 1              |
+| value     |  Value of custom metric expressed as an integer. Policy expressions are allowed.   | No           | 1              |
 
 
 ## Elements
@@ -60,20 +57,14 @@ The `emit-metric` policy sends custom metrics in the specified format to Applica
 * Product ID
 * User ID
 * Subscription ID
-* Location
+* Location ID
 * Gateway ID
 
 ## Usage
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, outbound, backend, on-error
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
-
-### Usage notes
-
-* You can configure at most 10 custom dimensions for this policy.
-
-* Invoking the `emit-metric` policy counts toward the usage limits for custom metrics per region in a subscription. [Learn more](api-management-howto-app-insights.md#limits-for-custom-metrics)
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Example
 
@@ -95,6 +86,6 @@ The following example sends a custom metric to count the number of API requests 
 
 ## Related policies
 
-* [Logging](api-management-policies.md#logging)
+* [API Management advanced policies](api-management-advanced-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

@@ -1,27 +1,21 @@
 ---
 title: Azure Resource Manager template samples for chaos experiments
-description: Sample Azure Resource Manager templates to create Azure Chaos Studio experiments.
+description: Sample Azure Resource Manager templates to create Azure Chaos Studio experiments
 services: chaos-studio
 author: prasha-microsoft 
 ms.topic: sample
 ms.date: 11/10/2021
-ms.author: abbyweisberg
-ms.reviewer: prashabora
+ms.author: prashabora
 ms.service: chaos-studio
 ms.custom: devx-track-arm-template
 ---
 
-# ARM template samples for experiments in Azure Chaos Studio
+# Resource Manager template samples for experiments in Azure Chaos Studio
+This article includes sample [Azure Resource Manager templates](../azure-resource-manager/templates/syntax.md) to create a [chaos experiment](chaos-studio-chaos-experiments.md) in Azure Chaos Studio. Each sample includes a template file and a parameters file with sample values to provide to the template.
 
-This article includes sample [Azure Resource Manager templates (ARM templates)](../azure-resource-manager/templates/syntax.md) to create a [chaos experiment](chaos-studio-chaos-experiments.md) in Azure Chaos Studio. Each sample includes a template file and a parameters file with sample values to provide to the template.
+## Create experiment (sample)
 
-## Create an experiment (sample)
-
-In this sample, we create a chaos experiment with a single target resource and a single CPU pressure fault. You can modify the experiment by referencing our [REST API](/rest/api/chaosstudio/experiments/create-or-update) and [fault library](chaos-studio-fault-library.md).
-
-## Deploying templates
-
-Once you've reviewed the template and parameter files, learn how to deploy them into your Azure subscription with the [Deploy resources with ARM templates and Azure portal](../azure-resource-manager/templates/deploy-portal.md) article.
+In this sample, we create a chaos experiment with a single target resource and a single CPU pressure fault. The experiment can be modified by referencing our [REST API](/rest/api/chaosstudio/experiments/create-or-update) and [fault library](chaos-studio-fault-library.md).
 
 ### Template file
 
@@ -47,7 +41,7 @@ Once you've reviewed the template and parameter files, learn how to deploy them 
     "chaosTargetResourceId": {
       "type": "string",
       "metadata": {
-        "description": "Resource ID of the chaos target. This is the full resource ID of the resource being targeted plus the target proxy resource."
+        "description": "Resource ID of the chaos target. This is the resource ID of the resource being targeted plus the target proxy resource."
       }
     }
   },
@@ -56,7 +50,7 @@ Once you've reviewed the template and parameter files, learn how to deploy them 
   "resources": [
     {
       "type": "Microsoft.Chaos/experiments",
-      "apiVersion": "2024-01-01",
+      "apiVersion": "2021-09-15-preview",
       "name": "[parameters('experimentName')]",
       "location": "[parameters('location')]",
       "identity": {
@@ -75,6 +69,7 @@ Once you've reviewed the template and parameter files, learn how to deploy them 
             ]
           }
         ],
+        "startOnCreation": "false",
         "steps": [
           {
             "name": "Step1",
@@ -128,5 +123,5 @@ Once you've reviewed the template and parameter files, learn how to deploy them 
 
 ## Next steps
 
-* [Learn more about Chaos Studio](chaos-studio-overview.md)
-* [Learn more about chaos experiments](chaos-studio-chaos-experiments.md)
+* [Learn more about Chaos Studio](chaos-studio-overview.md).
+* [Learn more about chaos experiments](chaos-studio-chaos-experiments.md).

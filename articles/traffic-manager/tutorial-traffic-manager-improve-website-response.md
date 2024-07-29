@@ -5,6 +5,7 @@ services: traffic-manager
 author: greg-lindsay
 ms.service: traffic-manager
 ms.topic: tutorial
+ms.workload: infrastructure-services
 ms.date: 03/06/2023
 ms.author: greglin
 ms.custom: template-tutorial
@@ -36,7 +37,7 @@ In order to see the Traffic Manager in action, this tutorial requires that you d
 
 ### Sign in to Azure
 
-Sign in to the [Azure portal](https://portal.azure.com).
+Sign in to the Azure portal at [https://portal.azure.com](https://portal.azure.com).
 
 ### Create websites
 

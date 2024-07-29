@@ -1,7 +1,7 @@
 ---
 title: Test the UI definition file
 description: Describes how to test the user experience for creating your Azure Managed Application through the portal.
-ms.topic: how-to
+ms.topic: conceptual
 ms.date: 06/04/2021
 ---
 

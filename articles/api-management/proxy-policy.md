@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/08/2022
 ms.author: danlep
 ---
 
 # Set HTTP proxy
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `proxy` policy allows you to route requests forwarded to backends via an HTTP proxy. Only HTTP (not HTTPS) is supported between the gateway and the proxy. Basic and NTLM authentication only. 
 
@@ -37,7 +35,7 @@ The `proxy` policy allows you to route requests forwarded to backends via an HTT
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Example
 
@@ -50,6 +48,6 @@ In this example, [named values](api-management-howto-properties.md) are used for
 
 ## Related policies
 
-* [Routing](api-management-policies.md#routing)
+* [API Management advanced policies](api-management-advanced-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

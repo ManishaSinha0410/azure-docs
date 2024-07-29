@@ -7,7 +7,6 @@ ms.author: sipa
 ms.date: 12/1/2021
 ms.topic: tutorial
 ms.service: azure-maps
-ms.custom: devx-track-extended-java
 services: azure-maps
 zone_pivot_groups: azure-maps-android
 ---
@@ -15,12 +14,6 @@ zone_pivot_groups: azure-maps-android
 # Tutorial: Migrate an Android app from Google Maps
 
 The Azure Maps Android SDK has an API interface that is similar to the Web SDK. If you've developed with one of these SDKs, many of the same concepts, best practices, and architectures apply. This tutorial demonstrates how to:
-
-> [!NOTE]
->
-> **Azure Maps Android SDK retirement**
->
-> The Azure Maps Native SDK for Android is now deprecated and will be retired on 3/31/25. To avoid service disruptions, migrate to the Azure Maps Web SDK by 3/31/25. For more information, see [The Azure Maps Android SDK migration guide](android-sdk-migration-guide.md).
 
 > [!div class="checklist"]
 >
@@ -32,7 +25,7 @@ The Azure Maps Android SDK has an API interface that is similar to the Web SDK. 
 
 All examples are provided in Java; however, you can use Kotlin with the Azure Maps Android SDK.
 
-For more information on developing with the Android SDK by Azure Maps, see the [How-to guides for the Azure Maps Android SDK].
+For more information on developing with the Android SDK by Azure Maps, see the [How-to guides for the Azure Maps Android SDK](how-to-use-android-map-control-library.md).
 
 ## Prerequisites
 
@@ -634,7 +627,7 @@ Here's an example of Azure Maps with the language set to "fr-FR".
 
 ![Azure Maps localization](media/migrate-google-maps-android-app/azure-maps-localization.png)
 
-Review the complete list of [Supported languages].
+Review the complete list of [Supported languages](supported-languages.md).
 
 ## Setting the map view
 
@@ -729,7 +722,7 @@ mapControl!!.onReady { map: AzureMap ->
 
 **Additional resources:**
 
-* [Supported map styles]
+* [Supported map styles](supported-map-styles.md)
 
 ## Adding a marker
 
@@ -810,7 +803,7 @@ mapControl!!.onReady { map: AzureMap ->
 
 ## Adding a custom marker
 
-Custom images can be used to represent points on a map. The map in the following examples use a custom image to display a point on the map. The point is at latitude: 51.5 and longitude: -0.2. The anchor offsets the position of the marker, so that the point of the pushpin icon aligns with the correct position on the map.
+Custom images can be used to represent points on a map. The map in examples below uses a custom image to display a point on the map. The point is at latitude: 51.5 and longitude: -0.2. The anchor offsets the position of the marker, so that the point of the pushpin icon aligns with the correct position on the map.
 
 ![yellow pushpin image](media/migrate-google-maps-web-app/yellow-pushpin.png)<br/>
 yellow-pushpin.png
@@ -967,7 +960,7 @@ public override fun onMapReady(googleMap: GoogleMap) {
 
 In Azure Maps, polylines are called `LineString` or `MultiLineString` objects. Add these objects to a data source and render them using a line layer. Set the stroke width using the `strokeWidth` option. Add a stroke dash array using the `strokeDashArray` option.
 
-The stroke width and the dash array "pixel" units in the Azure Maps Web SDK is the same as in the Google Maps service. Both accept the same values to produce the same results.
+The stroke width and the dash array "pixel" units in the Azure Maps Web SDK, is the same as in the Google Maps service. Both accept the same values to produce the same results.
 
 ::: zone pivot="programming-language-java-android"
 
@@ -1339,13 +1332,9 @@ No resources to be cleaned up.
 Learn more about the Azure Maps Android SDK:
 
 > [!div class="nextstepaction"]
-> [Get started with Azure Maps Android SDK]
+> [Get started with Azure Maps Android SDK](how-to-use-android-map-control-library.md)
 
 [Azure Maps account]: quick-demo-map-app.md#create-an-azure-maps-account
-[free account]: https://azure.microsoft.com/free/
-[Get started with Azure Maps Android SDK]: how-to-use-android-map-control-library.md
-[How-to guides for the Azure Maps Android SDK]: how-to-use-android-map-control-library.md
-[manage authentication in Azure Maps]: how-to-manage-authentication.md
 [subscription key]: quick-demo-map-app.md#get-the-subscription-key-for-your-account
-[Supported languages]: supported-languages.md
-[Supported map styles]: supported-map-styles.md
+[free account]: https://azure.microsoft.com/free/
+[manage authentication in Azure Maps]: how-to-manage-authentication.md

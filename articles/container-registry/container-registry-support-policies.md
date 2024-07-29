@@ -4,8 +4,7 @@ description: Learn about Azure Container Registry (ACR) technical support polici
 ms.topic: article
 author: tejaswikolli-web
 ms.author: tejaswikolli
-ms.date: 10/31/2023
-ms.service: container-registry
+ms.date: 10/11/2022
 #Customer intent: As a developer, I want to understand what ACR components I need to manage, what components are managed by Microsoft.
 ---
 

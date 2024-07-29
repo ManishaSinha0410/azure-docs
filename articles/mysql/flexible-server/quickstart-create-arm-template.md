@@ -1,6 +1,6 @@
 ---
-title: 'Quickstart: Create a flexible server by using Azure Resource Manager'
-description: In this quickstart, learn how to deploy a database in an instance of Azure Database for MySQL - Flexible Server by using an Azure Resource Manager template.
+title: 'Quickstart: Create an Azure Database for MySQL - Flexible Server - ARM template'
+description: In this Quickstart, learn how to create an Azure Database for MySQL - Flexible Server using ARM template.
 ms.service: mysql
 ms.subservice: flexible-server
 ms.topic: quickstart
@@ -10,11 +10,11 @@ ms.custom: subject-armqs, mode-arm, devx-track-arm-template
 ms.date: 02/16/2023
 ---
 
-# Quickstart: Create an instance of Azure Database for MySQL - Flexible Server by using Azure Resource Manager
+# Quickstart: Use an ARM template to create an Azure Database for MySQL - Flexible Server
 
-[!INCLUDE[applies-to-mysql-flexible-server](../includes/applies-to-mysql-flexible-server.md)]
+[!INCLUDE [applies-to-mysql-flexible-server](../includes/applies-to-mysql-flexible-server.md)]
 
-[!INCLUDE [azure-database-for-mysql-flexible-server-abstract](../includes/Azure-database-for-mysql-flexible-server-abstract.md)]
+[!INCLUDE [About Azure Database for MySQL - Flexible Server](../includes/Azure-database-for-mysql-flexible-server-abstract.md)]
 
 [!INCLUDE [About Azure Resource Manager](../../../includes/resource-manager-quickstart-introduction.md)]
 
@@ -24,9 +24,9 @@ ms.date: 02/16/2023
 
 [!INCLUDE [flexible-server-free-trial-note](../includes/flexible-server-free-trial-note.md)]
 
-## Create a server that has public access
+## Create server with public access
 
-To create an Azure Database for MySQL - Flexible Server instance by using the public access connectivity method and create a database on the server, create an *azuredeploy.json* file that has the following code examples. If necessary, update the default value for `firewallRules`.
+Create an **azuredeploy.json** file with the following content to create a server using public access connectivity method and also create a database on the server. Update the **firewallRules** default value if needed.
 
 ```json
 {
@@ -69,11 +69,11 @@ To create an Azure Database for MySQL - Flexible Server instance by using the pu
       "defaultValue": "Burstable",
       "allowedValues": [
         "Burstable",
-        "GeneralPurpose",
+        "Generalpurpose",
         "MemoryOptimized"
       ],
       "metadata": {
-        "description": "The tier of the specific SKU. High availability is available only for GeneralPurpose and MemoryOptimized SKUs."
+        "description": "The tier of the particular SKU. High Availability is available only for GeneralPurpose and MemoryOptimized sku."
       }
     },
     "version": {
@@ -91,7 +91,7 @@ To create an Azure Database for MySQL - Flexible Server instance by using the pu
       "type": "string",
       "defaultValue": "1",
       "metadata": {
-        "description": "The availability zone information of the server. (If you don't have a preference, leave this setting blank.)"
+        "description": "Availability Zone information of the server. (Leave blank for No Preference)."
       }
     },
     "haEnabled": {
@@ -103,14 +103,14 @@ To create an Azure Database for MySQL - Flexible Server instance by using the pu
         "ZoneRedundant"
       ],
       "metadata": {
-        "description": "High availability mode for a server: Disabled, SameZone, or ZoneRedundant."
+        "description": "High availability mode for a server : Disabled, SameZone, or ZoneRedundant"
       }
     },
     "standbyAvailabilityZone": {
       "type": "string",
       "defaultValue": "2",
       "metadata": {
-        "description": "The availability zone of the standby server."
+        "description": "Availability zone of the standby server."
       }
     },
     "storageSizeGB": {
@@ -133,7 +133,7 @@ To create an Azure Database for MySQL - Flexible Server instance by using the pu
       "type": "string",
       "defaultValue": "Standard_B1ms",
       "metadata": {
-        "description": "The name of the SKU. For example, Standard_D32ds_v4."
+        "description": "The name of the sku, e.g. Standard_D32ds_v4."
       }
     },
     "backupRetentionDays": {
@@ -254,9 +254,9 @@ To create an Azure Database for MySQL - Flexible Server instance by using the pu
 }
 ```
 
-## Create a server that has private access
+## Create a server with private access
 
-Modify the following code examples to create an Azure Database for MySQL flexible server that has private access connectivity inside a virtual network:
+Create an **azuredeploy.json** file with the following content to create a server using private access connectivity method inside a virtual network.
 
 ```json
 {
@@ -299,11 +299,11 @@ Modify the following code examples to create an Azure Database for MySQL flexibl
       "defaultValue": "Burstable",
       "allowedValues": [
         "Burstable",
-        "GeneralPurpose",
+        "Generalpurpose",
         "MemoryOptimized"
       ],
       "metadata": {
-        "description": "The tier of the specific SKU. High availability is available only for GeneralPurpose and MemoryOptimized SKUs."
+        "description": "The tier of the particular SKU. High Availability is available only for GeneralPurpose and MemoryOptimized sku."
       }
     },
     "version": {
@@ -321,7 +321,7 @@ Modify the following code examples to create an Azure Database for MySQL flexibl
       "type": "string",
       "defaultValue": "1",
       "metadata": {
-        "description": "The availability zone information of the server. (If you have no preference, leave blank.)"
+        "description": "Availability Zone information of the server. (Leave blank for No Preference)."
       }
     },
     "haEnabled": {
@@ -333,14 +333,14 @@ Modify the following code examples to create an Azure Database for MySQL flexibl
         "ZoneRedundant"
       ],
       "metadata": {
-        "description": "High availability mode for a server: Disabled, SameZone, or ZoneRedundant"
+        "description": "High availability mode for a server : Disabled, SameZone, or ZoneRedundant"
       }
     },
     "standbyAvailabilityZone": {
       "type": "string",
       "defaultValue": "2",
       "metadata": {
-        "description": "The availability zone of the standby server."
+        "description": "Availability zone of the standby server."
       }
     },
     "storageSizeGB": {
@@ -363,7 +363,7 @@ Modify the following code examples to create an Azure Database for MySQL flexibl
       "type": "string",
       "defaultValue": "Standard_B1ms",
       "metadata": {
-        "description": "The name of the SKU. For example, Standard_D32ds_v4."
+        "description": "The name of the sku, e.g. Standard_D32ds_v4."
       }
     },
     "backupRetentionDays": {
@@ -486,16 +486,16 @@ Modify the following code examples to create an Azure Database for MySQL flexibl
 
 ## Deploy the template
 
-Deploy the JSON file by using either the Azure CLI or Azure PowerShell.
+Deploy the Bicep file using either Azure CLI or Azure PowerShell.
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az group create --name exampleRG --location eastus
 az deployment group create --resource-group exampleRG --template-file azuredeploy.json
 ```
 
-# [Azure PowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 New-AzResourceGroup -Name exampleRG -Location eastus
@@ -504,38 +504,37 @@ New-AzResourceGroupDeployment -ResourceGroupName exampleRG -TemplateFile azurede
 
 ---
 
-Complete the steps to enter the parameter values. When the deployment finishes, a message indicates a successful deployment.
+Follow the instructions to enter the parameter values. When the deployment finishes, you should see a message indicating the deployment succeeded.
 
 ## Review deployed resources
 
-To verify that your Azure Database for MySQL flexible server was created in the resource group:
+Follow these steps to verify if your server was created in the resource group.
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az resource list --resource-group exampleRG
 
 ```
 
-# [Azure PowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 Get-AzResource -ResourceGroupName exampleRG
 ```
-
 ---
 
 ## Clean up resources
 
-To delete the resource group and all the resources that are in the resource group:
+To delete the resource group and the resources contained in the resource group:
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az group delete --name exampleRG
 ```
 
-# [Azure PowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 Remove-AzResourceGroup -Name exampleRG
@@ -543,7 +542,14 @@ Remove-AzResourceGroup -Name exampleRG
 
 ---
 
-## Related content
+## Next steps
 
-- For a step-by-step tutorial that guides you through the process of creating an ARM template, see [Tutorial: Create and deploy your first ARM template](../../azure-resource-manager/templates/template-tutorial-create-first-template.md).
-- For a step-by-step tutorial that demonstrates how to build an app by using Azure App Service and MySQL, see [Build a PHP (Laravel) web app with MySQL](tutorial-php-database-app.md).
+For a step-by-step tutorial that guides you through the process of creating an ARM template, see:
+
+> [!div class="nextstepaction"]
+> [Tutorial: Create and deploy your first ARM template](../../azure-resource-manager/templates/template-tutorial-create-first-template.md)
+
+For a step-by-step tutorial to build an app with App Service using MySQL, see:
+
+> [!div class="nextstepaction"]
+> [Build a PHP (Laravel) web app with MySQL](tutorial-php-database-app.md)

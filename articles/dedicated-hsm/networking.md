@@ -1,12 +1,17 @@
----
+﻿---
 title: Networking considerations - Azure Dedicated HSM | Microsoft Docs
 description: Overview of networking considerations applicable to Azure Dedicated HSM deployments
 services: dedicated-hsm
 author: msmbaldwin
+manager: rkarlin
+ms.custom: "mvc, seodec18"
+ms.service: key-vault
+ms.workload: identity
+ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.service: dedicated-hsm
-ms.date: 02/20/2024
-ms.author: mbaldwin
+ms.date: 03/25/2021
+ms.author: keithp
+
 ---
 
 # Azure Dedicated HSM networking

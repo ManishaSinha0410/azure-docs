@@ -1,16 +1,15 @@
 ---
 title: Enable Top flows and Flow trace logs in Azure Firewall 
-description: Learn how to enable the Top flows and Flow trace logs in Azure Firewall.
+description: Learn how to enable the Top flows and Flow trace logs in Azure Firewall
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.custom: devx-track-azurepowershell
 ms.topic: how-to
-ms.date: 05/12/2023
+ms.date: 03/27/2023
 ms.author: victorh 
 ---
 
-# Enable Top flows and Flow trace logs in Azure Firewall
+# Enable Top flows (preview) and Flow trace logs (preview) in Azure Firewall
 
 Azure Firewall has two new diagnostics logs you can use to help monitor your firewall:
 
@@ -21,15 +20,11 @@ Azure Firewall has two new diagnostics logs you can use to help monitor your fir
 
 The Top flows log (known in the industry as Fat Flows), shows the top connections that are contributing to the highest throughput through the firewall.
 
-> [!TIP]
-> Activate Top flows logs only when troubleshooting a specific issue to avoid excessive CPU usage of Azure Firewall.
-> 
-
-The flow rate is defined as the data transmission rate (in Megabits per second units). In other words, it's a measure of the amount of digital data that can be transmitted over a network in a period of time through the firewall. The Top Flows protocol runs periodically every three minutes. The minimum threshold to be considered a Top Flow is 1 Mbps.
+Because of the CPU impact, enable Top flows only when you need to troubleshoot a specific issue. The recommendation is to enable Top flows no longer than one week at a time.
 
 ### Prerequisites
 
-- Enable [structured logs](firewall-structured-logs.md#enable-structured-logs)
+- Enable [structured logs](firewall-structured-logs.md#enabledisable-structured-logs)
 - Use the Azure Resource Specific Table format in [Diagnostic Settings](firewall-diagnostics.md#enable-diagnostic-logging-through-the-azure-portal).
 
 ### Enable the log
@@ -42,20 +37,6 @@ $firewall = Get-AzFirewall -ResourceGroupName <ResourceGroupName> -Name <Firewal
 $firewall.EnableFatFlowLogging = $true
 Set-AzFirewall -AzureFirewall $firewall
 ```
-
-### Disable the log
-
-To disable the logs, use the same previous Azure PowerShell command and set the value to *False*. 
-
-For example:
-
-```azurepowershell
-Set-AzContext -SubscriptionName <SubscriptionName>
-$firewall = Get-AzFirewall -ResourceGroupName <ResourceGroupName> -Name <FirewallName>
-$firewall.EnableFatFlowLogging = $false
-Set-AzFirewall -AzureFirewall $firewall
-```
-
 ### Verify the update
 
 There are a few ways to verify the update was successful, but you can navigate to firewall **Overview** and select **JSON view** on the top right corner. Here’s an example:
@@ -67,7 +48,7 @@ There are a few ways to verify the update was successful, but you can navigate t
 1. In the Diagnostic settings tab, select **Add diagnostic setting**.
 2. Type a Diagnostic setting name.
 3. Select **Azure Firewall Fat Flow Log** under **Categories** and any other logs you want to be supported in the firewall.
-4. In Destination details, select  **Send to Log Analytics** workspace.
+4. In Destination details, select  **Send to Log Analytics** workspace
    1. Choose your desired Subscription and preconfigured Log Analytics workspace.
    1. Enable **Resource specific**.
    :::image type="content" source="media/enable-top-ten-and-flow-trace/log-destination-details.png" alt-text="Screenshot showing log destination details.":::
@@ -82,47 +63,37 @@ There are a few ways to verify the update was successful, but you can navigate t
 
 ## Flow trace
 
-Currently, the firewall logs show traffic through the firewall in the first attempt of a TCP connection, known as the *SYN* packet. However, this doesn't show the full journey of the packet in the TCP handshake. As a result, it's difficult to troubleshoot if a packet is dropped, or asymmetric routing occurred.
+Currently, the firewall logs show traffic through the firewall in the first attempt of a TCP connection, known as the *syn* packet. However, this doesn't show the full journey of the packet in the TCP handshake. As a result, it's difficult to troubleshoot if a packet is dropped, or asymmetric routing has occurred.
 
-
-> [!TIP]
-> To avoid excessive disk usage caused by Flow trace logs in Azure Firewall with many short-lived connections, activate the logs only when troubleshooting a specific issue for diagnostic purposes.
+Because of the disk impact, enable Flow trace only when you need to troubleshoot a specific issue. The recommendation is to enable Flow trace no longer than one week at a time.
 
 The following additional properties can be added: 
 - SYN-ACK
 
-   ACK flag that indicates acknowledgment of SYN packet. 
+   Ack flag that indicates acknowledgment of SYN packet. 
 - FIN
 
    Finished flag of the original packet flow. No more data is transmitted in the TCP flow. 
 - FIN-ACK
 
-   ACK flag that indicates acknowledgment of FIN packet. 
+   Ack flag that indicates acknowledgment of FIN packet. 
 
 - RST
 
-   The Reset the flag indicates the original sender doesn't receive more data.
+   Reset flag that indicates that original sender won't receive more data.
 
 - INVALID (flows)
 
-   Indicates packet can’t be identified or don't have any state. 
-
-   For example: 
-   - A TCP packet lands on a Virtual Machine Scale Sets instance, which doesn't have any prior history for this packet
-   - Bad CheckSum packets
-   - Connection Tracking table entry is full and new connections can't be accepted
-   - Overly delayed ACK packets
-
-Flow Trace logs, such as SYN-ACK and ACK, are exclusively logged for network traffic. In addition, SYN packets aren't logged by default. However, you can access the initial SYN packets within the network rule logs.
+   Indicates packet can’t be identified or don't have any state; TCP packet is landing on a Virtual Machine Scale Sets instance, which doesn't have any prior history to this packet.
 
 ### Prerequisites
 
-- Enable [structured logs](firewall-structured-logs.md#enable-structured-logs).
+- Enable [structured logs](firewall-structured-logs.md#enabledisable-structured-logs)
 - Use the Azure Resource Specific Table format in [Diagnostic Settings](firewall-diagnostics.md#enable-diagnostic-logging-through-the-azure-portal).
 
 ### Enable the log
 
-Enable the log using the following Azure PowerShell commands or navigate in the portal and search for **Enable TCP Connection Logging**:
+Enable the log using the following Azure PowerShell commands:
 
 ```azurepowershell
 Connect-AzAccount 
@@ -131,25 +102,18 @@ Register-AzProviderFeature -FeatureName AFWEnableTcpConnectionLogging -ProviderN
 Register-AzResourceProvider -ProviderNamespace Microsoft.Network
 ```
 
-It can take several minutes for this to take effect. Once the feature is registered, consider performing an update on Azure Firewall for the change to take effect immediately.
+It can take several minutes for this to take effect. Once the feature is completely registered, consider performing an update on Azure Firewall for the change to take effect immediately.
 
 To check the status of the AzResourceProvider registration, you can run the Azure PowerShell command:
 
 `Get-AzProviderFeature -FeatureName "AFWEnableTcpConnectionLogging" -ProviderNamespace "Microsoft.Network"`
-
-### Disable the log
-
-To disable the log, you can unregister it using the following command or select unregister in the previous portal example.
- 
-`Unregister-AzProviderFeature -FeatureName AFWEnableTcpConnectionLogging -ProviderNamespace Microsoft.Network`
-
 
 ### Create a diagnostic setting and enable Resource Specific Table
 
 1. In the Diagnostic settings tab, select **Add diagnostic setting**.
 2. Type a Diagnostic setting name.
 3. Select **Azure Firewall Flow Trace Log** under **Categories** and any other logs you want to be supported in the firewall.
-4. In Destination details, select  **Send to Log Analytics** workspace.
+4. In Destination details, select  **Send to Log Analytics** workspace
    1. Choose your desired Subscription and preconfigured Log Analytics workspace.
    1. Enable **Resource specific**.
    :::image type="content" source="media/enable-top-ten-and-flow-trace/log-destination-details.png" alt-text="Screenshot showing log destination details.":::
@@ -165,4 +129,4 @@ To disable the log, you can unregister it using the following command or select 
 
 ## Next steps
 
-- [Azure Structured Firewall Logs](firewall-structured-logs.md)
+- [Azure Structured Firewall Logs (preview)](firewall-structured-logs.md)

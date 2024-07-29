@@ -4,7 +4,6 @@ description:  Set up agentless dependency analysis in Azure Migrate.
 author: vikram1988
 ms.author: vibansa
 ms.manager: abhemraj
-ms.service: azure-migrate
 ms.topic: how-to
 ms.date: 02/23/2022
 ms.custom: engagement-fy23

@@ -56,13 +56,7 @@ Enrich your sensor with extra data to provide fuller risk assessment reports:
 
 ### Import firewall rules to an OT sensor
 
-Import firewall rules to your OT sensor for analysis in **Risk assessment** reports. Importing firewall rules is supported for the following firewalls:
-
-|Name  |Description  | File type |
-|---------|---------|---------|
-| **Check Point** | Firewall export to R77 | .ZIP |
-| **Fortinet** | Configuration backup | .CONF|
-|**Juniper** | ScreenOS CLI configuration | .TXT |
+Import firewall rules to your OT sensor for analysis in **Risk assessment** reports. Importing firewall rules is supported for Checkpoint, Fortinet, and Juniper firewalls.
 
 **To import firewall rules**:
 

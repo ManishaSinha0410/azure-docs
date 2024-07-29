@@ -1,86 +1,73 @@
 ---
-title: Find identity object IDs for authentication in Azure API for FHIR
-description: This article explains how to locate the identity object IDs needed to configure authentication for Azure API for FHIR.
+title: Find identity object IDs for authentication - Azure API for FHIR
+description: This article explains how to locate the identity object IDs needed to configure authentication for Azure API for FHIR
 services: healthcare-apis
 author: expekesheth
 ms.service: healthcare-apis
 ms.subservice: fhir
-ms.custom: has-azure-ad-ps-ref
 ms.topic: conceptual
-ms.date: 3/21/2024
+ms.date: 06/03/2022
 ms.author: kesheth
 ---
 
-# Find identity object IDs for authentication configuration in Azure API for FHIR
+# Find identity object IDs for authentication configuration for Azure API for FHIR
 
-[!INCLUDE [retirement banner](../includes/healthcare-apis-azure-api-fhir-retirement.md)]
-
-In this article, learn how to find the identity object IDs needed to configure the Azure API for FHIR service to [use an external or secondary Active Directory tenant](configure-local-rbac.md) for data plane.
+In this article, you'll learn how to find identity object IDs needed when configuring the Azure API for FHIR to [use an external or secondary Active Directory tenant](configure-local-rbac.md) for data plane.
 
 ## Find user object ID
 
-If you have a user with user name `myuser@contoso.com`, you can locate the user's `ObjectId` by using a Microsoft Graph PowerShell command or the Azure Command-Line Interface (CLI).
+If you have a user with user name `myuser@contoso.com`, you can locate the users `ObjectId` using the following PowerShell command:
 
-#### [PowerShell](#tab/powershell)
-
-```powershell
-$(Get-MgUser -Filter "UserPrincipalName eq 'myuser@contoso.com'").Id
+```azurepowershell-interactive
+$(Get-AzureADUser -Filter "UserPrincipalName eq 'myuser@contoso.com'").ObjectId
 ```
 
-#### [Azure CLI](#tab/command-line)
+or you can use the Azure CLI:
 
 ```azurecli-interactive
 az ad user show --id myuser@contoso.com --query id --out tsv
 ```
 
----
-
 ## Find service principal object ID
 
-Suppose you registered a [service client app](register-service-azure-ad-client-app.md) and you want to allow this service client to access the Azure API for FHIR. Find the object ID for the client service principal with a Microsoft Graph PowerShell command or the Azure CLI.
+Suppose you've registered a [service client app](register-service-azure-ad-client-app.md) and you would like to allow this service client to access the Azure API for FHIR, you can find the object ID for the client service principal with the following PowerShell command:
 
-#### [PowerShell](#tab/powershell)
-
-```powershell
-$(Get-MgServicePrincipal -Filter "AppId eq 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'").Id
+```azurepowershell-interactive
+$(Get-AzureADServicePrincipal -Filter "AppId eq 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'").ObjectId
 ```
 
-Where `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX` is the service client application ID. Alternatively, you can use the `DisplayName` of the service client:
+where `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX` is the service client application ID. Alternatively, you can use the `DisplayName` of the service client:
 
-```powershell
-$(Get-MgServicePrincipal -Filter "DisplayName eq 'testapp'").Id
+```azurepowershell-interactive
+$(Get-AzureADServicePrincipal -Filter "DisplayName eq 'testapp'").ObjectId
 ```
 
-#### [Azure CLI](#tab/command-line)
+If you're using the Azure CLI, you can use:
 
 ```azurecli-interactive
 az ad sp show --id XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX --query id --out tsv
 ```
 
----
-
 ## Find a security group object ID
 
-If you would like to locate the object ID of a security group, you can use a Microsoft Graph PowerShell command or the Azure CLI.
+If you would like to locate the object ID of a security group, you can use the following PowerShell command:
 
-#### [PowerShell](#tab/powershell)
-
-```powershell
-$(Get-MgGroup -Filter "DisplayName eq 'mygroup'").Id
+```azurepowershell-interactive
+$(Get-AzureADGroup -Filter "DisplayName eq 'mygroup'").ObjectId
 ```
-
 Where `mygroup` is the name of the group you're interested in.
 
-#### [Azure CLI](#tab/command-line)
+If you're using the Azure CLI, you can use:
 
 ```azurecli-interactive
 az ad group show --group "mygroup" --query id --out tsv
 ```
 
----
-
 ## Next steps
 
-[Configure local RBAC settings](configure-local-rbac.md)
+In this article, you've learned how to find identity object IDs needed to configure the Azure API for FHIR to use an external or secondary Azure Active Directory tenant. Next read about how to use the object IDs to configure local RBAC settings:
+ 
+>[!div class="nextstepaction"]
+>[Configure local RBAC settings](configure-local-rbac.md)
 
-[!INCLUDE [FHIR trademark statement](../includes/healthcare-apis-fhir-trademark.md)]
+FHIR&#174; is a registered trademark of [HL7](https://hl7.org/fhir/) and is used with the permission of HL7.

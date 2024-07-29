@@ -6,7 +6,7 @@ ms.service: vpn-gateway
 ms.topic: how-to
 author: cherylmc
 ms.author: cherylmc 
-ms.date: 03/12/2024
+ms.date: 05/11/2022
 ---
 # Configure a VPN client for point-to-site: RADIUS - certificate authentication
 

@@ -1,13 +1,14 @@
 ---
 title: Use #C to connect and run SQL commands on Azure Cosmos DB for PostgreSQL
 description: See how to use C# to connect and run SQL statements on Azure Cosmos DB for PostgreSQL.
-ms.author: nlarin
-author: niklarin
+ms.author: sasriram
+author: saimicrosoft
 ms.service: cosmos-db
 ms.subservice: postgresql
+ms.custom: ignite-2022
 ms.topic: quickstart
 recommendations: false
-ms.date: 06/05/2023
+ms.date: 10/27/2022
 ---
 
 # Use C# to connect and run SQL commands on Azure Cosmos DB for PostgreSQL
@@ -45,7 +46,7 @@ namespace Driver
         static void Main(string[] args)
         {
             // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
 
             connStr.TrustServerCertificate = true;
 
@@ -107,7 +108,7 @@ namespace Driver
         static void Main(string[] args)
         {
             // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = {your password}; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = {your password}; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50");
 
             connStr.TrustServerCertificate = true;
 
@@ -151,7 +152,7 @@ namespace Driver
         static void Main(string[] args)
         {
             // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
 
             connStr.TrustServerCertificate = true;
 
@@ -199,7 +200,7 @@ namespace Driver
         static void Main(string[] args)
         {
             // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
 
             connStr.TrustServerCertificate = true;
 
@@ -238,7 +239,7 @@ namespace Driver
         static void Main(string[] args)
         {
             // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = {your password}; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = {your password}; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
 
             connStr.TrustServerCertificate = true;
 
@@ -283,7 +284,7 @@ public class csvtotable
         String sFromFilePath = "C:\\Users\\Documents\\pharmacies.csv";
        
         // Replace <cluster> with your cluster name and <password> with your password:
-        var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+        var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
             
         connStr.TrustServerCertificate = true;
 
@@ -323,7 +324,7 @@ namespace Driver
         {
          
              // Replace <cluster> with your cluster name and <password> with your password:
-            var connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
+            var connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50 ");
 
             connStr.TrustServerCertificate = true;
 
@@ -365,7 +366,7 @@ namespace Driver
     {
         
         // Replace <cluster> with your cluster name and <password> with your password:
-        static string connStr = new NpgsqlConnectionStringBuilder("Server = c-<cluster>.<uniqueID>.postgres.cosmos.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50;TrustServerCertificate = true").ToString();
+        static string connStr = new NpgsqlConnectionStringBuilder("Server = c.<cluster>.postgres.database.azure.com; Database = citus; Port = 5432; User Id = citus; Password = <password>; Ssl Mode = Require; Pooling = true; Minimum Pool Size=0; Maximum Pool Size =50;TrustServerCertificate = true").ToString();
         static string executeRetry(string sql, int retryCount)
         {
             for (int i = 0; i < retryCount; i++)

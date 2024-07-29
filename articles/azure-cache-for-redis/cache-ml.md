@@ -196,14 +196,14 @@ When `show_output=True`, the output of the Docker build process is shown. Once t
     "passwords": [
         {
         "name": "password",
-        "value": "abcdefghijklmmopqrstuv1234567890"
+        "value": "Iv0lRZQ9762LUJrFiffo3P4sWgk4q+nW"
         },
         {
         "name": "password2",
-        "value": "1234567890abcdefghijklmmopqrstuv"
+        "value": "=pKCxHatX96jeoYBWZLsPR6opszr==mg"
         }
     ],
-    "username": "charlie.roy"
+    "username": "myml08024f78fd10"
     }
     ```
 
@@ -258,12 +258,12 @@ When `show_output=True`, the output of the Docker build process is shown. Once t
     {
         "name": "DOCKER_REGISTRY_SERVER_URL",
         "slotSetting": false,
-        "value": "[server-name].azurecr.io"
+        "value": "https://myml08024f78fd10.azurecr.io"
     },
     {
         "name": "DOCKER_REGISTRY_SERVER_USERNAME",
         "slotSetting": false,
-        "value": "[username]"
+        "value": "myml08024f78fd10"
     },
     {
         "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
@@ -272,7 +272,7 @@ When `show_output=True`, the output of the Docker build process is shown. Once t
     },
     {
         "name": "DOCKER_CUSTOM_IMAGE_NAME",
-        "value": "DOCKER|[server-name].azurecr.io/package:20190827195524"
+        "value": "DOCKER|myml08024f78fd10.azurecr.io/package:20190827195524"
     }
     ]
     ```
@@ -318,4 +318,3 @@ After a few moments, the resource group and all of its resources are deleted.
 * Learn to configure your function app in the [Functions](../azure-functions/functions-create-function-linux-custom-image.md) documentation.
 * [API Reference](/python/api/azureml-contrib-functions/azureml.contrib.functions)
 * Create a [Python app that uses Azure Cache for Redis](./cache-python-get-started.md)
-

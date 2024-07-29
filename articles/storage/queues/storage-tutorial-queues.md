@@ -6,9 +6,10 @@ ms.author: normesta
 ms.reviewer: dineshm
 ms.date: 06/09/2020
 ms.topic: tutorial
-ms.service: azure-queue-storage
+ms.service: storage
+ms.subservice: queues
 ms.devlang: csharp
-ms.custom: devx-track-csharp, devx-track-dotnet
+ms.custom: devx-track-csharp
 # Customer intent: As a developer, I want to use queues in my app so that my service will scale automatically during high demand times without losing data.
 ---
 

@@ -1,9 +1,8 @@
 ---
 title: Smart detection in Application Insights | Microsoft Docs
 description: Application Insights performs automatic deep analysis of your app telemetry and warns you about potential problems.
-ms.author: abbyweisberg
 ms.topic: conceptual
-ms.date: 04/01/2024
+ms.date: 02/07/2019
 ms.reviewer: yagil
 ---
 
@@ -22,13 +21,13 @@ You can access the detections issued by smart detection from the emails you rece
 You can discover detections in two ways:
 
 * **You receive an email** from Application Insights. Here's a typical example:
-    <!-- convertborder later -->
-    :::image type="content" source="./media/proactive-diagnostics/03.png" lightbox="./media/proactive-diagnostics/03.png" alt-text="Screenshot that shows an email alert." border="false":::
+  
+    ![Screenshot that shows an email alert.](./media/proactive-diagnostics/03.png)
   
     Select **See the analysis of this issue** to see more information in the portal.
 * **The smart detection pane** in Application Insights. Under the **Investigate** menu, select **Smart Detection** to see a list of recent detections.
-   <!-- convertborder later -->
-   :::image type="content" source="./media/proactive-diagnostics/04.png" lightbox="./media/proactive-diagnostics/04.png" alt-text="Screenshot that shows recent detections." border="false":::
+
+   ![Screenshot that shows recent detections.](./media/proactive-diagnostics/04.png)
 
 Select a detection to view its details.
 
@@ -54,7 +53,7 @@ Alternatively, you can change the configuration by using Azure Resource Manager 
 These diagnostic tools help you inspect the telemetry from your app:
 
 * [Metric explorer](../essentials/metrics-charts.md)
-* [Search explorer](../app/transaction-search-and-diagnostics.md?tabs=transaction-search)
+* [Search explorer](../app/diagnostic-search.md)
 * [Analytics: Powerful query language](../logs/log-analytics-tutorial.md)
 
 Smart detection is automatic, but if you want to set up more alerts, see:

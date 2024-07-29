@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: pod
 ms.topic: include
 ms.date: 10/21/2021
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Take the following steps if you're returning the device in Korea.

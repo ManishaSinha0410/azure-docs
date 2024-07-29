@@ -1,53 +1,54 @@
 ---
-title: LENGTH
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the numeric length of a string expression.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: LENGTH in Azure Cosmos DB query language
+description: Learn about SQL system function LENGTH in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# LENGTH (NoSQL query)
-
+# LENGTH (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the number of characters in the specified string expression.  
+ Returns the number of characters of the specified string expression.  
   
 ## Syntax
   
-```nosql
-LENGTH(<string_expr>)  
+```sql
+LENGTH(<str_expr>)  
 ```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
+  
+*str_expr*  
+   Is the string expression to be evaluated.  
   
 ## Return types
   
-Returns a numeric expression.  
+  Returns a numeric expression.  
   
 ## Examples
   
-The following example returns the length of a static string.  
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/length/query.sql" highlight="2-6":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/length/result.json":::
+  The following example returns the length of a string.  
+  
+```sql
+SELECT LENGTH("abc") AS len 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"len": 3}]  
+```  
 
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`REVERSE`](reverse.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

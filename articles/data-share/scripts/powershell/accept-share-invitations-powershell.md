@@ -1,11 +1,12 @@
 ---
 title: "PowerShell script: Accept invitation from an Azure Data Share"
 description: This PowerShell script accepts invitations from an existing data share.
+services: data-share
 author: sidontha
 ms.author: sidontha
 ms.service: data-share
 ms.topic: article
-ms.date: 12/19/2023 
+ms.date: 10/31/2022 
 ms.custom: devx-track-azurepowershell
 ---
 
@@ -43,4 +44,4 @@ This script uses the following commands:
 
 For more information on the Azure PowerShell, see [Azure PowerShell documentation](/powershell/).
 
-Other Azure Data Share PowerShell script samples can be found in the [Azure Data Share PowerShell samples](../../samples-powershell.md).
+Additional Azure Data Share PowerShell script samples can be found in the [Azure Data Share PowerShell samples](../../samples-powershell.md).

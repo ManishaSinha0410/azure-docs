@@ -2,15 +2,19 @@
 title: Connect a virtual network to SAP HANA on Azure (Large Instances) | Microsoft Docs
 description: Learn how to connect a virtual network to SAP HANA on Azure (Large Instances).
 services: virtual-machines-linux
-author: ju-shim
+documentationcenter: 
+author: lauradolan
 manager: bburns
+editor:
 ms.service: sap-on-azure
 ms.subservice: sap-large-instances
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
 ms.date: 6/1/2021
-ms.author: jushiman
+ms.author: ladolan
 ms.custom: H1Hack27Feb2017, devx-track-azurepowershell
+
 ---
 
 # Connect a virtual network to HANA Large Instances

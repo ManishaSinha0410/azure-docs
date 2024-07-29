@@ -4,8 +4,8 @@ description: Learn about automatic backups and restoring your Azure Database for
 ms.service: mysql
 ms.subservice: single-server
 ms.topic: conceptual
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.custom: references_regions
 ms.date: 06/20/2022
 ---

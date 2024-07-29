@@ -6,13 +6,16 @@ summary: Azure Cosmos DB for Gremlin provides a graph database service via the A
 metadata:
   title: Azure Cosmos DB for Gremlin documentation
   description: Azure Cosmos DB for Gremlin provides a graph database service via the API for Gremlin on a fully managed database service designed for any scale.
+  services: cosmos-db
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: markjbrown
   ms.service: cosmos-db
   ms.subservice: apache-gremlin
   ms.topic: landing-page
-  ms.date: 02/21/2024
+  ms.collection: collection
+  ms.date: 02/28/2023
+  ms.custom: ignite-2022
 landingContent:
   - title: About API for Gremlin
     linkLists:
@@ -20,10 +23,10 @@ landingContent:
         links:
           - text: What is Azure Cosmos DB for Gremlin?
             url: introduction.md
-          - text: Wire protocol compatibility with TinkerPop
+          - text: Wire protocol compatibility with Tinkerpop
             url: support.md
           - text: FAQ
-            url: faq.yml
+            url: gremlin-api-faq.yml
       - linkListType: concept
         links:
           - text: Wire protocol compatibility
@@ -34,7 +37,7 @@ landingContent:
     linkLists:
       - linkListType: quickstart
         links:
-          - text: Manage your data using Gremlin Console
+          - text: Manage your data using using Gremlin Console
             url: quickstart-console.md
           - text: Manage your data using a .NET app
             url: quickstart-dotnet.md
@@ -62,9 +65,9 @@ landingContent:
     linkLists:
       - linkListType: how-to-guide
         links:
-          - text: Non-Microsoft data visualization tools
+          - text: Third-party data visualization tools
             url: visualization-partners.md
-          - text: Non-Microsoft data modeling tools
+          - text: Third-party data modeling tools
             url: modeling-tools.md
       - linkListType: sample
         links:

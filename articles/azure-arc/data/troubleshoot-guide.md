@@ -4,8 +4,8 @@ description: Introduction to troubleshooting resources
 services: azure-arc
 ms.service: azure-arc
 ms.subservice: azure-arc-data
-author: AbdullahMSFT
-ms.author: amamun
+author: dnethi
+ms.author: dinethi
 ms.reviewer: mikeray
 ms.date: 07/07/2022
 ms.topic: how-to
@@ -172,6 +172,6 @@ If you see a message about insufficient CPU or memory, you should add more nodes
 
 [View logs and metrics using Kibana and Grafana](monitor-grafana-kibana.md)
 
-## Related content
+## Next steps
 
 [Scenario: View inventory of your instances in the Azure portal](view-arc-data-services-inventory-in-azure-portal.md)

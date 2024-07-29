@@ -1,13 +1,14 @@
 ---
 title: Use GitHub Actions to deploy a static site to Azure Storage
 description: Azure Storage static website hosting with GitHub Actions
-author: stevenmatthew
-ms.service: azure-blob-storage
+author: juliakm
+ms.service: storage
 ms.topic: how-to
-ms.author: shaas
+ms.author: jukullam
 ms.reviewer: dineshm
 ms.date: 01/24/2022
-ms.custom: devx-track-javascript, github-actions-azure, devx-track-azurecli
+ms.subservice: blobs
+ms.custom: devx-track-javascript, github-actions-azure
 ---
 
 # Use GitHub Actions workflow to deploy your static website in Azure Storage
@@ -31,11 +32,11 @@ An Azure subscription and GitHub account.
 
 ## Generate deployment credentials
 
-[!INCLUDE [include](~/reusable-content/github-actions/generate-deployment-credentials.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/generate-deployment-credentials.md)]
 
 ## Configure GitHub secrets
 
-[!INCLUDE [include](~/reusable-content/github-actions/create-secrets-with-openid.md)]
+[!INCLUDE [include](~/articles/reusable-content/github-actions/create-secrets-with-openid.md)]
 
 ## Add your workflow
 

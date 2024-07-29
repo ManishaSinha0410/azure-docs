@@ -6,6 +6,7 @@ services: front-door
 author: duongau
 ms.service: frontdoor
 ms.topic: conceptual
+ms.workload: infrastructure-services
 ms.date: 04/04/2023
 ms.author: duau
 zone_pivot_groups: front-door-tiers
@@ -24,8 +25,6 @@ In Azure Front Door Standard/Premium tier, you can configure URL redirect using 
 ::: zone-end
 
 ::: zone pivot="front-door-classic"
-
-[!INCLUDE [Azure Front Door (classic) retirement notice](../../includes/front-door-classic-retirement.md)]
 
 :::image type="content" source="./media/front-door-url-redirect/front-door-url-redirect.png" alt-text="Azure Front Door URL Redirect":::
 

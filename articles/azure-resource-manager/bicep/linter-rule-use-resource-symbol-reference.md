@@ -1,9 +1,8 @@
 ---
 title: Linter rule - use resource symbol reference
 description: Linter rule - use resource symbol reference
-ms.topic: reference
-ms.custom: devx-track-bicep
-ms.date: 03/20/2024
+ms.topic: conceptual
+ms.date: 03/30/2023
 ---
 
 # Linter rule - use resource symbol reference

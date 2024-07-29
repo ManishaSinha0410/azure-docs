@@ -6,7 +6,7 @@ ms.service: automation
 ms.subservice: dsc
 ms.topic: conceptual
 ms.date: 12/10/2019
-ms.custom:
+ms.custom: devx-track-azurepowershell
 ---
 
 # Enable Azure Automation State Configuration

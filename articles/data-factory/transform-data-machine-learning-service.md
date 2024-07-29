@@ -8,7 +8,7 @@ ms.custom: synapse
 ms.topic: conceptual
 ms.author: abnarain
 author: nabhishek
-ms.date: 05/15/2024
+ms.date: 09/22/2022
 ---
 
 # Execute Azure Machine Learning pipelines in Azure Data Factory and Synapse Analytics
@@ -70,7 +70,7 @@ continueOnStepFailure | Whether to continue execution of other steps in the Mach
 > [!NOTE]
 > To populate the dropdown items in Machine Learning pipeline name and ID, the user needs to have permission to list ML pipelines. The UI calls AzureMLService APIs directly using the logged in user's credentials.  
 
-## Related content
+## Next steps
 See the following articles that explain how to transform data in other ways:
 
 * [Execute Data Flow activity](control-flow-execute-data-flow-activity.md)

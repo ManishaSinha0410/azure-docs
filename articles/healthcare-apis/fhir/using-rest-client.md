@@ -42,9 +42,7 @@ In your `test.http` file, include the following information obtained from regist
 @tenantid =xxx....
 ```
 
-<a name='get-azure-ad-access-token'></a>
-
-## Get Microsoft Entra access token
+## Get Azure AD Access Token
 
 After including the information below in your `test.http` file, hit `Send Request`. You'll see an HTTP response that contains your access token.
 
@@ -69,9 +67,6 @@ grant_type=client_credentials
 ```
 
 [ ![Get access token](media/rest-config.png) ](media/rest-config.png#lightbox)
-
-> [!NOTE] 
-> In the scenarios where the FHIR service audience parameter is not mapped to the FHIR service endpoint url. The resource parameter value should be mapped to Audience value under FHIR Service Authentication blade.
 
 ## `GET` FHIR Patient data
 

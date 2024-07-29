@@ -1,20 +1,19 @@
 ---
 title: Quickstart - Create a service connection in Container Apps from the Azure portal
-description: This quickstart shows how to create a service connection in Azure Container Apps from the Azure portal
-author: maud-lv
-ms.author: malev
+description: Quickstart showing how to create a service connection in Azure Container Apps from the Azure portal
+author: mcleanbyron
+ms.author: mcleans
 ms.service: service-connector
+ms.custom: event-tier1-build-2022
 ms.topic: quickstart
-ms.date: 10/31/2023
-#Customer intent: As an app developer, I want to connect Azure Container Apps to a storage account in the Azure portal using Service Connector.
+ms.date: 08/09/2022
+
+#Customer intent: As an app developer, I want to connect a Container App to a storage account in the Azure portal using Service Connector.
 ---
 
 # Quickstart: Create a service connection in Azure Container Apps from the Azure portal
 
 This quickstart shows you how to connect Azure Container Apps to other Cloud resources using the Azure portal and Service Connector. Service Connector lets you quickly connect compute services to cloud services, while managing your connection's authentication and networking settings.
-
-> [!NOTE]
-> For information on connecting resources using Azure CLI, see [Create a service connection in Container Apps with the Azure CLI](./quickstart-cli-container-apps.md).
 
 > [!IMPORTANT]
 > This feature in Container Apps is currently in preview.
@@ -32,9 +31,9 @@ Sign in to the Azure portal at [https://portal.azure.com/](https://portal.azure.
 
 ## Create a new service connection
 
-Use Service Connector to create a new service connection in Container Apps.
+You'll use Service Connector to create a new service connection in Container Apps.
 
-1. Select the **Search resources, services and docs (G +/)** search bar at the top of the Azure portal, type *Container Apps* in the filter and select **Container Apps**.
+1. To create a new service connection in Container Apps, select the **Search resources, services and docs (G +/)** search bar at the top of the Azure portal, type *Container Apps* in the filter and select **Container Apps**.
 
     :::image type="content" source="./media/container-apps-quickstart/select-container-apps.png" alt-text="Screenshot of the Azure portal, selecting Container Apps.":::
 
@@ -48,18 +47,20 @@ Use Service Connector to create a new service connection in Container Apps.
 
     | Setting             | Example              | Description                                                                                                                                                                                                                                                                     |
     |---------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | **Container**       | *my-container-app*       | The container of your container app.                                                                                                                                                                                                                                            |
+    | **Container**       | *my-container*       | The container of your container app.                                                                                                                                                                                                                                            |
     | **Service type**    | *Storage - Blob*     | The type of service you're going to connect to your container.                                                                                                                                                                                                                  |
     | **Subscription**    | *my-subscription*    | The subscription that contains your target service (the service you want to connect to). The default value is the subscription that this container app is in.                                                                                                                   |
     | **Connection name** | *storageblob_700ae*  | The connection name that identifies the connection between your container app and target service. Use the connection name provided by Service Connector or choose your own connection name.                                                                                     |
     | **Storage account** | *my-storage-account* | The target storage account you want to connect to. If you choose a different service type, select the corresponding target service instance.                                                                                                                                    |
-    | **Client type**     | *.NET*               | The application stack that works with the target service you selected. The default value is None, which generates a list of configurations. If you know about the app stack or the client SDK in the container you selected, select the same app stack for the client type. |
+    | **Client type**     | *.NET*               | The application stack that works with the target service you selected. The default value is None, which will generate a list of configurations. If you know about the app stack or the client SDK in the container you selected, select the same app stack for the client type. |
+
+    :::image type="content" source="./media/container-apps-quickstart/basics.png" alt-text="Screenshot of the Azure portal, filling out the Basics tab.":::
 
 1. Select **Next: Authentication** to choose an authentication method: system-assigned managed identity (SMI), user-assigned managed identity (UMI), connection string, or service principal.
 
     ### [SMI](#tab/SMI)
 
-    System-assigned managed identity is the recommended authentication option. Select **System-assigned managed identity** to connect through an identity that's automatically generated in Microsoft Entra ID and tied to the lifecycle of the service instance.
+    System-assigned managed identity is the recommended authentication option. Select **System-assigned managed identity** to connect through an identity that's automatically generated in Azure Active Directory and tied to the lifecycle of the service instance.
 
     ### [UMI](#tab/UMI)
 
@@ -71,7 +72,7 @@ Use Service Connector to create a new service connection in Container Apps.
     1. Select **Managed identities** and select **Create**
     1. Enter a subscription, resource group, region and instance name
     1. Select **Review + create** and the **Create**
-    1. Once your managed identity has been deployed, go to your Service Connector tab, select **Previous** and then **Next** to refresh the form's data, and under **User-assigned managed identity**, select the identity you created.
+    1. Once your managed identity has been deployed, go to your Service Connector tab, select **Previous** and then **Next** to refresh the form's data, and under **User-assigned managed identity**, select the identity you've created.
 
     For more information, go to [create a user-assigned managed identity](../active-directory/managed-identities-azure-resources/how-manage-user-assigned-managed-identities.md?pivots=identity-mi-methods-azp).
 
@@ -81,7 +82,7 @@ Use Service Connector to create a new service connection in Container Apps.
 
     ### [Service principal](#tab/SP)
 
-    1. Select **Service principal** to use a service principal that defines the access policy and permissions for the user/application in Microsoft Entra ID.
+    1. Select **Service principal** to use a service principal that defines the access policy and permissions for the user/application in Azure Active Directory.
     1. Select a service principal from the list and enter a **secret**
 
     ---
@@ -98,11 +99,11 @@ Use Service Connector to create a new service connection in Container Apps.
 
 ## View service connections
 
-1. Container Apps connections are displayed under **Settings > Service Connector (preview)**. Select **>** to expand the list and see the properties required by your application.
+1. Container Apps connections are displayed under **Settings > Service Connector**.
 
-1. Select your connection and then **Validate** to prompt Service Connector to check your connection.
+1. Select **>** to expand the list and see the environment variables required by your application.
 
-1. Select  **Learn more** to review the connection validation details.
+1. Select **Validate** check your connection status, and select **Learn more** to review the connection validation details.
 
     :::image type="content" source="./media/container-apps-quickstart/validation-result.png" alt-text="Screenshot of the Azure portal, get connection validation result.":::
 

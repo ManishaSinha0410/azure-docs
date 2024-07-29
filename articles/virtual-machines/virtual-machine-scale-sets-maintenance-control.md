@@ -4,6 +4,7 @@ description: Learn how to control when automatic OS image upgrades are rolled ou
 author: ju-shim
 ms.service: virtual-machine-scale-sets
 ms.topic: conceptual
+ms.workload: infrastructure-services
 ms.date: 11/22/2022
 ms.author: jushiman
 #pmcontact: PPHILLIPS

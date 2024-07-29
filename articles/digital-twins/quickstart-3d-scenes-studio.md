@@ -1,4 +1,5 @@
 ---
+# Mandatory fields.
 title: Quickstart - Get started with 3D Scenes Studio (preview)
 titleSuffix: Azure Digital Twins
 description: Learn how to use 3D Scenes Studio (preview) for Azure Digital Twins by following this demo, where you'll create a sample scene with elements and behaviors.
@@ -7,10 +8,11 @@ ms.author: baanders # Microsoft employees only
 ms.date: 03/10/2023
 ms.topic: quickstart
 ms.service: digital-twins
-ms.custom: devx-track-azurecli
+ms.custom: event-tier1-build-2022
 
 # Optional fields. Don't forget to remove # if you need a field.
 # ms.custom: can-be-multiple-comma-separated
+# ms.reviewer: MSFT-alias-of-reviewer
 # manager: MSFT-alias-of-manager-or-PM-counterpart
 ---
 

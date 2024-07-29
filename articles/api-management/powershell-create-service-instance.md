@@ -6,24 +6,26 @@ author: dlepow
 ms.service: api-management
 ms.topic: quickstart
 ms.custom: mvc, devx-track-azurepowershell, mode-api, devdivchpfy22
-ms.date: 12/12/2023
+ms.date: 09/21/2022
 ms.author: danlep
 ---
 
-# Quickstart: Create a new Azure API Management instance by using PowerShell
+# Quickstart: Create a new Azure API Management service instance by using PowerShell
 
-[!INCLUDE [api-management-availability-premium-dev-standard-basic-consumption](../../includes/api-management-availability-premium-dev-standard-basic-consumption.md)]
+In this quickstart, you create a new API Management instance by using Azure PowerShell cmdlets.
 
-In this quickstart, you create a new API Management instance by using Azure PowerShell cmdlets. After creating an instance, you can use Azure PowerShell cmdlets for common management actions such as importing APIs in your API Management instance.
-
-[!INCLUDE [api-management-quickstart-intro](../../includes/api-management-quickstart-intro.md)]
-
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
-
+Azure API Management helps organizations publish APIs to external, partner, and internal developers to unlock the potential of their data and services. API Management provides the core competencies to ensure a successful API program through developer engagement, business insights, analytics, security, and protection. API Management lets you create and manage modern API gateways for existing backend services hosted anywhere. 
 
 ## Prerequisites
 
-[!INCLUDE [azure-powershell-requirements-no-header](../../includes/azure-powershell-requirements-no-header.md)]
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+
+- Azure Cloud Shell or Azure PowerShell
+
+    [!INCLUDE [cloud-shell-try-it-no-header](../../includes/cloud-shell-try-it-no-header.md)]
+
+    If you choose to install and use the PowerShell locally, this quickstart requires the Azure PowerShell module version 1.0 or later. Run `Get-Module -ListAvailable Az` to find the version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-Az-ps). If you're running PowerShell locally, you also need to run `Connect-AzAccount` to create a connection with Azure.
+
 
 ## Create resource group
 
@@ -43,7 +45,7 @@ In the following example, *myapim* is used for the service name. Update the name
 
 By default, the command creates the instance in the Developer tier, an economical option to evaluate Azure API Management. This tier isn't for production use. For more information about the API Management tiers, see [Feature-based comparison of the Azure API Management tiers](api-management-features.md).
 
-> [!TIP]
+> [!NOTE]
 > This is a long-running action. It can take between 30 and 40 minutes to create and activate an API Management service in this tier.
 
 ```azurepowershell-interactive
@@ -51,7 +53,7 @@ New-AzApiManagement -Name "myapim" -ResourceGroupName "myResourceGroup" `
   -Location "West US" -Organization "Contoso" -AdminEmail "admin@contoso.com" 
 ```
 
-When the command returns, run [Get-AzApiManagement](/powershell/module/az.apimanagement/get-azapimanagement) to view the properties of the Azure API Management service. After activation, the `ProvisioningState` is Succeeded and the instance has several associated URLs. For example:
+When the command returns, run [Get-AzApiManagement](/powershell/module/az.apimanagement/get-azapimanagement) to view the properties of the Azure API Management service. After activation, the setting up status is Succeeded and the service instance has several associated URLs. For example:
 
 ```azurepowershell-interactive
 Get-AzApiManagement -Name "myapim" -ResourceGroupName "myResourceGroup" 

@@ -3,7 +3,7 @@ title: "include file"
 description: "include file"
 services: storage
 author: pauljewellmsft
-ms.service: azure-storage
+ms.service: storage
 ms.topic: include
 ms.date: 04/05/2023
 ms.author: pauljewell

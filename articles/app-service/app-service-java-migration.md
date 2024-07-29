@@ -7,7 +7,8 @@ ms.topic: article
 ms.date: 03/29/2021
 ms.author: msangapu
 ms.devlang: java
-ms.custom: devx-track-extended-java, linux-related-content
+ms.custom: seodec18
+
 ---
 # Java migration resources for Azure App Service
 

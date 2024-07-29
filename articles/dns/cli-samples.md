@@ -5,7 +5,7 @@ services: dns
 author: greg-lindsay
 ms.service: dns
 ms.topic: sample
-ms.date: 11/30/2023
+ms.date: 09/27/2022
 ms.author: greglin 
 ms.custom: devx-track-azurecli
 

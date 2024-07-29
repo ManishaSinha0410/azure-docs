@@ -3,9 +3,8 @@ title: Deployment modes
 description: Describes how to specify whether to use a complete or incremental deployment mode with Azure Resource Manager.
 ms.topic: conceptual
 ms.custom: devx-track-arm-template
-ms.date: 03/20/2024
+ms.date: 01/21/2022
 ---
-
 # Azure Resource Manager deployment modes
 
 When deploying your resources, you specify that the deployment is either an incremental update or a complete update. The difference between these two modes is how Resource Manager handles existing resources in the resource group that aren't in the template.

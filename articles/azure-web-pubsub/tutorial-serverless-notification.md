@@ -4,9 +4,8 @@ description: A tutorial to walk through how to use Azure Web PubSub service and 
 author: JialinXin
 ms.author: jixin
 ms.service: azure-web-pubsub
-ms.custom: devx-track-azurecli
 ms.topic: tutorial 
-ms.date: 01/12/2024
+ms.date: 05/05/2023
 ---
 
 # Tutorial: Create a serverless notification app with Azure Functions and Azure Web PubSub service
@@ -23,23 +22,11 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-# [JavaScript Model v4](#tab/javascript-v4)
+# [JavaScript](#tab/javascript)
 
 * A code editor, such as [Visual Studio Code](https://code.visualstudio.com/)
 
-* [Node.js](https://nodejs.org/en/download/), version 18.x or above.
-   > [!NOTE]
-   > For more information about the supported versions of Node.js, see [Azure Functions runtime versions documentation](../azure-functions/functions-versions.md#languages).
-
-* [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing) (V4 or higher preferred) to run Azure Function apps locally and deploy to Azure.
-
-* The [Azure CLI](/cli/azure) to manage Azure resources.
-
-# [JavaScript Model v3](#tab/javascript-v3)
-
-* A code editor, such as [Visual Studio Code](https://code.visualstudio.com/)
-
-* [Node.js](https://nodejs.org/en/download/), version 18.x or above.
+* [Node.js](https://nodejs.org/en/download/), version 10.x.
    > [!NOTE]
    > For more information about the supported versions of Node.js, see [Azure Functions runtime versions documentation](../azure-functions/functions-versions.md#languages).
 
@@ -81,16 +68,11 @@ In this tutorial, you learn how to:
 
 ## Create and run the functions locally
 
-1. Make sure you have [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing) installed. Now, create an empty directory for the project. Run command under this working directory. Use one of the given options below.
+1. Make sure you have [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools#installing) installed. And then create an empty directory for the project. Run command under this working directory.
 
-    # [JavaScript Model v4](#tab/javascript-v4)
+    # [JavaScript](#tab/javascript)
     ```bash
-    func init --worker-runtime javascript --model V4
-    ```
-
-    # [JavaScript Model v3](#tab/javascript-v3)
-    ```bash
-    func init --worker-runtime javascript --model V3
+    func init --worker-runtime javascript
     ```
 
     # [C# in-process](#tab/csharp-in-process)
@@ -105,26 +87,16 @@ In this tutorial, you learn how to:
 
     # [Python](#tab/python)
     ```bash
-    func init --worker-runtime python --model V1
+    func init --worker-runtime python
     ```
     
-2. Follow the steps to install `Microsoft.Azure.WebJobs.Extensions.WebPubSub`.
-
-    # [JavaScript Model v4](#tab/javascript-v4)
-    Confirm or update `host.json`'s extensionBundle to version _4.*_ or later to get Web PubSub support. For updating the  `host.json`, open the file in editor, and then replace the existing version extensionBundle to version _4.*_ or later.
-    ```json
-    {
-        "extensionBundle": {
-            "id": "Microsoft.Azure.Functions.ExtensionBundle",
-            "version": "[4.*, 5.0.0)"
-        }
-    }
-    ```
+2. Install `Microsoft.Azure.WebJobs.Extensions.WebPubSub`.
    
-    # [JavaScript Model v3](#tab/javascript-v3)
-    Confirm or update `host.json`'s extensionBundle to version _3.3.0_ or later to get Web PubSub support. For updating the  `host.json`, open the file in editor, and then replace the existing version extensionBundle to version _3.3.0_ or later.
+    # [JavaScript](#tab/javascript)
+    Update `host.json`'s extensionBundle to version _3.3.0_ or later to get Web PubSub support.
     ```json
     {
+        "version": "2.0",
         "extensionBundle": {
             "id": "Microsoft.Azure.Functions.ExtensionBundle",
             "version": "[3.3.*, 4.0.0)"
@@ -142,10 +114,12 @@ In this tutorial, you learn how to:
     dotnet add package Microsoft.Azure.Functions.Worker.Extensions.WebPubSub --prerelease
     ```
 
+
     # [Python](#tab/python)
-    Update `host.json`'s extensionBundle to version _3.3.0_ or later to get Web PubSub support. For updating the  `host.json`, open the file in editor, and then replace the existing version extensionBundle to version _3.3.0_ or later.
+    Update `host.json`'s extensionBundle to version _3.3.0_ or later to get Web PubSub support.
     ```json
     {
+        "version": "2.0",
         "extensionBundle": {
             "id": "Microsoft.Azure.Functions.ExtensionBundle",
             "version": "[3.3.*, 4.0.0)"
@@ -157,36 +131,8 @@ In this tutorial, you learn how to:
     ```bash
     func new -n index -t HttpTrigger
     ```
-    # [JavaScript Model v4](#tab/javascript-v4)
-    - Update `src/functions/index.js` and copy following codes.
-      ```js
-      const { app } = require('@azure/functions');
-      const { readFile } = require('fs/promises');
-      
-      app.http('index', {
-          methods: ['GET', 'POST'],
-          authLevel: 'anonymous',
-          handler: async (context) => {
-              const content = await readFile('index.html', 'utf8', (err, data) => {
-                  if (err) {
-                      context.err(err)
-                      return
-                  }
-              });
-      
-              return { 
-                  status: 200,
-                  headers: { 
-                      'Content-Type': 'text/html'
-                  }, 
-                  body: content, 
-              };
-          }
-      });
-      ```
-
-    # [JavaScript Model v3](#tab/javascript-v3)
-    - Update `index/function.json` and copy following json codes. 
+    # [JavaScript](#tab/javascript)
+    - Update `index/function.json` and copy following json codes.
         ```json
         {
           "bindings": [
@@ -304,29 +250,8 @@ In this tutorial, you learn how to:
     ```bash
     func new -n negotiate -t HttpTrigger
     ```
-    # [JavaScript Model v4](#tab/javascript-v4)
-    - Update `src/functions/negotiate.js` and copy following codes.
-      ```js
-      const { app, input } = require('@azure/functions');
-      
-      const connection = input.generic({
-          type: 'webPubSubConnection',
-          name: 'connection',
-          hub: 'notification'
-      });
-      
-      app.http('negotiate', {
-          methods: ['GET', 'POST'],
-          authLevel: 'anonymous',
-          extraInputs: [connection],
-          handler: async (request, context) => {
-              return { body: JSON.stringify(context.extraInputs.get('connection')) };
-          },
-      });
-      ```
-
-    # [JavaScript Model v3](#tab/javascript-v3)
-    - Update `negotiate/function.json` and copy following json codes.
+    # [JavaScript](#tab/javascript)
+   - Update `negotiate/function.json` and copy following json codes.
         ```json
         {
           "bindings": [
@@ -350,7 +275,7 @@ In this tutorial, you learn how to:
           ]
         }
         ```
-    - Create a folder negotiate and update `negotiate/index.js` and copy following codes.
+   - Update `negotiate/index.js` and copy following codes.
         ```js
         module.exports = function (context, req, connection) {
             context.res = { body: connection };
@@ -391,7 +316,7 @@ In this tutorial, you learn how to:
         ```
 
     # [Python](#tab/python)
-    - Create a folder negotiate and update `negotiate/function.json` and copy following json codes.
+    - Update `negotiate/function.json` and copy following json codes.
          ```json
          {
            "scriptFile": "__init__.py",
@@ -431,35 +356,7 @@ In this tutorial, you learn how to:
     ```bash
     func new -n notification -t TimerTrigger
     ```
-    # [JavaScript Model v4](#tab/javascript-v4)
-    - Update `src/functions/notification.js` and copy following codes.
-      ```js
-      const { app, output } = require('@azure/functions');
-      
-      const wpsAction = output.generic({
-          type: 'webPubSub',
-          name: 'action',
-          hub: 'notification'
-      });
-      
-      app.timer('notification', {
-          schedule: "*/10 * * * * *",
-          extraOutputs: [wpsAction],
-          handler: (myTimer, context) => {
-              context.extraOutputs.set(wpsAction, {
-                  actionName: 'sendToAll',
-                  data: `[DateTime: ${new Date()}] Temperature: ${getValue(22, 1)}\xB0C, Humidity: ${getValue(40, 2)}%`,
-                  dataType: 'text',
-              });
-          },
-      });
-      
-      function getValue(baseNum, floatNum) {
-          return (baseNum + 2 * floatNum * (Math.random() - 0.5)).toFixed(3);
-      }
-      ```
-
-    # [JavaScript Model v3](#tab/javascript-v3)
+    # [JavaScript](#tab/javascript)
     - Update `notification/function.json` and copy following json codes.
         ```json
         {
@@ -517,7 +414,6 @@ In this tutorial, you learn how to:
         ``` 
     - Add `using` statements in header to resolve required dependencies.
         ```c#
-        using System.Threading.Tasks;
         using Microsoft.Azure.WebJobs.Extensions.WebPubSub;
         using Microsoft.Azure.WebPubSub.Common;
         ```
@@ -545,7 +441,7 @@ In this tutorial, you learn how to:
         ``` 
     
     # [Python](#tab/python)
-    - Create a folder notification and update `notification/function.json` and copy following json codes.
+    - Update `notification/function.json` and copy following json codes.
         ```json
         {
           "scriptFile": "__init__.py",
@@ -606,10 +502,8 @@ In this tutorial, you learn how to:
         </body>
     </html>
     ```
-
-    # [JavaScript Model v4](#tab/javascript-v4)
-
-    # [JavaScript Model v3](#tab/javascript-v3)
+    
+    # [JavaScript](#tab/javascript)
 
     # [C# in-process](#tab/csharp-in-process)
     Since C# project compiles files to a different output folder, you need to update your `*.csproj` to make the content page go with it.
@@ -669,7 +563,7 @@ Before you can deploy your function code to Azure, you need to create three reso
 
 Use the following commands to create these items. 
 
-1. Sign in to Azure:
+1. If you haven't done so already, sign in to Azure:
 
     ```azurecli
     az login
@@ -689,18 +583,10 @@ Use the following commands to create these items.
 
 1. Create the function app in Azure:
 
-    # [JavaScript Model v4](#tab/javascript-v4)
+    # [JavaScript](#tab/javascript)
 
     ```azurecli
-    az functionapp create --resource-group WebPubSubFunction --consumption-plan-location <REGION> --runtime node --runtime-version 18 --functions-version 4 --name <FUNCIONAPP_NAME> --storage-account <STORAGE_NAME>
-    ```
-    > [!NOTE]
-    > Check [Azure Functions runtime versions documentation](../azure-functions/functions-versions.md#languages) to set `--runtime-version` parameter to supported value.
-
-    # [JavaScript Model v3](#tab/javascript-v3)
-
-    ```azurecli
-    az functionapp create --resource-group WebPubSubFunction --consumption-plan-location <REGION> --runtime node --runtime-version 18 --functions-version 4 --name <FUNCIONAPP_NAME> --storage-account <STORAGE_NAME>
+    az functionapp create --resource-group WebPubSubFunction --consumption-plan-location <REGION> --runtime node --runtime-version 14 --functions-version 4 --name <FUNCIONAPP_NAME> --storage-account <STORAGE_NAME>
     ```
     > [!NOTE]
     > Check [Azure Functions runtime versions documentation](../azure-functions/functions-versions.md#languages) to set `--runtime-version` parameter to supported value.
@@ -724,7 +610,7 @@ Use the following commands to create these items.
 
 1. Deploy the function project to Azure:
 
-    Once you create your function app in Azure, you're now ready to deploy your local functions project by using the [func azure functionapp publish](../azure-functions/functions-run-local.md) command.
+    After you have successfully created your function app in Azure, you're now ready to deploy your local functions project by using the [func azure functionapp publish](../azure-functions/functions-run-local.md) command.
 
     ```bash
     func azure functionapp publish <FUNCIONAPP_NAME> --publish-local-settings
@@ -739,7 +625,7 @@ Use the following commands to create these items.
 
 If you're not going to continue to use this app, delete all resources created by this doc with the following steps so you don't incur any charges:
 
-1. In the Azure portal, select **Resource groups** on the far left, and then select the resource group you created. Use the search box to find the resource group by its name instead.
+1. In the Azure portal, select **Resource groups** on the far left, and then select the resource group you created. You may use the search box to find the resource group by its name instead.
 
 1. In the window that opens, select the resource group, and then select **Delete resource group**.
 

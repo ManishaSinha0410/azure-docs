@@ -1,54 +1,53 @@
 ---
-title: POWER
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a number multipled by itself a specified number of times.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: POWER in Azure Cosmos DB query language
+description: Learn about SQL system function POWER in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# POWER (NoSQL query)
-
+# POWER (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the value of the specified expression multipled by itself the given number of times.  
+ Returns the value of the specified expression to the specified power.  
   
 ## Syntax
   
-```nosql
-POWER(<numeric_expr_1>, <numeric_expr_2>)  
-```
-
+```sql
+POWER (<numeric_expr1>, <numeric_expr2>)  
+```  
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr_1`** | A numeric expression. |
-| **`numeric_expr_2`** | A numeric expression indicating the power to raise `numeric_expr_1`. |
-
+  
+*numeric_expr1*  
+   Is a numeric expression.  
+  
+*numeric_expr2*  
+   Is the power to which to raise *numeric_expr1*.  
+  
 ## Return types
-
-Returns a numeric expression.  
+  
+  Returns a numeric expression.  
   
 ## Examples
+  
+  The following example demonstrates raising a number to the power of 3 (the cube of the number).  
+  
+```sql
+SELECT POWER(2, 3) AS pow1, POWER(2.5, 3) AS pow2  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{pow1: 8, pow2: 15.625}]  
+```  
 
-The following example demonstrates raising a number to various powers.  
+## Next steps
 
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/power/query.sql" highlight="2-9":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/power/result.json":::
-
-## Remarks
-
-- This function doesn't use the index.
-
-## Related content
-
-- [System functions](system-functions.yml)
-- [`SQRT`](sqrt.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

@@ -1,53 +1,54 @@
 ---
-title: ABS
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the positive value of the specified numeric expression
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ABS in Azure Cosmos DB query language
+description: Learn about how the Absolute(ABS) SQL system function in Azure Cosmos DB returns the positive value of the specified numeric expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/04/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ABS (NoSQL query)
-
+# ABS (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the absolute (positive) value of the specified numeric expression.  
+ Returns the absolute (positive) value of the specified numeric expression.  
   
 ## Syntax
   
-```nosql
-ABS(<numeric_expr>)  
+```sql
+ABS (<numeric_expr>)  
 ```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
+  
+*numeric_expr*  
+   Is a numeric expression.  
   
 ## Return types
   
-Returns a numeric expression.  
+  Returns a numeric expression.  
   
 ## Examples
   
-The following example shows the results of using this function on three different numbers.  
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/absolute-value/query.sql" highlight="2-4":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/absolute-value/result.json":::
+  The following example shows the results of using the `ABS` function on three different numbers.  
+  
+```sql
+SELECT ABS(-1) AS abs1, ABS(0) AS abs2, ABS(1) AS abs3 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{abs1: 1, abs2: 0, abs3: 1}]  
+```
 
 ## Remarks
 
-- This function benefits from the use of a [range index](../../index-policy.md#includeexclude-strategy).
+This system function will benefit from a [range index](../../index-policy.md#includeexclude-strategy).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`IS_NUMBER`](is-number.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

@@ -3,11 +3,9 @@ title: Configure Linux Python apps
 description: Learn how to configure the Python container in which web apps are run, using both the Azure portal and the Azure CLI.
 ms.topic: quickstart
 ms.date: 11/16/2022
-ms.reviewer: astay
-ms.author: msangapu
-author: msangapu-msft
+ms.reviewer: astay; kraigb
 ms.devlang: python
-ms.custom: mvc, devx-track-python, devx-track-azurecli, mode-other, py-fresh-zinc, linux-related-content
+ms.custom: mvc, seodec18, devx-track-python, devx-track-azurecli, mode-other, py-fresh-zinc
 adobe-target: true
 ---
 
@@ -48,7 +46,7 @@ You can use either the [Azure portal](https://portal.azure.com) or the Azure CLI
   - Set the Python version with [az webapp config set](/cli/azure/webapp/config#az-webapp-config-set)
 
     ```azurecli
-    az webapp config set --resource-group <resource-group-name> --name <app-name> --linux-fx-version "PYTHON|3.11"
+    az webapp config set --resource-group <resource-group-name> --name <app-name> --linux-fx-version "PYTHON|3.7"
     ```
 
   - Show all Python versions that are supported in Azure App Service with [az webapp list-runtimes](/cli/azure/webapp#az-webapp-list-runtimes):

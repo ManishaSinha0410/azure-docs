@@ -41,19 +41,18 @@ After you get Direct peering in the previous step, enable it for Peering Service
 
 ## Modify a Direct peering connection
 
-If you need to modify connection settings, see the "Modify a Direct peering" section in [Create or modify a Direct peering using PowerShell](howto-direct-powershell.md).
+If you need to modify connection settings, see the "Modify a Direct peering" section in [Create or modify a Direct peering by using PowerShell](howto-direct-powershell.md).
+
+## Next steps
+
+* [Create or modify Exchange peering by using PowerShell](howto-exchange-powershell.md)
+* [Convert a legacy Exchange peering to an Azure resource by using PowerShell](howto-legacy-exchange-powershell.md)
 
 ## Additional resources
-
 You can get detailed descriptions of all the parameters by running the following command:
 
 ```powershell
 Get-Help Get-AzPeering -detailed
 ```
 
-## Next steps
-
-- For frequently asked questions, see the [Peering Service FAQ](faqs.md#peering-service).
-- To learn how to manage an Exchange peering, see [Create or modify Exchange peering using Azure PowerShell](howto-exchange-powershell.md).
-- To learn how to convert an Exchange peering to an Azure resource, see [Convert a legacy Exchange peering to an Azure resource using Azure PowerShell](howto-legacy-exchange-powershell.md).
-
+For frequently asked questions, see the [Peering Service FAQ](service-faqs.yml).

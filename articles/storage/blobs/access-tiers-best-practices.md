@@ -5,8 +5,9 @@ description: Learn about best practice guidelines that help you use access tiers
 author: normesta
 
 ms.author: normesta
-ms.date: 08/10/2023
-ms.service: azure-data-lake-storage
+ms.date: 05/02/2023
+ms.service: storage
+ms.subservice: blobs
 ms.topic: conceptual
 ---
 
@@ -16,14 +17,14 @@ This article provides best practice guidelines that help you use access tiers to
 
 ## Choose the most cost-efficient access tiers
 
-You can reduce costs by placing blob data into the most cost-efficient access tiers. Choose from three tiers that are designed to optimize your costs around data use. For example, the hot tier has a higher storage cost but lower read cost. Therefore, if you plan to access data frequently, the hot tier might be the most cost-efficient choice. If you plan to read data less frequently, the cool, cold or archive tier might make the most sense because it raises the cost of reading data while reducing the cost of storing data.
+You can reduce costs by placing blob data into the most cost-efficient access tiers. Choose from three tiers that are designed to optimize your costs around data use. For example, the hot tier has a higher storage cost but lower read cost. Therefore, if you plan to access data frequently, the hot tier might be the most cost-efficient choice. If you plan to read data less frequently, the cool or archive tier might make the most sense because it raises the cost of reading data while reducing the cost of storing data.
 
 To identify the most optimal access tier, try to estimate what percentage of the data will be read on a monthly basis. The following chart shows the impact on monthly spending given various read percentages. 
 
 > [!div class="mx-imgBorder"]
 > ![Chart that shows a bar for each tier which represents the monthly cost based on percentage read pattern](./media/access-tiers-best-practices/read-pattern-access-tiers.png)
 
-To model and analyze the cost of using cool or cold versus archive storage, see [Archive versus cold and cool](archive-cost-estimation.md#archive-versus-cold-and-cool). You can apply similar modeling techniques to compare the cost of hot to cool, cold or archive.
+To model and analyze the cost of using cool versus archive storage, see [Archive versus cool](archive-cost-estimation.md#archive-versus-cool). You can apply similar modeling techniques to compare the cost of hot to cool or archive.
 
 ## Migrate data directly to the most cost-efficient access tiers
 
@@ -41,7 +42,7 @@ To gather telemetry, enable [blob inventory reports](blob-inventory.md) and enab
 
 - [Tutorial: Analyze blob inventory reports](storage-blob-inventory-report-analytics.md)
 
-- [Calculate blob count and total size per container using Azure Storage inventory](calculate-blob-count-size.yml)
+- [Calculate blob count and total size per container using Azure Storage inventory](calculate-blob-count-size.md)
 
 - [How to calculate Container Level Statistics in Azure Blob Storage with Azure Databricks](https://techcommunity.microsoft.com/t5/azure-paas-blog/how-to-calculate-container-level-statistics-in-azure-blob/ba-p/3614650)
 

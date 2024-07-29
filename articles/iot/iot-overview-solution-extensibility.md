@@ -6,9 +6,10 @@ services: iot
 author: dominicbetts
 ms.author: dobett
 ms.topic: overview
-ms.date: 02/28/2024
+ms.date: 04/03/2023
 ms.custom: template-overview
-# Customer intent: As a solution builder, I want a high-level overview of the options for extending an IoT solution so that I can easily find relevant content for my scenario.
+
+# As a solution builder, I want a high-level overview of the options for extensing an IoT solution so that I can easily find relevant content for my scenario.
 ---
 
 # Extend your IoT solution
@@ -31,7 +32,7 @@ A typical IoT solution includes the analysis and visualization of the data from 
 
 ### Integration with other services
 
-An IoT solution might include other systems such as asset management, work scheduling, and control automation systems. Such systems might:
+An IoT solution may include other systems such as asset management, work scheduling, and control automation systems. Such systems might:
 
 - Use data from your IoT devices as input to predictive maintenance systems that generate entries in a work scheduling system.
 - Update the device registry to ensure it has up to date data from your asset management system.
@@ -39,7 +40,11 @@ An IoT solution might include other systems such as asset management, work sched
 
 ## Azure Data Health Services
 
-[Azure Health Data Services](../healthcare-apis/healthcare-apis-overview.md) is a set of managed API services based on open standards and frameworks that enable workflows to improve healthcare and offer scalable and secure healthcare solutions. An IoT solution can use these services to integrate IoT data into a healthcare solution.
+[Azure Health Data Services](../healthcare-apis/healthcare-apis-overview.md) is a set of managed API services based on open standards and frameworks that enable workflows to improve healthcare and offer scalable and secure healthcare solutions. An IoT solution can use these services to integrate IoT data into a healthcare solution. To learn more, see [Deploy and review the continuous patient monitoring application template (IoT Central)](../iot-central/healthcare/tutorial-continuous-patient-monitoring.md)
+
+## Industrial IoT (IIoT)
+
+Azure IIoT lets you integrate data from assets and sensors, including those systems that are already operating on your factory floor, into your Azure IoT solution. To learn more, see [Industrial IoT](../industrial-iot/overview-what-is-industrial-iot.md).
 
 ## Extensibility mechanisms
 
@@ -74,7 +79,8 @@ IoT Hub and IoT Central both let you [route device telemetry to different endpoi
 
 In addition to device telemetry, both IoT Hub and IoT Central can send property update and device connection status messages to other endpoints. Routing these messages enables you to build integrations with other services that need device status information:
 
-- [IoT Hub routing](../iot-hub/iot-hub-devguide-messages-d2c.md) can send device telemetry, property change events, device connectivity events, and device lifecycle events to destinations such as [Azure Event Hubs](../event-hubs/event-hubs-about.md), [Azure Blob Storage](../storage/blobs/storage-blobs-overview.md), and [Cosmos DB](../cosmos-db/introduction.md).
+- [IoT Hub routing](../iot-hub/iot-hub-devguide-messages-d2c.md) can send device telemetry, property change events, device connectivity events, and device lifecycle events to destinations such [Azure Event Hubs](../event-hubs/event-hubs-about.md), [Azure Blob Storage](../storage/blobs/storage-blobs-overview.md), and [Cosmos DB](../cosmos-db/introduction.md).
+- [IoT Hub routing](../iot-hub/iot-hub-devguide-messages-d2c.md) can send device telemetry, property change events, device connectivity events, and device lifecycle events to destinations such [Azure Event Hubs](../event-hubs/event-hubs-about.md), [Azure Blob Storage](../storage/blobs/storage-blobs-overview.md), and [Cosmos DB](../cosmos-db/introduction.md).
 - [IoT Hub Event Grid integration](../iot-hub/iot-hub-event-grid.md) uses Azure Event Grid to distribute IoT Hub events such as device connectivity, device lifecycle, and telemetry events to other Azure services.
 - [IoT Central rules](../iot-central/core/howto-configure-rules.md) can send device telemetry and property values to webhooks, [Microsoft Power Automate](/power-automate/getting-started/), and [Azure Logic Apps](/azure/logic-apps/logic-apps-overview/).
 - [IoT Central data export](../iot-central/core/howto-export-data.md) can send device telemetry, property change events, device connectivity events, and device lifecycle events to destinations such [Azure Blob Storage](../storage/blobs/storage-blobs-overview.md), [Azure Data Explorer](/azure/data-explorer/data-explorer-overview/), [Azure Event Hubs](../event-hubs/event-hubs-about.md), and webhooks.
@@ -88,4 +94,4 @@ The IoT Central application templates provide a starting point for building IoT 
 Now that you've seen an overview of the extensibility options available to your IoT solution, some suggested next steps include:
 
 - [Analyze and visualize your IoT data](iot-overview-analyze-visualize.md)
-- [IoT solution options](iot-introduction.md#solution-options)
+- [Choose the right IoT solution](iot-solution-options.md)

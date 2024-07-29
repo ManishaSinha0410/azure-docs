@@ -3,7 +3,7 @@ title: Template resource location
 description: Describes how to set resource location in an Azure Resource Manager template (ARM template).
 ms.topic: conceptual
 ms.custom: devx-track-arm-template
-ms.date: 03/20/2024
+ms.date: 09/04/2019
 ---
 
 # Set resource location in ARM template
@@ -65,12 +65,12 @@ The following example shows a storage account that is deployed to a location spe
     }
   },
   "variables": {
-    "storageAccountName": "[format('storage{0}', uniqueString(resourceGroup().id))]"
+    "storageAccountName": "[concat('storage', uniquestring(resourceGroup().id))]"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2022-09-01",
+      "apiVersion": "2018-07-01",
       "name": "[variables('storageAccountName')]",
       "location": "[parameters('location')]",
       "sku": {

@@ -8,7 +8,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 05/15/2024
+ms.date: 08/04/2022
 ---
 
 # Unpivot transformation in mapping data flow
@@ -53,6 +53,6 @@ Setting the Column Arrangement to "Normal" will group together all of the new un
 
 The final unpivoted data result set shows the column totals now unpivoted into separate row values.
 
-## Related content
+## Next steps
 
 Use the [Pivot transformation](data-flow-pivot.md) to pivot rows to columns.

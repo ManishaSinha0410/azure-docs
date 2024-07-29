@@ -2,10 +2,10 @@
 title: Back up Azure Managed Disks
 description: Learn how to back up Azure Managed Disks from the Azure portal.
 ms.topic: conceptual
-ms.date: 05/09/2024
+ms.date: 11/03/2022
 ms.service: backup
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
+author: jyothisuri
+ms.author: jsuri
 ---
 
 # Back up Azure Managed Disks
@@ -39,7 +39,7 @@ A Backup vault is a storage entity in Azure that holds backup data for various n
 
    ![Initiate: Create vault](./media/backup-managed-disks/initiate-create-vault.png)
 
-1. In the **Basics** tab, provide subscription, resource group, backup vault name, region, and backup storage redundancy. Continue by selecting **Review + create**. Learn more about [creating a Backup vault](./create-manage-backup-vault.md#create-a-backup-vault).
+1. In the **Basics** tab, provide subscription, resource group, backup vault name, region, and backup storage redundancy. Continue by selecting **Review + create**. Learn more about [creating a Backup vault](./backup-vault-overview.md#create-a-backup-vault).
 
    ![Review and create vault](./media/backup-managed-disks/review-and-create.png)
 
@@ -76,10 +76,6 @@ A Backup vault is a storage entity in Azure that holds backup data for various n
    >Azure Backup for Managed Disks uses incremental snapshots which are limited to 500 snapshots per disk. To allow you to take on-demand backups aside from scheduled backups, backup policy limits the total backups to 450. Learn more about [incremental snapshots](../virtual-machines/disks-incremental-snapshots.md#restrictions) for managed disk.
 
 1. Complete the backup policy creation by selecting **Review + create**.
-
->[!Note]
->- For Azure Disks belonging to Standard HDD, Standard SSD, and Premium SSD SKUs, you can define the backup schedule with *Hourly* frequency (of 1, 2, 4, 6, 8, or 12 hours) and *Daily* frequency. 
->- For Azure Disks belonging to Premium V2 and Ultra Disk SKUs, you can define the backup schedule with *Hourly* frequency of only 12 hours and *Daily* frequency.
 
 ## Configure backup
 
@@ -118,7 +114,7 @@ To configure disk backup, follow these steps:
    >[!Note]
    >While the portal allows you to select multiple disks and configure backup, each disk is an individual backup instance. Currently, Azure Disk Backup only supports backup of individual disks. Point-in-time backup of multiple disks attached to a virtual machine isn't supported.
    >
-   >In the Azure portal, you can only select disks within the same subscription. If you have several disks to be backed up or if the disks reside in different subscriptions, you can use scripts ([PowerShell](./backup-managed-disks-ps.md)/[CLI](./backup-managed-disks-cli.md)) to automate. 
+   >In the Azure  portal, you can only select disks within the same subscription. If you have several disks to be backed up or if the disks reside in different subscriptions, you can use scripts ([PowerShell](./backup-managed-disks-ps.md)/[CLI](./backup-managed-disks-cli.md)) to automate. 
    >
    >See the [support matrix](./disk-backup-support-matrix.md) for more information on the Azure Disk backup region availability, supported scenarios, and limitations.
 

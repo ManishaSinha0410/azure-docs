@@ -1,8 +1,9 @@
 ---
  title: include file
  description: include file
+ services: virtual-machines
  author: roygara
- ms.service: azure-disk-storage
+ ms.service: virtual-machines
  ms.topic: include
  ms.date: 03/16/2023
  ms.author: rogarana

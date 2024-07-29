@@ -2,15 +2,13 @@
 title: Restart server - Azure portal - Azure Database for MariaDB
 description: This article describes how you can restart an Azure Database for MariaDB server using the Azure Portal.
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: how-to
 ms.date: 06/24/2022
 ---
 
 # Restart Azure Database for MariaDB server using Azure portal
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 This topic describes how you can restart an Azure Database for MariaDB server. You may need to restart your server for maintenance reasons, which causes a short outage as the server performs the operation.
 

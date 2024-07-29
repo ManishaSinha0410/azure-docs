@@ -2,12 +2,13 @@
 title: Use the Azure portal to manage customer-managed keys for Azure Data Box
 description: Learn how to use Azure portal to create and manage customer-managed keys with Azure Key Vault for an Azure Data Box. Customer-managed keys let you create, rotate, disable, and revoke access controls.
 services: databox
-author: stevenmatthew
+author: alkohli
 ms.service: databox
 ms.topic: how-to
 ms.date: 01/13/2022
-ms.author: shaas
+ms.author: alkohli
 ms.subservice: pod
+ms.custom: contperf-fy22q3
 ---
 
 # Use customer-managed keys in Azure Key Vault for Azure Data Box

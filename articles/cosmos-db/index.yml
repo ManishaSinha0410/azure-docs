@@ -1,18 +1,21 @@
 ### YamlMime:Hub
 
 title: Azure Cosmos DB documentation
-summary: Fully managed, distributed NoSQL, relational, and vector database for modern app development. High performance, high availability, and support for open-source PostgreSQL, MongoDB, and Apache Cassandra. Build cloud-native apps effortlessly.
+summary: Azure Cosmos DB - Fast NoSQL database with SLA-backed speed and availability, automatic and instant scalability, and open-source APIs for MongoDB and Cassandra.
 brand: azure
 
 metadata:
   title: Azure Cosmos DB
-  description: Fully managed, distributed NoSQL, relational, and vector database for modern apps. High performance, availability, and support for PostgreSQL, MongoDB, and Cassandra.
+  description: Azure Cosmos DB - Fast NoSQL database with SLA-backed speed and availability, automatic and instant scalability, and open-source APIs for MongoDB and Cassandra.
+  services: cosmos-db
   author: seesharprun
   ms.author: sidandrews
   ms.reviewer: mjbrown
   ms.service: cosmos-db
   ms.topic: landing-page
-  ms.date: 02/21/2024
+  ms.collection: collection
+  ms.date: 02/28/2023
+  ms.custom: ignite-2022
 highlightedContent:
   items:
     - title: Introduction to Azure Cosmos DB
@@ -24,12 +27,9 @@ highlightedContent:
     - title: Distributed NoSQL databases
       itemType: concept
       url: distributed-nosql.md
-    - title: Microsoft Questions and Answers
+    - title: Q&A
       itemType: reference
       url: /answers/tags/187/azure-cosmos-db
-    - title: Vector Database in Azure Cosmos DB
-      itemType: concept
-      url: vector-database.md
     - title: Choose an API in Azure Cosmos DB
       itemType: concept
       url: choose-api.md
@@ -39,6 +39,9 @@ highlightedContent:
     - title: Create an Azure Cosmos DB for PostgreSQL account
       itemType: how-to-guide
       url: postgresql/quickstart-create-portal.md
+    - title: Learn more about Azure Cosmos DB
+      itemType: learn
+      url: /training/modules/explore-azure-cosmos-db/
 
 additionalContent:
   sections:
@@ -48,6 +51,8 @@ additionalContent:
           links:
             - text: SQL queries
               url: nosql/query/getting-started.md
+            - text: Stored procedures, triggers, UDFs
+              url: nosql/how-to-write-stored-procedures-triggers-udfs.md
             - text: Model document data
               url: nosql/modeling-data.md
             - text: See more >
@@ -89,7 +94,7 @@ additionalContent:
             - text: Find request unit charge
               url: table/find-request-unit-charge.md
             - text: FAQ
-              url: table/faq.yml
+              url: table/table-api-faq.yml
             - text: See more >
               url: table/index.yml
         - title: PostgreSQL
@@ -122,11 +127,11 @@ additionalContent:
               url: concepts-limits.md
         - title: Analytics with Azure Synapse Link
           links:
-            - text: Azure Synapse Link for Azure Cosmos DB
+            - text: Synapse Link for Azure Cosmos DB
               url: synapse-link.md
             - text: Azure Cosmos DB Analytical Store
               url: analytical-store-introduction.md
-            - text: Azure Synapse Link use cases
+            - text: Synapse Link use cases
               url: synapse-link-use-cases.md
             - text: Configure Azure Synapse Link
               url: configure-synapse-link.md
@@ -162,19 +167,19 @@ additionalContent:
       items:
         - title: Migration options
           links:
-            - text: Cassandra Query Language (CQL) shell, Spark – API for Cassandra
+            - text: CQL shell, Spark – API for Cassandra
               url: cassandra/migrate-data.md
             - text: Azure Database Migration Service – API for MongoDB
               url: ../dms/tutorial-mongodb-cosmos-db.md
         - title: Migration guides
           links:
-            - text: Oracle Database to Azure Cosmos DB API for NoSQL using Striim
+            - text: Oracle DB to Azure Cosmos DB API for NoSQL using Striim
               url: cosmosdb-sql-api-migrate-data-striim.md
-            - text: Oracle Database to Azure Cosmos DB API for Cassandra using Striim
+            - text: Oracle DB to Azure Cosmos DB API for Cassandra using Striim
               url: cassandra/migrate-data-striim.md
-            - text: Oracle Database to Azure Cosmos DB API for Cassandra using Arcion
+            - text: Oracle DB to Azure Cosmos DB API for Cassandra using Arcion
               url: cassandra/oracle-migrate-cosmos-db-arcion.md
             - text: Apache Cassandra to Azure Cosmos DB using Arcion
               url: cassandra/migrate-data-arcion.md
-            - text: Migrate hundreds of terabytes of data
+            - text: Migrate 100's TBs of data
               url: migrate.md

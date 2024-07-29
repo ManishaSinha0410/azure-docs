@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 04/14/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 To reset your device, you need to securely wipe out all the data on the data disk and the boot disk of your device. 

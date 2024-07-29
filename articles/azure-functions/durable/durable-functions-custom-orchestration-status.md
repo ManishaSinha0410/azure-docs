@@ -4,8 +4,7 @@ description: Learn how to configure and use custom orchestration status for Dura
 ms.topic: conceptual
 ms.date: 12/07/2022
 ms.author: azfuncdf
-ms.devlang: csharp
-# ms.devlang: csharp, javascript, python
+ms.devlang: csharp, javascript, python
 ---
 
 # Custom orchestration status in Durable Functions (Azure Functions)

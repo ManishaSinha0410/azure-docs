@@ -3,9 +3,8 @@ title: Quickstart - Create registry - PowerShell
 description: Quickly learn to create a private Docker registry in Azure Container Registry with PowerShell
 author: tejaswikolli-web
 ms.author: tejaswikolli
-ms.date: 10/31/2023
+ms.date: 10/11/2022
 ms.topic: quickstart
-ms.service: container-registry
 ms.custom: devx-track-azurepowershell, mvc, mode-api
 ---
 
@@ -17,7 +16,7 @@ Azure Container Registry is a private registry service for building, storing, an
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-This quickstart requires Azure PowerShell module. Run `Get-Module -ListAvailable Az` to determine your installed version. If you need to install or upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell).
+This quickstart requires Azure PowerShell module. Run `Get-Module -ListAvailable Az` to determine your installed version. If you need to install or upgrade, see [Install Azure PowerShell module](/powershell/azure/install-az-ps).
 
 You must also have Docker installed locally. Docker provides packages for [macOS][docker-mac], [Windows][docker-windows], and [Linux][docker-linux] systems.
 

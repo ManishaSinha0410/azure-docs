@@ -1,10 +1,11 @@
 ---
 title: Overview of Azure Policy
 description: Azure Policy is a service in Azure, that you use to create, assign and, manage policy definitions in your Azure environment.
-ms.date: 04/17/2024
+ms.date: 12/02/2022
 ms.topic: overview
+ms.author: davidsmatlak
+author: davidsmatlak
 ---
-
 # What is Azure Policy?
 
 Azure Policy helps to enforce organizational standards and to assess compliance at-scale. Through
@@ -109,7 +110,8 @@ in their environment.
 
 Azure RBAC focuses on managing user
 [actions](../../role-based-access-control/resource-provider-operations.md) at different scopes. If
-control of an action is required based on user information, then Azure RBAC is the correct tool to use. Even if an individual has access to perform an action, if the result is a non-compliant resource, Azure Policy still blocks the create or update.
+control of an action is required based on user information, then Azure RBAC is the correct tool to use. Even if an individual has access to perform an action, if the result is a non-compliant resource, Azure Policy still
+blocks the create or update.
 
 The combination of Azure RBAC and Azure Policy provides full scope control in Azure.
 
@@ -137,21 +139,23 @@ permissions.
 If none of the built-in roles have the permissions required, create a
 [custom role](../../role-based-access-control/custom-roles.md).
 
-Azure Policy operations can have a significant effect on your Azure environment. Only the minimum set of permissions necessary to perform a task should be assigned and these permissions shouldn't be granted to users who don't need them.
+Azure Policy operations can have a significant impact on your Azure environment. Only the minimum set of
+permissions necessary to perform a task should be assigned and these permissions should not be granted
+to users who do not need them.
 
 > [!NOTE]
 > The managed identity of a **deployIfNotExists** or **modify** policy assignment needs enough
 > permissions to create or update targeted resources. For more information, see
 > [Configure policy definitions for remediation](./how-to/remediate-resources.md#configure-the-policy-definition).
 
-### Special permissions requirement for Azure Policy with Azure Virtual Network Manager
+### Special permissions requirement for Azure Policy with Azure Virtual Network Manager (preview)
 
 [Azure Virtual Network Manager (preview)](../../virtual-network-manager/overview.md) enables you to apply consistent management and security policies to multiple Azure virtual networks (VNets) throughout your cloud infrastructure. Azure Virtual Network Manager (AVNM) dynamic groups use Azure Policy definitions to evaluate VNet membership in those groups.
 
 To create, edit, or delete Azure Virtual Network Manager dynamic group policies, you need:
 
 - Read and write Azure RBAC permissions to the underlying policy
-- Azure RBAC permissions to join the network group (Classic Admin authorization isn't supported).
+- Azure RBAC permissions to join the network group (Note: Classic Admin authorization is not supported)
 
 Specifically, the required resource provider permission is `Microsoft.Network/networkManagers/networkGroups/join/action`.
 
@@ -163,9 +167,13 @@ Specifically, the required resource provider permission is `Microsoft.Network/ne
 
 ### Resources covered by Azure Policy
 
-Although a policy can be assigned at the management group level, _only_ resources at the subscription or resource group level are evaluated.
-
-For certain resource providers such as [Machine configuration](../machine-configuration/overview.md), [Azure Kubernetes Service](../../aks/intro-kubernetes.md), and [Azure Key Vault](../../key-vault/general/overview.md), there's a deeper integration for managing settings and objects. To find out more, go to [Resource Provider modes](./concepts/definition-structure.md#resource-provider-modes).
+Azure Policy evaluates all Azure resources at or below subscription-level, including Arc enabled
+resources. For certain resource providers such as
+[Machine configuration](../machine-configuration/overview.md),
+[Azure Kubernetes Service](../../aks/intro-kubernetes.md), and
+[Azure Key Vault](../../key-vault/general/overview.md), there's a deeper integration for managing
+settings and objects. To find out more, see
+[Resource Provider modes](./concepts/definition-structure.md).
 
 ### Recommendations for managing policies
 
@@ -217,7 +225,7 @@ In Azure Policy, we offer several built-in policies that are available by defaul
   specified by the deploy request.
 - **Not allowed resource types** (Deny): Prevents a list of resource types from being deployed.
 
-To implement these policy definitions (both built-in and custom definitions), you need to assign
+To implement these policy definitions (both built-in and custom definitions), you'll need to assign
 them. You can assign any of these policies through the Azure portal, PowerShell, or Azure CLI.
 
 Policy evaluation happens with several different actions, such as policy assignment or policy
@@ -295,7 +303,12 @@ To learn more about the structures of initiative definitions, review
 
 ### Assignments
 
-An assignment is a policy definition or initiative that has been assigned to a specific scope. This scope could range from a [management group](../management-groups/overview.md) to an individual resource. The term _scope_ refers to all the resources, resource groups, subscriptions, or management groups that the definition is assigned to. Assignments are inherited by all child resources. This design means that a definition applied to a resource group is also applied to resources in that resource group. However, you can exclude a subscope from the assignment.
+An assignment is a policy definition or initiative that has been assigned to a
+specific scope. This scope could range from a [management group](../management-groups/overview.md)
+to an individual resource. The term _scope_ refers to all the resources, resource groups,
+subscriptions, or management groups that the definition is assigned to. Assignments are inherited by
+all child resources. This design means that a definition applied to a resource group is also applied
+to resources in that resource group. However, you can exclude a subscope from the assignment.
 
 For example, at the subscription scope, you can assign a definition that prevents the creation of
 networking resources. You could exclude a resource group in that subscription that is intended for
@@ -311,7 +324,7 @@ on the child management group or subscription level. If any assignment results i
 denied, then the only way to allow the resource is to modify the denying assignment.
 
 Policy assignments always use the latest state of their assigned definition or initiative when
-evaluating resources. If a policy definition that's already assigned is changed, all existing
+evaluating resources. If a policy definition that is already assigned is changed all existing
 assignments of that definition will use the updated logic when evaluating.
 
 For more information on setting assignments through the portal, see [Create a policy assignment to
@@ -322,7 +335,7 @@ available. For information on the assignment structure, see
 
 ## Maximum count of Azure Policy objects
 
-[!INCLUDE [policy-limits](../includes/policy/azure-policy-limits.md)]
+[!INCLUDE [policy-limits](../../../includes/azure-policy-limits.md)]
 
 ## Next steps
 

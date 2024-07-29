@@ -5,7 +5,7 @@ author: kromerm
 ms.service: data-factory
 ms.subservice: tutorials
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.date: 08/09/2022
 ms.author: makromer
 ---
 
@@ -56,6 +56,6 @@ This video walks through an example of setting-up error row handling logic in yo
 
     :::image type="content" source="media/data-flow/error-row-3.png" alt-text="complete data flow with error rows":::
 
-## Related content
+## Next steps
 
 * Build the rest of your data flow logic by using mapping data flows [transformations](concepts-data-flow-overview.md).

@@ -1,17 +1,17 @@
 ---
 title: include file
 description: include file
-author: stevenmatthew
+author: v-dalc
 services: storage
 
-ms.service: azure-storage
+ms.service: storage
 ms.topic: include
 ms.date: 12/27/2021
-ms.author: shaas
+ms.author: alkohli
 ms.custom: include file
 ---
 
-Track the job to completion, then verify that the upload was successful and all data is present. 
+Track the job to completion. Then make sure that your data has been uploaded to Azure successfully. 
 
 Review the **Data copy details** of the completed job to locate the logs for each drive included in the job:
 

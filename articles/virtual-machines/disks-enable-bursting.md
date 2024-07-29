@@ -5,7 +5,8 @@ author: roygara
 ms.author: rogarana
 ms.date: 05/02/2023
 ms.topic: conceptual
-ms.service: azure-disk-storage
+ms.service: storage
+ms.subservice: disks
 ms.custom: references_regions, devx-track-azurecli, devx-track-azurepowershell
 ---
 

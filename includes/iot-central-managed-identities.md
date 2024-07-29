@@ -3,7 +3,7 @@ author: dominicbetts
 ms.author: dobett
 ms.service: iot-central
 ms.topic: include
-ms.date: 05/22/2023
+ms.date: 12/10/2021
 ---
 
 Managed identities are more secure because:

@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 08/21/2019
-ms.author: shaas
+ms.author: alkohli
 ---
 
 For data at rest:
@@ -12,4 +12,3 @@ For data at rest:
 
     - SMB clients that access share data need user credentials associated with the share. These credentials are defined when the share is created.
     - The IP addresses of NFS clients that access a share need to be added when the share is created.
-

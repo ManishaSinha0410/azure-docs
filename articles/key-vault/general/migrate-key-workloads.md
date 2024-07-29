@@ -4,10 +4,10 @@ description: How to migrate key workloads
 author: msmbaldwin
 ms.author: mbaldwin
 services: key-vault
-ms.subservice: general
 ms.topic: conceptual
 ms.service: key-vault
-ms.date: 02/20/2024
+ms.subservice: managed-hsm
+ms.date: 11/15/2022
 ---
 
 # How to migrate key workloads

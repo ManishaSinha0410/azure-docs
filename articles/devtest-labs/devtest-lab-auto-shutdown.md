@@ -4,8 +4,7 @@ description: Learn how to set auto shutdown schedules and policies for Azure Dev
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 04/24/2023
 ---
 
 # Configure auto shutdown for labs and VMs in DevTest Labs
@@ -247,6 +246,6 @@ Now, integrate with your email client.
 
 ## Next steps
 
-- [Auto startup lab virtual machines](devtest-lab-auto-startup-vm.yml)
+- [Auto startup lab virtual machines](devtest-lab-auto-startup-vm.md)
 - [Define lab policies in Azure DevTest Labs](devtest-lab-set-lab-policy.md)
 - [Receive and respond to inbound HTTPS requests in Azure Logic Apps](../connectors/connectors-native-reqres.md)

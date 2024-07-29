@@ -3,10 +3,9 @@ title: Connect ExpressRoute to the virtual network gateway
 description: Steps to connect ExpressRoute to the virtual network gateway.
 ms.topic: include
 ms.service: azure-vmware
-ms.date: 1/03/2024
+ms.date: 12/08/2020
 author: suzizuber
 ms.author: v-szuber
-ms.custom: engagement-fy23
 ---
 
 <!-- Used in deploy-azure-vmware-solution.md and tutorial-configure-networking.md -->
@@ -29,8 +28,8 @@ ms.custom: engagement-fy23
    | **Authorization key**  | Paste the authorization key you copied earlier. |
    | **Peer circuit URI**  | Paste the ExpressRoute ID you copied earlier.  |
 
-   :::image type="content" source="../media/tutorial-configure-networking/add-connection.png" alt-text="Screenshot shows the Add connection page to connect ExpressRoute to the virtual network gateway.":::
+   :::image type="content" source="../media/tutorial-configure-networking/add-connection.png" alt-text="Screenshot showing the Add connection page to connect ExpressRoute to the virtual network gateway.":::
 
 The connection between your ExpressRoute circuit and your Virtual Network is created.
 
-:::image type="content" source="../media/expressroute-global-reach/virtual-network-gateway-connections.png" alt-text="Screenshot shows a successful virtual network gateway connection.":::
+:::image type="content" source="../media/expressroute-global-reach/virtual-network-gateway-connections.png" alt-text="Screenshot showing a successful virtual network gateway connection.":::

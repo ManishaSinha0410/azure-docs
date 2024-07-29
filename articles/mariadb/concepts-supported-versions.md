@@ -2,14 +2,12 @@
 title: Supported versions - Azure Database for MariaDB
 description: Learn which versions of the MariaDB server are supported in the Azure Database for MariaDB service.
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: conceptual
 ms.date: 06/24/2022
 ---
 # Supported Azure Database for MariaDB server versions
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 Azure Database for MariaDB has been developed from the open-source [MariaDB Server](https://downloads.mariadb.org/), using the InnoDB engine.
 

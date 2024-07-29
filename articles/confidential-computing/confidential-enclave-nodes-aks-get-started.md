@@ -1,13 +1,13 @@
 ---
 title: 'Quickstart: Deploy an AKS cluster with Enclave Confidential Container Intel SGX nodes by using the Azure CLI'
 description: Learn how to create an Azure Kubernetes Service (AKS) cluster with enclave confidential containers a Hello World app by using the Azure CLI.
-author: angarg05
-ms.service: virtual-machines
+author: agowdamsft
+ms.service: virtual-machines 
 ms.subservice: confidential-computing
 ms.topic: quickstart
-ms.date: 11/06/2023
-ms.author: ananyagarg
-ms.custom: devx-track-azurecli, mode-api
+ms.date: 04/11/2023
+ms.author: amgowda
+ms.custom: contentperf-fy21q3, devx-track-azurecli, ignite-fall-2021, mode-api
 ---
 
 # Quickstart: Deploy an AKS cluster with confidential computing Intel SGX agent nodes by using the Azure CLI
@@ -100,7 +100,7 @@ This section assumes you're already running an AKS cluster that meets the prereq
 Run the following command to enable the confidential computing add-on:
 
 ```azurecli-interactive
-az aks enable-addons --addons confcom --name MyManagedCluster --resource-group MyResourceGroup
+az aks enable-addons --addons confcom --name MyManagedCluster --resource-group MyResourceGroup 
 ```
 
 ### Add a DCsv3 user node pool to the cluster
@@ -138,11 +138,11 @@ kubectl get pods --all-namespaces
 kube-system     sgx-device-plugin-xxxx     1/1     Running
 ```
 
-If the output matches the preceding code, your AKS cluster is now ready to run confidential applications.
+If the output matches the preceding code, your AKS cluster is now ready to run confidential applications. 
 
 ## Deploy Hello World from an isolated enclave application <a id="hello-world"></a>
 
-You're now ready to deploy a test application.
+You're now ready to deploy a test application. 
 
 Create a file named *hello-world-enclave.yaml* and paste in the following YAML manifest. You can find this sample application code in the [Open Enclave project](https://github.com/openenclave/openenclave/tree/master/samples/helloworld). This deployment assumes that you've deployed the *confcom* add-on.
 
@@ -153,30 +153,22 @@ Create a file named *hello-world-enclave.yaml* and paste in the following YAML m
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: oe-helloworld
-  namespace: default
+  name: sgx-test
+  labels:
+    app: sgx-test
 spec:
   template:
     metadata:
       labels:
-        app: oe-helloworld
+        app: sgx-test
     spec:
       containers:
-      - name: oe-helloworld
-        image: mcr.microsoft.com/acc/samples/oe-helloworld:latest
+      - name: sgxtest
+        image: oeciteam/sgx-test:1.0
         resources:
           limits:
-            sgx.intel.com/epc: "10Mi"
-          requests:
-            sgx.intel.com/epc: "10Mi"
-        volumeMounts:
-        - name: var-run-aesmd
-          mountPath: /var/run/aesmd
-      restartPolicy: "Never"
-      volumes:
-      - name: var-run-aesmd
-        hostPath:
-          path: /var/run/aesmd
+            sgx.intel.com/epc: 5Mi # This limit will automatically place the job into a confidential computing node and mount the required driver volumes. sgx limit setting needs "confcom" AKS Addon as referenced above. 
+      restartPolicy: Never
   backoffLimit: 0
 ```
 
@@ -186,13 +178,12 @@ Alternatively you can also do a node pool selection deployment for your containe
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: oe-helloworld
-  namespace: default
+  name: sgx-test
 spec:
   template:
     metadata:
       labels:
-        app: oe-helloworld
+        app: sgx-test
     spec:
       affinity:
         nodeAffinity:
@@ -205,21 +196,14 @@ spec:
                 - acc # this is the name of your confidential computing nodel pool
                 - acc_second # this is the name of your confidential computing nodel pool
       containers:
-      - name: oe-helloworld
-        image: mcr.microsoft.com/acc/samples/oe-helloworld:latest
+      - name: sgx-test
+        image: oeciteam/oe-helloworld:1.0
         resources:
           limits:
-            sgx.intel.com/epc: "10Mi"
+            kubernetes.azure.com/sgx_epc_mem_in_MiB: 10
           requests:
-            sgx.intel.com/epc: "10Mi"
-        volumeMounts:
-        - name: var-run-aesmd
-          mountPath: /var/run/aesmd
+            kubernetes.azure.com/sgx_epc_mem_in_MiB: 10
       restartPolicy: "Never"
-      volumes:
-      - name: var-run-aesmd
-        hostPath:
-          path: /var/run/aesmd
   backoffLimit: 0
 ```
 
@@ -230,31 +214,31 @@ kubectl apply -f hello-world-enclave.yaml
 ```
 
 ```output
-job "oe-helloworld" created
+job "sgx-test" created
 ```
 
 You can confirm that the workload successfully created a Trusted Execution Environment (enclave) by running the following commands:
 
 ```bash
-kubectl get jobs -l app=oe-helloworld
+kubectl get jobs -l app=sgx-test
 ```
 
 ```output
 NAME       COMPLETIONS   DURATION   AGE
-oe-helloworld   1/1           1s         23s
+sgx-test   1/1           1s         23s
 ```
 
 ```bash
-kubectl get pods -l app=oe-helloworld
+kubectl get pods -l app=sgx-test
 ```
 
 ```output
 NAME             READY   STATUS      RESTARTS   AGE
-oe-helloworld-rchvg   0/1     Completed   0          25s
+sgx-test-rchvg   0/1     Completed   0          25s
 ```
 
 ```bash
-kubectl logs -l app=oe-helloworld
+kubectl logs -l app=sgx-test
 ```
 
 ```output
@@ -264,13 +248,13 @@ Enclave called into host to print: Hello World!
 
 ## Clean up resources
 
-To remove the confidential computing node pool that you created in this quickstart, use the following command:
+To remove the confidential computing node pool that you created in this quickstart, use the following command: 
 
 ```azurecli-interactive
 az aks nodepool delete --cluster-name myAKSCluster --name confcompool1 --resource-group myResourceGroup
 ```
 
-To delete the AKS cluster, use the following command:
+To delete the AKS cluster, use the following command: 
 
 ```azurecli-interactive
 az aks delete --resource-group myResourceGroup --cluster-name myAKSCluster

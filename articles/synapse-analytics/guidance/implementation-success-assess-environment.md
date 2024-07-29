@@ -101,7 +101,7 @@ Use the following checklists of possible requirements to guide your assessment.
     - Dynamic data masking
 - Authentication:
     - SQL login
-    - Microsoft Entra ID
+    - Azure Active Directory (Azure AD)
     - Multi-factor authentication (MFA)
 - Network security:
     - Virtual networks

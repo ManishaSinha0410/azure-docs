@@ -5,8 +5,7 @@ ms.topic: article
 ms.custom: devx-track-azurecli
 author: tejaswikolli-web
 ms.author: tejaswikolli
-ms.service: container-registry
-ms.date: 10/31/2023
+ms.date: 10/11/2022
 ---
 
 # Delete container images in Azure Container Registry
@@ -229,6 +228,7 @@ For more information about image storage in Azure Container Registry, see [Conta
 
 <!-- LINKS - External -->
 [docker-manifest-inspect]: https://docs.docker.com/edge/engine/reference/commandline/manifest/#manifest-inspect
+[portal]: https://portal.azure.com
 
 <!-- LINKS - Internal -->
 [az-acr-repository-delete]: /cli/azure/acr/repository#az_acr_repository_delete

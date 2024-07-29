@@ -1,10 +1,11 @@
 ---
-title: Planning multicloud security get started guidance before you begin cloud solution
+title: Defender for Cloud Planning multicloud security get started guidance before you begin cloud solution
 description: Learn about designing a solution for securing and protecting your multicloud environment with Microsoft Defender for Cloud.
 ms.topic: how-to
-author: dcurwin
-ms.author: dacurwin
-ms.date: 05/30/2024
+author: bmansheim
+ms.author: benmansheim
+ms.custom: ignite-2022
+ms.date: 10/03/2022
 ---
 
 # Get started

@@ -5,7 +5,6 @@ author: settiy
 ms.author: settiy
 ms.date: 02/09/2023
 ms.service: confidential-ledger
-ms.custom: devx-track-dotnet, devx-track-extended-java, devx-track-js, devx-track-python
 ms.topic: how-to
 ---
 
@@ -348,4 +347,4 @@ main().catch((err) => {
 ## Next steps
 
 - [Create a client certificate](create-client-certificate.md)
-- [Manage Microsoft Entra token-based users](manage-azure-ad-token-based-users.md)
+- [Manage Azure AD token-based users](manage-azure-ad-token-based-users.md)

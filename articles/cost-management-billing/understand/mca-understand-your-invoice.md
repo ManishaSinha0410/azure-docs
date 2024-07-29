@@ -3,10 +3,11 @@ title: Understand your Microsoft Customer Agreement invoice in Azure
 description: Learn how to read and understand your Microsoft Customer Agreement bill in Azure
 author: bandersmsft
 ms.reviewer: amberb
+tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: conceptual
-ms.date: 03/21/2024
+ms.date: 04/26/2023
 ms.author: banders
 ---
 
@@ -44,7 +45,7 @@ The following sections list important terms that you see on your invoice and pro
 
 The **Invoice Summary** is at the top of the first page and shows information about your billing profile and how you pay.
 
-:::image type="content" border="true" source="./media/mca-understand-your-invoice/invoicesummary.png" alt-text="Screenshot showing the Invoice summary section.":::
+![Invoice summary section](./media/mca-understand-your-invoice/invoicesummary.png)
 
 | Term | Description |
 | --- | --- |
@@ -60,7 +61,7 @@ The **Invoice Summary** is at the top of the first page and shows information ab
 
 The **Billing Summary**  shows the charges against the billing profile since the previous billing period, any credits that were applied, tax, and the total amount due.
 
-:::image type="content" border="true" source="./media/mca-understand-your-invoice/billingsummary.png" alt-text="Screenshot showing the Billing summary section.":::
+![Billing summary section](./media/mca-understand-your-invoice/billingsummary.png)
 
 | Term | Description |
 | --- | --- |
@@ -83,7 +84,7 @@ The details show the cost for each invoice section broken down by product order.
 
 The total amount due for each service family is calculated by subtracting *Azure credits* from *Credits/charges* and adding *Tax*:
 
-:::image type="content" border="true" source="./media/mca-understand-your-invoice/invoicesectiondetails.png" alt-text="Screenshot showing the details by invoice section.":::
+![Details by invoice section](./media/mca-understand-your-invoice/invoicesectiondetails.png)
 
 | Term |Description |
 | --- | --- |
@@ -154,7 +155,7 @@ Microsoft has received guidance that due to decimal point rounding, some LRD inv
 
 If you have questions or need help, [create a support request](https://go.microsoft.com/fwlink/?linkid=2083458).
 
-## Related content
+## Next steps
 
 - [Understand the charges on your billing profile's invoice](review-customer-agreement-bill.md)
 - [How to get your Azure billing invoice and daily usage data](../manage/download-azure-invoice-daily-usage-date.md)

@@ -4,7 +4,6 @@ titleSuffix: Azure Lab Services
 description: Learn how to create an Azure Lab Services lab plan using Python and the Azure Python SDK. 
 author: RogerBestMSFT
 ms.topic: how-to
-ms.custom: devx-track-python
 ms.date: 02/15/2022
 ---
 
@@ -14,9 +13,7 @@ In this article, you learn how to use Python and the Azure Python SDK to create 
 
 ## Prerequisites
 
-[!INCLUDE [Azure subscription](./includes/lab-services-prerequisite-subscription.md)]
-[!INCLUDE [Create and manage labs](./includes/lab-services-prerequisite-create-lab.md)]
-
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free).
 - [Setup Local Python dev environment for Azure](/azure/developer/python/configure-local-development-environment).
 - [The requirements.txt can be downloaded from the Azure Python samples](https://github.com/Azure-Samples/azure-samples-python-management/blob/main/samples/labservices/requirements.txt)
 

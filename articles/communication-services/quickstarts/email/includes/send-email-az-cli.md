@@ -42,13 +42,10 @@ You need to [sign in to Azure CLI](/cli/azure/authenticate-azure-cli). You can s
 
 You can configure the `AZURE_COMMUNICATION_CONNECTION_STRING` environment variable to use Azure CLI keys operations without having to use `--connection_string` to pass in the connection string. To configure an environment variable, open a console window and select your operating system from the below tabs. Replace `<connectionString>` with your actual connection string.
 
->[!NOTE] 
-> Don't store your connection string as an unencrypted environment variable for production environments. This is meant for testing purposes only. For production environments, you should generate new connection strings. We encourage you to encrypt connection strings and change them regularly.
-
 ##### [Windows](#tab/windows)
 
 ```console
-setx AZURE_COMMUNICATION_CONNECTION_STRING "<yourConnectionString>"
+setx AZURE_COMMUNICATION_STRING "<yourConnectionString>"
 ```
 
 After you add the environment variable, you may need to restart any running programs that will need to read the environment variable, including the console window. For example, if you're using Visual Studio as your editor, restart Visual Studio before running the example. 
@@ -58,7 +55,7 @@ After you add the environment variable, you may need to restart any running prog
 Edit your **`.zshrc`**, and add the environment variable:
 
 ```bash
-export AZURE_COMMUNICATION_CONNECTION_STRING="<connectionString>"
+export AZURE_COMMUNICATION_STRING="<connectionString>"
 ```
 
 After you add the environment variable, run `source ~/.zshrc` from your console window to make the changes effective. If you created the environment variable with your IDE open, you may need to close and reopen the editor, IDE, or shell in order to access the variable. 
@@ -68,7 +65,7 @@ After you add the environment variable, run `source ~/.zshrc` from your console 
 Edit your **`.bash_profile`**, and add the environment variable:
 
 ```bash
-export AZURE_COMMUNICATION_CONNECTION_STRING="<connectionString>"
+export AZURE_COMMUNICATION_STRING="<connectionString>"
 ```
 
 After you add the environment variable, run `source ~/.bash_profile` from your console window to make the changes effective. If you created the environment variable with your IDE open, you may need to close and reopen the editor, IDE, or shell in order to access the variable. 
@@ -91,9 +88,7 @@ Make these replacements in the code:
 - Replace `<emailalias@emaildomain.com>` with the email address you would like to send a message to.
 - Replace `<donotreply@xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.azurecomm.net>` with the MailFrom address of your verified domain.
 
-The above command also performs a polling on the messageId and returns the status of the email delivery. The status can be one of the following:
-
-[!INCLUDE [Email Message Status](./email-operation-status.md)]
+To track the status of the email delivery, you need the `messageId` from the response.
 
 ### Optional parameters
 
@@ -102,8 +97,6 @@ The following optional parameters are available in Azure CLI.
 - `--html` can be used instead of `--text` for html email body.
 
 - `--importance` sets the importance type for the email. Known values are: high, normal, and low. Default is normal.
-
-- `--to` sets the list of email recipients.
 
 - `--cc` sets carbon copy email addresses.
 
@@ -117,5 +110,18 @@ The following optional parameters are available in Azure CLI.
 
 - `--attachment-types` sets the list of email attachment types, in the same order of attachments.
 
-Also, you can use a list of recipients with `--cc` and `--bcc` similar to `--to`. There needs to be at least one recipient in `--to` or `--cc` or `--bcc`.
- 
+Also, you can use a list of recipients with `--to`, similar to `--cc` and `--bcc`.
+
+
+## Get the status of the email delivery
+
+We can keep checking the email delivery status until the status is `OutForDelivery`.
+
+```azurecli-interactive
+az communication email status get --message-id "\<messageId\>"
+```
+
+- Replace "\<messageId\>" with the messageId from the response of the send request.
+
+[!INCLUDE [Email Message Status](./email-operation-status.md)]
+

@@ -2,11 +2,11 @@
  title: include file
  description: include file
  services: virtual-machines
-author: jushiman
+ author: cynthn
  ms.service: virtual-machines
  ms.topic: include
  ms.date: 07/09/2020
-ms.author: jushiman
+ ms.author: cynthn
  ms.custom: include file
 ---
 ## Overview of SSH and keys

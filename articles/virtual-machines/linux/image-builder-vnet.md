@@ -8,7 +8,7 @@ ms.date: 03/02/2021
 ms.topic: how-to
 ms.service: virtual-machines
 ms.subservice: image-builder
-ms.custom: devx-track-azurecli, linux-related-content
+ms.custom: devx-track-azurecli
 ---
 
 # Use Azure VM Image Builder for Linux VMs to access an existing Azure virtual network
@@ -17,7 +17,7 @@ ms.custom: devx-track-azurecli, linux-related-content
 
 This article shows you how to use Azure VM Image Builder to create a basic, customized Linux image that has access to existing resources on a virtual network. The build virtual machine (VM) you create is deployed to a new or existing virtual network that you specify in your subscription. When you use an existing Azure virtual network, VM Image Builder doesn't require public network connectivity.
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 ## Set variables and permissions
 
@@ -157,14 +157,14 @@ VM Image Builder uses the [user identity](../../active-directory/managed-identit
 
 ```azurecli
 # create user assigned identity for image builder
-identityName=aibBuiUserId$(date +'%s')
-az identity create -g $imageResourceGroup -n $identityName
+idenityName=aibBuiUserId$(date +'%s')
+az identity create -g $imageResourceGroup -n $idenityName
 
 # get identity id
-imgBuilderCliId=$(az identity show -g $imageResourceGroup -n $identityName --query clientId -o tsv)
+imgBuilderCliId=$(az identity show -g $sigResourceGroup -n $identityName --query clientId -o tsv)
 
 # get the user identity URI, needed for the template
-imgBuilderId=/subscriptions/$subscriptionID/resourcegroups/$imageResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$identityName
+imgBuilderId=/subscriptions/$subscriptionID/resourcegroups/$imageResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/$idenityName
 
 # update the template
 sed -i -e "s%<imgBuilderId>%$imgBuilderId%g" existingVNETLinux.json
@@ -188,12 +188,12 @@ az role definition create --role-definition ./aibRoleNetworking.json
 # grant role definition to the user assigned identity
 az role assignment create \
     --assignee $imgBuilderCliId \
-    --role "$imageRoleDefName" \
+    --role $imageRoleDefName \
     --scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup
 
 az role assignment create \
     --assignee $imgBuilderCliId \
-    --role "$netRoleDefName" \
+    --role $netRoleDefName \
     --scope /subscriptions/$subscriptionID/resourceGroups/$vnetRgName
 ```
 

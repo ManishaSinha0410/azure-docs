@@ -1,15 +1,15 @@
 ---
 title: Terms of Use (partner data sources)
-titleSuffix: Azure AI Search
+titleSuffix: Azure Cognitive Search
 description: Terms of use for partner and third-party data source connectors.
+
 author: HeidiSteen
 ms.author: heidist
 
 ms.service: cognitive-search
-ms.custom:
-  - ignite-2023
 ms.topic: conceptual
-ms.date: 01/10/2024
+ms.date: 09/07/2022
+
 ---
 
 # Terms of Use: Partner data sources

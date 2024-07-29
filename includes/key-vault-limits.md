@@ -40,8 +40,7 @@ This section describes service limits for resource type `vaults`.
 
 | Transactions type | Maximum transactions allowed in 10 seconds, per vault per region<sup>1</sup> |
 | --- | --- |
-| Secret<br>CREATE secret| 300 |
-| All other transactions |4,000 |
+| All transactions |4,000 |
 
 For information on how to handle throttling when these limits are exceeded, see [Azure Key Vault throttling guidance](../articles/key-vault/general/overview-throttling.md).
 

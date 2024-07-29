@@ -3,7 +3,7 @@ title: Azure HDInsight Encryption in transit
 description: Learn about security features to provide encryption in transit for your Azure HDInsight cluster.
 ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 05/23/2023
+ms.date: 04/14/2022
 ---
 
 # IPSec Encryption in transit for Azure HDInsight
@@ -71,4 +71,4 @@ az deployment group create --name HDInsightEnterpriseSecDeployment \
 ## Next steps
 
 * [Overview of enterprise security in Azure HDInsight](hdinsight-security-overview.md)
-* [Synchronize Microsoft Entra users to an HDInsight cluster](../disk-encryption.md).
+* [Synchronize Azure Active Directory users to an HDInsight cluster](../disk-encryption.md).

@@ -5,6 +5,7 @@ author: yelevin
 ms.topic: how-to
 ms.date: 11/09/2021
 ms.author: yelevin
+ms.custom: ignite-fall-2021
 ---
 
 # Manage template versions for your scheduled analytics rules in Microsoft Sentinel

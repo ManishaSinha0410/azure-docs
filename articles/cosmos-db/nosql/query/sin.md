@@ -1,53 +1,54 @@
 ---
-title: SIN
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric sine of the specified angle.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: SIN in Azure Cosmos DB query language
+description: Learn about SQL system function SIN in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# SIN (NoSQL query)
-
+# SIN (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the trigonometric sine of the specified angle in radians.
+ Returns the trigonometric sine of the specified angle, in radians, in the specified expression.  
   
 ## Syntax
   
-```nosql
+```sql
 SIN(<numeric_expr>)  
-```
+```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
   
-Returns a numeric expression.  
+  Returns a numeric expression.  
   
 ## Examples
   
-The following example calculates the sine of the specified angle using the function.
+  The following example calculates the `SIN` of the specified angle.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/sin/query.sql" highlight="2":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/sin/result.json":::
+```sql
+SELECT SIN(45.175643) AS sin  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"sin": 0.929607286611012}]  
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`COS`](cos.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

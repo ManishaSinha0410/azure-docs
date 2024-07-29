@@ -1,8 +1,8 @@
----
+﻿---
 title: Azure App Configuration REST API - Authorization
 description: Reference pages for authorization using the Azure App Configuration REST API
-author: maud-lv
-ms.author: malev
+author: mcleanbyron
+ms.author: mcleans
 ms.service: azure-app-configuration
 ms.topic: reference
 ms.date: 08/17/2020
@@ -16,8 +16,6 @@ Authorization refers to the procedure used to determine the permissions that a c
 
 The [authorization model](./rest-api-authorization-hmac.md) model associated with HMAC authentication splits permissions into read-only or read-write. See the [HMAC authorization](./rest-api-authorization-hmac.md) page for details.
 
-<a name='azure-active-directory'></a>
+## Azure Active Directory
 
-## Microsoft Entra ID
-
-The [authorization model](./rest-api-authorization-azure-ad.md) associated with Microsoft Entra authentication uses Azure RBAC to control permissions. See the [Microsoft Entra authorization](./rest-api-authorization-azure-ad.md) page for details.
+The [authorization model](./rest-api-authorization-azure-ad.md) associated with Azure Active Directory (Azure AD) authentication uses Azure RBAC to control permissions. See the [Azure AD authorization](./rest-api-authorization-azure-ad.md) page for details.

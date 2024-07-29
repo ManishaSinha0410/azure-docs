@@ -2,7 +2,7 @@
 author: dknappettmsft
 ms.author: daknappe
 ms.topic: include
-ms.date: 06/13/2023
+ms.date: 03/08/2023
 ---
 
 ## Latest client versions
@@ -11,26 +11,17 @@ The following table lists the current version available for the public release:
 
 | Release | Latest version | Download |
 |---------|----------------|----------|
-| Public  | 10.2.3012      | [Microsoft Store](https://go.microsoft.com/fwlink/?LinkID=616709) |
-
-## Updates for version 10.2.3012
-
-*Published: June 12, 2023*
-
-In this release, we've made the following change:
-
-- Updated Store description to mention the end of Azure Virtual Desktop support.
-- Fixed the vulnerability known as [CVE-2023-28290](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-28290).
+| Public  | 10.2.3000.0      | [Microsoft Store](https://go.microsoft.com/fwlink/?LinkID=616709) |
 
 ## Updates for version 10.2.3000
 
-*Published: March 6, 2023*
+*Date published: March 6, 2023*
 
 There are no changes to the client in this release.
 
 ## Updates for version 10.2.1810
 
-*Published: March 29, 2021*
+*Date published: March 29, 2021*
 
 In this release, we've made the following changes:
 
@@ -42,7 +33,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.2.1534
 
-*Published: August 26, 2020*
+*Date published: August 26, 2020*
 
 In this release, we've made the following changes:
 
@@ -61,7 +52,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1215
 
-*Published: April 20, 2020*
+*Date published: April 20, 2020*
 
 In this release, we've made the following change:
 
@@ -69,7 +60,7 @@ In this release, we've made the following change:
 
 ## Updates for version 10.1.1195
 
-*Published: March 6, 2020*
+*Date published: March 6, 2020*
 
 In this release, we've made the following changes:
 
@@ -80,7 +71,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1107
 
-*Published: September 4, 2019*
+*Date published: September 4, 2019*
 
 In this release, we've made the following changes:
 
@@ -91,7 +82,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1098
 
-*Published: March 15, 2019*
+*Date published: March 15, 2019*
 
 In this release, we've made the following changes:
 
@@ -103,7 +94,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1088
 
-*Published: November 6, 2018*
+*Date published: November 6, 2018*
 
 In this release, we've made the following changes:
 
@@ -116,7 +107,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1060
 
-*Published: September 14, 2018*
+*Date published: September 14, 2018*
 
 In this release, we've made the following changes:
 
@@ -128,7 +119,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1046
 
-*Published: June 20, 2018*
+*Date published: June 20, 2018*
 
 In this release, we've made the following changes:
 
@@ -136,7 +127,7 @@ In this release, we've made the following changes:
 
 ## Updates for version 10.1.1042
 
-*Published: April 2, 2018*
+*Date published: April 2, 2018*
 
 In this release, we've made the following changes:
 

@@ -12,7 +12,7 @@ services: azure-maps
 
 # Search for a location using Azure Maps Search services
 
-The [Search] service is a set of RESTful APIs designed to help developers search addresses, places, and business listings by name, category, and other geographic information. In addition to supporting traditional geocoding, services can also reverse geocode addresses and cross streets based on latitudes and longitudes. Latitude and longitude values returned by the search can be used as parameters in other Azure Maps services, such as [Route] and [Weather].
+The [Search service] is a set of RESTful APIs designed to help developers search addresses, places, and business listings by name, category, and other geographic information. In addition to supporting traditional geocoding, services can also reverse geocode addresses and cross streets based on latitudes and longitudes. Latitude and longitude values returned by the search can be used as parameters in other Azure Maps services, such as [Route] and [Weather] services.
 
 This article demonstrates how to:
 
@@ -51,7 +51,7 @@ The example in this section uses [Get Search Address] to convert an address into
 
 5. Next, try setting the `query` key to `400 Broa`.
 
-6. Select the **Send** button. The response includes results from multiple countries/regions. To geobias results to the relevant area for your users, always add as many location details as possible to the request.
+6. Select the **Send** button. The response includes results from multiple countries. To geobias results to the relevant area for your users, always add as many location details as possible to the request.
 
 ## Fuzzy Search
 
@@ -62,7 +62,7 @@ The example in this section uses [Get Search Address] to convert an address into
 
 ### Search for an address using Fuzzy Search
 
-The example in this section uses `Fuzzy Search` to search the entire world for *pizza*, then searches over the scope of a specific country/region. Finally, it demonstrates how to use a coordinate location and radius to scope a search over a specific area, and limit the number of returned results.
+The example in this section uses `Fuzzy Search` to search the entire world for *pizza*, then searches over the scope of a specific country. Finally, it demonstrates how to use a coordinate location and radius to scope a search over a specific area, and limit the number of returned results.
 
 > [!IMPORTANT]
 > To geobias results to the relevant area for your users, always add as many location details as possible. For more information, see [Best Practices for Search].
@@ -172,28 +172,28 @@ This example demonstrates how to search for a cross street based on the coordina
 > [Best practices for Azure Maps Search service]
 
 [Azure Maps account]: quick-demo-map-app.md#create-an-azure-maps-account
-[Azure Maps Search service]: /rest/api/maps/search?view=rest-maps-1.0&preserve-view=true
+[Azure Maps Search service]: /rest/api/maps/search
 [Best practices for Azure Maps Search service]: how-to-use-best-practices-for-search.md
 [Best Practices for Search]: how-to-use-best-practices-for-search.md#geobiased-search-results
-[Entity Types]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true#entitytype
-[Fuzzy Search URI Parameters]: /rest/api/maps/search/getsearchfuzzy?view=rest-maps-1.0&preserve-view=true#uri-parameters
-[Fuzzy Search]: /rest/api/maps/search/getsearchfuzzy?view=rest-maps-1.0&preserve-view=true
-[Get Search Address Reverse]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true
-[Get Search Address]: /rest/api/maps/search/getsearchaddress?view=rest-maps-1.0&preserve-view=true
-[point of interest result]: /rest/api/maps/search/getsearchpoi?view=rest-maps-1.0&preserve-view=true#searchpoiresponse
+[Entity Types]: /rest/api/maps/search/getsearchaddressreverse#entitytype
+[Fuzzy Search URI Parameters]: /rest/api/maps/search/getsearchfuzzy#uri-parameters
+[Fuzzy Search]: /rest/api/maps/search/getsearchfuzzy
+[Get Search Address Reverse]: /rest/api/maps/search/getsearchaddressreverse
+[Get Search Address]: /rest/api/maps/search/getsearchaddress
+[point of interest result]: /rest/api/maps/search/getsearchpoi#searchpoiresponse
 [Post Search Address Batch]: /rest/api/maps/search/postsearchaddressbatch
-[Post Search Address Reverse Batch]: /rest/api/maps/search/postsearchaddressreversebatch?view=rest-maps-1.0&preserve-view=true
+[Post Search Address Reverse Batch]: /rest/api/maps/search/postsearchaddressreversebatch
 [Postman]: https://www.postman.com/
-[Reverse Address Search Results]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true#searchaddressreverseresult
-[Reverse Address Search]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true
-[Reverse Search Parameters]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true#uri-parameters
-[Road Use Types]: /rest/api/maps/search/getsearchaddressreverse?view=rest-maps-1.0&preserve-view=true#uri-parameters
+[Reverse Address Search Results]: /rest/api/maps/search/getsearchaddressreverse#searchaddressreverseresult
+[Reverse Address Search]: /rest/api/maps/search/getsearchaddressreverse
+[Reverse Search Parameters]: /rest/api/maps/search/getsearchaddressreverse#uri-parameters
+[Road Use Types]: /rest/api/maps/search/getsearchaddressreverse#uri-parameters
 [Route]: /rest/api/maps/route
-[Search Address Reverse Cross Street]: /rest/api/maps/search/getsearchaddressreversecrossstreet?view=rest-maps-1.0&preserve-view=true
-[Search Address]: /rest/api/maps/search/getsearchaddress?view=rest-maps-1.0&preserve-view=true
+[Search Address Reverse Cross Street]: /rest/api/maps/search/getsearchaddressreversecrossstreet
+[Search Address]: /rest/api/maps/search/getsearchaddress
 [Search Coverage]: geocoding-coverage.md
-[Search Polygon API]: /rest/api/maps/search/getsearchpolygon?view=rest-maps-1.0&preserve-view=true
-[Search]: /rest/api/maps/search?view=rest-maps-1.0&preserve-view=true
+[Search Polygon API]: /rest/api/maps/search/getsearchpolygon
+[Search service]: /rest/api/maps/search
 [subscription key]: quick-demo-map-app.md#get-the-subscription-key-for-your-account
-[URI Parameter reference]: /rest/api/maps/search/getsearchfuzzy?view=rest-maps-1.0&preserve-view=true#uri-parameters
+[URI Parameter reference]: /rest/api/maps/search/getsearchfuzzy#uri-parameters
 [Weather]: /rest/api/maps/weather

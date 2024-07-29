@@ -1,10 +1,10 @@
 ---
-author: jushiman
+author: cynthn
 ms.service: virtual-machines
 ms.custom: devx-track-arm-template
 ms.topic: include
 ms.date: 10/26/2018
-ms.author: jushiman
+ms.author: cynthn
 ---
 
 

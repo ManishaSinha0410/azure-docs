@@ -1,6 +1,6 @@
 ---
-title: How to manage legal tags in Microsoft Azure Data Manager for Energy
-description: This article describes how to manage legal tags in Azure Data Manager for Energy
+title: How to manage legal tags in Microsoft Azure Data Manager for Energy Preview
+description: This article describes how to manage legal tags in Azure Data Manager for Energy Preview
 author: Lakshmisha-KS
 ms.author: lakshmishaks
 ms.service: energy-data-services
@@ -10,12 +10,14 @@ ms.custom: template-how-to
 ---
 
 # How to manage legal tags
-In this article, you'll know how to manage legal tags in your Azure Data Manager for Energy instance. A Legal tag is the entity that represents the legal status of data in the Azure Data Manager for Energy instance. Legal tag is a collection of properties that governs how data can be ingested and consumed. A legal tag is required for data to be [ingested](concepts-csv-parser-ingestion.md) into your Azure Data Manager for Energy instance. It's also required for the [consumption](concepts-index-and-search.md) of the data from your Azure Data Manager for Energy instance. Legal tags are defined at a data partition level individually.
+In this article, you'll know how to manage legal tags in your Azure Data Manager for Energy Preview instance. A Legal tag is the entity that represents the legal status of data in the Azure Data Manager for Energy Preview instance. Legal tag is a collection of properties that governs how data can be ingested and consumed. A legal tag is required for data to be [ingested](concepts-csv-parser-ingestion.md) into your Azure Data Manager for Energy Preview instance. It's also required for the [consumption](concepts-index-and-search.md) of the data from your Azure Data Manager for Energy Preview instance. Legal tags are defined at a data partition level individually.
 
-While in Azure Data Manager for Energy instance, [entitlement service](concepts-entitlements.md) defines access to data for a given user(s), legal tag defines the overall access to the data across users. A user may have access to manage the data within a data partition however, they may not be able to do so-until certain legal requirements are fulfilled.
+While in Azure Data Manager for Energy Preview instance, [entitlement service](concepts-entitlements.md) defines access to data for a given user(s), legal tag defines the overall access to the data across users. A user may have access to manage the data within a data partition however, they may not be able to do so-until certain legal requirements are fulfilled.
+
+[!INCLUDE [preview features callout](./includes/preview/preview-callout.md)]
 
 ## Create a legal tag
-Run the below curl command in Azure Cloud Bash to create a legal tag for a given data partition of your Azure Data Manager for Energy instance.
+Run the below curl command in Azure Cloud Bash to create a legal tag for a given data partition of your Azure Data Manager for Energy Preview instance.
 
 ```bash
     curl --location --request POST 'https://<URI>/api/legal/v1/legaltags' \
@@ -40,7 +42,7 @@ Run the below curl command in Azure Cloud Bash to create a legal tag for a given
 ```
 
 ### Sample request
-Consider an Azure Data Manager for Energy instance named "medstest" with a data partition named "dp1"
+Consider an Azure Data Manager for Energy Preview instance named "medstest" with a data partition named "dp1"
 
 ```bash
     curl --location --request POST 'https://medstest.energy.azure.com/api/legal/v1/legaltags' \
@@ -49,7 +51,7 @@ Consider an Azure Data Manager for Energy instance named "medstest" with a data 
     --header 'Content-Type: application/json' \
     --data-raw '{
         "name": "medstest-dp1-legal-tag",
-        "description": "Azure Data Manager for Energy Legal Tag",
+        "description": "Azure Data Manager for Energy Preview Legal Tag",
         "properties": {
             "contractId": "A1234",
             "countryOfOrigin": ["US"],
@@ -69,7 +71,7 @@ Consider an Azure Data Manager for Energy instance named "medstest" with a data 
 ```JSON
     {
         "name": "medsStest-dp1-legal-tag",
-        "description": "Azure Data Manager for Energy Legal Tag",
+        "description": "Azure Data Manager for Energy Preview Legal Tag",
         "properties": {
         "countryOfOrigin": [
             "US"
@@ -96,7 +98,7 @@ The Create Legal Tag api, internally appends data-partition-id to legal tag name
     --header 'Content-Type: application/json' \
     --data-raw '{
         "name": "legal-tag",
-        "description": "Azure Data Manager for Energy Legal Tag",
+        "description": "Azure Data Manager for Energy Preview Legal Tag",
         "properties": {
             "contractId": "A1234",
             "countryOfOrigin": ["US"],
@@ -116,7 +118,7 @@ The sample response will have data-partition-id appended to the legal tag name a
 ```JSON
     {
         "name": "medstest-dp1-legal-tag",
-        "description": "Azure Data Manager for Energy Legal Tag",
+        "description": "Azure Data Manager for Energy Preview Legal Tag",
         "properties": {
         "countryOfOrigin": [
             "US"
@@ -133,7 +135,7 @@ The sample response will have data-partition-id appended to the legal tag name a
 ```
 
 ## Get a legal tag
-Run the below curl command in Azure Cloud Bash to get the legal tag associated with a data partition of your Azure Data Manager for Energy instance.
+Run the below curl command in Azure Cloud Bash to get the legal tag associated with a data partition of your Azure Data Manager for Energy Preview instance.
     
 ```bash
     curl --location --request GET 'https://<URI>/api/legal/v1/legaltags/<legal-tag-name>' \
@@ -142,7 +144,7 @@ Run the below curl command in Azure Cloud Bash to get the legal tag associated w
 ```
 
 ### Sample request
-Consider an Azure Data Manager for Energy instance named "medstest" with a data partition named "dp1"
+Consider an Azure Data Manager for Energy Preview instance named "medstest" with a data partition named "dp1"
 
 ```bash
     curl --location --request GET 'https://medstest.energy.azure.com/api/legal/v1/legaltags/medstest-dp1-legal-tag' \
@@ -155,7 +157,7 @@ Consider an Azure Data Manager for Energy instance named "medstest" with a data 
 ```JSON
     {
     "name": "medstest-dp1-legal-tag",
-    "description": "Azure Data Manager for Energy Legal Tag",
+    "description": "Azure Data Manager for Energy Preview Legal Tag",
     "properties": {
         "countryOfOrigin": [
         "US"

@@ -4,10 +4,10 @@ description: Lists Azure Policy Regulatory Compliance controls available for Azu
 ms.topic: sample
 ms.service: mysql
 ms.subservice: single-server
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.custom: subject-policy-compliancecontrols
-ms.date: 02/06/2024
+ms.date: 02/14/2023
 ---
 
 # Azure Policy Regulatory Compliance controls for Azure Database for MySQL

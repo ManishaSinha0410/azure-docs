@@ -6,7 +6,8 @@ author: jianleishen
 ms.service: data-factory
 ms.subservice: data-movement
 ms.topic: conceptual
-ms.date: 05/15/2024
+ms.custom: seo-lt-2019
+ms.date: 08/12/2022
 ---
 
 # Load data into Azure Data Lake Storage Gen1 by using Azure Data Factory
@@ -120,7 +121,7 @@ This article shows you how to use the Data Factory Copy Data tool to _load data 
 
     :::image type="content" source="./media/load-data-into-azure-data-lake-store/adls-copy-result.png" alt-text="Verify Data Lake Storage Gen1 output":::
 
-## Related content
+## Next steps
 
 Advance to the following article to learn about Data Lake Storage Gen1 support: 
 

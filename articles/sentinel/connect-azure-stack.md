@@ -5,6 +5,7 @@ author: yelevin
 ms.topic: conceptual
 ms.date: 11/09/2021
 ms.author: yelevin
+ms.custom: ignite-fall-2021
 ---
 
 # Connect Azure Stack Hub virtual machines to Microsoft Sentinel

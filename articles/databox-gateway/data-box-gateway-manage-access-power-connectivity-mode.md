@@ -2,14 +2,14 @@
 title: Azure Data Box Gateway device access, power, and connectivity mode
 description: Describes how to manage access, power, and connectivity mode for the Azure Data Box Gateway device that helps transfer data to Azure
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: gateway
 ms.topic: how-to
 ms.date: 10/14/2020
-ms.author: shaas 
-ms.custom:
+ms.author: alkohli 
+ms.custom: devx-track-azurepowershell
 ---
 
 # Manage access, power, and connectivity mode for your Azure Data Box Gateway

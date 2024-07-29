@@ -5,7 +5,8 @@ description: Use the Azure CLI to manage directories and files in storage accoun
 services: storage
 author: normesta
 
-ms.service: azure-data-lake-storage
+ms.service: storage
+ms.subservice: data-lake-storage-gen2
 ms.topic: how-to
 ms.date: 02/17/2021
 ms.author: normesta
@@ -65,7 +66,7 @@ To learn about how to get, set, and update the access control lists (ACL) of dir
    Replace the `<subscription-id>` placeholder value with the ID of your subscription.
 
 > [!NOTE]
-> The example presented in this article show Microsoft Entra authorization. To learn more about authorization methods, see [Authorize access to blob or queue data with Azure CLI](./authorize-data-operations-cli.md).
+> The example presented in this article show Azure Active Directory (Azure AD) authorization. To learn more about authorization methods, see [Authorize access to blob or queue data with Azure CLI](./authorize-data-operations-cli.md).
 
 ## Create a container
 

@@ -6,7 +6,6 @@ author: v-dalc
 
 ms.service: databox
 ms.subservice: edge
-ms.custom: linux-related-content
 ms.topic: how-to
 ms.date: 06/28/2022
 ms.author: alkohli

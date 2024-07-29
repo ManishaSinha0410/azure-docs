@@ -8,7 +8,8 @@ ms.topic: conceptual
 ms.author: normesta
 ms.reviewer: jamesbak
 ms.date: 03/09/2023
-ms.service: azure-data-lake-storage
+ms.service: storage
+ms.subservice: data-lake-storage-gen2
 ---
 
 # Azure Data Lake Storage query acceleration

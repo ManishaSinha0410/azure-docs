@@ -7,8 +7,8 @@ ms.subservice: nosql
 ms.topic: sample
 ms.date: 03/17/2020
 ms.author: sidandrews
-ms.reviewer: mjbrown
-ms.custom: devx-track-azurepowershell
+ms.reviewer: mjbrown 
+ms.custom: devx-track-azurepowershell, ignite-2022
 ---
 
 # List and get databases and containers for Azure Cosmos DB - API for NoSQL
@@ -17,7 +17,7 @@ ms.custom: devx-track-azurepowershell
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
 This sample requires Azure PowerShell Az 5.4.0 or later. Run `Get-Module -ListAvailable Az` to see which versions are installed.
-If you need to install, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell).
+If you need to install, see [Install Azure PowerShell module](/powershell/azure/install-az-ps).
 
 Run [Connect-AzAccount](/powershell/module/az.accounts/connect-azaccount) to sign in to Azure.
 

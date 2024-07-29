@@ -4,10 +4,10 @@ description: In this quickstart, you learn how to use Azure PowerShell to create
 author: msmbaldwin
 ms.author: mbaldwin
 ms.service: virtual-machines
-ms.subservice: security
+ms.subservice: disks
 ms.collection: windows
 ms.topic: quickstart
-ms.date: 02/20/2024
+ms.date: 01/04/2023
 ms.custom: devx-track-azurepowershell, mode-api
 ---
 

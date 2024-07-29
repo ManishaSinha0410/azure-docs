@@ -5,7 +5,7 @@ author: reachnijel
 ms.author: nijelsf
 ms.service: hdinsight
 ms.topic: how-to
-ms.date: 09/15/2023
+ms.date: 07/18/2022
 ---
 
 # Migrate default Hive metastore DB to external metastore DB

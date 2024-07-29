@@ -4,7 +4,8 @@ titleSuffix: Azure Storage
 description: Use Blob APIs and applications that use Blob APIs with Azure Data Lake Storage Gen2.
 author: normesta
 
-ms.service: azure-data-lake-storage
+ms.subservice: data-lake-storage-gen2
+ms.service: storage
 ms.topic: conceptual
 ms.date: 03/09/2023
 ms.author: normesta

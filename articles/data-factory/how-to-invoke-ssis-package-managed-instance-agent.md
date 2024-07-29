@@ -6,7 +6,7 @@ ms.subservice: integration-runtime
 ms.topic: conceptual
 ms.author: lle
 author: lrtoyou1223
-ms.date: 05/15/2024
+ms.date: 08/09/2022
 ---
 
 # Run SSIS packages by using Azure SQL Managed Instance Agent
@@ -156,5 +156,5 @@ To cancel package execution from a SQL Managed Instance Agent job, take the foll
 
 1. Stop the corresponding operation based on **executionId**.
 
-## Related content
+## Next steps
 You can also schedule SSIS packages by using Azure Data Factory. For step-by-step instructions, see [Azure Data Factory event trigger](how-to-create-event-trigger.md).

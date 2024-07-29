@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/01/2022
 ms.author: danlep
 ---
 
 # Authenticate with client certificate
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
  Use the `authentication-certificate` policy to authenticate with a backend service using a client certificate. When the certificate is [installed into API Management](./api-management-howto-mutual-certificates.md) first, identify it first by its thumbprint or certificate ID (resource name). 
 
@@ -41,7 +39,7 @@ ms.author: danlep
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
-- [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+- [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ## Examples
 
@@ -65,6 +63,6 @@ ms.author: danlep
 
 ## Related policies
 
-* [Authentication and authorization](api-management-policies.md#authentication-and-authorization)
+* [API Management authentication policies](api-management-authentication-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

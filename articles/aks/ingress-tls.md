@@ -7,8 +7,7 @@ ms.custom: devx-track-azurecli, devx-track-azurepowershell
 author: asudbring
 ms.author: allensu
 ms.topic: how-to
-ms.date: 03/14/2024
-ROBOTS: NOINDEX
+ms.date: 01/20/2023
 #Customer intent: As a cluster operator or developer, I want to use TLS with an ingress controller to handle the flow of incoming traffic and secure my apps using my own certificates or automatically generated certificates.
 ---
 
@@ -18,12 +17,7 @@ The transport layer security (TLS) protocol uses certificates to provide securit
 
 You can bring your own certificates and integrate them with the Secrets Store CSI driver. Alternatively, you can use [cert-manager][cert-manager], which automatically generates and configures [Let's Encrypt][lets-encrypt] certificates. Two applications run in the AKS cluster, each of which is accessible over a single IP address.
 
-> [!IMPORTANT]
-> The Application routing add-on is recommended for ingress in AKS. For more information, see [Managed nginx Ingress with the application routing add-on][aks-app-add-on].
-
-> [!IMPORTANT]
-> Microsoft **_does not_** manage or support cert-manager and any issues stemming from its use. For issues with cert-manager, see [cert-manager troubleshooting][cert-manager-troubleshooting] documentation.
->
+> [!NOTE]
 > There are two open source ingress controllers for Kubernetes based on Nginx: one is maintained by the Kubernetes community ([kubernetes/ingress-nginx][nginx-ingress]), and one is maintained by NGINX, Inc. ([nginxinc/kubernetes-ingress]). This article uses the *Kubernetes community ingress controller*.
 
 ## Before you begin
@@ -72,9 +66,6 @@ To use TLS with [Let's Encrypt][lets-encrypt] certificates, you'll deploy [cert-
 ### [Azure PowerShell](#tab/azure-powershell)
 
 * Use `Import-AzContainerRegistryImage` to import the following images into your ACR.
-
-   >[!NOTE]
-   >When performing the steps to import the images into your ACR when working in Azure Government, you need to include the [`targetTag`][parameter-targettag] parameter with the value representing the tag of the image you want to import. 
 
     ```azurepowershell
     $RegistryName = "<REGISTRY_NAME>"
@@ -245,7 +236,7 @@ You can configure your FQDN using one of the following methods:
 * Set the DNS label using Azure CLI or Azure PowerShell.
 * Set the DNS label using Helm chart settings.
 
-For more information, see [Public IP address DNS name labels](../virtual-network/ip-services/public-ip-addresses.md#domain-name-label).
+For more information, see [Public IP address DNS name labels](../virtual-network/ip-services/public-ip-addresses.md#dns-name-label).
 
 #### Set the DNS label using Azure CLI or Azure PowerShell
 
@@ -508,7 +499,7 @@ In the following example, traffic is routed as such:
             backend:
               service:
                 name: aks-helloworld-one
-                port:
+                port: 
                   number: 80
     ```
 
@@ -576,8 +567,8 @@ Alternatively, you can delete the resource individually.
     $ helm list --namespace ingress-basic
 
     NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
-    cert-manager            ingress-basic   1               2020-01-15 10:23:36.515514 -0600 CST    deployed        cert-manager-v0.13.0    v0.13.0
-    nginx                   ingress-basic   1               2020-01-15 10:09:45.982693 -0600 CST    deployed        nginx-ingress-1.29.1    0.27.0
+    cert-manager            ingress-basic   1               2020-01-15 10:23:36.515514 -0600 CST    deployed        cert-manager-v0.13.0    v0.13.0    
+    nginx                   ingress-basic   1               2020-01-15 10:09:45.982693 -0600 CST    deployed        nginx-ingress-1.29.1    0.27.0  
     ```
 
 3. Uninstall the releases using the `helm uninstall` command. The following example uninstalls the NGINX ingress and cert-manager deployments.
@@ -628,7 +619,6 @@ You can also:
 [helm]: https://helm.sh/
 [helm-cli]: ./kubernetes-helm.md
 [cert-manager]: https://github.com/jetstack/cert-manager
-[cert-manager-troubleshooting]: https://cert-manager.io/docs/troubleshooting/
 [cert-manager-certificates]: https://cert-manager.io/docs/concepts/certificate/
 [ingress-shim]: https://cert-manager.io/docs/usage/ingress/
 [cert-manager-cluster-issuer]: https://cert-manager.io/docs/concepts/issuer/
@@ -657,11 +647,9 @@ You can also:
 [client-source-ip]: concepts-network.md#ingress-controllers
 [install-azure-cli]: /cli/azure/install-azure-cli
 [aks-supported versions]: supported-kubernetes-versions.md
-[aks-integrated-acr]: cluster-container-registry-integration.md#create-a-new-acr
+[aks-integrated-acr]: cluster-container-registry-integration.md?tabs=azure-cli#create-a-new-aks-cluster-with-acr-integration
+[aks-integrated-acr-ps]: cluster-container-registry-integration.md?tabs=azure-powershell#create-a-new-aks-cluster-with-acr-integration
 [azure-powershell-install]: /powershell/azure/install-az-ps
 [acr-helm]: ../container-registry/container-registry-helm-repos.md
 [get-az-aks-cluster]: /powershell/module/az.aks/get-azakscluster
 [new-az-public-ip-address]: /powershell/module/az.network/new-azpublicipaddress
-[aks-app-add-on]: app-routing.md
-[parameter-targettag]: /powershell/module/az.containerregistry/import-azcontainerregistryimage
-

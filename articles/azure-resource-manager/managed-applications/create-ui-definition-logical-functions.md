@@ -1,7 +1,7 @@
 ---
 title: Create UI definition logical functions
 description: Describes the functions to perform logical operations.
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 07/13/2020
 ---
 

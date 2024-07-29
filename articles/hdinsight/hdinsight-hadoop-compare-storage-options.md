@@ -3,7 +3,8 @@ title: Compare storage options for use with Azure HDInsight clusters
 description: Provides an overview of storage types and how they work with Azure HDInsight.
 ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 06/12/2023
+ms.custom: seoapr2020
+ms.date: 05/30/2022
 ---
 
 # Compare storage options for use with Azure HDInsight clusters

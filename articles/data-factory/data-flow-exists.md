@@ -9,7 +9,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 01/05/2024
+ms.date: 08/03/2022
 ---
 
 # Exists transformation in mapping data flow
@@ -85,6 +85,6 @@ NameNorm2, TypeConversions
     ) ~> checkForChanges
 ```
 
-## Related content
+## Next steps
 
 Similar transformations are [Lookup](data-flow-lookup.md) and [Join](data-flow-join.md).

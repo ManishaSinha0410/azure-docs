@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/05/2022
 ms.author: danlep
 ---
 
 # Validate parameters
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `validate-parameters` policy validates the header, query, or path parameters in requests against the API schema.
 
@@ -61,7 +59,7 @@ The `validate-parameters` policy validates the header, query, or path parameters
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ### Usage notes
 
@@ -89,6 +87,6 @@ In this example, all query and path parameters are validated in the prevention m
 
 ## Related policies
 
-* [Content validation](api-management-policies.md#content-validation)
+* [API Management validation policies](validation-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

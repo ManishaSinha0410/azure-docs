@@ -1,53 +1,54 @@
 ---
-title: COS
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric cosine of the specified angle.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: COS in Azure Cosmos DB query language
+description: Learn about how the Cosine (COS) SQL system function in Azure Cosmos DB returns the trigonometric cosine of the specified angle, in radians, in the specified expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# COS (NoSQL query)
-
+# COS (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the trigonometric cosine of the specified angle in radians.
+ Returns the trigonometric cosine of the specified angle, in radians, in the specified expression.  
   
 ## Syntax
   
-```nosql
+```sql
 COS(<numeric_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
   
-The following example calculates the cosine of the specified angle using the function.
+  The following example calculates the `COS` of the specified angle.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/cos/query.sql" highlight="2":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/cos/result.json":::
+```sql
+SELECT COS(14.78) AS cos  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"cos": -0.59946542619465426}]  
+```  
 
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`SIN`](sin.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

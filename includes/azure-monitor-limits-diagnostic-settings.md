@@ -3,12 +3,13 @@ title: "include file"
 description: "include file" 
 services: azure-monitor
 author: rboucher
+tags: azure-service-management
 ms.topic: "include"
 ms.date: 09/13/2021
 ms.author: robb
 ms.custom: "include file"
 ---
 
-| Resource | Default Limit | Maximum Limit |
-|:---|:---|:---|
-| Maximum number of diagnostic settings per resource | 5 | Same as default. |
+| Limit | Value |
+|:---|:---|
+| Maximum number of diagnostic settings per resource | 5 |

@@ -4,10 +4,11 @@ description: Learn how to identify, diagnose, and troubleshoot Azure Cosmos DB's
 ms.service: cosmos-db
 ms.topic: troubleshooting
 ms.subservice: mongodb
-ms.date: 04/02/2024
-author: avijitgupta
-ms.author: avijitgupta
-ms.reviewer: gahllevy
+ms.custom: ignite-2022
+ms.date: 08/26/2021
+author: gahl-levy
+ms.author: gahllevy
+ms.reviewer: mjbrown
 ---
 
 # Troubleshoot query issues when using the Azure Cosmos DB for MongoDB
@@ -343,7 +344,6 @@ The value `estimatedDelayFromRateLimitingInMilliseconds` gives a sense of the po
 ## Next steps
 
 * [Troubleshoot query performance (API for NoSQL)](troubleshoot-query-performance.md)
-* [Prevent rate limiting with SSR](prevent-rate-limiting-errors.md)
 * [Manage indexing in Azure Cosmos DB's API for MongoDB](indexing.md)
 * Trying to do capacity planning for a migration to Azure Cosmos DB? You can use information about your existing database cluster for capacity planning.
     * If all you know is the number of vcores and servers in your existing database cluster, read about [estimating request units using vCores or vCPUs](../convert-vcore-to-request-unit.md) 

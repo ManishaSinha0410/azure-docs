@@ -6,7 +6,7 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: estfan, azla
 ms.topic: how-to
-ms.date: 01/04/2024
+ms.date: 08/19/2018
 ---
 
 # Exchange EDI messages as batches or groups between trading partners in Azure Logic Apps

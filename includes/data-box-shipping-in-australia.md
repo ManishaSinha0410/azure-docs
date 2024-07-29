@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: pod
 ms.topic: include
 ms.date: 06/06/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Azure datacenters in Australia have an additional security notification. All the inbound shipments must have an advanced notification. Take the following steps to ship in Australia.
@@ -17,4 +17,3 @@ Azure datacenters in Australia have an additional security notification. All the
     - On the DHL website, select **No** to create a shipping label. Enter the DHL Waybill number generated when completing **Prepare to ship** process.
     
     :::image type="content" source="media/data-box-shipping-in-australia/dhl-schedule-pickup.png" alt-text="Screenshot of DHL site to schedule a pickup.":::
-

@@ -1,10 +1,10 @@
 ---
 title: Configure module build options
-description: Learn how to use the module.json file to configure build and deployment options for an IoT Edge module
+description: Learn how to use the module.json file to configure build and deployment options for a module 
 author: PatAltimore
 
 ms.author: patricka
-ms.date: 05/31/2024
+ms.date: 03/11/2022
 ms.topic: how-to
 ms.service: iot-edge
 services: iot-edge
@@ -63,6 +63,6 @@ Once the module is built, the final tag of the image is combined with both versi
 `<repository>:<version>-<platform key>`. For this example, the image tag for `amd64.debug` is
 `localhost:5000/csharpmod:0.0.1-amd64.debug`.
 
-## Next step
+## Next steps
 
 [Understand the requirements and tools for developing IoT Edge modules](module-development.md)

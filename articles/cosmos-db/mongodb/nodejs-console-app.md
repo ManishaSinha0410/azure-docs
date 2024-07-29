@@ -8,7 +8,7 @@ ms.topic: sample
 ms.date: 08/26/2021
 author: gahl-levy
 ms.author: gahllevy
-ms.custom: devx-track-js
+ms.custom: devx-track-js, ignite-2022
 ---
 # Build an app using Node.js and Azure Cosmos DB's API for MongoDB 
 [!INCLUDE[MongoDB](../includes/appliesto-mongodb.md)]
@@ -18,7 +18,7 @@ This example shows you how to build a console app using Node.js and Azure Cosmos
 To use this example, you must:
 
 * [Create](create-mongodb-dotnet.md#create-an-azure-cosmos-db-account) an Azure Cosmos DB account configured to use Azure Cosmos DB's API for MongoDB.
-* Retrieve your [connection string](connect-account.yml) information.
+* Retrieve your [connection string](connect-account.md) information.
 
 ## Create the app
 
@@ -141,7 +141,7 @@ To use this example, you must:
     });
     ```
     
-2. Modify the following variables in the *app.js* file per your account settings (Learn how to find your [connection string](connect-account.yml)):
+2. Modify the following variables in the *app.js* file per your account settings (Learn how to find your [connection string](connect-account.md)):
 
     > [!IMPORTANT]
     > The **MongoDB Node.js 3.0 driver** requires encoding special characters in the Azure Cosmos DB password. Make sure to encode '=' characters as %3D

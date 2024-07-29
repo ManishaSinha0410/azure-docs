@@ -7,7 +7,7 @@ ms.service: attestation
 ms.topic: overview
 ms.date: 04/05/2022
 ms.author: prsriva
-ms.custom: TPM Attestation overview complete, linux-related-content
+ms.custom: TPM Attestation overview complete 
 ---
 
 # Trusted Platform Module attestation

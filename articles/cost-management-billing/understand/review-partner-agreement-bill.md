@@ -3,10 +3,11 @@ title: Review your Microsoft Partner Agreement invoice - Azure
 description: Learn how to review your bill and resource usage and to verify charges for your Microsoft Partner Agreement invoice.
 author: bandersmsft
 ms.reviewer: judupont
+tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: tutorial
-ms.date: 03/21/2024
+ms.date: 04/26/2023
 ms.author: banders
 ---
 
@@ -33,7 +34,7 @@ It must be more than 30 days from the day that you subscribed to Azure. Azure bi
 
 ## Sign in to Azure
 
-- Sign in to the [Azure portal](https://portal.azure.com).
+- Sign in to the Azure portal at [https://portal.azure.com](https://portal.azure.com).
 
 ## Check access to a Microsoft Customer Agreement
 
@@ -41,15 +42,15 @@ Check the agreement type to determine whether you have access to a billing accou
 
 In the Azure portal, type *cost management + billing* in the search box and then select **Cost Management + Billing**.
 
-:::image type="content" border="true" source="./media/review-partner-agreement-bill/billing-search-cost-management-billing.png" alt-text="Screenshot that shows Azure portal search.":::
+![Screenshot that shows Azure portal search](./media/review-partner-agreement-bill/billing-search-cost-management-billing.png)
 
 If you have access to just one billing scope, select **Properties** from the left-hand side. You have access to a billing account for a Microsoft Partner Agreement if the billing account type is **Microsoft Partner Agreement**.
 
-:::image type="content" border="true" source="./media/review-partner-agreement-bill/billing-account-properties-partner-agreement.png" alt-text="Screenshot that shows Microsoft Partner Agreement in properties page.":::
+![Screenshot that shows Microsoft Partner Agreement in properties page](./media/review-partner-agreement-bill/billing-account-properties-partner-agreement.png)
 
 If you have access to multiple billing scopes, check the type in the billing account column. You have access to a billing account for a Microsoft Partner Agreement if the billing account type for any of the scopes is **Microsoft Partner Agreement**.
 
-:::image type="content" border="true" source="./media/review-partner-agreement-bill/mpa-in-the-list.png" alt-text="Screenshot that shows Microsoft Partner Agreement in billing account list page.":::
+![Screenshot that shows Microsoft Partner Agreement in billing account list page](./media/review-partner-agreement-bill/mpa-in-the-list.png)
 
 ## Review invoiced transactions in the Azure portal
 
@@ -57,7 +58,7 @@ In Cost Management + Billing, select **All transactions** from the left side of 
 
 The All transactions page displays the following information:
 
-:::image type="content" border="true" source="./media/review-partner-agreement-bill/all-transactions.png" alt-text="Screenshot that shows the billed transactions list.":::
+![Screenshot that shows the billed transactions list](./media/review-partner-agreement-bill/all-transactions.png)
 
 |Column  |Definition  |
 |---------|---------|
@@ -85,11 +86,15 @@ Select **All transactions** from the left side of the page.
 
 Search for *pending*. Use the **Timespan** filter to view pending charges for current or last month.
 
+<!-- ![Screenshot that shows the pending transactions list](./media/billing-mpa-understand-your-bill/mpa-billing-profile-pending-transactions.png) -->
+
 ### View pending charges by customer
 
 In Cost Management + Billing, select a billing profile. Depending on your access, you may have to select a billing account. From the billing account, select **Billing profiles** then select a billing profile.
 
 Select **Customers** on the left side of the page.
+
+<!-- ![screenshot of billing profile customers list](./media/billing-mpa-understand-your-bill/mpa-billing-profile-customers.png) -->
 
 The Customers page displays the current and last month's charges for each customer associated with the billing profile. The month-to-date charges are the pending charges for the current month and are billed when the invoice is generated for the month. If the invoice for last month is still not generated, then last month's charges are also pending.
 
@@ -98,6 +103,8 @@ The Customers page displays the current and last month's charges for each custom
 In Cost Management + Billing, select a billing profile. Depending on your access, you may have to select a billing account. From the billing account, select **Billing profiles** then select a billing profile.
 
 Select **Azure subscriptions** on the left side of the page. The Azure subscriptions page displays the current and last month's charges for each subscription in the billing profile. The month-to-date charges are the pending charges for the current month and are billed when the invoice is generated for the month. If the invoice for last month is still not generated, then last month's charges are also pending.
+
+<!--     ![Screenshot that shows the Azure subscriptions list for MPA billing profile](./media/billing-mpa-understand-your-bill/mpa-billing-profile-subscriptions-list.png) -->
 
 ## Analyze your Azure usage charges
 

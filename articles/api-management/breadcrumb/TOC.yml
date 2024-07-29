@@ -21,12 +21,3 @@ items:
     - name: API Management
       tocHref: /azure/reliability/
       topicHref: /azure/api-management/index
-    - name: API Management
-      tocHref: /semantic-kernel/
-      topicHref: /azure/api-management/index
-    - name: API Management
-      tocHref: /azure/copilot/
-      topicHref: /azure/api-management/index
-    - name: API Management
-      tocHref: /azure/api-center/
-      topicHref: /azure/api-management/index

@@ -4,8 +4,7 @@ description: Learn how to use the Azure portal to add a virtual machine (VM) to 
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 03/03/2022
 ---
 
 # Create lab virtual machines in Azure DevTest Labs

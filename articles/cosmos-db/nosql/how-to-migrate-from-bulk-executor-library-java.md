@@ -8,7 +8,8 @@ ms.topic: how-to
 ms.date: 05/13/2022
 ms.author: thvankra
 ms.devlang: java
-ms.custom: devx-track-java, devx-track-extended-java
+ms.custom: devx-track-java
+
 ---
 
 # Migrate from the bulk executor library to the bulk support in Azure Cosmos DB Java V4 SDK

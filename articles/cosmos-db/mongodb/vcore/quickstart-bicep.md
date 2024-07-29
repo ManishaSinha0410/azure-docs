@@ -3,14 +3,13 @@ title: |
   Quickstart: Deploy a cluster by using a Bicep template
 titleSuffix: Azure Cosmos DB for MongoDB vCore
 description: In this quickstart, create a new Azure Cosmos DB for MongoDB vCore cluster to store databases, collections, and documents by using a Bicep template.
-author: gahl-levy
-ms.author: gahllevy
-ms.reviewer: sidandrews
 ms.service: cosmos-db
 ms.subservice: mongodb-vcore
 ms.topic: quickstart
-ms.date: 08/28/2023
-ms.custom: devx-track-bicep
+author: gahl-levy
+ms.author: gahllevy
+ms.reviewer: nayakshweta
+ms.date: 03/07/2023
 ---
 
 # Quickstart: Create an Azure Cosmos DB for MongoDB vCore cluster by using a Bicep template
@@ -53,7 +52,7 @@ resource cluster 'Microsoft.DocumentDB/mongoClusters@2022-10-15-preview' = {
     nodeGroupSpecs: [
         {
             kind: 'Shard'
-            shardCount: 1
+            nodeCount: 1
             sku: 'M40'
             diskSizeGB: 128
             enableHa: false
@@ -71,13 +70,11 @@ resource firewallRules 'Microsoft.DocumentDB/mongoClusters/firewallRules@2022-10
   }
 }
 ```
-> [!NOTE]
-> Kindly note that in the above code, shardGroupSpecs is called nodeGroupSpecs. 
 
 Two Azure resources are defined in the Bicep file:
 
-- [`Microsoft.DocumentDB/mongoclusters`](/azure/templates/microsoft.documentdb/mongoclusters?pivots=deployment-language-bicep): Creates an Azure Cosmos DB for MongoDB vCore cluster.
-  - [`Microsoft.DocumentDB/mongoClusters/firewallRules`](/azure/templates/microsoft.documentdb/mongoclusters?pivots=deployment-language-bicep): Creates firewall rules for the Azure Cosmos DB for MongoDB vCore cluster.
+- [`Microsoft.DocumentDB/databaseAccounts`](/azure/templates/microsoft.documentdb/databaseAccounts?pivots=deployment-language-bicep): Creates an Azure Cosmos DB for MongoDB vCore cluster.
+  - [`Microsoft.DocumentDB/databaseAccounts/sqlDatabases`](/azure/templates/microsoft.documentdb/databaseAccounts?pivots=deployment-language-bicep): Creates firewall rules for the Azure Cosmos DB for MongoDB vCore cluster.
 
 ## Deploy the Bicep file
 
@@ -280,7 +277,7 @@ When you're done with your Azure Cosmos DB for MongoDB vCore cluster, you can de
 
 ---
 
-## Next step
+## Next steps
 
 In this guide, you learned how to create an Azure Cosmos DB for MongoDB vCore cluster. You can now migrate data to your cluster.
 

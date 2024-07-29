@@ -4,10 +4,11 @@ description: Learn how to generate and use SSH keys from a Windows computer to c
 author: mattmcinnes
 ms.service: virtual-machines
 ms.collection: linux
+ms.workload: infrastructure-services
 ms.date: 12/13/2021
 ms.topic: how-to
 ms.author: mattmcinnes
-ms.custom: devx-track-azurecli, linux-related-content
+ms.custom: devx-track-azurecli
 ms.devlang: azurecli
 ms.reviewer: jamesser
 ---
@@ -70,7 +71,7 @@ Using the Azure CLI, you specify the path and filename for the public key using 
 az vm create \
    --resource-group myResourceGroup \
    --name myVM \
-   --image Ubuntu2204\
+   --image UbuntuLTS\
    --admin-username azureuser \
    --ssh-key-value ~/.ssh/id_rsa.pub
 ```

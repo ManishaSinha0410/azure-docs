@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 04/04/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Before you begin the data copy:

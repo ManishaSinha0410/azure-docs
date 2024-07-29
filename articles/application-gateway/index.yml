@@ -6,11 +6,12 @@ summary: Learn how to create application gateways. This documentation helps you 
 metadata:
   title: Azure Application Gateway documentation
   description: Learn about Azure Application Gateway, a web traffic load balancer that enables you to manage traffic to your web applications.
+  services: application-gateway
   ms.service: application-gateway
   ms.topic: landing-page
   author: greg-lindsay
   ms.author: greglin
-  ms.date: 07/20/2023
+  ms.date: 03/30/2022
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | whats-new
 
@@ -22,10 +23,8 @@ landingContent:
     linkLists:
       - linkListType: overview
         links:
-          - text: What is Application Gateway?
+          - text: What is Azure Application Gateway?
             url: overview.md
-          - text: What is Application Gateway for Containers?
-            url: ./for-containers/overview.md
       - linkListType: concept
         links:
           - text: Frequently asked questions
@@ -88,26 +87,6 @@ landingContent:
         links:
           - text: Create an application gateway that improves web application access
             url: tutorial-autoscale-ps.md
-
-# Card
-  - title: Application Gateway for Containers
-    linkLists:
-      - linkListType: overview
-        links:
-          - text: What is Application Gateway for Containers?
-            url: ./for-containers/overview.md
-      - linkListType: concept
-        links:
-          - text: Application Gateway for Containers components
-            url: ./for-containers/application-gateway-for-containers-components.md
-      - linkListType: quickstart
-        links:
-          - text: Deploy Application Gateway for Containers ALB Controller
-            url: ./for-containers/quickstart-deploy-application-gateway-for-containers-alb-controller.md
-          - text: Create Application Gateway for Containers - Bring your own deployment
-            url: ./for-containers/quickstart-create-application-gateway-for-containers-byo-deployment.md
-          - text: Create Application Gateway for Containers managed by ALB Controller
-            url: ./for-containers/quickstart-create-application-gateway-for-containers-managed-by-alb-controller.md
 
 # Card
   - title: Ingress Controller for AKS

@@ -1,9 +1,9 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox  
 ms.topic: include
 ms.date: 03/04/2019
-ms.author: shaas
+ms.author: alkohli
 ---
 
 1. [Connect to the PowerShell interface](#connect-to-the-powershell-interface).
@@ -49,6 +49,5 @@ ms.author: shaas
     | HcsVersion                     | The HCS software version running on your device. For instance, the HCS software version corresponding to Data Box Edge 1902 is 1.4.771.324.            |
     | LocalCapacityInMb              | The total local capacity of the device in Megabits.                                                                                                        |
     | IsRegistered                   | This value indicates if your device is activated with the service.                                                                                         |
-
 
 

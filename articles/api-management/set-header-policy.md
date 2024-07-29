@@ -6,13 +6,11 @@ author: dlepow
 
 ms.service: api-management
 ms.topic: article
-ms.date: 03/18/2024
+ms.date: 12/08/2022
 ms.author: danlep
 ---
 
 # Set header
-
-[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `set-header` policy assigns a value to an existing HTTP response and/or request header or adds a new response and/or request header.
 
@@ -46,11 +44,11 @@ The `set-header` policy assigns a value to an existing HTTP response and/or requ
 
 - [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, outbound, backend, on-error
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
 
 ### Usage notes
 
-Multiple values of a header are concatenated to a CSV string, for example: 
+ Multiple values of a header are concatenated to a CSV string, for example: 
 
 `headerName: value1,value2,value3`
 
@@ -59,18 +57,13 @@ Exceptions include standardized headers whose values:
 - may contain date (`Cookie`, `Set-Cookie`, `Warning`),
 - contain date (`Date`, `Expires`, `If-Modified-Since`, `If-Unmodified-Since`, `Last-Modified`, `Retry-After`).
 
-In case of those exceptions, multiple header values won't be concatenated into one string and will be passed as separate headers, for example:
+In case of those exceptions, multiple header values will not be concatenated into one string and will be passed as separate headers, for example:
 
 ```
 User-Agent: value1
 User-Agent: value2
 User-Agent: value3
 ```
-
-The following limitations apply:
-
-- Removal of `Server` header isn't supported.
-- Headers: `Connection`, `ContentLength`, `KeepAlive`, `TransferEncoding` cannot be modified or deleted. 
 
 ## Examples
 
@@ -103,6 +96,6 @@ This example shows how to apply policy at the API level to supply context inform
 
 ## Related policies
 
-- [Transformation](api-management-policies.md#transformation)
+- [API Management transformation policies](api-management-transformation-policies.md)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

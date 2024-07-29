@@ -2,12 +2,11 @@
 title: Troubleshoot Blob backup and restore issues
 description: In this article, learn about symptoms, causes, and resolutions of Azure Backup failures related to Blob backup and restore.
 ms.topic: troubleshooting
-ms.date: 11/22/2023
+ms.date: 04/13/2023
 ms.service: backup
 ms.reviewer: geg
-author: AbhishekMallick-MS
-ms.author: v-abhmallick
-ms.custom: engagement-fy24
+author: jyothisuri
+ms.author: jsuri
 ---
 
 # Troubleshoot Azure Blob backup
@@ -97,14 +96,6 @@ This article provides troubleshooting information to address issues you encounte
 
 **Recommendation**: Ensure that the restore point ID is correct and the restore point didn't get deleted based on the backup retention settings. For a recent recovery point, ensure that the corresponding backup job is complete. We recommend you triggering the operation again using a valid restore point. If the issue persists, contact Microsoft support.
 
-### UserErrorContainerNotFoundForPointInTimeRestore
-
-**Error code**: `UserErrorContainerNotFoundForPointInTimeRestore`
-
-**Error message**: A container selected for the restore was not found in the storage account for the selected point in time. 
-
-**Recommendation**: Use specific container restore or prefix match restore for containers that are present in the account. We also recommend enabling vaulted backup for your storage account to get comprehensive protection against deletion of containers. If you already have it configured, you can use a recovery point for performing recovery of deleted containers.
-
 ### UserErrorTargetContainersExistOnAccount
 
 **Error code**: `UserErrorTargetContainersExistOnAccount`
@@ -151,7 +142,7 @@ This article provides troubleshooting information to address issues you encounte
 
 **Error message**: Incorrect containers selected for operation.
 
-**Recommendation**: This error may occur if one or more containers included in the scope of protection no longer exist in the protected storage account. We recommend to re-trigger the operation after modifying the protected container list using the edit backup instance option.
+**Recommendation**: Select valid list of containers and trigger the operation.
 
 ### UserErrorCrossTenantOrsPolicyDisabled
 

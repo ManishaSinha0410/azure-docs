@@ -8,7 +8,8 @@ author: msmbaldwin
 ms.author: mbaldwin
 ms.date: 01/11/2023
 ms.devlang: csharp
-ms.custom: devx-track-csharp, devx-track-dotnet
+ms.custom: devx-track-csharp
+
 # Customer intent: As a developer I want storage credentials and SAS tokens to be managed securely by Azure Key Vault.
 ---
 # Create SAS definition and fetch shared access signature tokens in code (legacy)

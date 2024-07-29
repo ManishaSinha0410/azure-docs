@@ -1,15 +1,17 @@
 ---
-title: Tutorial - Create and manage Azure virtual networks for Windows VMs
+title: Tutorial - Create and manage Azure virtual networks for Windows VMs 
 description: In this tutorial, you learn how to use Azure PowerShell to create and manage Azure virtual networks for Windows virtual machines
-author: ju-shim
+author: cynthn
 ms.service: virtual-machines
 ms.subservice: networking
 ms.collection: windows
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure
 ms.date: 08/04/2020
-ms.author: jushiman
+ms.author: cynthn
 ms.custom: mvc, devx-track-azurepowershell
+
 #Customer intent: As an IT administrator, I want to learn about Azure virtual networks so that I can securely deploy Windows virtual machines and restrict traffic between them.
 ---
 

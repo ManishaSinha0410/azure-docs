@@ -1,12 +1,12 @@
 ---
 title: include file
-description: iOS how-to guide for enabling Closed captions during a Teams interop call.
+description: iOS how-to guide for enabling Closed captions during a call.
 author: Kunaal
 ms.service: azure-communication-services
 ms.subservice: calling
 ms.topic: include
 ms.topic: include file
-ms.date: 07/21/20223
+ms.date: 03/21/2023
 ms.author: kpunjabi
 ---
 
@@ -19,95 +19,68 @@ ms.author: kpunjabi
 - For Translated captions, you need to have a [Teams premium](/MicrosoftTeams/teams-add-on-licensing/licensing-enhance-teams#meetings) license.
 
 >[!NOTE]
->Please note that you will need to have a voice calling app using Azure Communication Services calling SDKs to access the closed captions feature that is described in this guide.
+>Please note that you will need to have a voice calling app using ACS calling SDKs to access the closed captions feature that is described in this guide.
 
 ## Models
 | Name | Description |
 |------|-------------|
-| CaptionsCallFeature | API for captions call feature|
-| TeamsCaptions | API for Teams captions |
+| TeamsCaptionsCallFeature | API for TeamsCall captions |
 | StartCaptionOptions | Closed caption options like spoken language |
-| TeamsCaptionsDelegate | Delegate for Teams captions |
-| TeamsCaptionsReceivedEventArgs | Data object received for each Teams captions received event |
+| TeamsCaptionsCallFeatureDelegate | Delegate for events |
+| TeamsCaptionsInfo | Data object received for each didReceiveCaptions event |
 
 ## Get closed captions feature 
 
-### External Identity users and Microsoft 365 users
+### External Identity users
 
-If you're building an application that allows Azure Communication Services users to join a Teams meeting 
+If you're building an application that allows ACS users to join a Teams meeting 
 
 ``` swift
-if let call = self.call {
-    @State var captionsCallFeature = call.feature(Features.captions)
-    captionsCallFeature.getCaptions{(value, error) in
-        if let error = error {
-            // failed to get captions
-        } else {
-            if (value?.type == CaptionsType.teamsCaptions) {
-                // teams captions
-                @State var teamsCaptions = value as? TeamsCaptions
-            }
-        }
-    }
-}
+if let call = self.call { @State var captionsCallFeature = call.feature(Features.teamsCaptions) }
+```
+
+### Microsoft 365 users 
+
+If you're building an app for Microsoft 365 Users using ACS SDK. 
+
+``` swift
+if let teamsCall = self.teamsCall { @State var captionsCallFeature = call.feature(Features.teamsCaptions) }
 ```
 
 ## Subscribe to listeners
 
-### Add a listener to receive captions enabled/disabled, spoken language, caption language status changed and data received
+### Add a listener to receive captions active/inactive status and data received
 
 ```swift
-extension CallObserver: TeamsCaptionsDelegate {
-    // listener for receive captions enabled/disabled status
-    public func teamsCaptions(_ teamsCaptions: TeamsCaptions, didChangeCaptionsEnabledState args: PropertyChangedEventArgs) {
-        // teamsCaptions.isEnabled
+extension CallObserver: TeamsCaptionsCallFeatureDelegate {
+    // Add a listener to receive captions active/inactive status
+    public func teamsCaptionsCallFeature(_ teamsCaptionsFeature: TeamsCaptionsCallFeature, didChangeCaptionsActiveState args: PropertyChangedEventArgs) {
+        if(captionsCallFeature.isCaptionsFeatureActive) {
+            
+        }
     }
     
-    // listener for active spoken language state change
-    public func teamsCaptions(_ teamsCaptions: TeamsCaptions, didChangeActiveSpokenLanguageState args: PropertyChangedEventArgs) {
-        // teamsCaptions.activeSpokenLanguage
-    }
-    
-    // listener for active caption language state change
-    public func teamsCaptions(_ teamsCaptions: TeamsCaptions, didChangeActiveCaptionLanguageState args: PropertyChangedEventArgs) {
-        // teamsCaptions.activeCaptionLanguage
-    }
-    
-    // listener for captions data received
-    public func teamsCaptions(_ teamsCaptions: TeamsCaptions, didReceiveCaptions:TeamsCaptionsReceivedEventArgs) {
-            // Information about the speaker.
-            // didReceiveCaptions.speaker
-            // The original text with no transcribed.
-            // didReceiveCaptions.spokenText
-            // language identifier for the captions text.
-            // didReceiveCaptions.captionLanguage
-            // language identifier for the speaker.
-            // didReceiveCaptions.spokenLanguage
-            // The transcribed text.
-            // didReceiveCaptions.captionText
-            // Timestamp denoting the time when the corresponding speech was made.
-            // didReceiveCaptions.timestamp
-            // CaptionsResultType is Partial if text contains partially spoken sentence.
-            // It is set to Final once the sentence has been completely transcribed.
-            // didReceiveCaptions.resultType
+    // Add listener for captions data received
+    public func teamsCaptionsCallFeature(_ teamsCaptionsFeature: TeamsCaptionsCallFeature, didReceiveCaptions: TeamsCaptionsInfo) {
+        
     }
 }
 
-teamsCaptions.delegate = self.callObserver
+teamsCaptionsFeature.delegate = self.callObserver
 ```
 
 ## Start captions
 
-Once you've set up all your listeners, you can now start adding captions.
+Once you've got all your listeners setup, you can now start captions.
 
 ``` swift
 func startCaptions() {
-    guard let teamsCaptions = teamsCaptions else {
+    guard let captionsCallFeature = captionsCallFeature else {
         return
     }
     let startCaptionsOptions = StartCaptionsOptions()
     startCaptionsOptions.spokenLanguage = "en-us"
-    teamsCaptions.startCaptions(startCaptionsOptions: startCaptionsOptions, completionHandler: { (error) in
+    captionsCallFeature.startCaptions(startCaptionsOptions: startCaptionsOptions, completionHandler: { (error) in
         if error != nil {
             
         }
@@ -119,7 +92,7 @@ func startCaptions() {
 
 ``` swift
 func stopCaptions() {
-    teamsCaptions.stopCaptions(completionHandler: { (error) in
+    captionsCallFeature.stopCaptions(completionHandler: { (error) in
         if error != nil {
             
         }
@@ -130,7 +103,7 @@ func stopCaptions() {
 ## Remove caption received listener
 
 ``` swift
-teamsCaptions?.delegate = nil
+captionsCallFeature?.delegate = nil
 ```
 
 ## Spoken language support 
@@ -141,7 +114,7 @@ Get a list of supported spoken languages that your users can select from when en
 ``` swift
 // bcp 47 formatted language code
 let spokenLanguage : String = "en-us"
-for language in teamsCaptions?.supportedSpokenLanguages ?? [] {
+for language in captionsCallFeature?.supportedSpokenLanguages ?? [] {
     // choose required language
     spokenLanguage = language
 }
@@ -152,11 +125,11 @@ When the user selects the spoken language, your app can set the spoken language 
 
 ``` swift 
 func setSpokenLanguage() {
-    guard let teamsCaptions = self.teamsCaptions else {
+    guard let captionsCallFeature = self.captionsCallFeature else {
         return
     }
 
-    teamsCaptions.set(spokenLanguage: spokenLanguage, completionHandler: { (error) in
+    captionsCallFeature.set(spokenLanguage: spokenLanguage, completionHandler: { (error) in
         if let error = error {
         }
     })
@@ -167,12 +140,12 @@ func setSpokenLanguage() {
 
 ### Get supported caption language 
 
-If your organization has an active Teams premium license, then your Azure Communication Services users can enable translated captions as long as the organizer of the meeting has a Teams premium license. As for users with Microsoft 365 identities this check is done against their own user account if they meeting organizer doesn't have a Teams premium license.
+If your organization has an active Teams premium license, then your ACS users can enable translated captions as long as the organizer of the meeting has a Teams premium license. As for users with Microsoft 365 identities this check is done against their own user account if they meeting organizer doesn't have a Teams premium license.
 
 ``` swift
 // ISO 639-1 formatted language code
 let captionLanguage : String = "en"
-for language in teamsCaptions?.supportedCaptionLanguages ?? [] {
+for language in captionsCallFeature?.supportedCaptionLanguages ?? [] {
     // choose required language
     captionLanguage = language
 }
@@ -181,11 +154,11 @@ for language in teamsCaptions?.supportedCaptionLanguages ?? [] {
 
 ``` swift
 func setCaptionLanguage() {
-    guard let teamsCaptions = self.teamsCaptions else {
+    guard let captionsCallFeature = self.captionsCallFeature else {
         return
     }
 
-    teamsCaptions.set(captionLanguage: captionLanguage, completionHandler: { (error) in
+    captionsCallFeature.set(captionLanguage: captionLanguage, completionHandler: { (error) in
         if let error = error {
         }
     })

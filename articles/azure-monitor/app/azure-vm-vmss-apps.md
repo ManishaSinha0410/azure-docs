@@ -2,9 +2,8 @@
 title: Monitor performance on Azure VMs - Azure Application Insights
 description: Application performance monitoring for Azure virtual machines and virtual machine scale sets.
 ms.topic: conceptual
-ms.date: 04/05/2024
-ms.devlang: csharp
-# ms.devlang: csharp, java, javascript, python
+ms.date: 03/22/2023
+ms.devlang: csharp, java, javascript, python
 ms.custom: devx-track-azurepowershell
 ms.reviewer: abinetabate
 ---
@@ -17,12 +16,12 @@ This article walks you through enabling Application Insights monitoring by using
 
 ## Enable Application Insights
 
-Autoinstrumentation is easy to enable. Advanced configuration isn't required.
+Auto-instrumentation is easy to enable. Advanced configuration isn't required.
 
-For a complete list of supported autoinstrumentation scenarios, see [Supported environments, languages, and resource providers](codeless-overview.md#supported-environments-languages-and-resource-providers).
+For a complete list of supported auto-instrumentation scenarios, see [Supported environments, languages, and resource providers](codeless-overview.md#supported-environments-languages-and-resource-providers).
 
 > [!NOTE]
-> Autoinstrumentation is available for ASP.NET, ASP.NET Core IIS-hosted applications, and Java. Use an SDK to instrument Node.js and Python applications hosted on Azure virtual machines and virtual machine scale sets.
+> Auto-instrumentation is available for ASP.NET, ASP.NET Core IIS-hosted applications, and Java. Use an SDK to instrument Node.js and Python applications hosted on Azure virtual machines and virtual machine scale sets.
 
 ### [.NET Framework](#tab/net)
 
@@ -38,11 +37,11 @@ We recommend the [Application Insights Java 3.0 agent](./opentelemetry-enable.md
 
 ### [Node.js](#tab/nodejs)
 
-To instrument your Node.js application, use the [OpenTelemetry Distro](./opentelemetry-enable.md).
+To instrument your Node.js application, use the [SDK](./nodejs.md).
 
 ### [Python](#tab/python)
 
-To monitor Python apps, use the [OpenTelemetry Distro](./opentelemetry-enable.md).
+To monitor Python apps, use the [SDK](./opencensus-python.md).
 
 ---
 
@@ -209,7 +208,7 @@ If your extension deployed successfully but you're unable to see telemetry, it c
 
 - Updated Application Insights .NET/.NET Core SDK to 2.20.1 - red field.
 - Enabled SQL query collection.
-- Enabled support for Microsoft Entra authentication.
+- Enabled support for Azure Active Directory authentication.
 
 ### 2.8.42
 
@@ -217,7 +216,7 @@ Updated Application Insights .NET/.NET Core SDK to 2.18.1 - red field.
 
 ### 2.8.41
 
-Added the ASP.NET Core autoinstrumentation feature.
+Added the ASP.NET Core auto-instrumentation feature.
 
 ## Next steps
 * Learn how to [deploy an application to an Azure virtual machine scale set](../../virtual-machine-scale-sets/virtual-machine-scale-sets-deploy-app.md).

@@ -11,7 +11,8 @@ ms.custom: devx-track-azurepowershell, devx-track-arm-template
 
 # Deploy an Azure Resource Manager template in an Automation PowerShell runbook
 
-You can write an [Automation PowerShell runbook](./learn/powershell-runbook-managed-identity.md) that deploys an Azure resource by using an [Azure Resource Manager template](../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md). Templates allow you to use Azure Automation to automate deployment of your Azure resources. You can maintain your Resource Manager templates in a central, secure location, such as Azure Storage.
+You can write an [Automation PowerShell runbook](./learn/powershell-runbook-managed-identity.md)
+that deploys an Azure resource by using an [Azure Resource Manager template](../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md). Templates allow you to use Azure Automation to automate deployment of your Azure resources. You can maintain your Resource Manager templates in a central, secure location, such as Azure Storage.
 
 In this article, we create a PowerShell runbook that uses a Resource Manager template stored in [Azure Storage](../storage/common/storage-introduction.md) to deploy a new Azure Storage account.
 
@@ -25,7 +26,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 * [Azure Storage account](../storage/common/storage-account-create.md) in which to store the Resource Manager template.
 
-* Azure PowerShell installed on a local machine. See [Install the Azure PowerShell Module](/powershell/azure/install-azure-powershell) for information about how to get Azure PowerShell. You'll also need module [Az.ManagedServiceIdentity](/powershell/module/az.managedserviceidentity). `Az.ManagedServiceIdentity` is a preview module and not installed as part of the Az module. To install it, run `Install-Module -Name Az.ManagedServiceIdentity`
+* Azure PowerShell installed on a local machine. See [Install the Azure PowerShell Module](/powershell/azure/install-az-ps) for information about how to get Azure PowerShell. You'll also need module [Az.ManagedServiceIdentity](/powershell/module/az.managedserviceidentity). `Az.ManagedServiceIdentity` is a preview module and not installed as part of the Az module. To install it, run `Install-Module -Name Az.ManagedServiceIdentity`
 
 ## Assign permissions to managed identities
 

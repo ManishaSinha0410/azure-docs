@@ -2,7 +2,7 @@
 title: Quickstart - Azure Key Vault Key client library for Java
 description: Provides a quickstart for the Azure Key Vault Keys client library for Java.
 author: msmbaldwin
-ms.custom: devx-track-java, devx-track-azurecli, devx-track-azurepowershell, mode-api, passwordless-java, devx-track-extended-java
+ms.custom: devx-track-java, devx-track-azurecli, devx-track-azurepowershell, mode-api, passwordless-java
 ms.author: mbaldwin
 ms.date: 01/04/2023
 ms.service: key-vault
@@ -115,7 +115,11 @@ Open the *pom.xml* file in your text editor. Add the following dependency elemen
 
 #### Grant access to your key vault
 
-[!INCLUDE [Using RBAC to provide access to a key vault](../../../includes/key-vault-quickstart-rbac.md)]
+Create an access policy for your key vault that grants key permissions to your user account.
+
+```azurecli
+az keyvault set-policy --name <your-key-vault-name> --upn user@domain.com --key-permissions delete get list create purge
+```
 
 #### Set environment variables
 

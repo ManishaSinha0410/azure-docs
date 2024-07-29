@@ -1,53 +1,54 @@
 ---
-title: TAN
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric tangent of the specified angle.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: TAN in Azure Cosmos DB query language
+description: Learn about SQL system function TAN in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/04/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# TAN (NoSQL query)
-
+# TAN (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the trigonometric tangent of the specified angle in radians.
+ Returns the tangent of the specified angle, in radians, in the specified expression.  
   
 ## Syntax
   
-```nosql
-TAN(<numeric_expr>)  
-```
+```sql
+TAN (<numeric_expr>)  
+```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
   
-Returns a numeric expression.  
+  Returns a numeric expression.  
   
 ## Examples
   
-The following example calculates the cotangent of the specified angle using the function.
+  The following example calculates the tangent of PI()/2.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/tan/query.sql" highlight="2-3":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/tan/result.json":::
+```sql
+SELECT TAN(PI()/2) AS tan 
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"tan": 16331239353195370 }]  
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`COT`](cot.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

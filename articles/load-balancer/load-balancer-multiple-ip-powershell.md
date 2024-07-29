@@ -6,9 +6,10 @@ services: load-balancer
 author: mbender-ms
 ms.service: load-balancer
 ms.topic: how-to
-ms.date: 06/27/2023
+ms.workload: infrastructure-services
+ms.date: 09/25/2017
 ms.author: mbender
-ms.custom: template-how-to, devx-track-azurepowershell, engagement-fy23
+ms.custom: template-how-to, seodec18, devx-track-azurecli, devx-track-azurepowershell
 ---
 
 # Load balancing on multiple IP configurations using PowerShell

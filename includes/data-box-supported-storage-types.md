@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: alkohli
 ms.service: databox
 ms.subservice: heavy   
 ms.topic: include
 ms.date: 05/22/2019
-ms.author: shaas
+ms.author: alkohli
 ---
 
 Here is a list of the supported storage types for the Data Box device.
@@ -14,4 +14,3 @@ Here is a list of the supported storage types for the Data Box device.
 | Azure block blob | |
 | Azure page blob  | The data should be 512 bytes aligned.|
 | Azure Files | |
-

@@ -1,10 +1,9 @@
 ---
-title: "Overview of Azure Kubernetes Fleet Manager"
+title: "Overview of Azure Kubernetes Fleet Manager (preview)"
 services: kubernetes-fleet
 ms.service: kubernetes-fleet
-ms.custom:
-  - ignite-2023
-ms.date: 11/06/2023
+ms.custom: ignite-2022
+ms.date: 08/29/2022
 ms.topic: overview
 author: shashankbarsin
 ms.author: shasb
@@ -12,22 +11,20 @@ description: "This article provides an overview of Azure Kubernetes Fleet Manage
 keywords: "Kubernetes, Azure, multi-cluster, multi, containers"
 ---
 
-# What is Azure Kubernetes Fleet Manager?
+# What is Azure Kubernetes Fleet Manager (preview)?
 
-Azure Kubernetes Fleet Manager (Fleet) enables at-scale management of multiple Azure Kubernetes Service (AKS) clusters. Fleet supports the following scenarios:
+Azure Kubernetes Fleet Manager (Fleet) enables multi-cluster and at-scale scenarios for Azure Kubernetes Service (AKS) clusters. A Fleet resource creates a cluster that can be used to manage other member clusters.
 
-* Create a Fleet resource and join AKS clusters across regions and subscriptions as member clusters.
+Fleet supports the following scenarios:
 
-* Orchestrate Kubernetes version upgrades and node image upgrades across multiple clusters by using update runs, stages, and groups.
+* Create a Fleet resource and group AKS clusters as member clusters.
 
-* Create Kubernetes resource objects on the Fleet resource's hub cluster and control their propagation to member clusters (preview).
+* Create Kubernetes resource objects on the Fleet resource's cluster and control their propagation to all or a subset of all member clusters.
 
-* Export and import services between member clusters, and load balance incoming layer-4 traffic across service endpoints on multiple clusters (preview).
+* Export a service from one member cluster to the Fleet resource. Once successfully exported, the service and its endpoints are synced to the hub, which other member clusters (or any Fleet resource-scoped load balancer) can consume.
+
+[!INCLUDE [preview features note](./includes/preview/preview-callout.md)]
 
 ## Next steps
 
-* [Conceptual overview of Fleets and member clusters](./concepts-fleet.md).
-* [Conceptual overview of Update orchestration across multiple member clusters](./concepts-update-orchestration.md).
-* [Conceptual overview of Kubernetes resource propagation from hub cluster to member clusters](./concepts-resource-propagation.md).
-* [Conceptual overview of Multi-cluster layer-4 load balancing](./concepts-l4-load-balancing.md).
-* [Create a fleet and join member clusters](./quickstart-create-fleet-and-members.md).
+[Create an Azure Kubernetes Fleet Manager resource and group multiple AKS clusters as member clusters of the fleet](./quickstart-create-fleet-and-members.md).

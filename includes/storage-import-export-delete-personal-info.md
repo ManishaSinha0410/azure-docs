@@ -24,7 +24,7 @@ Personal information is relevant to the import/export service (via the portal an
 - City
 - Zip/postal code
 - State
-- Country/Region/Province
+- Country/Province/Region
 - Drive ID
 - Carrier account number
 - Shipping tracking number
@@ -41,4 +41,4 @@ Personal contact information may be deleted in the following ways:
   - Click *Export all settings* (to save your current settings to a `.json` file).
   - Click *Delete all settings and private dashboards* to delete all settings including saved contact information.
 
-For more information, review the Microsoft Privacy policy at [Trust Center](https://www.microsoft.com/trust-center)
+For more information, review the Microsoft Privacy policy at [Trust Center](https://www.microsoft.com/trustcenter)

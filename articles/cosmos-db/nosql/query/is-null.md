@@ -1,53 +1,61 @@
 ---
-title: IS_NULL
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a boolean indicating whether an expression evaluates to null.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: IS_NULL in Azure Cosmos DB query language
+description: Learn about SQL system function IS_NULL in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 09/13/2019
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# IS_NULL (NoSQL query)
-
+# IS_NULL (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns a boolean value indicating if the type of the specified expression is `null`.  
+ Returns a Boolean value indicating if the type of the specified expression is null.  
   
 ## Syntax
   
-```nosql
+```sql
 IS_NULL(<expr>)  
 ```  
   
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`expr`** | Any expression. |
+  
+*expr*  
+   Is any expression.  
   
 ## Return types
   
-Returns a boolean expression.  
+  Returns a Boolean expression.  
   
 ## Examples
-
-The following example checks objects of various types using the function.  
   
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/is-null/query.sql" highlight="2-10":::
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/is-null/result.json":::
+  The following example checks objects of JSON Boolean, number, string, null, object, array, and undefined types using the `IS_NULL` function.  
+  
+```sql
+SELECT   
+    IS_NULL(true) AS isNull1,   
+    IS_NULL(1) AS isNull2,  
+    IS_NULL("value") AS isNull3,   
+    IS_NULL(null) AS isNull4,  
+    IS_NULL({prop: "value"}) AS isNull5,   
+    IS_NULL([1, 2, 3]) AS isNull6,  
+    IS_NULL({prop: "value"}.prop2) AS isNull7  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"isNull1":false,"isNull2":false,"isNull3":false,"isNull4":true,"isNull5":false,"isNull6":false,"isNull7":false}]
+```  
 
 ## Remarks
 
-- This function benefits from a [range index](../../index-policy.md#includeexclude-strategy).
+This system function will benefit from a [range index](../../index-policy.md#includeexclude-strategy).
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`IS_OBJECT`](is-object.md)
+- [Type checking functions Azure Cosmos DB](type-checking-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

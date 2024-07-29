@@ -2,15 +2,13 @@
 title: Troubleshoot query performance - Azure Database for MariaDB
 description: Learn how to use EXPLAIN to troubleshoot query performance in Azure Database for MariaDB.
 ms.service: mariadb
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.topic: troubleshooting
 ms.date: 06/24/2022
 ---
 
 # How to use EXPLAIN to profile query performance in Azure Database for MariaDB
-
-[!INCLUDE [azure-database-for-mariadb-deprecation](includes/azure-database-for-mariadb-deprecation.md)]
 
 **EXPLAIN** is a handy tool to optimize queries. EXPLAIN statement can be used to get information about how SQL statements are executed. The following output shows an example of the execution of an EXPLAIN statement.
 

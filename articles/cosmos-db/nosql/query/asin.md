@@ -1,53 +1,54 @@
 ---
-title: ASIN
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric arcsine of the specified angle.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ASIN in Azure Cosmos DB query language
+description: Learn about how the Arcsine (ASIN) SQL system function in Azure Cosmos DB returns the angle, in radians, whose sine is the specified numeric expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/04/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ASIN (NoSQL query)
-
+# ASIN (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the trigonometric arcsine of the specified numeric value. The arcsine is the angle, in radians, whose sine is the specified numeric expression.
-
+ Returns the angle, in radians, whose sine is the specified numeric expression. This is also called arcsine.  
+  
 ## Syntax
-
-```nosql
+  
+```sql
 ASIN(<numeric_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
-
-The following example calculates the arcsine of the specified angle using the function.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/asin/query.sql" highlight="2":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/asin/result.json":::
+  
+  The following example returns the `ASIN` of -1.  
+  
+```sql
+SELECT ASIN(-1) AS asin  
+```  
+  
+ Here is the result set.  
+  
+```json
+[{"asin": -1.5707963267948966}]  
+```  
 
 ## Remarks
 
-- This system function doesn't use the index.
+This system function will not utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`SIN`](sin.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

@@ -13,13 +13,15 @@ ms.date: 04/12/2023
 ms.reviewer: lagayhar
 ---
 
-# CLI (v2) pipeline component YAML schema
+# CLI (v2) pipeline component YAML schema (preview)
 
-[!INCLUDE [cli v2](includes/machine-learning-cli-v2.md)]
+[!INCLUDE [cli v2](../../includes/machine-learning-cli-v2.md)]
 
 The source JSON schema can be found at https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json.
 
-[!INCLUDE [schema note](includes/machine-learning-preview-old-json-schema-note.md)]
+[!INCLUDE [schema note](../../includes/machine-learning-preview-old-json-schema-note.md)]
+
+[!INCLUDE [machine-learning-preview-generic-disclaimer](../../includes/machine-learning-preview-generic-disclaimer.md)]
 
 ## YAML syntax
 

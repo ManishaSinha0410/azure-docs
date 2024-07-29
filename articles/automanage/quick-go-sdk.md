@@ -3,7 +3,7 @@ title: Azure Quickstart SDK for Go
 description: Create configuration profile assignments using the GO SDK for Automanage.
 author: andrsmith
 ms.service: automanage
-ms.custom: devx-track-go
+ms.workload: infrastructure
 ms.topic: quickstart
 ms.date: 08/24/2022
 ms.author: andrsmith
@@ -74,3 +74,4 @@ newAssignment, err = assignmentClient.CreateOrUpdate(context.Background(), "defa
 
 > [!div class="nextstepaction"]
 Learn how to conduct more operations with the GO Automanage Client by visiting the [azure-sdk-for-go repo](https://github.com/Azure/azure-sdk-for-go/blob/main/sdk/resourcemanager/automanage/armautomanage/).
+

@@ -2,16 +2,17 @@
 title: Azure Monitor workbook tile visualizations
 description: Learn about all the Azure Monitor workbook tile visualizations.
 services: azure-monitor
+ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
-ms.date: 06/21/2023
+ms.date: 07/05/2022
 ---
 
 # Tile visualizations
 
 Tiles are a useful way to present summary data in workbooks. The following example shows a common use case of tiles with app-level summary on top of a detailed grid.
 
-:::image type="content" source="./media/workbooks-tile-visualizations/tiles-summary.png" lightbox="./media/workbooks-tile-visualizations/tiles-summary.png" alt-text="Screenshot that shows a tile summary view.":::
+[![Screenshot that shows a tile summary view.](./media/workbooks-tile-visualizations/tiles-summary.png)](./media/workbooks-tile-visualizations/tiles-summary.png#lightbox)
 
 Workbook tiles support showing items like a title, subtitle, large text, icons, metric-based gradients, spark lines or bars, and footers.
 
@@ -41,12 +42,12 @@ Workbook tiles support showing items like a title, subtitle, large text, icons, 
     1. In **Bottom**, set:
         * **Use column**: `appName`
 1. Select the **Save and Close** button at the bottom of the pane.
-<!-- convertborder later; applied Learn formatting border because the border created manually is thin. -->
-:::image type="content" source="./media/workbooks-tile-visualizations/tile-settings.png" lightbox="./media/workbooks-tile-visualizations/tile-settings.png" alt-text="Screenshot that shows a tile summary view with query and tile settings.":::
+
+[![Screenshot that shows a tile summary view with query and tile settings.](./media/workbooks-tile-visualizations/tile-settings.png)](./media/workbooks-tile-visualizations/tile-settings.png#lightbox)
 
 The tiles in read mode:
-<!-- convertborder later; applied Learn formatting border because the border created manually is thin. -->
-:::image type="content" source="./media/workbooks-tile-visualizations/tiles-read-mode.png" lightbox="./media/workbooks-tile-visualizations/tiles-read-mode.png" alt-text="Screenshot that shows a tile summary view in read mode.":::
+
+[![Screenshot that shows a tile summary view in read mode.](./media/workbooks-tile-visualizations/tiles-read-mode.png)](./media/workbooks-tile-visualizations/tiles-read-mode.png#lightbox)
 
 ## Spark lines in tiles
 
@@ -91,8 +92,8 @@ The tiles in read mode:
         * **Color palette**: `Green to Red`
         * **Minimum value**: `0`
 1. Select **Save and Close** at the bottom of the pane.
-<!-- convertborder later -->
-:::image type="content" source="./media/workbooks-tile-visualizations/spark-line.png" lightbox="./media/workbooks-tile-visualizations/spark-line.png" alt-text="Screenshot that shows tile visualization with a spark line." border="false":::
+
+![Screenshot that shows tile visualization with a spark line.](./media/workbooks-tile-visualizations/spark-line.png)
 
 ## Tile sizes
 
@@ -101,18 +102,18 @@ You have an option to set the tile width in the tile settings:
 * `fixed` (default)
 
     The default behavior of tiles is to be the same fixed width, approximately 160 pixels wide, plus the space around the tiles.
-    <!-- convertborder later -->
-    :::image type="content" source="./media/workbooks-tile-visualizations/tiles-fixed.png" lightbox="./media/workbooks-tile-visualizations/tiles-fixed.png" alt-text="Screenshot that shows fixed-width tiles." border="false":::
+
+    ![Screenshot that shows fixed-width tiles.](./media/workbooks-tile-visualizations/tiles-fixed.png)
 * `auto`
 
     Each title shrinks or grows to fit their contents. The tiles are limited to the width of the tiles' view (no horizontal scrolling).
-    <!-- convertborder later -->
-    :::image type="content" source="./media/workbooks-tile-visualizations/tiles-auto.png" lightbox="./media/workbooks-tile-visualizations/tiles-auto.png" alt-text="Screenshot that shows auto-width tiles." border="false":::
+
+    ![Screenshot that shows auto-width tiles.](./media/workbooks-tile-visualizations/tiles-auto.png)
 * `full size`
 
     Each title is always the full width of the tiles' view, with one title per line.
-     <!-- convertborder later -->
-     :::image type="content" source="./media/workbooks-tile-visualizations/tiles-full.png" lightbox="./media/workbooks-tile-visualizations/tiles-full.png" alt-text="Screenshot that shows full-size-width tiles." border="false":::
+
+     ![Screenshot that shows full-size-width tiles.](./media/workbooks-tile-visualizations/tiles-full.png)
 
 ## Next steps
 

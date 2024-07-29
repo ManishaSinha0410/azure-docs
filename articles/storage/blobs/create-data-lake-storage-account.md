@@ -7,7 +7,8 @@ author: normesta
 ms.topic: how-to
 ms.author: normesta
 ms.date: 03/09/2023
-ms.service: azure-data-lake-storage
+ms.service: storage
+ms.subservice: data-lake-storage-gen2
 ---
 
 # Create a storage account to use with Azure Data Lake Storage Gen2

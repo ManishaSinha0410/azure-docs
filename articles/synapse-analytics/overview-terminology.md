@@ -8,6 +8,7 @@ ms.subservice: overview
 ms.date: 08/19/2022
 ms.author: saveenr
 ms.reviewer: sngun
+ms.custom: ignite-fall-2021
 ---
 
 # Azure Synapse Analytics terminology

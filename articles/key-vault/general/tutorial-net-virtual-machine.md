@@ -1,15 +1,17 @@
 ---
-title: Tutorial - Use Azure Key Vault with a virtual machine in .NET
+title: Tutorial - Use Azure Key Vault with a virtual machine in .NET | Microsoft Docs
 description: In this tutorial, you configure a virtual machine an ASP.NET core application to read a secret from your key vault.
 services: key-vault
 author: msmbaldwin
+
 ms.service: key-vault
 ms.subservice: general
 ms.topic: tutorial
-ms.date: 02/20/2024
+ms.date: 03/17/2021
 ms.author: mbaldwin
 ms.devlang: csharp
-ms.custom: mvc, devx-track-csharp, devx-track-azurepowershell, devx-track-azurecli, devx-track-dotnet
+ms.custom: "mvc, devx-track-csharp, devx-track-azurepowershell, devx-track-azurecli"
+
 #Customer intent: As a developer I want to use Azure Key Vault to store secrets for my app, so that they are kept secure.
 ---
 # Tutorial: Use Azure Key Vault with a virtual machine in .NET
@@ -38,7 +40,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 For Windows, Mac, and Linux:
   * [Git](https://git-scm.com/downloads)
   * The [.NET Core 3.1 SDK or later](https://dotnet.microsoft.com/download/dotnet-core/3.1).
-  * [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell)
+  * [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-az-ps)
 
 ## Create resources and assign permissions
 

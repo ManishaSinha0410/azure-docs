@@ -8,7 +8,7 @@ ms.reviewer: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 04/15/2023
-ms.custom: build-2023
+ms.custom: ignite-2022
 ---
 
 # Azure Cosmos DB service quotas
@@ -50,9 +50,7 @@ The actual minimum RU/s may vary depending on your account configuration. You ca
 
 #### Minimum throughput on container
 
-**Manual throughput**
-
-To estimate the minimum RU/s required of a container with manual throughput, find the maximum of:
+To estimate the minimum throughput required of a container with manual throughput, find the maximum of:
 
 * 400 RU/s 
 * Current storage in GB * 1 RU/s
@@ -60,49 +58,23 @@ To estimate the minimum RU/s required of a container with manual throughput, fin
 
 For example, you have a container provisioned with 400 RU/s and 0-GB storage. You increase the throughput to 50,000 RU/s and import 20 GB of data. The minimum RU/s is now `MAX(400, 20 * 1 RU/s per GB, 50,000 RU/s / 100)` = 500 RU/s. Over time, the storage grows to 2000 GB. The minimum RU/s is now `MAX(400, 2000 * 1 RU/s per GB, 50,000 / 100)` = 2000 RU/s.
 
-**Autoscale throughput**
-
-To estimate the minimum autoscale max RU/s required of a container with autoscale throughput, find the maximum of:
-
-* 1000 RU/s 
-* Current storage in GB * 10 RU/s
-* Highest RU/s ever provisioned on the container / 10
-
-For example, you have a container provisioned with 1000 RU/s and 0-GB storage. You increase the throughput to 50,000 RU/s and import 20 GB of data. The minimum max RU/s is now `MAX(1000, 20 * 10 RU/s per GB, 50,000 RU/s / 10)` = 5000 RU/s. Over time, the storage grows to 2000 GB. The minimum max RU/s is now `MAX(1000, 2000 * 10 RU/s per GB, 50,000 / 10)` = 20,000 RU/s.
-
 #### Minimum throughput on shared throughput database
 
-**Manual throughput**
-
-To estimate the minimum RU/s required of a shared throughput database with manual throughput, find the maximum of:
+To estimate the minimum throughput required of a shared throughput database with manual throughput, find the maximum of:
 
 * 400 RU/s 
 * Current storage in GB * 1 RU/s
 * Highest RU/s ever provisioned on the database / 100
 * 400 + MAX(Container count - 25, 0) * 100 RU/s
 
-For example, you have a database provisioned with 400 RU/s, 15 GB of storage, and 10 containers. The minimum RU/s is `MAX(400, 15 * 1 RU/s per GB, 400 / 100, 400 + 0 )` = 400 RU/s. If there were 30 containers in the database, the minimum RU/s would be `400 + MAX(30 - 25, 0) * 100 RU/s` = 900 RU/s.
+For example, you have a database provisioned with 400 RU/s, 15 GB of storage, and 10 containers. The minimum RU/s is `MAX(400, 15 * 1 RU/s per GB, 400 / 100, 400 + 0 )` = 400 RU/s. If there were 30 containers in the database, the minimum RU/s would be `400 + MAX(30 - 25, 0) * 100 RU/s` = 900 RU/s. 
 
-**Autoscale throughput**
+In summary, here are the minimum provisioned RU limits when using manual throughput.
 
-To estimate the minimum autoscale max RU/s required of a shared throughput database with autoscale throughput, find the maximum of:
-
-* 1000 RU/s 
-* Current storage in GB * 10 RU/s
-* Highest RU/s ever provisioned on the database / 10
-* 1000 + MAX(Container count - 25, 0) * 1000 RU/s
-
-For example, you have a database provisioned with 1000 RU/s, 15 GB of storage, and 10 containers. The minimum max RU/s for autoscale database is `MAX(1000, 15 * 10 RU/s per GB, 1000 / 10, 1000 + 0 )` = 1000 RU/s. If there were 30 containers in the database, the minimum max RU/s would be `1000 + MAX(30 - 25, 0) * 1000 RU/s` = 5000 RU/s. 
- 
-
-In summary, here are the minimum provisioned RU limits when using provisioned throughput.
-
-| Provisioning Type | Resource | Limit |
-| --- | --- | --- |
-| Manual throughput | Minimum RUs per container ([dedicated throughput provisioned mode with manual throughput](./set-throughput.md#set-throughput-on-a-container)) | 400 |
-| Manual throughput | Minimum RUs per database ([shared throughput provisioned mode with manual throughput](./set-throughput.md#set-throughput-on-a-database) | 400 RU/s for first 25 containers. |
-| Autoscale throughput | Minimum max RUs per container ([dedicated throughput provisioned mode with autoscale throughput](./provision-throughput-autoscale.md#how-autoscale-provisioned-throughput-works)) | 1000 |
-| Autoscale throughput | Minimum max RUs per database ([shared throughput provisioned mode with autoscale throughput](./provision-throughput-autoscale.md#how-autoscale-provisioned-throughput-works)) | 1000 RU/s for first 25 containers. |
+| Resource | Limit |
+| --- | --- |
+| Minimum RUs per container ([dedicated throughput provisioned mode with manual throughput](./resource-model.md#azure-cosmos-db-containers)) | 400 |
+| Minimum RUs per database ([shared throughput provisioned mode with manual throughput](./resource-model.md#azure-cosmos-db-containers)) | 400 RU/s for first 25 containers. |
 
 Azure Cosmos DB supports programmatic scaling of throughput (RU/s) per container or database via the SDKs or portal.
 
@@ -114,21 +86,22 @@ Depending on the current RU/s provisioned and resource settings, each resource c
 
 | Resource | Limit |
 | --- | --- |
-| Maximum RU/s per container | 20,000* |
+| Maximum RU/s per container | 5,000 |
 | Maximum storage across all items per (logical) partition | 20 GB |
-| Maximum storage per container | 1 TB  |
+| Maximum storage per container (API for NoSQL, MongoDB, Table, and Gremlin)| 50 GB (default)¹  |
+| Maximum storage per container (API for Cassandra)| 30 GB (default)¹  |
 
-*Maximum RU/sec availability is dependent on data stored in the container. See, [Serverless Performance](serverless-performance.md)
+¹ Serverless containers up to 1 TB are currently in preview with Azure Cosmos DB. To try the new feature, register the *"Azure Cosmos DB Serverless 1 TB Container Preview"* [preview feature in your Azure subscription](../azure-resource-manager/management/preview-features.md).
 
 ## Control plane
 
-Azure Cosmos DB maintains a resource provider that offers a management layer to create, update, and delete resources in your Azure Cosmos DB account. The resource provider interfaces with the overall Azure Resource Management layer, which is the deployment and management service for Azure. You can [create and manage Azure Cosmos DB resources](how-to-manage-database-account.yml) using the Azure portal, Azure PowerShell, Azure CLI, Azure Resource Manager and Bicep templates, Rest API, Azure Management SDKs as well as 3rd party tools such as Terraform and Pulumi.
+Azure Cosmos DB maintains a resource provider that offers a management layer to create, update, and delete resources in your Azure Cosmos DB account. The resource provider interfaces with the overall Azure Resource Management layer, which is the deployment and management service for Azure. You can [create and manage Azure Cosmos DB resources](how-to-manage-database-account.md) using the Azure portal, Azure PowerShell, Azure CLI, Azure Resource Manager and Bicep templates, Rest API, Azure Management SDKs as well as 3rd party tools such as Terraform and Pulumi.
 
 This management layer can also be accessed from the Azure Cosmos DB data plane SDKs used in your applications to create and manage resources within an account. Data plane SDKs also make control plane requests during initial connection to the service to do things like enumerating databases and containers, as well as requesting account keys for authentication.
 
 Each account for Azure Cosmos DB has a `master partition` which contains all of the metadata for an account. It also has a small amount of throughput to support control plane operations. Control plane requests that create, read, update or delete this metadata consumes this throughput. When the amount of throughput consumed by control plane operations exceeds this amount, operations are rate-limited, same as data plane operations within Azure Cosmos DB. However, unlike throughput for data operations, throughput for the master partition cannot be increased.
 
-Some control plane operations do not consume master partition throughput, such as Get or List Keys. However, unlike requests on data within your Azure Cosmos DB account, resource providers within Azure are not designed for high request volumes. **Control plane operations that exceed the documented limits at sustained levels over consecutive 5-minute periods may experience request throttling as well as failed or incomplete operations on Azure Cosmos DB resources**. 
+Some control plane operations do not consume master partition throughput, such as Get or List Keys. However, unlike requests on data within your Azure Cosmos DB account, resource providers within Azure are not designed for high request volumes. **Control plane operations that exceed the documented limits at sustained levels over consecutive 5-minute periods here may experience request throttling as well failed or incomplete operations on Azure Cosmos DB resources**. 
 
 Control plane operations can be monitored by navigating the Insights tab for an Azure Cosmos DB account. To learn more see [Monitor Control Plane Requests](use-metrics.md#monitor-control-plane-requests). Users can also customize these, use Azure Monitor and create a workbook to monitor [Metadata Requests](monitor-reference.md#request-metrics) and set alerts on them.
 
@@ -138,11 +111,11 @@ The following table lists resource limits per subscription or account.
 
 | Resource | Limit |
 | --- | --- |
-| Maximum number of accounts per subscription | 250 by default ¹ |
+| Maximum number of accounts per subscription | 50 by default. ¹ |
 | Maximum number of databases & containers per account | 500 ² |
 | Maximum throughput supported by an account for metadata operations | 240 RU/s |
 
-¹ Default limits differ for Microsoft internal customers. You can increase these limits by creating an [Azure Support request](create-support-request-quota-increase.md) up to 1,000 max. Cosmos DB reserves the right to delete any empty database accounts i.e. no databases/collections.
+¹ You can increase these limits by creating an [Azure Support request](create-support-request-quota-increase.md) up to 1,000 max.
 ² This limit cannot be increased. Total count of both with an account. (1 database and 499 containers, 250 databases and 250 containers, etc.)
 
 ### Request limits
@@ -171,7 +144,7 @@ Here's a list of limits per account.
 
 | Resource | Limit |
 | --- | --- |
-| Maximum number of databases and containers per account | 500¹ |
+| Maximum number of databases and containers per account | 500 |
 | Maximum number of containers per database with shared throughput | 25 |
 | Maximum number of regions | No limit (All Azure regions) |
 
@@ -179,8 +152,10 @@ Here's a list of limits per account.
 
 | Resource | Limit |
 | --- | --- |
-| Maximum number of databases and containers per account  | 500 |
+| Maximum number of databases and containers per account  | 100 ¹ |
 | Maximum number of regions | 1 (Any Azure region) |
+
+¹ You can increase this limit by creating an [Azure Support request](nosql/create-support-request-quota-increase.md).
 
 ## Per-container limits
 
@@ -248,7 +223,7 @@ Azure Cosmos DB uses HMAC for authorization. You can use either a primary key, o
 
 ## Limits for autoscale provisioned throughput
 
-See the [Autoscale](./provision-throughput-autoscale.md#autoscale-limits) article and [FAQ](./autoscale-faq.yml#how-do-i-lower-the-maximum-ru-s-) for more detailed explanation of the throughput and storage limits with autoscale.
+See the [Autoscale](provision-throughput-autoscale.md#autoscale-limits) article and [FAQ](autoscale-faq.yml#how-do-i-lower-the maximum-ru-s---) for more detailed explanation of the throughput and storage limits with autoscale.
 
 | Resource | Limit |
 | --- | --- |
@@ -272,7 +247,6 @@ Azure Cosmos DB supports querying items using [SQL](nosql/query/getting-started.
 | Maximum explicitly included paths per container| 1500 ¹ |
 | Maximum explicitly excluded paths per container| 1500 ¹ |
 | Maximum properties in a composite index| 8 |
-| Maximum number of paths in a composite index| 100 |
 
 ¹ You can increase any of these SQL query limits by creating an [Azure Support request](create-support-request-quota-increase.md).
 
@@ -290,7 +264,6 @@ The following table lists the limits specific to MongoDB feature support. Other 
 | Maximum execution time for MongoDB operations (for 3.6 and 4.0 server version)| 60 seconds|
 | Maximum level of nesting for embedded objects / arrays on index definitions | 6 |
 | Idle connection timeout for server side connection closure ² | 30 minutes |
-| Time limit for MongoDB shell in the Azure Portal | 120 minutes in a 24hr period |
 
 ¹ Large document sizes up to 16 MB require feature enablement in Azure portal. Read the [feature documentation](../cosmos-db/mongodb/feature-support-42.md#data-types) to learn more.
 
@@ -330,3 +303,5 @@ In addition to the previous table, the [Per-account limits](#per-account-limits)
 
 * Read more about [global distribution](distribute-data-globally.md)
 * Read more about [partitioning](partitioning-overview.md) and [provisioned throughput](request-units.md).
+
+

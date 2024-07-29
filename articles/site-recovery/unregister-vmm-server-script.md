@@ -627,7 +627,7 @@ try
                     else
                     {
                         $transaction.Rollback()
-                        Write-Error "Error occurred"
+                        Write-Error "Error occured"
                         $error[0]
                         ""
                         Write-Error "FAILED"

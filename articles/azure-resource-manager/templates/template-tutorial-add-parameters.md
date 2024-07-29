@@ -1,9 +1,11 @@
 ---
 title: Tutorial - add parameters to template
 description: Add parameters to your Azure Resource Manager template (ARM template) to make it reusable.
-ms.date: 07/28/2023
+author: mumian
+ms.date: 06/15/2022
 ms.topic: tutorial
 ms.custom: devx-track-arm-template
+ms.author: jgao 
 ---
 
 # Tutorial: Add parameters to your ARM template

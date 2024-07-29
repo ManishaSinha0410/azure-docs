@@ -1,70 +1,43 @@
 ---
-title: Azure App Service monitoring data reference
-description: This article contains important reference material you need when you monitor Azure App Service.
-ms.date: 03/07/2024
-ms.custom: horz-monitor
-ms.topic: reference
+title: Monitoring App Service data reference
+description: Important reference material needed when you monitor App Service
 author: msangapu-msft
+ms.topic: reference
 ms.author: msangapu
 ms.service: app-service
+ms.custom: subject-monitoring
+ms.date: 04/16/2021
 ---
 
-# Azure App Service monitoring data reference
+# Monitoring App Service data reference
 
-[!INCLUDE [horz-monitor-ref-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-intro.md)]
+This reference applies to the use of Azure Monitor for monitoring App Service. See [Monitoring App Service](monitor-app-service.md) for details on collecting and analyzing monitoring data for App Service.
 
-See [Monitor Azure App Service](monitor-app-service.md) for details on the data you can collect for Azure App Service and how to use it.
+## Metrics
 
-[!INCLUDE [horz-monitor-ref-metrics-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-intro.md)]
-
-### Supported metrics for Microsoft.Web
-
-The following tables list the automatically collected platform metrics for App Service.
+This section lists all the automatically collected platform metrics collected for App Service.  
 
 |Metric Type | Resource Provider / Type Namespace<br/> and link to individual metrics |
 |-------|-----|
-| Web apps | [Microsoft.Web/sites](/azure/azure-monitor/reference/supported-metrics/microsoft-web-sites-metrics)
-| App Service Plans | [Microsoft.Web/serverfarms](/azure/azure-monitor/reference/supported-metrics/microsoft-web-serverfarms-metrics)
-| Staging slots | [Microsoft.Web/sites/slots](/azure/azure-monitor/reference/supported-metrics/microsoft-web-sites-slots-metrics)
-| App Service Environment | [Microsoft.Web/hostingEnvironments](/azure/azure-monitor/reference/supported-metrics/microsoft-web-hostingenvironments-metrics)
-| App Service Environment Front-end | [Microsoft.Web/hostingEnvironments/multiRolePools](/azure/azure-monitor/reference/supported-metrics/microsoft-web-hostingenvironments-multirolepools-metrics)
-| App Service Environment Worker Pools | [Microsoft.Web/hostingEnvironments/workerPools](/azure/azure-monitor/reference/supported-metrics/microsoft-web-hostingenvironments-workerpools-metrics)
+| App Service Plans | [Microsoft.Web/serverfarms](../azure-monitor/essentials/metrics-supported.md#microsoftwebserverfarms)
+| Web apps | [Microsoft.Web/sites](../azure-monitor/essentials/metrics-supported.md#microsoftwebsites) |
+| Staging slots | [Microsoft.Web/sites/slots](../azure-monitor/essentials/metrics-supported.md#microsoftwebsitesslots) 
+| App Service Environment | [Microsoft.Web/hostingEnvironments](../azure-monitor/essentials/metrics-supported.md#microsoftwebhostingenvironments)
+| App Service Environment Front-end | [Microsoft.Web/hostingEnvironments/multiRolePools](../azure-monitor/essentials/metrics-supported.md#microsoftwebhostingenvironmentsmultirolepools)
 
->[!NOTE]
->Azure App Service, Functions, and Logic Apps share the Microsoft.Web/sites namespace dating back to when they were a single service. Refer to the **Metric** column in the [Microsoft.Web/sites](/azure/azure-monitor/reference/supported-metrics/microsoft-web-sites-metrics) table to see which metrics apply to which services. The **Metrics** interface in the Azure portal for each service shows only the metrics that apply to that service.
 
->[!NOTE]
->App Service Plan metrics are available only for plans in *Basic*, *Standard*, and *Premium* tiers.
+For more information, see a list of [all platform metrics supported in Azure Monitor](../azure-monitor/essentials/metrics-supported.md).
 
-[!INCLUDE [horz-monitor-ref-metrics-dimensions-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-dimensions-intro.md)]
-[!INCLUDE [horz-monitor-ref-metrics-dimensions](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-dimensions.md)]
 
-Some metrics in the following namespaces have the listed dimensions:
+## Metric Dimensions
 
-**Microsoft.Web/sites**
+For more information on what metric dimensions are, see [Multi-dimensional metrics](../azure-monitor/essentials/data-platform-metrics.md#multi-dimensional-metrics).
 
-- Instance
-- workflowName
-- status
-- accountName
+App Service doesn't have any metrics that contain dimensions.
 
-**Microsoft.Web/serverFarms**,<br>
-**Microsoft.Web/sites/slots**,<br>
-**Microsoft.Web/hostingEnvironments**,<br>
-**Microsoft.Web/hostingenvironments/multirolepools,**<br>
-**Microsoft.Web/hostingenvironments/workerpools**
+## Resource logs
 
-- Instance
-
-[!INCLUDE [horz-monitor-ref-resource-logs](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-resource-logs.md)]
-
-### Supported resource logs for Microsoft.Web
-
-- [Microsoft.Web/hostingEnvironments](/azure/azure-monitor/reference/supported-logs/microsoft-web-hostingenvironments-logs)
-- [Microsoft.Web/sites](/azure/azure-monitor/reference/supported-logs/microsoft-web-sites-logs)
-- [Microsoft.Web/sites/slots](/azure/azure-monitor/reference/supported-logs/microsoft-web-sites-slots-logs)
-
-The following table lists more information about resource logs you can collect for App Service. 
+This section lists the types of resource logs you can collect for App Service. 
 
 | Log type | Windows | Windows Container | Linux | Linux Container | Description |
 |-|-|-|-|-|-|
@@ -80,27 +53,15 @@ The following table lists more information about resource logs you can collect f
 
 <sup>1</sup> For Java SE apps, add "$WEBSITE_AZMON_PREVIEW_ENABLED" to the app settings and set it to 1 or to true.
 
-[!INCLUDE [horz-monitor-ref-logs-tables](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-logs-tables.md)]
-### App Services
+For reference, see a list of [all resource logs category types supported in Azure Monitor](../azure-monitor/essentials/resource-logs-schema.md).
 
-Microsoft.Web/sites
-- [AzureActivity](/azure/azure-monitor/reference/tables/azureactivity)
-- [LogicAppWorkflowRuntime](/azure/azure-monitor/reference/tables/logicappworkflowruntime)
-- [AppServiceAuthenticationLogs](/azure/azure-monitor/reference/tables/appserviceauthenticationlogs)
-- [AppServiceServerlessSecurityPluginData](/azure/azure-monitor/reference/tables/appserviceserverlesssecurityplugindata)
-- [AzureMetrics](/azure/azure-monitor/reference/tables/azuremetrics)
-- [AppServiceAppLogs](/azure/azure-monitor/reference/tables/appserviceapplogs)
-- [AppServiceAuditLogs](/azure/azure-monitor/reference/tables/appserviceauditlogs)
-- [AppServiceConsoleLogs](/azure/azure-monitor/reference/tables/appserviceconsolelogs)
-- [AppServiceFileAuditLogs](/azure/azure-monitor/reference/tables/appservicefileauditlogs)
-- [AppServiceHTTPLogs](/azure/azure-monitor/reference/tables/appservicehttplogs)
-- [FunctionAppLogs](/azure/azure-monitor/reference/tables/functionapplogs)
-- [AppServicePlatformLogs](/azure/azure-monitor/reference/tables/appserviceplatformlogs)
-- [AppServiceIPSecAuditLogs](/azure/azure-monitor/reference/tables/appserviceipsecauditlogs)
+## Azure Monitor Logs tables
 
-[!INCLUDE [horz-monitor-ref-activity-log](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-activity-log.md)]
+Azure App Service uses Kusto tables from Azure Monitor Logs. You can query these tables with Log analytics. For a list of App Service tables used by Kusto, see the [Azure Monitor Logs table reference - App Service tables](/azure/azure-monitor/reference/tables/tables-resourcetype#app-services). 
 
-The following table lists common activity log operations related to App Service. This list isn't exhaustive. For all Microsoft.Web resource provider operations, see [Microsoft.Web resource provider operations](/azure/role-based-access-control/resource-provider-operations#microsoftweb).
+## Activity log
+
+The following table lists common operations related to App Service that may be created in the Activity log. This is not an exhaustive list.
 
 | Operation | Description |
 |:---|:---|
@@ -122,7 +83,9 @@ The following table lists common activity log operations related to App Service.
 |Get Zipped Container Logs for Web App| Get container logs |
 |Restore Web App From Backup Blob| App restored from backup|
 
-## Related content
+For more information on the schema of Activity Log entries, see [Activity  Log schema](../azure-monitor/essentials/activity-log-schema.md). 
 
-- See [Monitor App Service](monitor-app-service.md) for a description of monitoring App Service.
-- See [Monitor Azure resources with Azure Monitor](/azure/azure-monitor/essentials/monitor-azure-resource) for details on monitoring Azure resources.
+## See Also
+
+- See [Monitoring Azure App Service](monitor-app-service.md) for a description of monitoring Azure App Service.
+- See [Monitoring Azure resources with Azure Monitor](../azure-monitor/essentials/monitor-azure-resource.md) for details on monitoring Azure resources.

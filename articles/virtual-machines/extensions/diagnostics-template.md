@@ -7,7 +7,7 @@ ms.subservice: extensions
 ms.custom: devx-track-arm-template
 ms.author: gabsta
 author: GabstaMSFT
-ms.reviewer: jushiman
+ms.reviewer: erd
 ms.collection: windows
 ms.date: 04/21/2023
 ---

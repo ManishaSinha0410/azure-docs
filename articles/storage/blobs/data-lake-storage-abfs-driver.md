@@ -8,7 +8,8 @@ ms.topic: conceptual
 ms.author: normesta
 ms.reviewer: jamesbak
 ms.date: 03/09/2023
-ms.service: azure-data-lake-storage
+ms.service: storage
+ms.subservice: data-lake-storage-gen2
 ---
 
 # The Azure Blob Filesystem driver (ABFS): A dedicated Azure Storage driver for Hadoop
@@ -44,7 +45,7 @@ The ABFS driver supports two forms of authentication so that the Hadoop applicat
 
 - **Shared Key:** This permits users access to ALL resources in the account. The key is encrypted and stored in Hadoop configuration.
 
-- **Microsoft Entra ID OAuth Bearer Token:** Microsoft Entra bearer tokens are acquired and refreshed by the driver using either the identity of the end user or a configured Service Principal. Using this authentication model, all access is authorized on a per-call basis using the identity associated with the supplied token and evaluated against the assigned POSIX Access Control List (ACL).
+- **Azure Active Directory OAuth Bearer Token:** Azure AD bearer tokens are acquired and refreshed by the driver using either the identity of the end user or a configured Service Principal. Using this authentication model, all access is authorized on a per-call basis using the identity associated with the supplied token and evaluated against the assigned POSIX Access Control List (ACL).
 
    > [!NOTE]
    > Azure Data Lake Storage Gen2 supports only Azure AD v1.0 endpoints.

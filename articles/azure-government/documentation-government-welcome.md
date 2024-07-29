@@ -3,9 +3,10 @@ title: Azure Government Overview
 description: Overview of Azure Government capabilities
 ms.service: azure-government
 ms.topic: overview
+ms.workload: azure-government
 ms.custom: references_regions
-ms.author: eliotgra
-author: EliotSeattle
+ms.author: stevevi
+author: stevevi
 recommendations: false
 ms.date: 03/07/2022
 ---

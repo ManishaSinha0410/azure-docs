@@ -1,12 +1,15 @@
 ---
 title: Build integrated solutions
 description: Solution tools and partners that integrate with a dedicated SQL pool (formerly SQL DW) in Azure Synapse Analytics.
-author: WilliamDAssafMSFT
-ms.author: wiassaf
-ms.date: 04/17/2018
+author: mlee3gsd 
+manager: craigg
 ms.service: synapse-analytics
-ms.subservice: sql-dw
 ms.topic: conceptual
+ms.subservice: sql-dw 
+ms.date: 04/17/2018
+ms.author: martinle
+ms.reviewer: wiassaf
+ms.custom: seo-lt-2019
 ---
 
 # Integrate other services with a dedicated SQL pool (formerly SQL DW) in Azure Synapse Analytics.

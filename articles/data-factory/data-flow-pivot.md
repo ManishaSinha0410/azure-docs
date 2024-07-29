@@ -8,7 +8,7 @@ ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
 ms.custom: synapse
-ms.date: 05/15/2024
+ms.date: 08/04/2022
 ---
 
 # Pivot transformation in mapping data flow
@@ -105,6 +105,6 @@ BasketballPlayerStats pivot(groupBy(Tm),
 
 ```
 
-## Related content
+## Next steps
 
 Try the [unpivot transformation](data-flow-unpivot.md) to turn column values into row values. 

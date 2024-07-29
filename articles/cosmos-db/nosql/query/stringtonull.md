@@ -1,57 +1,93 @@
 ---
-title: StringToNull
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns a string expression converted to null.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: StringToNull in Azure Cosmos DB query language
+description: Learn about SQL system function StringToNull in Azure Cosmos DB.
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/03/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# StringToNull (NoSQL query)
-
+# StringToNull (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Converts a string expression to `null`.
+ Returns expression translated to null. If expression can't be translated, returns undefined.  
   
 ## Syntax
-
-```nosql
-StringToNull(<string_expr>)  
-```
-
+  
+```sql
+StringToNull(<str_expr>)  
+```  
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`string_expr`** | A string expression. |
-
+  
+*str_expr*  
+   Is a string expression to be parsed as a null expression.
+  
 ## Return types
-
-Returns a `null`.
-
+  
+  Returns a null expression or undefined.  
+  
 ## Examples
   
-The following example illustrates how this function works with various data types.
+  The following example shows how `StringToNull` behaves across different types. 
 
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/stringtonull/query.sql" highlight="2-9":::
+The following are examples with valid input.
 
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/stringtonull/result.json":::
+ Whitespace is allowed only before or after "null".
+
+```sql
+SELECT 
+    StringToNull("null") AS n1, 
+    StringToNull("  null ") AS n2,
+    IS_NULL(StringToNull("null   ")) AS n3
+```  
+  
+ Here's the result set.  
+  
+```json
+[{"n1": null, "n2": null, "n3": true}]
+```  
+
+The following are examples with invalid input.
+
+Null is case sensitive and must be written with all lowercase characters such as `null`.
+
+```sql
+SELECT    
+    StringToNull("NULL"),
+    StringToNull("Null")
+```  
+  
+ Here's the result set.  
+  
+```json
+[{}]
+```  
+
+The expression passed will be parsed as a null expression; these inputs don't evaluate to type null and thus return undefined.
+
+```sql
+SELECT    
+    StringToNull("true"), 
+    StringToNull(false), 
+    StringToNull(undefined),
+    StringToNull(NaN) 
+```  
+  
+ Here's the result set.  
+  
+```json
+[{}]
+```  
 
 ## Remarks
 
-- This function doesn't use the index.
-- If the expression can't be converted, the function returns `undefined`.
+This system function won't utilize the index.
 
-> [!NOTE]
-> For more information on the JSON format, see [https://json.org](https://json.org/).
+## Next steps
 
-## Related content
-
-- [System functions](system-functions.yml)
-- [`StringToBoolean`](stringtoboolean.md)
+- [String functions Azure Cosmos DB](string-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

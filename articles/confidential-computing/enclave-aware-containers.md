@@ -1,11 +1,12 @@
 ---
 title: Enclave aware containers on Azure
 description: enclave ready application containers support on Azure Kubernetes Service (AKS)
-author: angarg05
+author: agowdamsft
 ms.service: confidential-computing
 ms.topic: overview
 ms.date: 9/22/2020
-ms.author: ananyagarg
+ms.author: amgowda
+ms.custom: ignite-fall-2021
 ---
 
 # Enclave Aware Containers with Intel SGX

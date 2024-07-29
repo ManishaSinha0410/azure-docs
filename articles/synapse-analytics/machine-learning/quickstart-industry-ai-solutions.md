@@ -8,6 +8,7 @@ ms.reviewer: garye
 ms.date: 11/02/2021
 author: nelgson
 ms.author: negust
+ms.custom: ignite-fall-2021
 ---
 
 # Industry AI solutions

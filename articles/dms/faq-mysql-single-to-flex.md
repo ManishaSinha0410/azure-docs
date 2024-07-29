@@ -8,8 +8,7 @@ ms.reviewer: maghan
 ms.date: 09/17/2022
 ms.service: dms
 ms.topic: faq
-ms.custom:
-  - sql-migration-content
+ms.custom: seo-lt-2019
 ---
 
 # Frequently Asked Questions (FAQs)

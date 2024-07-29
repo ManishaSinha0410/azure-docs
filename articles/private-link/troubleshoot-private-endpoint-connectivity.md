@@ -1,11 +1,12 @@
 ---
 title: Troubleshoot Azure Private Endpoint connectivity problems
 description: Step-by-step guidance to diagnose private endpoint connectivity
-author: abell
+author: asudbring
 ms.service: private-link
 ms.topic: troubleshooting
 ms.date: 03/28/2023
-ms.author: abell
+ms.author: allensu
+ms.custom: ignite-2022
 ---
 
 # Troubleshoot Azure Private Endpoint connectivity problems

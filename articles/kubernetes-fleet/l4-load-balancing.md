@@ -2,19 +2,18 @@
 title: "How to set up multi-cluster Layer 4 load balancing across Azure Kubernetes Fleet Manager member clusters (preview)"
 description: Learn how to use Azure Kubernetes Fleet Manager to set up multi-cluster Layer 4 load balancing across workloads deployed on multiple member clusters.
 ms.topic: how-to
-ms.date: 03/20/2024
+ms.date: 09/09/2022
 author: shashankbarsin
 ms.author: shasb
 ms.service: kubernetes-fleet
-ms.custom:
-  - devx-track-azurecli
+ms.custom: ignite-2022
 ---
 
 # Set up multi-cluster layer 4 load balancing across Azure Kubernetes Fleet Manager member clusters (preview)
 
-For applications deployed across multiple clusters, admins often want to route incoming traffic to them across clusters.
+After an application has been deployed across multiple clusters, admins often want to set up load balancing for incoming traffic across these application endpoints on member clusters.
 
-You can follow this document to set up layer 4 load balancing for such multi-cluster applications.
+In this how-to guide, you'll set up layer 4 load balancing across workloads deployed across a fleet's member clusters.
 
 [!INCLUDE [preview features note](./includes/preview/preview-callout.md)]
 
@@ -22,16 +21,15 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
 
 [!INCLUDE [free trial note](../../includes/quickstarts-free-trial-note.md)]
 
-* Read the [conceptual overview of this feature](./concepts-l4-load-balancing.md), which provides an explanation of `ServiceExport` and `MultiClusterService` objects referenced in this document.
+* You must have a Fleet resource with member clusters to which a workload has been deployed. If you don't have this resource, follow [Quickstart: Create a Fleet resource and join member clusters](quickstart-create-fleet-and-members.md) and [Propagate Kubernetes configurations from a Fleet resource to member clusters](configuration-propagation.md)
 
-* You must have a Fleet resource with a hub cluster and member clusters. If you don't have this resource, follow [Quickstart: Create a Fleet resource and join member clusters](quickstart-create-fleet-and-members.md).
+* These target clusters should be using [Azure CNI networking](../aks/configure-azure-cni.md).
 
-* The target Azure Kubernetes Service (AKS) clusters on which the workloads are deployed need to be present on either the same [virtual network](../virtual-network/virtual-networks-overview.md) or on [peered virtual networks](../virtual-network/virtual-network-peering-overview.md).
+* The target AKS clusters on which the workloads are deployed need to be present on either the same [virtual network](../virtual-network/virtual-networks-overview.md) or on [peered virtual networks](../virtual-network/virtual-network-peering-overview.md).
 
-  * These target clusters have to be [added as member clusters to the Fleet resource](./quickstart-create-fleet-and-members.md#join-member-clusters).
-  * These target clusters should be using [Azure CNI (Container Networking Interface) networking](../aks/configure-azure-cni.md).
+* These target clusters have to be [added as member clusters to the Fleet resource](./quickstart-create-fleet-and-members.md#join-member-clusters).
 
-* You must gain access to the Kubernetes API of the hub cluster by following the steps in [Access the Kubernetes API of the Fleet resource](./quickstart-access-fleet-kubernetes-api.md).
+* Follow the [conceptual overview of this feature](./architectural-overview.md#multi-cluster-load-balancing), which provides an explanation of `ServiceExport` and `MultiClusterService` objects referenced in this document.
 
 * Set the following environment variables and obtain the kubeconfigs for the fleet and all member clusters:
 
@@ -45,9 +43,9 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     az aks get-credentials --resource-group ${GROUP} --name ${MEMBER_CLUSTER_1} --file aks-member-1
     ```
 
-[!INCLUDE [preview features note](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [preview features note](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
-## Deploy a workload across member clusters of the Fleet resource
+## Deploy a sample workload to demo clusters
 
 > [!NOTE]
 >
@@ -61,7 +59,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     KUBECONFIG=fleet kubectl create namespace kuard-demo
     ```
 
-    Output looks similar to the following example:
+    Output will look similar to the following example:
 
     ```console
     namespace/kuard-demo created
@@ -73,7 +71,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     KUBECONFIG=fleet kubectl apply -f https://raw.githubusercontent.com/Azure/AKS/master/examples/fleet/kuard/kuard-export-service.yaml
     ```
 
-    The `ServiceExport` specification in the above file allows you to export a service from member clusters to the Fleet resource. Once successfully exported, the service and all its endpoints are synced to the fleet cluster and can then be used to set up multi-cluster load balancing across these endpoints. The output looks similar to the following example:
+    The `ServiceExport` specification in the above file allows you to export a service from member clusters to the Fleet resource. Once successfully exported, the service and all its endpoints will be synced to the fleet cluster and can then be used to set up multi-cluster load balancing across these endpoints. The output will look similar to the following example:
 
     ```console
     deployment.apps/kuard created
@@ -84,7 +82,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
 1. Create the following `ClusterResourcePlacement` in a file called `crp-2.yaml`. Notice we're selecting clusters in the `eastus` region:
 
     ```yaml
-    apiVersion: placement.kubernetes-fleet.io/v1beta1
+    apiVersion: fleet.azure.com/v1alpha1
     kind: ClusterResourcePlacement
     metadata:
       name: kuard-demo
@@ -97,11 +95,10 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
       policy:
         affinity:
           clusterAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              clusterSelectorTerms:
-                - labelSelector:
-                    matchLabels:
-                      fleet.azure.com/location: eastus
+            clusterSelectorTerms:
+              - labelSelector:
+                  matchLabels:
+                    fleet.azure.com/location: eastus
     ```
 
 1. Apply the `ClusterResourcePlacement`:
@@ -110,10 +107,10 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     KUBECONFIG=fleet kubectl apply -f crp-2.yaml
     ```
 
-    If successful, the output looks similar to the following example:
+    If successful, the output will look similar to the following example:
 
     ```console
-    clusterresourceplacement.placement.kubernetes-fleet.io/kuard-demo created
+    clusterresourceplacement.fleet.azure.com/kuard-demo created
     ```
 
 1. Check the status of the `ClusterResourcePlacement`:
@@ -123,7 +120,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     KUBECONFIG=fleet kubectl get clusterresourceplacements
     ```
 
-    If successful, the output looks similar to the following example:
+    If successful, the output will look similar to the following example:
 
     ```console
     NAME            GEN   SCHEDULED   SCHEDULEDGEN   APPLIED   APPLIEDGEN   AGE
@@ -132,13 +129,14 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
 
 ## Create MultiClusterService to load balance across the service endpoints in multiple member clusters
 
-1. Check whether the service is successfully exported for the member clusters in `eastus` region:
+
+1. Check the member clusters in `eastus` region to see if the service is successfully exported:
 
     ```bash
     KUBECONFIG=aks-member-1 kubectl get serviceexport kuard --namespace kuard-demo
     ```
 
-    Output looks similar to the following example:
+    Output will look similar to the following example:
 
     ```console
     NAME    IS-VALID   IS-CONFLICTED   AGE
@@ -149,7 +147,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     KUBECONFIG=aks-member-2 kubectl get serviceexport kuard --namespace kuard-demo
     ```
 
-    Output looks similar to the following example:
+    Output will look similar to the following example:
 
     ```console
     NAME    IS-VALID   IS-CONFLICTED   AGE
@@ -161,7 +159,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     > [!NOTE]
     > It may take a minute or two for the ServiceExport to be propagated.
 
-1. Create `MultiClusterService` on one member to load balance across the service endpoints in these clusters:
+1. Apply the MultiClusterService on one of these members to load balance across the service endpoints in these clusters:
 
     ```bash
     KUBECONFIG=aks-member-1 kubectl apply -f https://raw.githubusercontent.com/Azure/AKS/master/examples/fleet/kuard/kuard-mcs.yaml
@@ -181,7 +179,8 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
     >   ...
     > ```
 
-    Output looks similar to the following example:
+
+    Output will look similar to the following example:
 
     ```console
     multiclusterservice.networking.fleet.azure.com/kuard created
@@ -202,7 +201,7 @@ You can follow this document to set up layer 4 load balancing for such multi-clu
 
     The `IS-VALID` field should be `true` in the output. Check out the external load balancer IP address (`EXTERNAL-IP`) in the output. It may take a while before the import is fully processed and the IP address becomes available.
 
-1. Run the following command multiple times using the external load balancer IP address:
+1. Run the following command multiple times using the External IP address from above:
 
     ```bash
     curl <a.b.c.d>:8080 | grep addrs 

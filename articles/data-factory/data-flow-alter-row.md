@@ -8,8 +8,8 @@ ms.reviewer: daperlov
 ms.service: data-factory
 ms.subservice: data-flows
 ms.topic: conceptual
-ms.custom: synapse
-ms.date: 10/20/2023
+ms.custom: synapse, ignite-2022
+ms.date: 11/01/2022
 ---
 
 # Alter row transformation in mapping data flow
@@ -103,6 +103,6 @@ SpecifyUpsertConditions alterRow(insertIf(alterRowCondition == 'insert'),
 	deleteIf(alterRowCondition == 'delete')) ~> AlterRow
 ```
 
-## Related content
+## Next steps
 
 After the Alter Row transformation, you may want to [sink your data into a destination data store](data-flow-sink.md).

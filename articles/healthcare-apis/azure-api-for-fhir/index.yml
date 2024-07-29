@@ -1,40 +1,44 @@
 ### YamlMime:Landing
 
-title: Azure API for FHIR documentation
-summary: Azure API for FHIR is a managed, standards-based, compliant API for clinical health data that enables actionable analytics and machine learning solutions. 
+title: Azure API for FHIR Documentation
+summary: Azure API for FHIR is a managed, standards-based, compliant API for clinical health data that enables solutions for actionable analytics and machine learning. 
 
 metadata:
   title: Azure API for FHIR Documentation - tutorials, how-to guides
   description: Azure API for FHIR is a managed, standards-based, compliant API for clinical health data that enables solutions for actionable analytics and machine learning. 
+  services: healthcare-apis
   ms.service: healthcare-apis
   ms.subservice: fhir
   ms.topic: landing-page 
+  ms.collection: collection
   author: expekesheth
   ms.author: kesheth
-  ms.date: 09/01/2023
+  ms.date: 09/30/2022
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
 landingContent:
 
-  - title: Get started
+  - title: Start with Azure API for FHIR
     linkLists:
       - linkListType: overview
         links:
           - text: What is Azure API for FHIR?
             url: overview.md
-      - linkListType: how-to-guide
+      - linkListType: quickstart
         links:
           - text: Get started with Azure API for FHIR
             url: get-started-with-azure-api-fhir.md
+      - linkListType: deploy
+        links:
           - text: Deploy Azure API for FHIR
             url: fhir-paas-portal-quickstart.md
 
-  - title: Access Azure API for FHIR
+  - title: Accessing Azure API for FHIR
     linkLists:
       - linkListType: concept
         links:
-          - text: Microsoft Entra identity configuration for Azure API for FHIR
+          - text: Azure AD identity configuration for Azure API for FHIR
             url: azure-active-directory-identity-configuration.md
           - text: Access token validation
             url: azure-api-fhir-access-token-validation.md
@@ -54,7 +58,7 @@ landingContent:
           - text: Search examples for Azure API for FHIR
             url: search-samples.md 
 
-  - title: Interoperability and patient access
+  - title: Interoperability and Patient Access
     linkLists:
       - linkListType: tutorial
         links:
@@ -78,7 +82,7 @@ landingContent:
           - text: $member-match operation
             url: tutorial-member-match.md
 
-  - title: Export and convert data
+  - title: Export and Convert Data
     linkLists:
       - linkListType: how-to-guide
         links:

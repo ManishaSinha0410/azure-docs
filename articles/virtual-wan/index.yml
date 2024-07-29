@@ -10,7 +10,7 @@ metadata:
   ms.topic: landing-page
   author: cherylmc
   ms.author: cherylmc
-  ms.date: 01/09/2024
+  ms.date: 05/01/2023
   ms.custom: e2e-hybrid
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | whats-new
@@ -97,8 +97,6 @@ landingContent:
         links:
           - text: About virtual hub routing
             url: about-virtual-hub-routing.md
-          - text: About Route-maps
-            url: route-maps-about.md
           - text: Scenario - Route traffic through an NVA
             url: scenario-route-through-nva.md
           - text: Scenario - Any spoke to any spoke

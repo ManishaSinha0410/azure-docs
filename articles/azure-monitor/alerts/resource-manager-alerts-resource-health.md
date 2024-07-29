@@ -5,8 +5,7 @@ ms.topic: sample
 ms.custom: devx-track-arm-template
 author: AbbyMSFT
 ms.author: abbyweisberg
-ms.reviewer: yagil
-ms.date: 04/01/2024
+ms.date: 05/11/2022
 ---
 
 # Resource Manager template samples for resource health alert rules in Azure Monitor

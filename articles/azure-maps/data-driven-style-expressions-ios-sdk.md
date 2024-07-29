@@ -12,12 +12,6 @@ services: azure-maps
 
 # Data-driven style expressions in the iOS SDK (Preview)
 
-> [!NOTE]
->
-> **Azure Maps iOS SDK retirement**
->
-> The Azure Maps Native SDK for iOS is now deprecated and will be retired on 3/31/25. To avoid service disruptions, migrate to the Azure Maps Web SDK by 3/31/25. For more information, see [The Azure Maps iOS SDK migration guide](ios-sdk-migration-guide.md).
-
 Layers use predicates and expressions to determine what to display and how
 to format it. _Predicates_ are represented by the same `NSPredicate` class that
 filters results from Core Data or items in an `NSArray` in Objective-C.
@@ -26,7 +20,7 @@ Predicates are based on _expressions_, represented by the `NSExpression` class.
 This document discusses the specific subset of the predicate and expression
 syntax supported by this SDK. For a more general introduction to predicates and
 expressions, consult the
-_[Predicate Programming Guide]_
+_[Predicate Programming Guide](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html)_
 in Apple developer documentation.
 
 ## Using predicates to filter vector data
@@ -95,9 +89,9 @@ like `ALL` and `ANY`.
 
 ### Operands
 
-Operands in predicates can be [variables], [key paths],
+Operands in predicates can be [variables](#variables), [key paths](#key-paths),
 or almost anything else that can appear
-[inside an expression].
+[inside an expression](#using-expressions-to-configure-layer-options).
 
 Automatic type casting isn't performed. Therefore, a feature only matches a
 predicate if its value for the property in question is of the same type as the
@@ -109,8 +103,9 @@ path or variable into a matching type:
 * To cast a value to a color, use `CAST(key, 'UIColor')`.
 * To cast a `UIColor` object to an array, use `CAST(noindex(color), 'NSArray')`.
 
-For more information about the predicate format string syntax, see the “Predicate
-Format String Syntax” chapter of the _[Predicate Programming Guide]_
+For details about the predicate format string syntax, consult the “Predicate
+Format String Syntax” chapter of the
+_[Predicate Programming Guide](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html)_
 in Apple developer documentation.
 
 ### Operands examples
@@ -215,7 +210,7 @@ Using this approach can make it easy to reuse style expressions between mobile a
 
 This video provides an overview of data-driven styling in Azure Maps.
 
->[Internet of Things Show - Data-Driven Styling with Azure Maps]
+>[Internet of Things Show - Data-Driven Styling with Azure Maps](/shows/Internet-of-Things-Show/Data-Driven-Styling-with-Azure-Maps/player?format=ny)
 
 ### Constant values
 
@@ -268,7 +263,9 @@ NSExpression(
 ### Functions
 
 Of the
-[functions predefined] by the [`NSExpression(forFunction:arguments:)` method],
+[functions predefined](https://developer.apple.com/documentation/foundation/nsexpression/1413747-init#discussion)
+by the
+[`NSExpression(forFunction:arguments:)` method](https://developer.apple.com/documentation/foundation/nsexpression/1413747-init),
 the following subset is supported in layer options:
 
 Initializer parameter | Format string syntax
@@ -318,7 +315,7 @@ Initializer parameter | Format string syntax
 
 ### Conditionals
 
-Conditionals are supported via the built-in `NSExpression(forAZMConditional:trueExpression:falseExpression:)` method and `TERNARY()` operator. If you need to express multiple cases (“else-if”), you can either nest a conditional within a conditional or use the [match expression].
+Conditionals are supported via the built-in `NSExpression(forAZMConditional:trueExpression:falseExpression:)` method and `TERNARY()` operator. If you need to express multiple cases (“else-if”), you can either nest a conditional within a conditional or use the [match expression](#match-expression).
 
 #### Conditionals example
 
@@ -395,7 +392,7 @@ _Format string syntax_: `$geometryType`
 
 ##### Variables example
 
-See [Operands examples].
+See [Operands examples](#operands-examples).
 
 #### Zoom
 
@@ -433,7 +430,7 @@ let layer = HeatMapLayer(
 
 #### HeatMap density
 
-The [kernel density estimation]
+The [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation)
 of a screen point in a heatmap layer; in other words, a relative measure
 of how many data points are crowded around a particular pixel. 
 This variable evaluates to a number between 0 and 1.
@@ -494,7 +491,7 @@ let layer = HeatMapLayer(
 )
 ```
 
-For more information, see the [Add a heat map layer] article.
+For more information, see the [Add a heat map layer](add-heat-map-layer-ios.md) documentation.
 
 #### Line progress
 
@@ -535,7 +532,7 @@ let layer = LineLayer(
 )
 ```
 
-[See live example]
+[See live example](add-line-layer-map-ios.md)
 
 ### AzureMaps-specific methods
 
@@ -670,7 +667,7 @@ There are three types of interpolation methods that can be used in an interpolat
 |------|-------------|------------|
 | `ExpressionInterpolationMode.linear` | Interpolates linearly between the pair of stops. | `nil` |
 | `ExpressionInterpolationMode.exponential` | Interpolates exponentially between the stops. A base is specified and controls the rate at which the output increases. Higher values make the output increase more towards the high end of the range. A base value close to 1 produces an output that increases more linearly.| An expression that evaluates to a number, specifying the base of the exponential interpolation. |
-| `ExpressionInterpolationMode.cubicBezier` | Interpolates using a [cubic Bezier curve] defined by the given control points. | An array or aggregate expression containing four expressions, each evaluating to a number. The four numbers are control points for the cubic Bézier curve. |
+| `ExpressionInterpolationMode.cubicBezier` | Interpolates using a [cubic Bezier curve](https://developer.mozilla.org/docs/Web/CSS/timing-function) defined by the given control points. | An array or aggregate expression containing four expressions, each evaluating to a number. The four numbers are control points for the cubic Bézier curve. |
 
 Here's an example of what these different types of interpolations look like.
 
@@ -709,7 +706,7 @@ The following image demonstrates how the colors are chosen for the above express
 
 ##### Step expression
 
-A step expression can be used to calculate discrete, stepped result values by evaluating a [piecewise-constant function] defined by stops.
+A step expression can be used to calculate discrete, stepped result values by evaluating a [piecewise-constant function](https://mathworld.wolfram.com/PiecewiseConstantFunction.html) defined by stops.
 
 Step expressions return the output value of the stop just before the input value, or the from value if the input is less than the first stop.
 
@@ -745,26 +742,7 @@ The following image demonstrates how the colors are chosen for the above express
 
 Learn more about the layers that support expressions:
 
-* [Add a symbol layer]
-* [Add a bubble layer]
-* [Add a line layer]
-* [Add a polygon layer]
-
-[`NSExpression(forFunction:arguments:)` method]: https://developer.apple.com/documentation/foundation/nsexpression/1413747-init
-[Add a bubble layer]: add-bubble-layer-map-ios.md
-[Add a heat map layer]: add-heat-map-layer-ios.md
-[Add a line layer]: add-line-layer-map-ios.md
-[Add a polygon layer]: add-polygon-layer-map-ios.md
-[Add a symbol layer]: add-symbol-layer-ios.md
-[cubic Bezier curve]: https://developer.mozilla.org/docs/Web/CSS/timing-function
-[functions predefined]: https://developer.apple.com/documentation/foundation/nsexpression/1413747-init#discussion
-[inside an expression]: #using-expressions-to-configure-layer-options
-[Internet of Things Show - Data-Driven Styling with Azure Maps]: /shows/Internet-of-Things-Show/Data-Driven-Styling-with-Azure-Maps/player?format=ny
-[kernel density estimation]: https://en.wikipedia.org/wiki/Kernel_density_estimation
-[key paths]: #key-paths
-[match expression]: #match-expression
-[Operands examples]: #operands-examples
-[piecewise-constant function]: https://mathworld.wolfram.com/PiecewiseConstantFunction.html
-[Predicate Programming Guide]: https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html
-[See live example]: add-line-layer-map-ios.md
-[variables]: #variables
+* [Add a symbol layer](add-symbol-layer-ios.md)
+* [Add a bubble layer](add-bubble-layer-map-ios.md)
+* [Add a line layer](add-line-layer-map-ios.md)
+* [Add a polygon layer](add-polygon-layer-map-ios.md)

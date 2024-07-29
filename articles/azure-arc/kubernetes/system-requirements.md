@@ -1,8 +1,7 @@
 ---
 title: "Azure Arc-enabled Kubernetes system requirements"
-ms.date: 08/28/2023
+ms.date: 04/27/2023
 ms.topic: conceptual
-ms.custom: devx-track-azurepowershell
 description: Learn about the system requirements to connect Kubernetes clusters to Azure Arc.
 ---
 
@@ -34,7 +33,9 @@ For a multi-node Kubernetes cluster environment, pods can get scheduled on diffe
 
 ## Management tool requirements
 
-To connect a cluster to Azure Arc, you'll need to use either Azure CLI or Azure PowerShell.
+Connecting a cluster to Azure Arc requires [Helm 3](https://helm.sh/docs/intro/install), version 3.7.0 or earlier.
+
+You'll also need to use either Azure CLI or Azure PowerShell.
 
 For Azure CLI:
 
@@ -47,21 +48,16 @@ For Azure CLI:
 
 For Azure PowerShell:
 
-- Install [Azure PowerShell version 6.6.0 or later](/powershell/azure/install-azure-powershell).
+- Install [Azure PowerShell version 6.6.0 or later](/powershell/azure/install-az-ps).
 - Install the **Az.ConnectedKubernetes** PowerShell module:
 
     ```azurepowershell-interactive
     Install-Module -Name Az.ConnectedKubernetes
     ```
 
-> [!NOTE]
-> When you deploy the Azure Arc agents to a cluster,  Helm v. 3.6.3 will be installed in the `.azure` folder of the deployment machine. This [Helm 3](https://helm.sh/docs/) installation is only used for Azure Arc, and it doesn't remove or change any previously installed versions of Helm on the machine.
+## Azure AD identity requirements
 
-<a name='azure-ad-identity-requirements'></a>
-
-## Microsoft Entra identity requirements
-
-To connect your cluster to Azure Arc, you must have a Microsoft Entra identity (user or service principal) which can be used to log in to [Azure CLI](/cli/azure/authenticate-azure-cli) or [Azure PowerShell](/powershell/azure/authenticate-azureps) and connect your cluster to Azure Arc.
+To connect your cluster to Azure Arc, you must have an Azure AD identity (user or service principal) which can be used to log in to [Azure CLI](/cli/azure/authenticate-azure-cli) or [Azure PowerShell](/powershell/azure/authenticate-azureps) and connect your cluster to Azure Arc.
 
 This identity must have 'Read' and 'Write' permissions on the Azure Arc-enabled Kubernetes resource type (`Microsoft.Kubernetes/connectedClusters`). If connecting the cluster to an existing resource group (rather than a new one created by this identity), the identity must have 'Read' permission for that resource group.
 

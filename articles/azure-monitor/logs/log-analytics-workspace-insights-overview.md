@@ -5,20 +5,14 @@ services: azure-monitor
 ms.topic: conceptual
 author: guywild
 ms.author: guywild
-ms.reviewer: osalzberg
-ms.date: 12/28/2023
+ms.reviewer: noakuper
+ms.date: 06/27/2022
 
 ---
 
 # Log Analytics Workspace Insights
 
 Log Analytics Workspace Insights provides comprehensive monitoring of your workspaces through a unified view of your workspace usage, performance, health, agent, queries, and change log. This article helps you understand how to onboard and use Log Analytics Workspace Insights.
-
-## Permissions required
-
-- You need `Microsoft.OperationalInsights/workspaces/read` permissions to the Log Analytics workspace whose insights you want to see, as provided by the [Log Analytics Reader built-in role](./manage-access.md#log-analytics-reader), for example..
-- To run the additional usage queries, you need `*/read` permissions, as provided by the [Log Analytics Reader built-in role](./manage-access.md#log-analytics-reader), for example.
-
 
 ## Overview of your Log Analytics workspaces
 

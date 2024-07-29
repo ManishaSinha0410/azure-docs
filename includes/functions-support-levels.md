@@ -6,6 +6,8 @@ ms.date: 06/01/2021
 ms.author: glenga
 ---
 
+## Levels of support
+
 There are two levels of support:
 
 * **Generally available (GA)** - Fully supported and approved for production use.

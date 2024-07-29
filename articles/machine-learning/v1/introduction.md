@@ -1,7 +1,7 @@
 ---
 title: SDK & CLI (v1)
 titleSuffix: Azure Machine Learning
-description: Learn about Azure Machine Learning SDK & CLI (v1).
+description: Learn about Azure Machine Learning SDK & CLI (v1). 
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -11,15 +11,18 @@ ms.reviewer: larryfr
 ms.author: balapv
 author: balapv
 ms.date: 05/10/2022
-ms.custom: UpdateFrequency5, cliv1
+ms.custom: UpdateFrequency5, cliv1, event-tier1-build-2022, ignite-2022
 ---
 
 # Azure Machine Learning SDK & CLI (v1) 
 
-[!INCLUDE [dev v1](../includes/machine-learning-dev-v1.md)]
+[!INCLUDE [dev v1](../../../includes/machine-learning-dev-v1.md)]
 
+> [!div class="op_single_selector" title1="Select the version of Azure Machine Learning CLI extension or Python SDK you are using:"]
+> * [v1](introduction.md)
+> * [v2 (current version)](../index.yml?view=azureml-api-2&preserve-view=true)
 
-All articles in this section document the use of the first version of Azure Machine Learning Python SDK (v1) or Azure CLI ml extension (v1). For information on the current SDK and CLI, see [Azure Machine Learning SDK and CLI v2](../concept-v2.md).
+All articles in this section document the use of the first version of Azure Machine Learning Python SDK (v1) or Azure CLI ml extension (v1).  
 
 ## SDK v1
 
@@ -58,5 +61,5 @@ For more information on installing and using the different extensions, see the f
 
 For more information on installing and using the different SDK versions:
 
-* `azureml-core` - [Install the Azure Machine Learning SDK (v1) for Python](/python/api/overview/azure/ml/install?view=azure-ml-py&preserve-view=true)
+* `azureml-core` - [Install the Azure Machine Learning SDK (v1) for Python](/python/api/overview/azure/ml/install?view=azure-ml-py&preserve-view=true )
 * `azure-ai-ml` - [Install the Azure Machine Learning SDK (v2) for Python](https://aka.ms/sdk-v2-install)

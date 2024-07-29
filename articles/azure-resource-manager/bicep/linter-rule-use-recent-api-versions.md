@@ -1,9 +1,9 @@
 ---
 title: Linter rule - use recent API versions
 description: Linter rule - use recent API versions
-ms.topic: reference
+ms.topic: conceptual
 ms.custom: devx-track-bicep
-ms.date: 03/20/2024
+ms.date: 04/28/2023
 ---
 
 # Linter rule - use recent API versions

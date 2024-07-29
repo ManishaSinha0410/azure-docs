@@ -1,7 +1,7 @@
 ---
-title: Use Microsoft Entra ID in Communication Services
+title: Use Azure Active Directory in Communication Services
 titleSuffix: An Azure Communication Services quickstart
-description: Microsoft Entra ID lets you authorize Azure Communication Services access from applications running in Azure VMs, function apps, and other resources.
+description: Azure Active Directory lets you authorize Azure Communication Services access from applications running in Azure VMs, function apps, and other resources.
 services: azure-communication-services
 author: peiliu
 ms.service: azure-communication-services
@@ -11,12 +11,12 @@ ms.date: 06/30/2021
 ms.author: peiliu
 ms.reviewer: mikben
 zone_pivot_groups: acs-azcli-js-csharp-java-python
-ms.custom: mode-other, devx-track-extended-java, devx-track-js, devx-track-python
+ms.custom: mode-other
 ---
 
-# Quickstart: Authenticate using Microsoft Entra ID
+# Quickstart: Authenticate using Azure Active Directory
 
-Get started with Azure Communication Services by using Microsoft Entra ID. The Communication Services Identity and SMS SDKs support Microsoft Entra authentication.
+Get started with Azure Communication Services by using Azure Active Directory. The Communication Services Identity and SMS SDKs support Azure Active Directory (Azure AD) authentication.
 
 This quickstart shows you how to authorize access to the Identity and SMS SDKs from an Azure environment that supports Active Directory. It also describes how to test your code in a development environment by creating a service principal for your work.
 

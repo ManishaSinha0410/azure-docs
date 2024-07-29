@@ -5,7 +5,6 @@ ms.topic: conceptual
 ms.author: rosemalcolm
 author: RoseHJM
 ms.date: 08/26/2021
-ms.custom: UpdateFrequency2
 ---
 
 # Compare custom images and formulas in DevTest Labs

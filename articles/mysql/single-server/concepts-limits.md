@@ -4,8 +4,8 @@ description: This article describes limitations in Azure Database for MySQL, suc
 ms.service: mysql
 ms.subservice: single-server
 ms.topic: conceptual
-author: SudheeshGH
-ms.author: sunaray
+author: savjani
+ms.author: pariks
 ms.date: 06/20/2022
 ---
 

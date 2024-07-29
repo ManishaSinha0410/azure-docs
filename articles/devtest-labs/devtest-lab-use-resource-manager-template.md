@@ -4,8 +4,7 @@ description: Learn how to view, edit, save, and store ARM virtual machine (VM) t
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 01/11/2022
 ---
 
 # Use ARM templates to create DevTest Labs virtual machines
@@ -34,7 +33,7 @@ You can customize and use an ARM template from any Azure VM base to deploy more 
 1. On the **Advanced Settings** tab, select **View ARM template**.
 1. Copy and [save the ARM template](#store-arm-templates-in-git-repositories) to use for creating more VMs.
 
-   :::image type="content" source="media/devtest-lab-use-arm-template/devtestlab-lab-copy-rm-template.png" alt-text="Screenshot that shows an ARM template to save for later use.":::
+   ![Screenshot that shows an ARM template to save for later use.](./media/devtest-lab-use-arm-template/devtestlab-lab-copy-rm-template.png)
 
 1. If you want to create an instance of the VM now, on the **Basic Settings** tab, select **Create**.
 
@@ -54,7 +53,7 @@ Use the following file structure to store an ARM template in a source control re
 
 - To reuse the ARM template, you need to update the `parameters` section of *azuredeploy.json*. You can create a *parameter.json* file that customizes just the parameters, without having to edit the main template file. Name this parameter file *azuredeploy.parameters.json*.
 
-   :::image type="content" source="media/devtest-lab-use-arm-template/devtestlab-lab-custom-params.png" alt-text="Customize parameters using a JSON file.":::
+  ![Customize parameters using a JSON file](./media/devtest-lab-use-arm-template/devtestlab-lab-custom-params.png)
 
   In the parameters file, you can use the parameters `_artifactsLocation` and `_artifactsLocationSasToken` to construct a `parametersLink` URI value for automatically managing nested templates. For more information about nested templates, see [Deploy nested Azure Resource Manager templates for testing environments](deploy-nested-template-environments.md).
 
@@ -69,7 +68,7 @@ Use the following file structure to store an ARM template in a source control re
 
 The following screenshot shows a typical ARM template folder structure in a repository.
 
-:::image type="content" source="media/devtest-lab-create-environment-from-arm/main-template.png" alt-text="Screenshot that shows key ARM template files in a repository.":::
+![Screenshot that shows key ARM template files in a repository.](./media/devtest-lab-create-environment-from-arm/main-template.png)
 
 ## Add template repositories to labs
 
@@ -83,7 +82,7 @@ Add your template repositories to your lab so all lab users can access the templ
 
 1. To add your private ARM template repository to the lab, select **Add** in the top menu bar.
 
-   :::image type="content" source="media/devtest-lab-create-environment-from-arm/public-repo.png" alt-text="Screenshot that shows the Repositories configuration screen.":::
+   ![Screenshot that shows the Repositories configuration screen.](./media/devtest-lab-create-environment-from-arm/public-repo.png)
 
 1. In the **Repositories** pane, enter the following information:
 
@@ -97,7 +96,7 @@ Add your template repositories to your lab so all lab users can access the templ
 
 1. Select **Save**.
 
-   :::image type="content" source="media/devtest-lab-create-environment-from-arm/repo-values.png" alt-text="Screenshot that shows adding a new template repository to a lab.":::
+   ![Screenshot that shows adding a new template repository to a lab.](./media/devtest-lab-create-environment-from-arm/repo-values.png)
 
 The repository now appears in the **Repositories** list for the lab. Users can now use the repository templates to [create multi-VM DevTest Labs environments](devtest-lab-create-environment-from-arm.md). Lab administrators can use the templates to [automate lab deployment and management tasks](devtest-lab-use-arm-and-powershell-for-lab-resources.md#arm-template-automation).
 

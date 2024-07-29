@@ -66,7 +66,9 @@ Create a Node.js application that uses your key vault.
     npm init -y
     ```
 
+
 ## Install Key Vault packages
+
 
 1. Using the terminal, install the Azure Key Vault secrets library, [@azure/keyvault-certificates](https://www.npmjs.com/package/@azure/keyvault-certificates) for Node.js.
 
@@ -82,7 +84,11 @@ Create a Node.js application that uses your key vault.
 
 ## Grant access to your key vault
 
-[!INCLUDE [Using RBAC to provide access to a key vault](../../../includes/key-vault-quickstart-rbac.md)]
+Create a vault access policy for your key vault that grants key permissions to your user account.
+
+```azurecli
+az keyvault set-policy --name <YourKeyVaultName> --upn user@domain.com --certificate-permissions delete get list create purge update
+```
 
 ## Set environment variables
 

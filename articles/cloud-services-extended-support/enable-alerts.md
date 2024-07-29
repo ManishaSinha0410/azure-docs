@@ -7,6 +7,7 @@ author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
 ms.date: 10/13/2020
+ms.custom: 
 ---
 
 # Enable monitoring for Cloud Services (extended support) using the Azure portal
@@ -14,7 +15,7 @@ ms.date: 10/13/2020
 This article explains how to enable alerts on existing Cloud Service (extended support) deployments. 
 
 ## Add monitoring rules
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://portal.azure.com). 
 2. Select the Cloud Service (extended support) deployment you want to enable alerts for. 
 3. Select the **Alerts** blade. 
 

@@ -1,15 +1,14 @@
 ---
 title: Related GitHub Projects for Azure Health Data Services
-description: Lists all Open Source (GitHub) repositories
+description: List all Open Source (GitHub) repositories
 services: healthcare-apis
 author: evachen96
 ms.service: healthcare-apis
 ms.topic: reference
-ms.date: 03/11/2024
+ms.date: 06/06/2022
 ms.author: evach
 ---
-
-# GitHub projects
+# GitHub Projects
 
 We have many open-source projects on GitHub that provide you the source code and instructions to deploy services for various uses. You're always welcome to visit our GitHub repositories to learn and experiment with our features and products. 
 
@@ -21,7 +20,7 @@ We have many open-source projects on GitHub that provide you the source code and
 
 * The [Azure Health Data Services Toolkit](https://github.com/microsoft/azure-health-data-services-toolkit) helps you extend the functionality of Azure Health Data Services by providing a consistent toolset to build custom operations to modify the core service behavior. 
 
-## FHIR server
+## FHIR Server
 
 * [microsoft/fhir-server](https://github.com/microsoft/fhir-server/): open-source FHIR Server, which is the basis for FHIR service
 * For information about the latest releases, see [Release notes](https://github.com/microsoft/fhir-server/releases)
@@ -47,7 +46,7 @@ We have many open-source projects on GitHub that provide you the source code and
 * Integrated with the FHIR service and FHIR server for Azure in the form of `de-identified $export` operation
 * For FHIR data, it can also be used with Azure Data Factory (ADF) pipeline by reading FHIR data from Azure blob storage and writing back the anonymized data
 
-## Analytics Pipelines
+## Analytic Pipelines
 
 FHIR Analytics Pipelines help you build components and pipelines for rectangularizing and moving FHIR data from Azure FHIR servers namely [Azure Health Data Services FHIR Server](./../healthcare-apis/index.yml), [Azure API for FHIR](./../healthcare-apis/azure-api-for-fhir/index.yml), and [FHIR Server for Azure](https://github.com/microsoft/fhir-server) to [Azure Data Lake](https://azure.microsoft.com/solutions/data-lake/) and thereby make it available for analytics with [Azure Synapse Analytics](https://azure.microsoft.com/services/synapse-analytics/), [Power BI](https://powerbi.microsoft.com/), and [Azure Machine Learning](https://azure.microsoft.com/services/machine-learning/).
 
@@ -80,7 +79,7 @@ This solution enables you to transform the data into tabular format as it gets w
 
 ## DICOM service
 
-The DICOM service provides an open-source [Medical Imaging Server](https://github.com/microsoft/dicom-server) for DICOM that is easily deployed on Azure. It allows standards-based communication with any DICOMweb™ enabled systems, and injects DICOM metadata into a FHIR server to create a holistic view of patient data. For more information, see [Manage medical imaging data with the DICOM service](./dicom/dicom-data-lake.md).
+The DICOM service provides an open-source [Medical Imaging Server](https://github.com/microsoft/dicom-server) for DICOM that is easily deployed on Azure. It allows standards-based communication with any DICOMweb™ enabled systems, and injects DICOM metadata into a FHIR server to create a holistic view of patient data. See [DICOM service](./dicom/get-started-with-dicom.md) for more information.
 
 ## Next steps
 
@@ -91,4 +90,3 @@ In this article, you learned about some of Azure Health Data Services open-sourc
 >[Overview of Azure Health Data Services](healthcare-apis-overview.md)
 
 (FHIR&#174;) is a registered trademark of [HL7](https://hl7.org/fhir/) and is used with the permission of HL7.
-

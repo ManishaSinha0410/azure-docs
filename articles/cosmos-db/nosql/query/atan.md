@@ -1,54 +1,54 @@
 ---
-title: ATAN
-titleSuffix: Azure Cosmos DB for NoSQL
-description: An Azure Cosmos DB for NoSQL system function that returns the trigonometric arctangent of the specified angle.
-author: jcodella
-ms.author: jacodel
-ms.reviewer: sidandrews
+title: ATAN in Azure Cosmos DB query language
+description: Learn about how the ATAN (arctangent) SQL system function in Azure Cosmos DB returns the angle, in radians, whose tangent is the specified numeric expression
+author: ginamr
 ms.service: cosmos-db
 ms.subservice: nosql
-ms.topic: reference
-ms.devlang: nosql
-ms.date: 02/27/2024
-ms.custom: query-reference
+ms.topic: conceptual
+ms.date: 03/04/2020
+ms.author: girobins
+ms.custom: query-reference, ignite-2022
 ---
-
-# ATAN (NoSQL query)
-
+# ATAN (Azure Cosmos DB)
 [!INCLUDE[NoSQL](../../includes/appliesto-nosql.md)]
 
-Returns the trigonometric arctangent of the specified numeric value. The arcsine is the angle, in radians, whose tangent is the specified numeric expression.
-
+ Returns the angle, in radians, whose tangent is the specified numeric expression. This value is also called arctangent.  
+  
 ## Syntax
-
-```nosql
+  
+```sql
 ATAN(<numeric_expr>)  
 ```  
-
+  
 ## Arguments
-
-| | Description |
-| --- | --- |
-| **`numeric_expr`** | A numeric expression. |
-
+  
+*numeric_expr*  
+   Is a numeric expression.  
+  
 ## Return types
-
-Returns a numeric expression.  
-
+  
+  Returns a numeric expression.  
+  
 ## Examples
-
-The following example calculates the arctangent of the specified angle using the function.
-
-:::code language="nosql" source="~/cosmos-db-nosql-query-samples/scripts/atan/query.sql" highlight="2":::  
-
-:::code language="json" source="~/cosmos-db-nosql-query-samples/scripts/atan/result.json":::
-
+  
+  The following example returns the `ATAN` of the specified value.  
+  
+```sql
+SELECT ATAN(-45.01) AS atan  
+```  
+  
+ Here's the result set.  
+  
+```json
+[{"atan": -1.5485826962062663}]  
+```  
+  
 ## Remarks
 
-- This system function doesn't use the index.
+This system function won't utilize the index.
 
-## Related content
+## Next steps
 
-- [System functions](system-functions.yml)
-- [`TAN`](tan.md)
-- [`ATN2`](atn2.md)
+- [Mathematical functions Azure Cosmos DB](mathematical-functions.md)
+- [System functions Azure Cosmos DB](system-functions.md)
+- [Introduction to Azure Cosmos DB](../../introduction.md)

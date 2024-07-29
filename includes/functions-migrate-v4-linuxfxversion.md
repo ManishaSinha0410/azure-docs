@@ -1,7 +1,6 @@
 ---
 author: ggailey777
 ms.service: azure-functions
-ms.custom: linux-related-content
 ms.topic: include
 ms.date: 11/03/2022
 ms.author: glenga

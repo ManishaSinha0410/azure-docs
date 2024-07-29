@@ -30,14 +30,14 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-This article requires the latest Azure PowerShell modules. Run `Get-Module -ListAvailable Az` to find the version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell). If you're running PowerShell locally, you also need to run `Login-AzAccount` to create a connection with Azure.
+This article requires the latest Azure PowerShell modules. Run `Get-Module -ListAvailable Az` to find the version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-az-ps). If you're running PowerShell locally, you also need to run `Login-AzAccount` to create a connection with Azure.
 
 ## Deploy the network infrastructure
 
 First, set up some variables to use in the deployment. Replace the values with your own.
 
 > [!TIP]
-> You can use Microsoft Entra ID to find your user principal name.
+> You can use Azure Active Directory to find your user principal name.
 
 ```azurepowershell
 $rg = "<resource-group-name>"
@@ -54,7 +54,7 @@ Create the network infrastructure. This includes a virtual network, subnets and 
 ```azurepowershell
 
 # Create a new resource group
-New-AzResourceGroup -Name $rg -Location $location
+New-AzResourceGroup -Name "$rg" -Location $location
 
 # Create new subnets for the firewall
 $FWsub = New-AzVirtualNetworkSubnetConfig -Name AzureFirewallSubnet -AddressPrefix 10.0.1.0/26
@@ -66,7 +66,7 @@ $testVnet = New-AzVirtualNetwork -Name test-fw-vn -ResourceGroupName $rg -Locati
 # Create a public IP address for the firewall
 $pip = New-AzPublicIpAddress `
     -ResourceGroupName $rg `
-    -Location $location `
+    -Location eastus `
     -AllocationMethod Static `
     -Sku Standard `
     -Name fw-pip
@@ -252,5 +252,4 @@ Remove-AzResourceGroup -Name $rg -Force
 
 ## Next steps
 
-- [Deploy Azure Firewall to inspect traffic to a private endpoint](https://techcommunity.microsoft.com/t5/azure-network-security-blog/deploy-azure-firewall-to-inspect-traffic-to-a-private-endpoint/ba-p/3714575)
 - [Azure Firewall FTP support](ftp-support.md)

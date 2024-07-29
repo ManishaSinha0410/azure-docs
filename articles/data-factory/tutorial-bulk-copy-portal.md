@@ -5,8 +5,9 @@ ms.author: jianleishen
 author: jianleishen
 ms.service: data-factory
 ms.subservice: tutorials
+ms.workload: data-services 
 ms.topic: tutorial
-ms.date: 05/15/2024
+ms.date: 09/26/2022
 ---
 
 # Copy multiple tables in bulk by using Azure Data Factory in the Azure portal
@@ -378,7 +379,7 @@ Here are the steps to create the pipeline:
 
 1. Confirm that the data was copied to the target Azure Synapse Analytics you used in this tutorial. 
 
-## Related content
+## Next steps
 You performed the following steps in this tutorial: 
 
 > [!div class="checklist"]

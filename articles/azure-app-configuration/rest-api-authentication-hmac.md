@@ -1,12 +1,11 @@
 ---
 title: Azure App Configuration REST API - HMAC authentication
 description: Use HMAC to authenticate to Azure App Configuration by using the REST API
-author: maud-lv
-ms.author: malev
+author: mcleanbyron
+ms.author: mcleans
 ms.service: azure-app-configuration
 ms.topic: reference
-ms.devlang: csharp
-# ms.devlang: csharp, golang, java, javascript, powershell, python
+ms.devlang: csharp, golang, java, javascript, powershell, python
 ms.date: 08/17/2020
 ---
 

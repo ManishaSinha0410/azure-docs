@@ -2,13 +2,13 @@
 title: Azure Data Box Gateway security | Microsoft Docs
 description: Describes the security and privacy features that protect your Azure Data Box Gateway virtual device, service, and data, on-premises and in the cloud.
 services: databox
-author: stevenmatthew
+author: alkohli
 
 ms.service: databox
 ms.subservice: gateway
 ms.topic: article
 ms.date: 10/20/2020
-ms.author: shaas
+ms.author: alkohli
 ---
 
 # Azure Data Box Gateway security and data protection
@@ -92,7 +92,7 @@ The Data Box Gateway service collects personal information in the following scen
 
 To view the list of users who can access or delete a share, follow the steps in [Manage shares on the Data Box Gateway](data-box-gateway-manage-shares.md).
 
-For more information, review the Microsoft privacy policy on the [Trust Center](https://www.microsoft.com/trust-center).
+For more information, review the Microsoft privacy policy on the [Trust Center](https://www.microsoft.com/trustcenter).
 
 ## Next steps
 

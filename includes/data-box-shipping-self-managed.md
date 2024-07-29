@@ -1,10 +1,10 @@
 ---
-author: stevenmatthew
+author: v-dalc
 ms.service: databox  
 ms.subservice: pod
 ms.topic: include
 ms.date: 06/07/2022
-ms.author: shaas
+ms.author: alkohli
 ---
 
 If you selected self-managed shipping when you created your order, follow these instructions (except for Brazil). 
@@ -22,4 +22,3 @@ If you selected self-managed shipping when you created your order, follow these 
         3. Contact name of the person dropping off. You will need to display a government-approved ID during the drop off.
     ```
  
-

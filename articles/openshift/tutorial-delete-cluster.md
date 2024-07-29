@@ -36,19 +36,20 @@ If you have access to multiple subscriptions, run `az account set -s {subscripti
 
 ## Delete the cluster
 
-In previous tutorials, the following variable was set:
+In previous tutorials, the following variables were set.
 
 ```bash
+CLUSTER=yourclustername
 RESOURCEGROUP=yourresourcegroup
 ```
 
-Using this value, delete your cluster:
+Using these values, delete your cluster:
 
 ```azurecli
-az group delete --name $RESOURCEGROUP
+az aro delete --resource-group $RESOURCEGROUP --name $CLUSTER
 ```
 
-You'll then be prompted to confirm if you are sure you want to perform this operation. After you confirm with `y`, it will take several minutes to delete the cluster. When the command finishes, the entire resource group and all resources inside it, including the cluster and the virtual network, will be deleted.
+You'll then be prompted to confirm if you want to delete the cluster. After you confirm with `y`, it will take several minutes to delete the cluster. When the command finishes, the entire resource group and all resources inside it, including the cluster, will be deleted.
 
 ## Next steps
 

@@ -1,6 +1,6 @@
 ---
-title: 'Quickstart: Create a flexible server by using Bicep'
-description: In this quickstart, learn how to deploy a database in an instance of Azure Database for MySQL - Flexible Server by using Bicep.
+title: 'Quickstart: Create an Azure Database for MySQL - Flexible Server - Bicep'
+description: In this Quickstart, learn how to create an Azure Database for MySQL - Flexible Server by using Bicep.
 ms.service: mysql
 ms.subservice: flexible-server
 ms.custom: devx-track-bicep
@@ -10,11 +10,11 @@ ms.author: shaithal
 ms.date: 02/16/2023
 ---
 
-# Quickstart: Create an instance of Azure Database for MySQL - Flexible Server by using a Bicep file
+# Quickstart: Use a Bicep file to create an Azure Database for MySQL - Flexible Server
 
-[!INCLUDE[applies-to-mysql-flexible-server](../includes/applies-to-mysql-flexible-server.md)]
+[!INCLUDE [applies-to-mysql-flexible-server](../includes/applies-to-mysql-flexible-server.md)]
 
-[!INCLUDE [azure-database-for-mysql-flexible-server-abstract](../includes/azure-database-for-mysql-flexible-server-abstract.md)]
+[!INCLUDE [About Azure Database for MySQL - Flexible Server](../includes/azure-database-for-mysql-flexible-server-abstract.md)]
 
 [!INCLUDE [About Azure Resource Manager](../../../includes/resource-manager-quickstart-bicep-introduction.md)]
 
@@ -24,11 +24,11 @@ ms.date: 02/16/2023
 
 [!INCLUDE [flexible-server-free-trial-note](../includes/flexible-server-free-trial-note.md)]
 
-## Create a server that has public access
+## Create server with public access
 
-Modify the following code examples to create a *main.bicep* file and a *CreateFirewallRules.bicep* file. Use the files to create an Azure Database for MySQL flexible server that has public access and to create a database on the server. You might need to modify the default value of `firewallRules`.
+Create a **main.bicep** file and a **CreateFirewallRules.bicep** file with the following content to create a server using public access connectivity method and also create a database on the server. Update the **firewallRules** default value if needed.
 
-*main.bicep*:
+**main.bicep**
 
 ```bicep
 @description('Provide a prefix for creating resource names.')
@@ -37,14 +37,14 @@ param resourceNamePrefix string
 @description('Provide the location for all the resources.')
 param location string = resourceGroup().location
 
-@description('Provide the administrator login username for the flexible server.')
+@description('Provide the administrator login name for the MySQL server.')
 param administratorLogin string
 
-@description('Provide the administrator login password for the flexible server.')
+@description('Provide the administrator login password for the MySQL server.')
 @secure()
 param administratorLoginPassword string
 
-@description('Provide an array of firewall rules to apply to the flexible server.')
+@description('Provide an array of firewall rules to be applied to the MySQL server.')
 param firewallRules array = [
   {
     name: 'rule1'
@@ -58,10 +58,10 @@ param firewallRules array = [
   }
 ]
 
-@description('The tier of the particular SKU. High availability mode is available only in the GeneralPurpose and MemoryOptimized SKUs.')
+@description('The tier of the particular SKU. High Availability is available only for GeneralPurpose and MemoryOptimized sku.')
 @allowed([
   'Burstable'
-  'GeneralPurpose'
+  'Generalpurpose'
   'MemoryOptimized'
 ])
 param serverEdition string = 'Burstable'
@@ -73,10 +73,10 @@ param serverEdition string = 'Burstable'
 ])
 param version string = '8.0.21'
 
-@description('The availability zone information for the server. (If you don't have a preference, leave blank.)')
+@description('Availability Zone information of the server. (Leave blank for No Preference).')
 param availabilityZone string = '1'
 
-@description('High availability mode for a server: Disabled, SameZone, or ZoneRedundant.')
+@description('High availability mode for a server : Disabled, SameZone, or ZoneRedundant')
 @allowed([
   'Disabled'
   'SameZone'
@@ -84,7 +84,7 @@ param availabilityZone string = '1'
 ])
 param haEnabled string = 'Disabled'
 
-@description('The availability zone of the standby server.')
+@description('Availability zone of the standby server.')
 param standbyAvailabilityZone string = '2'
 
 param storageSizeGB int = 20
@@ -95,7 +95,7 @@ param storageIops int = 360
 ])
 param storageAutogrow string = 'Enabled'
 
-@description('The name of the SKU, such as Standard_D32ds_v4.')
+@description('The name of the sku, e.g. Standard_D32ds_v4.')
 param skuName string = 'Standard_B1ms'
 
 param backupRetentionDays int = 7
@@ -158,7 +158,7 @@ resource database 'Microsoft.DBforMySQL/flexibleServers/databases@2021-12-01-pre
 }
 ```
 
-*CreateFirewallRules.bicep*:
+**CreateFirewallRules.bicep**
 
 ```bicep
 param serverName string
@@ -173,11 +173,11 @@ resource firewallRules 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2021-
 }
 ```
 
-Save the two Bicep files in the same directory.
+Save the two Bicep files in the same directly.
 
-## Create a server that has private access
+## Create a server with private access
 
-Modify the following code samples to deploy an Azure Database for MySQL flexible server that has private access inside a virtual network:
+Create an **main.bicep** file with the following content to create a server using private access connectivity method inside a virtual network.
 
 ```bicep
 @description('Provide a prefix for creating resource names.')
@@ -199,7 +199,7 @@ param vnetAddressPrefix string = '10.0.0.0/16'
 @description('Provide Subnet Address Prefix')
 param subnetPrefix string = '10.0.0.0/24'
 
-@description('Provide the tier of the specific SKU. High availability is available only in the GeneralPurpose and MemoryOptimized SKUs.')
+@description('Provide the tier of the particular SKU. High Availability is available only for GeneralPurpose and MemoryOptimized sku.')
 @allowed([
   'Burstable'
   'Generalpurpose'
@@ -214,10 +214,10 @@ param serverEdition string = 'Burstable'
 ])
 param serverVersion string = '8.0.21'
 
-@description('The availability zone information for the server. (If you don't have a preference, leave blank.)')
+@description('Provide the availability zone information of the server. (Leave blank for No Preference).')
 param availabilityZone string = '1'
 
-@description('Provide the high availability mode for a server: Disabled, SameZone, or ZoneRedundant.')
+@description('Provide the high availability mode for a server : Disabled, SameZone, or ZoneRedundant')
 @allowed([
   'Disabled'
   'SameZone'
@@ -323,16 +323,16 @@ resource database 'Microsoft.DBforMySQL/flexibleServers/databases@2021-12-01-pre
 
 ## Deploy the template
 
-Deploy the Bicep file by using either the Azure CLI or Azure PowerShell.
+Deploy the Bicep file using either Azure CLI or Azure PowerShell.
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az group create --name exampleRG --location eastus
 az deployment group create --resource-group exampleRG --template-file main.bicep
 ```
 
-# [AzurePowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 New-AzResourceGroup -Name exampleRG -Location eastus
@@ -345,34 +345,33 @@ Follow the instructions to enter the parameter values. When the deployment finis
 
 ## Review deployed resources
 
-To verify that your Azure Database for MySQL flexible server was created in the resource group:
+Follow these steps to verify if your server was created in the resource group.
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az resource list --resource-group exampleRG
 
 ```
 
-# [Azure PowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 Get-AzResource -ResourceGroupName exampleRG
 ```
-
 ---
 
 ## Clean up resources
 
-To delete the resource group and the resources that are contained in the resource group:
+To delete the resource group and the resources contained in the resource group:
 
-# [Azure CLI](#tab/azure-cli)
+# [CLI](#tab/CLI)
 
 ```azurecli
 az group delete --name exampleRG
 ```
 
-# [Azure PowerShell](#tab/azure-powershell)
+# [PowerShell](#tab/PowerShell)
 
 ```azurepowershell
 Remove-AzResourceGroup -Name exampleRG
@@ -380,7 +379,14 @@ Remove-AzResourceGroup -Name exampleRG
 
 ---
 
-## Related content
+## Next steps
 
-- For a step-by-step tutorial that guides you through the process of creating a Bicep template, see [Quickstart: Create Bicep files by using Visual Studio Code](../../azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code.md).
-- For a step-by-step tutorial that shows how to build an app by using Azure App Service and MySQL, see[Build a PHP (Laravel) web app with MySQL](tutorial-php-database-app.md).
+For a step-by-step tutorial that guides you through the process of creating an ARM template, see:
+
+> [!div class="nextstepaction"]
+> [Quickstart: Create Bicep files with Visual Studio Code](../../azure-resource-manager/bicep/quickstart-create-bicep-use-visual-studio-code.md)
+
+For a step-by-step tutorial to build an app with App Service using MySQL, see:
+
+> [!div class="nextstepaction"]
+> [Build a PHP (Laravel) web app with MySQL](tutorial-php-database-app.md)

@@ -4,8 +4,7 @@ description: Learn how to configure an existing virtual network and subnet to us
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 09/30/2023
-ms.custom: UpdateFrequency2
+ms.date: 02/15/2022
 ---
 
 # Add a virtual network in Azure DevTest Labs

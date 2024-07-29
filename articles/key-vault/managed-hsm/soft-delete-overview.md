@@ -4,9 +4,9 @@ description: Soft-delete in Managed HSM allows you to recover deleted HSM instan
 ms.service: key-vault
 ms.subservice: managed-hsm
 ms.topic: conceptual
-author: msmbaldwin
+author: mbaldwin
 ms.author: mbaldwin
-ms.date: 02/20/2024
+ms.date: 11/14/2022
 ---
 
 # Managed HSM soft-delete overview

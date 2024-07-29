@@ -5,7 +5,8 @@ services: logic-apps
 ms.suite: integration
 ms.reviewer: deli, azla
 ms.topic: how-to
-ms.date: 01/04/2024
+ms.date: 05/25/2019
+tags: connectors
 ---
 
 # Delay running the next action in Azure Logic Apps

@@ -4,12 +4,8 @@ description: Learn how to manage and monitor costs and billing for Microsoft Sen
 author: cwatson-cat
 ms.author: cwatson
 ms.custom: subject-cost-optimization
-ms.topic: conceptual
-ms.date: 03/07/2024
-ms.collection: usx-security
-appliesto:
-    - Microsoft Sentinel in the Azure portal
-    - Microsoft Sentinel in the Microsoft Defender portal
+ms.topic: how-to
+ms.date: 01/05/2023
 ---
 
 # Manage and monitor costs for Microsoft Sentinel
@@ -18,23 +14,22 @@ After you've started using Microsoft Sentinel resources, use Cost Management fea
 
 Costs for Microsoft Sentinel are only a portion of the monthly costs in your Azure bill. Although this article explains how to manage and monitor costs for Microsoft Sentinel, you're billed for all Azure services and resources your Azure subscription uses, including Partner services.
 
-[!INCLUDE [unified-soc-preview](includes/unified-soc-preview.md)]
-
 ## Prerequisites
 
 To view cost data and perform cost analysis in Cost Management, you must have a supported Azure account type, with at least read access.
 
 While cost analysis in Cost Management supports most Azure account types, not all are supported. To view the full list of supported account types, see [Understand Cost Management data](../cost-management-billing/costs/understand-cost-mgt-data.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 
-For information about assigning access to Microsoft Cost Management data, see [Assign access to data](../cost-management/assign-access-acm-data.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
+For information about assigning access to Azure Cost Management data, see [Assign access to data](../cost-management/assign-access-acm-data.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 
 
 ## View costs by using cost analysis
-As you use Azure resources with Microsoft Sentinel, you incur costs. Azure resource usage unit costs vary by time intervals such as seconds, minutes, hours, and days, or by unit usage, like bytes and megabytes. As soon as Microsoft Sentinel starts to analyze billable data, it incurs costs. View these costs by using cost analysis in the Azure portal. For more information, see [Start using cost analysis](../cost-management/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 
-When you use cost analysis, you view Microsoft Sentinel costs in graphs and tables for different time intervals. Some examples are by day, current and prior month, and year. You also view costs against budgets and forecasted costs. Switching to longer views over time can help you identify spending trends. And you see where overspending might have occurred. If you created budgets, you can also easily see where they're exceeded.
+As you use Azure resources with Microsoft Sentinel, you incur costs. Azure resource usage unit costs vary by time intervals such as seconds, minutes, hours, and days, or by unit usage, like bytes and megabytes. As soon as Microsoft Sentinel use starts, it incurs costs, and you can see the costs in [cost analysis](../cost-management/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 
-The [Microsoft Cost Management + Billing](../cost-management-billing/costs/quick-acm-cost-analysis.md) hub provides useful functionality. After you open **Cost Management + Billing** in the Azure portal, select **Cost Management** in the left navigation and then select the [scope](..//cost-management-billing/costs/understand-work-scopes.md) or set of resources to investigate, such as an Azure subscription or resource group.
+When you use cost analysis, you view Microsoft Sentinel costs in graphs and tables for different time intervals. Some examples are by day, current and prior month, and year. You also view costs against budgets and forecasted costs. Switching to longer views over time can help you identify spending trends. And you see where overspending might have occurred. If you've created budgets, you can also easily see where they're exceeded.
+
+The [Azure Cost Management + Billing](../cost-management-billing/costs/quick-acm-cost-analysis.md) hub provides useful functionality. After you open **Cost Management + Billing** in the Azure portal, select **Cost Management** in the left navigation and then select the [scope](..//cost-management-billing/costs/understand-work-scopes.md) or set of resources to investigate, such as an Azure subscription or resource group.
 
 The **Cost Analysis** screen shows detailed views of your Azure usage and costs, with the option to apply various controls and filters.
 
@@ -48,17 +43,17 @@ For example, to see charts of your daily costs for a certain time frame:
 
    :::image type="content" source="media/billing-monitor-costs/cost-management.png" alt-text="Screenshot of a cost management + billing cost analysis screen." lightbox="media/billing-monitor-costs/cost-management.png":::
 
-You could also apply further controls. For example, to view only the costs associated with Microsoft Sentinel, select **Add filter**, select **Service name**, and then select the service names **Sentinel**, **Log Analytics**, and **Azure Monitor**.
+You could also apply further controls. For example, to view only the costs associated with Microsoft Sentinel, select **Add filter**, select **Service name**, and then select the service names **Sentinel**, **log analytics**, and **azure monitor**.
 
 Microsoft Sentinel data ingestion volumes appear under **Security Insights** in some portal Usage Charts.
 
-The Microsoft Sentinel classic pricing tiers don't include Log Analytics charges, so you might see those charges billed separately. Microsoft Sentinel simplified pricing combines the two costs into one set of tiers. To learn more about Microsoft Sentinel's simplified pricing tiers, see [Simplified pricing tiers](billing.md#simplified-pricing-tiers).
+The Microsoft Sentinel pricing tiers don't include Log Analytics charges. To change your pricing tier commitment for Log Analytics, see [Change pricing tier for Log Analytics workspace](../azure-monitor/logs/change-pricing-tier.md).
 
-For more information on reducing costs, see [Create budgets](#create-budgets) and [Reduce costs in Microsoft Sentinel](billing-monitor-costs.md).
+For more information, see [Create budgets](#create-budgets) and [Reduce costs in Microsoft Sentinel](billing-monitor-costs.md).
 
 ## Using Azure Prepayment with Microsoft Sentinel
 
-You can pay for Microsoft Sentinel charges with your Azure Prepayment credit. However, you can't use Azure Prepayment credit to pay bills to non-Microsoft organizations for their products and services, or for products from the Azure Marketplace.
+You can pay for Microsoft Sentinel charges with your Azure Prepayment credit. However, you can't use Azure Prepayment credit to pay bills to third-party organizations for their products and services, or for products from the Azure Marketplace.
 
 ## Run queries to understand your data ingestion
 
@@ -92,7 +87,7 @@ Usage
 | where TimeGenerated > ago(32d)
 | where StartTime >= startofday(ago(31d)) and EndTime < startofday(now())
 | where IsBillable == true
-| summarize BillableDataGB = sum(Quantity) / 1000. by Solution, DataType
+| summarize BillableDataGB = sum(Quantity) by Solution, DataType
 | extend Solution = iif(Solution == "SecurityInsights", "AzureSentinel", Solution)
 | sort by Solution asc, DataType asc
 ```
@@ -136,12 +131,12 @@ To define a daily volume cap, select **Usage and estimated costs** in the left n
 
 The **Usage and estimated costs** screen also shows your ingested data volume trend in the past 31 days, and the total retained data volume.
 
-For more information, see [Set daily cap on Log Analytics workspace](../azure-monitor/logs/daily-cap.md).
+The daily cap doesn't limit collection of all data types. Security data is excluded from the cap. For more information about managing the daily cap in Log Analytics, see [Set daily cap on Log Analytics workspace](../azure-monitor/logs/daily-cap.md).
 
 ## Next steps
 
 - [Reduce costs for Microsoft Sentinel](billing-reduce-costs.md)
-- Learn [how to optimize your cloud investment with Microsoft Cost Management](../cost-management-billing/costs/cost-mgt-best-practices.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
+- Learn [how to optimize your cloud investment with Azure Cost Management](../cost-management-billing/costs/cost-mgt-best-practices.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 - Learn more about managing costs with [cost analysis](../cost-management-billing/costs/quick-acm-cost-analysis.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 - Learn about how to [prevent unexpected costs](../cost-management-billing/understand/analyze-unexpected-charges.md?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn).
 - Take the [Cost Management](/training/paths/control-spending-manage-bills?WT.mc_id=costmanagementcontent_docsacmhorizontal_-inproduct-learn) guided learning course.
